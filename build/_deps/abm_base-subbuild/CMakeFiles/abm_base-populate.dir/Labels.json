@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/matin/Downloads/testProjs/ABM_extension/build/_deps/abm_base-subbuild/CMakeFiles/abm_base-populate"
+		},
+		{
+			"file" : "/Users/matin/Downloads/testProjs/ABM_extension/build/_deps/abm_base-subbuild/CMakeFiles/abm_base-populate.rule"
+		},
+		{
+			"file" : "/Users/matin/Downloads/testProjs/ABM_extension/build/_deps/abm_base-subbuild/CMakeFiles/abm_base-populate-complete.rule"
+		},
+		{
+			"file" : "/Users/matin/Downloads/testProjs/ABM_extension/build/_deps/abm_base-subbuild/abm_base-populate-prefix/src/abm_base-populate-stamp/abm_base-populate-install.rule"
+		},
+		{
+			"file" : "/Users/matin/Downloads/testProjs/ABM_extension/build/_deps/abm_base-subbuild/abm_base-populate-prefix/src/abm_base-populate-stamp/abm_base-populate-mkdir.rule"
+		},
+		{
+			"file" : "/Users/matin/Downloads/testProjs/ABM_extension/build/_deps/abm_base-subbuild/abm_base-populate-prefix/src/abm_base-populate-stamp/abm_base-populate-download.rule"
+		},
+		{
+			"file" : "/Users/matin/Downloads/testProjs/ABM_extension/build/_deps/abm_base-subbuild/abm_base-populate-prefix/src/abm_base-populate-stamp/abm_base-populate-update.rule"
+		},
+		{
+			"file" : "/Users/matin/Downloads/testProjs/ABM_extension/build/_deps/abm_base-subbuild/abm_base-populate-prefix/src/abm_base-populate-stamp/abm_base-populate-patch.rule"
+		},
+		{
+			"file" : "/Users/matin/Downloads/testProjs/ABM_extension/build/_deps/abm_base-subbuild/abm_base-populate-prefix/src/abm_base-populate-stamp/abm_base-populate-configure.rule"
+		},
+		{
+			"file" : "/Users/matin/Downloads/testProjs/ABM_extension/build/_deps/abm_base-subbuild/abm_base-populate-prefix/src/abm_base-populate-stamp/abm_base-populate-build.rule"
+		},
+		{
+			"file" : "/Users/matin/Downloads/testProjs/ABM_extension/build/_deps/abm_base-subbuild/abm_base-populate-prefix/src/abm_base-populate-stamp/abm_base-populate-test.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"abm_base-populate"
+		],
+		"name" : "abm_base-populate"
+	}
+}

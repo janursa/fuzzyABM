@@ -1,0 +1,17 @@
+# CMAKE_MINIMUM_REQUIRED(VERSION 3.13.1)
+# for testing
+set(HEADER_LIST )
+
+SET(MODULE_NAME "myBinds")
+
+set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
+
+pybind11_add_module(${MODULE_NAME} myBinds.cpp ${HEADER_LIST})
+target_link_libraries(${MODULE_NAME} PRIVATE pybind11::module)
+target_link_libraries(${MODULE_NAME} PRIVATE fmt::fmt)
+target_link_libraries(${MODULE_NAME} PRIVATE "/Users/matin/Downloads/testProjs/ABM_base/build/src/libBaseLibs.a")
+target_link_libraries(${MODULE_NAME} PRIVATE ${STATICLIBS})
+target_include_directories(${MODULE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include/ABM)
+target_include_directories(${MODULE_NAME} PUBLIC "/Users/matin/Downloads/testProjs/ABM_base/include/ABM")
+
+source_group(TREE "${PROJECT_SOURCE_DIR}/include" PREFIX "Header Files" FILES ${HEADER_LIST})
