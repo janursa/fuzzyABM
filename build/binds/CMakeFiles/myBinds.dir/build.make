@@ -77,27 +77,27 @@ include binds/CMakeFiles/myBinds.dir/progress.make
 # Include the compile flags for this target's objects.
 include binds/CMakeFiles/myBinds.dir/flags.make
 
-binds/CMakeFiles/myBinds.dir/myBinds.cpp.o: binds/CMakeFiles/myBinds.dir/flags.make
-binds/CMakeFiles/myBinds.dir/myBinds.cpp.o: ../binds/myBinds.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/matin/Downloads/testProjs/ABM_extension/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object binds/CMakeFiles/myBinds.dir/myBinds.cpp.o"
-	cd /Users/matin/Downloads/testProjs/ABM_extension/build/binds && /Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/myBinds.dir/myBinds.cpp.o -c /Users/matin/Downloads/testProjs/ABM_extension/binds/myBinds.cpp
+binds/CMakeFiles/myBinds.dir/mybinds.cpp.o: binds/CMakeFiles/myBinds.dir/flags.make
+binds/CMakeFiles/myBinds.dir/mybinds.cpp.o: ../binds/mybinds.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/matin/Downloads/testProjs/ABM_extension/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object binds/CMakeFiles/myBinds.dir/mybinds.cpp.o"
+	cd /Users/matin/Downloads/testProjs/ABM_extension/build/binds && /Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/myBinds.dir/mybinds.cpp.o -c /Users/matin/Downloads/testProjs/ABM_extension/binds/mybinds.cpp
 
-binds/CMakeFiles/myBinds.dir/myBinds.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/myBinds.dir/myBinds.cpp.i"
-	cd /Users/matin/Downloads/testProjs/ABM_extension/build/binds && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/matin/Downloads/testProjs/ABM_extension/binds/myBinds.cpp > CMakeFiles/myBinds.dir/myBinds.cpp.i
+binds/CMakeFiles/myBinds.dir/mybinds.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/myBinds.dir/mybinds.cpp.i"
+	cd /Users/matin/Downloads/testProjs/ABM_extension/build/binds && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/matin/Downloads/testProjs/ABM_extension/binds/mybinds.cpp > CMakeFiles/myBinds.dir/mybinds.cpp.i
 
-binds/CMakeFiles/myBinds.dir/myBinds.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/myBinds.dir/myBinds.cpp.s"
-	cd /Users/matin/Downloads/testProjs/ABM_extension/build/binds && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/matin/Downloads/testProjs/ABM_extension/binds/myBinds.cpp -o CMakeFiles/myBinds.dir/myBinds.cpp.s
+binds/CMakeFiles/myBinds.dir/mybinds.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/myBinds.dir/mybinds.cpp.s"
+	cd /Users/matin/Downloads/testProjs/ABM_extension/build/binds && /Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/matin/Downloads/testProjs/ABM_extension/binds/mybinds.cpp -o CMakeFiles/myBinds.dir/mybinds.cpp.s
 
 # Object files for target myBinds
 myBinds_OBJECTS = \
-"CMakeFiles/myBinds.dir/myBinds.cpp.o"
+"CMakeFiles/myBinds.dir/mybinds.cpp.o"
 
 # External object files for target myBinds
 myBinds_EXTERNAL_OBJECTS =
 
-binds/myBinds.cpython-37m-darwin.so: binds/CMakeFiles/myBinds.dir/myBinds.cpp.o
+binds/myBinds.cpython-37m-darwin.so: binds/CMakeFiles/myBinds.dir/mybinds.cpp.o
 binds/myBinds.cpython-37m-darwin.so: binds/CMakeFiles/myBinds.dir/build.make
 binds/myBinds.cpython-37m-darwin.so: _deps/fmtlib-build/libfmt.a
 binds/myBinds.cpython-37m-darwin.so: /Users/matin/Downloads/testProjs/ABM_base/build/src/libBaseLibs.a

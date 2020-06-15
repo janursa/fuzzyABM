@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/myBinds.dir/myBinds.cpp.o"
+  "CMakeFiles/myBinds.dir/mybinds.cpp.o"
   "myBinds.cpython-37m-darwin.so"
   "myBinds.pdb"
 )

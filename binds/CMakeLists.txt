@@ -6,7 +6,7 @@ SET(MODULE_NAME "myBinds")
 
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
 
-pybind11_add_module(${MODULE_NAME} myBinds.cpp ${HEADER_LIST})
+pybind11_add_module(${MODULE_NAME} mybinds.cpp ${HEADER_LIST})
 target_link_libraries(${MODULE_NAME} PRIVATE pybind11::module)
 target_link_libraries(${MODULE_NAME} PRIVATE fmt::fmt)
 target_link_libraries(${MODULE_NAME} PRIVATE "/Users/matin/Downloads/testProjs/ABM_base/build/src/libBaseLibs.a")

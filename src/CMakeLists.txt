@@ -3,7 +3,7 @@
 set(HEADER_LIST )
 
 set(SOURCE_FILES "model.cpp"
-				 "myPyBases.cpp")
+				 "mypybases.cpp")
 
 set (CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
 

@@ -12,7 +12,7 @@ bases.h
 memory.h
 ../include/ABM/memory.h
 
-../include/ABM/myPyBases.h
+../include/ABM/mypybases.h
 pybases.h
 ../include/ABM/pybases.h
 model.h
@@ -63,16 +63,18 @@ map
 -
 algorithm
 -
+pybases.h
+/Users/matin/Downloads/testProjs/ABM_base/include/ABM/pybases.h
 pybind11/pybind11.h
 /Users/matin/Downloads/testProjs/ABM_base/include/ABM/pybind11/pybind11.h
 
-/Users/matin/Downloads/testProjs/ABM_extension/binds/myBinds.cpp
+/Users/matin/Downloads/testProjs/ABM_extension/binds/mybinds.cpp
 iostream
 -
 tools.h
 /Users/matin/Downloads/testProjs/ABM_extension/binds/tools.h
-myPyBases.h
-/Users/matin/Downloads/testProjs/ABM_extension/binds/myPyBases.h
+mypybases.h
+/Users/matin/Downloads/testProjs/ABM_extension/binds/mypybases.h
 pybases.h
 /Users/matin/Downloads/testProjs/ABM_extension/binds/pybases.h
 model.h

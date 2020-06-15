@@ -156,32 +156,32 @@ myBinds/fast:
 	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f binds/CMakeFiles/myBinds.dir/build.make binds/CMakeFiles/myBinds.dir/build
 .PHONY : myBinds/fast
 
-myBinds.o: myBinds.cpp.o
+mybinds.o: mybinds.cpp.o
 
-.PHONY : myBinds.o
+.PHONY : mybinds.o
 
 # target to build an object file
-myBinds.cpp.o:
-	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f binds/CMakeFiles/myBinds.dir/build.make binds/CMakeFiles/myBinds.dir/myBinds.cpp.o
-.PHONY : myBinds.cpp.o
+mybinds.cpp.o:
+	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f binds/CMakeFiles/myBinds.dir/build.make binds/CMakeFiles/myBinds.dir/mybinds.cpp.o
+.PHONY : mybinds.cpp.o
 
-myBinds.i: myBinds.cpp.i
+mybinds.i: mybinds.cpp.i
 
-.PHONY : myBinds.i
+.PHONY : mybinds.i
 
 # target to preprocess a source file
-myBinds.cpp.i:
-	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f binds/CMakeFiles/myBinds.dir/build.make binds/CMakeFiles/myBinds.dir/myBinds.cpp.i
-.PHONY : myBinds.cpp.i
+mybinds.cpp.i:
+	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f binds/CMakeFiles/myBinds.dir/build.make binds/CMakeFiles/myBinds.dir/mybinds.cpp.i
+.PHONY : mybinds.cpp.i
 
-myBinds.s: myBinds.cpp.s
+mybinds.s: mybinds.cpp.s
 
-.PHONY : myBinds.s
+.PHONY : mybinds.s
 
 # target to generate assembly for a file
-myBinds.cpp.s:
-	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f binds/CMakeFiles/myBinds.dir/build.make binds/CMakeFiles/myBinds.dir/myBinds.cpp.s
-.PHONY : myBinds.cpp.s
+mybinds.cpp.s:
+	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f binds/CMakeFiles/myBinds.dir/build.make binds/CMakeFiles/myBinds.dir/mybinds.cpp.s
+.PHONY : mybinds.cpp.s
 
 # Help Target
 help:
@@ -193,9 +193,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... myBinds"
-	@echo "... myBinds.o"
-	@echo "... myBinds.i"
-	@echo "... myBinds.s"
+	@echo "... mybinds.o"
+	@echo "... mybinds.i"
+	@echo "... mybinds.s"
 .PHONY : help
 
 

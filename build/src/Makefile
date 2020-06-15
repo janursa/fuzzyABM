@@ -183,32 +183,32 @@ model.cpp.s:
 	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/ExtLibs.dir/build.make src/CMakeFiles/ExtLibs.dir/model.cpp.s
 .PHONY : model.cpp.s
 
-myPyBases.o: myPyBases.cpp.o
+mypybases.o: mypybases.cpp.o
 
-.PHONY : myPyBases.o
+.PHONY : mypybases.o
 
 # target to build an object file
-myPyBases.cpp.o:
-	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/ExtLibs.dir/build.make src/CMakeFiles/ExtLibs.dir/myPyBases.cpp.o
-.PHONY : myPyBases.cpp.o
+mypybases.cpp.o:
+	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/ExtLibs.dir/build.make src/CMakeFiles/ExtLibs.dir/mypybases.cpp.o
+.PHONY : mypybases.cpp.o
 
-myPyBases.i: myPyBases.cpp.i
+mypybases.i: mypybases.cpp.i
 
-.PHONY : myPyBases.i
+.PHONY : mypybases.i
 
 # target to preprocess a source file
-myPyBases.cpp.i:
-	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/ExtLibs.dir/build.make src/CMakeFiles/ExtLibs.dir/myPyBases.cpp.i
-.PHONY : myPyBases.cpp.i
+mypybases.cpp.i:
+	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/ExtLibs.dir/build.make src/CMakeFiles/ExtLibs.dir/mypybases.cpp.i
+.PHONY : mypybases.cpp.i
 
-myPyBases.s: myPyBases.cpp.s
+mypybases.s: mypybases.cpp.s
 
-.PHONY : myPyBases.s
+.PHONY : mypybases.s
 
 # target to generate assembly for a file
-myPyBases.cpp.s:
-	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/ExtLibs.dir/build.make src/CMakeFiles/ExtLibs.dir/myPyBases.cpp.s
-.PHONY : myPyBases.cpp.s
+mypybases.cpp.s:
+	cd /Users/matin/Downloads/testProjs/ABM_extension/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/ExtLibs.dir/build.make src/CMakeFiles/ExtLibs.dir/mypybases.cpp.s
+.PHONY : mypybases.cpp.s
 
 # Help Target
 help:
@@ -223,9 +223,9 @@ help:
 	@echo "... model.o"
 	@echo "... model.i"
 	@echo "... model.s"
-	@echo "... myPyBases.o"
-	@echo "... myPyBases.i"
-	@echo "... myPyBases.s"
+	@echo "... mypybases.o"
+	@echo "... mypybases.i"
+	@echo "... mypybases.s"
 .PHONY : help
 
 
