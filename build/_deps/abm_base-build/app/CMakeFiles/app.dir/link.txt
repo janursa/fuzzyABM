@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++   -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/app.dir/main.cpp.o  -o app  ../src/libBaseLibs.a -undefined dynamic_lookup ../../fmtlib-build/libfmt.a 

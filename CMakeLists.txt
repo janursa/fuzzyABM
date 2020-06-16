@@ -32,22 +32,19 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(fmtlib)
 
-include(FetchContent)
 FetchContent_Declare(
   pybind11
   GIT_REPOSITORY https://github.com/pybind/pybind11.git
   GIT_TAG        master
 )
 FetchContent_MakeAvailable(pybind11)
-set(PYBIND11_CPP_STANDARD -std=c++17)
 
-# include(FetchContent)
-# FetchContent_Declare(
-#   ABM_base
-#   GIT_REPOSITORY https://github.com/janursa/ABM_extension.git
-#   GIT_TAG        master
-# )
-# FetchContent_MakeAvailable(ABM_base)
+FetchContent_Declare(
+  cppyabm
+  GIT_REPOSITORY https://github.com/janursa/CPPYABM.git
+  GIT_TAG        master
+)
+FetchContent_MakeAvailable(cppyabm)
 
 
 set(JSON_BuildTests OFF CACHE INTERNAL "")

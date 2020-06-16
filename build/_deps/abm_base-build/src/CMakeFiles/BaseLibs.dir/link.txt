@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libBaseLibs.a  CMakeFiles/BaseLibs.dir/env.cpp.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libBaseLibs.a

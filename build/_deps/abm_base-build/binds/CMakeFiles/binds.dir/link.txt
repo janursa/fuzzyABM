@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -bundle -Wl,-headerpad_max_install_names  -o binds.cpython-37m-darwin.so CMakeFiles/binds.dir/binds.cpp.o  -undefined dynamic_lookup -flto ../../fmtlib-build/libfmt.a -undefined dynamic_lookup 

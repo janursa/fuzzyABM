@@ -1,6 +1,5 @@
 #pragma once
-#include "bases.h"
-#include "memory.h"
+#include "CPPYABM/bases.h"
 using namespace std;
 struct Patch;
 struct myAgent : public Agent{
