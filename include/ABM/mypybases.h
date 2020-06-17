@@ -8,7 +8,20 @@ class PyMyEnv: public PyEnv<derivedEnv>{
 	
 };
 template<class derivedAgent>
-class PyMyAgent: public PyAgent<derivedAgent>{
+class PyMSC: public PyAgent<derivedAgent>{
+	using PyAgent<derivedAgent>::PyAgent;
+	using input_output = std::map<string,double>;
+	input_output run_policy(input_output inputs) override {
+		PYBIND11_OVERLOAD_PURE(
+			input_output,
+			derivedAgent,
+			run_policy,
+			inputs
+		)
+	}
+};
+template<class derivedAgent>
+class PyDead: public PyAgent<derivedAgent>{
 	using PyAgent<derivedAgent>::PyAgent;
 };
 template<class derivedPatch>

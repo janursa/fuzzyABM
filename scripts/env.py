@@ -13,8 +13,8 @@ sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
 # sys.path.insert(1,os.path.join(current_file_path,'..','..','ABM_base','build','binds'))
 # from binds import mesh_tools
 from myBinds import myEnv,mesh_tools
-from agents import MSC,Dead
-from patch import myPatch_
+from agents import MSC_,Dead_
+# from patch import myPatch_
 
 SETTINGS_PATH = os.path.join(current_file_path,'settings.json')
 PARAMS_PATH = os.path.join(current_file_path,'params.json')
@@ -27,30 +27,30 @@ class myEnv_(myEnv):
 		## env variables
 		self.tick = 0
 		self.last_tick = 0
+		self.id_rec = 0
 		## simulation specific
 		with open(SETTINGS_PATH) as file:
 			self.settings = json.load(file)
 		with open(PARAMS_PATH) as file:
 			self.params = json.load(file)
+		self.set_settings(self.settings);
+		self.set_params(self.params);
 	def update_repo(self):
 		self._repo[:]= [agent for agent in self._repo if not agent.disappear]
-	def generate_patch(self):
-		patch_obj = myPatch_(self, configs = self.settings["setup"]["patch"].copy(),
-								  params = self.params.copy())
-		self._repo.append(patch_obj)
-		return patch_obj
 	def generate_agent(self,agent_name):
 		if agent_name == 'MSC':
-			agent_obj = MSC(self, configs = self.settings["setup"]["agents"]["MSC"].copy(),
-								  params = self.params.copy())
+			agent_obj = MSC_(self, params = self.params.copy(),
+				initial_conditions = self.settings["setup"]["agents"]["MSC"]["attrs"].copy(),
+				id = self.id_rec)
 		elif agent_name == 'Dead':
-			agent_obj = Dead(self, configs = self.settings["setup"]["agents"]["Dead"].copy(),
+			agent_obj = Dead_(self, configs = self.settings["setup"]["agents"]["Dead"].copy(),
 								  params = self.params.copy())
 		else:
 			print("Generate agent is not defined for '{}'".format(agent_name))
 			sys.exit(0)
 		self._repo.append(agent_obj)
 		self.agents.append(agent_obj)
+		self.id_rec+=1
 		return agent_obj
 
 	def setup(self):
@@ -71,6 +71,7 @@ class myEnv_(myEnv):
 		pass
 	def update(self):
 		super().update()
+		time.sleep(1)
 		## Either updates or appends a pair of key-value to self.data
 		def add(key,value): 
 			if key not in self.data:
@@ -108,22 +109,36 @@ class myEnv_(myEnv):
 		Post processing: logging the results to a file
 		"""
 		# agents on patches as scatter format
-		# file = open('scatter.csv','w')
-		# file.write('x,y,type,size\n')
-		# for index,patch in self.patches.items():
-		# 	if patch.empty:
-		# 		size_ = 2
-		# 		type_ = 'nothing'
-		# 	else:
-		# 		size_ = 10
-		# 		type_ = patch.agent.class_name
-				
-		# 	file.write("{},{},{},{}\n".format(patch.coords[0],
-		# 									patch.coords[1],
-		# 									type_,
-		# 									size_))
-		# file.close()
-
+		def scatter_patch(patches):
+			file = open('outputs/scatter.csv','w')
+			file.write('x,y,type,size\n')
+			for index,patch in patches.items():
+				if patch.empty:
+					size_ = 2
+					type_ = 'nothing'
+				else:
+					size_ = 10
+					type_ = patch.agent.class_name
+					
+				file.write("{},{},{},{}\n".format(patch.coords[0],
+												patch.coords[1],
+												type_,
+												size_))
+			file.close()
+		# print_patch(self.patches)
+		def scatter_agents(agents):
+			file = open('outputs/scatter.csv','w')
+			file.write('x,y,type,size\n')
+			for agent in agents:
+				x,y,z = agent.patch.coords
+				type_ = agent.class_name
+				size_ = 10	
+				file.write("{},{},{},{}\n".format(x,
+												y,
+												type_,
+												size_))
+			file.close()
+		scatter_agents(self.agents)
 		## agent counts 
 		df = pd.DataFrame.from_dict(self.data)
 		df_agent_counts = df[["MSC","Dead"]]
