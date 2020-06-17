@@ -9,12 +9,11 @@
 
 PYBIND11_MODULE(myBinds, m) {
 	/** Envs **/
+    expose_defaults(m);
 	// data type
-	// py::bind_vector<AgentsBank>(m,"AgentsBank");
- //    py::bind_map<PatchesBank>(m,"PatchesBank");
-    expose_containers(m);   
+    // expose_containers(m);   
     // class
-	expose_base_env(m);
+	// expose_base_env(m);
 	auto myEnv_binds = expose_env<myEnv,PyMyEnv<myEnv>>(m,"myEnv");
     myEnv_binds.def(py::init<>());
     myEnv_binds.def("collect_from_patches",&myEnv::collect_from_patches);
@@ -22,7 +21,7 @@ PYBIND11_MODULE(myBinds, m) {
     myEnv_binds.def("set_params",&myEnv::set_params);
 	/** Agent **/
     // MSC
-    expose_base_agent(m);
+    // expose_base_agent(m);
     auto MSC_binds = expose_agent<MSC,PyMSC<MSC>>(m,"MSC");
     MSC_binds.def("mortality",&MSC::mortality);
     MSC_binds.def(py::init<shared_ptr<Env>,
@@ -40,7 +39,7 @@ PYBIND11_MODULE(myBinds, m) {
     auto Dead_binds = expose_agent<Dead,PyDead<Dead>>(m,"Dead");
     Dead_binds.def(py::init<shared_ptr<Env>,string>(),"Initialize",py::arg("env"),py::arg("class_name"));
     /** Patch **/
-    expose_base_patch(m);
+    // expose_base_patch(m);
     auto myPatch_binds = expose_patch<myPatch,PyMyPatch<myPatch>>(m,"myPatch");
     myPatch_binds.def(py::init<shared_ptr<Env>,
                     std::map<string,double>,
@@ -49,9 +48,9 @@ PYBIND11_MODULE(myBinds, m) {
                     py::arg("params"),py::arg("initial_conditions"));
 
     // /** Exceptions **/
-    expose_exceptions(m);
+    // expose_exceptions(m);
     /** mesh **/
-    expose_mesh(m);
+    // expose_mesh(m);
 }
 
 
