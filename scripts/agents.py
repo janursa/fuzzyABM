@@ -32,8 +32,7 @@ class MSC_(MSC):
 	"""
 	def __init__(self,env, params = None,initial_conditions = None, id = 0):
 		MSC.__init__(self,env = env, class_name = 'MSC',  
-					params = params, initial_conditions = initial_conditions,
-					id = id )
+					params = params, initial_conditions = initial_conditions)
 		self.policy = fuzzy("MSC",params)
 
 	def run_policy(self,policy_inputs):

@@ -17,7 +17,7 @@ PYBIND11_MODULE(myBinds, m) {
 	auto myEnv_binds = expose_env<myEnv,PyMyEnv<myEnv>>(m,"myEnv");
     myEnv_binds.def(py::init<>());
     myEnv_binds.def("collect_from_patches",&myEnv::collect_from_patches);
-    myEnv_binds.def("set_settings",&myEnv::set_settings);
+    // myEnv_binds.def("set_settings",&myEnv::set_settings);
     myEnv_binds.def("set_params",&myEnv::set_params);
 	/** Agent **/
     // MSC
@@ -27,11 +27,9 @@ PYBIND11_MODULE(myBinds, m) {
     MSC_binds.def(py::init<shared_ptr<Env>,
                     string,
                     std::map<string,double>,
-                    std::map<string,double>,
-                    unsigned>(),
+                    std::map<string,double>>(),
                     "Initialize",py::arg("env"),py::arg("class_name"),
-                    py::arg("params"),py::arg("initial_conditions"),
-                    py::arg("id")
+                    py::arg("params"),py::arg("initial_conditions")
                     );
     MSC_binds.def("alkalinity",&MSC::alkalinity);
     MSC_binds.def("adaptation",&MSC::adaptation);
@@ -50,9 +48,9 @@ PYBIND11_MODULE(myBinds, m) {
                     py::arg("params"),py::arg("initial_conditions"));
 
     // /** Exceptions **/
-    register_exceptions(m);
+    expose_exceptions(m);
     /** mesh **/
-    register_mesh(m);
+    expose_mesh(m);
 }
 
 

@@ -15,13 +15,11 @@ struct Dead: public Agent{
 };
 struct MSC : public Agent{
 	MSC(shared_ptr<Env> env , string class_name, 
-		std::map<string,double> params_,std::map<string,double> initial_conditions,
-		unsigned id_)
+		std::map<string,double> params_,std::map<string,double> initial_conditions)
 	try: Agent(env,class_name){
 		this->params = params_;
 		this->initial_conditions = initial_conditions;
 		this->initialize(initial_conditions);
-		this->id = id_;
 	}catch(...){
 		cerr<<"Error in the construction of my agent";
 		exit(2);
@@ -38,7 +36,6 @@ struct MSC : public Agent{
 	bool migration(double Mi);
 	virtual std::map<string,double> run_policy(std::map<string,double> ) = 0;
 	virtual void step();
-	unsigned id;
 	virtual double get_data(string tag){
 		return this->data[tag];
 	}
