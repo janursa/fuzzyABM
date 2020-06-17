@@ -10,8 +10,9 @@
 PYBIND11_MODULE(myBinds, m) {
 	/** Envs **/
 	// data type
-	py::bind_vector<AgentsBank>(m,"AgentsBank");
-    py::bind_map<PatchesBank>(m,"PatchesBank");
+	// py::bind_vector<AgentsBank>(m,"AgentsBank");
+ //    py::bind_map<PatchesBank>(m,"PatchesBank");
+    expose_containers(m);   
     // class
 	expose_base_env(m);
 	auto myEnv_binds = expose_env<myEnv,PyMyEnv<myEnv>>(m,"myEnv");

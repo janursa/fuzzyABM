@@ -66,7 +66,7 @@ class ABM(myEnv):
 		self.agents.append(agent_obj)
 		return agent_obj
 	def generate_patch(self):
-		patch_obj = myPatch_(self, initial_conditions = self.settings["setup"]["patch"].copy(),
+		patch_obj = myPatch_(self, initial_conditions = self.settings["setup"]["patch"]["attrs"].copy(),
 								  params = self.params.copy())
 		self._repo.append(patch_obj)
 		return patch_obj
