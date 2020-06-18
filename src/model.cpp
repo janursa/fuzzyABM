@@ -13,9 +13,9 @@ double myPatch::lactate(){
 void myPatch::step(){
 
 	auto pH_new = this->pH();
-	auto new_lactate = this->lactate();
+	// auto new_lactate = this->lactate();
 	this->data["pH"] = pH_new;
-	this->data["lactate"] = new_lactate;
+	// this->data["lactate"] = new_lactate;
 	this->data["agent_density"] = this->find_neighbor_agents(true).size()/9.0;
 }
 
@@ -112,8 +112,9 @@ void myPatch::initialize(map<string,double> configs){
 	}
 double myPatch::pH(){
 		auto mg = this->data["Mg"];
-		auto lactate = this->data["lactate"];
-		auto pH_new = this->params["w_mg_ph"]*mg -this->params["w_lactate_ph"]*lactate + 7.8;
+		// auto lactate = this->data["lactate"];
+		// auto pH_new = this->params["w_mg_ph"]*mg -this->params["w_lactate_ph"]*lactate + 7.8;
+		auto pH_new = this->params["w_mg_ph"]*mg + 7.8;
 		return pH_new;
 	}
 void MSC::inherit(shared_ptr<Agent> father){
