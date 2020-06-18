@@ -4,47 +4,12 @@ import os
 path_to_env = os.path.join(current_file,'..')
 import sys
 sys.path.insert(1,path_to_env)
-from env import ABM,trainingData
-sys.path.insert(1,"/Users/matin/Downloads/testProjs/ABC/ABC/ABC")
-import tools
-
+from env import trainingData
+import plotly.graph_objects as go
+import statistics as st
 import json
 
-settings = {
-	"MPI_flag": True,
-	"sample_n": 10,
-	"top_n": 2,
-	"output_path": "outputs",
-	"plot": True,
-	"test": True,
-	"model":ABM
-}
-
-free_params = {
-#     "AE_H_t": [0,1],
-#     "AE_L_t": [0,1],
-#     "B_MSC_rec": [0.001,0.005],
-    # "B_MSC_Pr": [0.01,0.05]
-    # "CD_H_t": [0.45,0.7],
-    "CD_L_t": [0.3,0.5],
-    "CD_M_t1": [0.4,0.7],
-#     "CD_M_t2": 0.6,
-#     "MG_H_t": [15,40],
-#     "MG_L_t1": [0,10],
-#     "MG_L_t2": [3,15],
-#     "Mo_H_v": [2,5],
-#     "Pr_N_v": [0,1],
-#     "w_lactate_ph": [0.1,0.5],
-#     "w_mg_ph": [0.02,0.1],
-#     "w_MI_lactate": [0.05,0.1]
-}
 if __name__ == "__main__":
-	obj = tools.ABC(settings=settings,free_params=free_params)
-	obj.sample()
-	tools.clock.start()
-	obj.run()
-	tools.clock.end()
-	obj.postprocessing()
 
 	## plotting 
 	with open(os.path.join('outputs','top_results.json')) as file:
@@ -65,8 +30,7 @@ if __name__ == "__main__":
 		oo.update({ID:matched})
 	# plotting for this ID case. TODO: needs to be extended to all
 	mg_ID = "0"
-	import plotly.graph_objects as go
-	import statistics as st
+	
 	exp_y_mean = [oo[mg_ID][i]["exp"] for i in time_points] # error bar is excluded for exp
 	sim_y = [oo[mg_ID][i]["sim"] for i in time_points]
 	sim_y_median = []

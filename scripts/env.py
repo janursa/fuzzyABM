@@ -6,6 +6,7 @@ import os
 import json
 import pandas as pd
 from pprogress import ProgressBar
+import numpy as np
 
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
@@ -49,7 +50,10 @@ class ABM(myEnv):
 		self.errors = {}
 	def reset(self):
 		self.initialize()
-		self.setup()
+		try:
+			self.setup()
+		except Exception as e:
+			raise e
 	def update_repo(self):
 		self._repo[:]= [agent for agent in self._repo if not agent.disappear]
 	def generate_agent(self,agent_name):
@@ -76,7 +80,9 @@ class ABM(myEnv):
 		self.setup_domain(mesh)
 		## create agents
 		agent_counts = self.settings["setup"]["agents"]["n"]
+		
 		self.setup_agents(agent_counts)
+		
 		self.update()
 	def step(self):
 
@@ -130,9 +136,9 @@ class ABM(myEnv):
 		#step 5: return them
 		if "expectations" not in self.settings: # no  calculaton is required
 			return
-		if self.tick is not self.settings["expectations"]: # not the right tick
+		if str(self.tick) not in self.settings["expectations"]: # not the right tick
 			return 
-		factors = self.settings["expectations"][self.tick]
+		factors = self.settings["expectations"][str(self.tick)]
 		errors = {}
 		results = {}
 		for key,value in factors.items():
@@ -144,12 +150,12 @@ class ABM(myEnv):
 			else:
 				raise Exception("Error is not defined for '{}'".format(key))
 
-			error_value = (float)(sim_res - value)/value
+			error_value =abs((float)(sim_res - value)/value) 
+			# print("\nsim_res {} value {} error_value {}".format(sim_res,value,error_value))
 			errors.update({key:error_value})
 			results.update({key:sim_res})
-		self.errors.update({self.tick:errors})
-		self.results.update({self.tick:results})
-	
+		self.errors.update({str(self.tick):errors})
+		self.results.update({str(self.tick):results})	
 
 	def episode(self,trainingItem = None):
 		"""
@@ -165,33 +171,65 @@ class ABM(myEnv):
 		if trainingItem:
 			self.settings["setup"] = trainingItem["setup"]
 			self.settings.update({"expectations":trainingItem["expectations"]})
-			print(self.settings)
-		self.reset()
+		try :
+			self.reset()
+		except ValueError as vl:
+			raise vl
+
 		self.duration = self.settings["setup"]["exp_duration"]
 		self.pb = ProgressBar(self.duration)
 		for i in range(self.duration):
 			self.step()
-			self.pb.update()
+			if self.run_mode == "test":
+				self.pb.update()
 		self.pb.done()
-		print("Episode finished")
 
-		return self.results,self.errors
-	def epoch(self):
+		# calculate mean error
+		mm = []
+		for key,item in self.errors.items():
+			for key2,error in item.items():
+				mm.append(error)
+		mean_error = np.mean(mm)
+		if self.run_mode == "test":
+			print("Episode finished")
+
+		return self.results,self.errors,mean_error
+
+	def run(self):
 		"""
 		Runs the model for all training items
 		"""
 		#step 1: for each training item, run `episode` 
 		#step 2: receive the results and append it to the epoch results
 		#step 3: calculate error
-		epoch_error = {}
+		
+		mean_errors = []
 		IDs = trainingData["IDs"]
 		for ID in IDs:
 			training_item = trainingData[ID]
-			results,episode_error = self.episode(training_item) 
-			print(results)
-			epoch_error[ID] = episode_error
-		return 
-		
+			try:
+				_,_,mean_error = self.episode(training_item) 
+			except ValueError as vl:
+				return None
+			mean_errors.append(mean_error)
+			
+		epoch_error = np.mean(mean_errors)
+		return epoch_error
+
+	def test(self):
+		results = {}
+		IDs = trainingData["IDs"]
+		for ID in IDs:
+			training_item = trainingData[ID]
+			try:
+				results_episode,_,_ = self.episode(training_item) 
+			except ValueError as vl:
+				print("\nValueError inside env::test as ",vl)
+				return None
+
+			results.update({ID:results_episode})
+		return results
+
 	def output(self):
 		"""
 		Post processing: logging the results to a file

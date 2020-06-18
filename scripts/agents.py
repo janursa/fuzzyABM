@@ -33,8 +33,10 @@ class MSC_(MSC):
 	def __init__(self,env, params = None,initial_conditions = None, id = 0):
 		MSC.__init__(self,env = env, class_name = 'MSC',  
 					params = params, initial_conditions = initial_conditions)
-		self.policy = fuzzy("MSC",params)
-
+		try:
+			self.policy = fuzzy("MSC",params)
+		except:
+			raise ValueError("Policy raise error")
 	def run_policy(self,policy_inputs):
 		"""
 		Collects policy inputs, executes policy and returns predictions
