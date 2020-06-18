@@ -1,8 +1,7 @@
-from env import myEnv_
+from env import ABM
 import time
 
-obj = myEnv_()
-obj.setup()
+obj = ABM()
 start = time.time()
 obj.episode()
 end = time.time()

@@ -5,7 +5,8 @@ path_to_env = os.path.join(current_file,'..')
 import sys
 sys.path.insert(1,path_to_env)
 from env import ABM,trainingData
-sys.path.insert(1,"/Users/matin/Downloads/testProjs/ABC/ABC/ABC")
+ABC_path = os.path.join(current_file,'..','..','..','ABC/ABC/ABC')
+sys.path.insert(1,ABC_path)
 import tools
 
 import json
