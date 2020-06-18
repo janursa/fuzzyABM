@@ -25,12 +25,6 @@ if(${CMAKE_VERSION} VERSION_LESS 3.14)
     include(cmake/add_FetchContent_MakeAvailable.cmake)
 endif()
 
-FetchContent_Declare(
-  fmtlib
-  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-  GIT_TAG        5.3.0
-)
-FetchContent_MakeAvailable(fmtlib)
 
 FetchContent_Declare(
   pybind11
@@ -46,9 +40,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(cppyabm)
 
-
-set(JSON_BuildTests OFF CACHE INTERNAL "")
-find_package(nlohmann_json REQUIRED)
 
 # add_subdirectory(binds)
 add_subdirectory(src)
