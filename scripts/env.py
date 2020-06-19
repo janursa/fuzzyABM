@@ -7,12 +7,13 @@ import json
 import pandas as pd
 from pprogress import ProgressBar
 import numpy as np
-
+from math import sqrt
+import copy
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
 sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
 
-from myBinds import myEnv,mesh_tools
+from myBinds import myEnv,grid
 from agents import MSC_,Dead_
 from patch import myPatch_
 
@@ -24,7 +25,7 @@ with open(TRAININGDATA_PATH) as file:
 	trainingData = json.load(file)
 
 class ABM(myEnv):
-	def __init__(self,free_params = {}):
+	def __init__(self,free_params = {},run_mode = "ABC"):
 		myEnv.__init__(self)
 		## simulation specific
 		with open(SETTINGS_PATH) as file:
@@ -35,7 +36,7 @@ class ABM(myEnv):
 			self.params[key] = value
 		self.set_params(self.params) # sends it to c++
 		## specific settings
-		self.run_mode = "ABC"  ## other options are test and RL
+		self.run_mode = run_mode  ## other options are test and RL
 	def initialize(self):
 		## default fields
 		self._repo = []
@@ -76,11 +77,10 @@ class ABM(myEnv):
 		return patch_obj
 	def setup(self):
 		grid_info = self.settings["setup"]["grid"]
-		mesh =  mesh_tools.grid(grid_info["x_l"],grid_info["y_l"],grid_info["patch_size"])
+		mesh =  grid(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],share = True)
 		self.setup_domain(mesh)
 		## create agents
 		agent_counts = self.settings["setup"]["agents"]["n"]
-		
 		self.setup_agents(agent_counts)
 		
 		self.update()
@@ -156,7 +156,26 @@ class ABM(myEnv):
 			results.update({key:sim_res})
 		self.errors.update({str(self.tick):errors})
 		self.results.update({str(self.tick):results})	
-
+	@staticmethod
+	def scale(settings):
+		"""
+		Scale the settings (both setup and expectations) based on the scale factor. This needs
+		to be revised for new training items with different format
+		"""
+		scale = settings["scale"]
+		# scale area
+		settings["setup"]["grid"]["area"] *= scale
+		# scale cell count
+		for (key,value) in settings["setup"]["agents"]["n"].items():
+			settings["setup"]["agents"]["n"][key] = (int)(value*scale)
+		# scale expectations
+		if "expectations" in settings:
+			for timepoint in settings["expectations"]["timepoints"]:
+				for (key,value) in settings["expectations"][timepoint].items():
+					if key == "liveCellCount":
+						settings["expectations"][timepoint][key] = (int)(value * scale)
+					else:
+						raise ValueError("Scalling is not defined for {} in expectations".format(key))
 	def episode(self,trainingItem = None):
 		"""
 		Runs the model for one single training item
@@ -167,11 +186,12 @@ class ABM(myEnv):
 		#step 2: setup and run the model
 		#step 3: reset the model
 		#step 3: return the simulation results
-		
 		if trainingItem:
+			self.settings["scale"] = trainingItem["scale"]
 			self.settings["setup"] = trainingItem["setup"]
 			self.settings.update({"expectations":trainingItem["expectations"]})
-		try :
+		self.scale(self.settings);
+		try : # to catch the errors in the setup
 			self.reset()
 		except ValueError as vl:
 			raise vl
@@ -202,13 +222,12 @@ class ABM(myEnv):
 		#step 1: for each training item, run `episode` 
 		#step 2: receive the results and append it to the epoch results
 		#step 3: calculate error
-		
+		trainingData_copy =  copy.deepcopy(trainingData)
 		mean_errors = []
-		IDs = trainingData["IDs"]
+		IDs = trainingData_copy["IDs"]
 		for ID in IDs:
-			training_item = trainingData[ID]
 			try:
-				_,_,mean_error = self.episode(training_item) 
+				_,_,mean_error = self.episode(trainingData_copy[ID]) 
 			except ValueError as vl:
 				return None
 			mean_errors.append(mean_error)
@@ -217,12 +236,12 @@ class ABM(myEnv):
 		return epoch_error
 
 	def test(self):
+		trainingData_copy =  copy.deepcopy(trainingData)
 		results = {}
 		IDs = trainingData["IDs"]
 		for ID in IDs:
-			training_item = trainingData[ID]
 			try:
-				results_episode,_,_ = self.episode(training_item) 
+				results_episode,_,_ = self.episode(trainingData_copy[ID]) 
 			except ValueError as vl:
 				print("\nValueError inside env::test as ",vl)
 				return None

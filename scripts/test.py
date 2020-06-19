@@ -1,7 +1,7 @@
 from env import ABM
 import time
 
-obj = ABM()
+obj = ABM(run_mode = "test")
 start = time.time()
 obj.episode()
 end = time.time()

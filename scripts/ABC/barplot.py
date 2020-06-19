@@ -8,9 +8,10 @@ from env import trainingData
 import plotly.graph_objects as go
 import statistics as st
 import json
-
+import copy
+from env import ABM
 if __name__ == "__main__":
-
+	trainingData_copy = copy.deepcopy(trainingData)
 	## plotting 
 	with open(os.path.join('outputs','top_results.json')) as file:
 		top_results = json.load(file)['top_results']
@@ -18,10 +19,13 @@ if __name__ == "__main__":
 	target = "liveCellCount"
 	time_points = ["24","48","72"]
 	oo = {}
-	for ID in trainingData["IDs"]:
+	for ID in trainingData_copy["IDs"]:
+		ABM.scale(trainingData_copy[ID])
+		
+	for ID in trainingData_copy["IDs"]:
 		matched = {}
 		for time_point in time_points:
-			exp = trainingData[ID]["expectations"][time_point][target]
+			exp = trainingData_copy[ID]["expectations"][time_point][target]
 			sims = []
 			for top_result in top_results:
 				sim = top_result[ID][time_point][target]
@@ -29,7 +33,7 @@ if __name__ == "__main__":
 			matched.update({time_point:{"sim":sims,"exp":exp}})
 		oo.update({ID:matched})
 	# plotting for this ID case. TODO: needs to be extended to all
-	mg_ID = "0"
+	mg_ID = "H2017_Mg0"
 	
 	exp_y_mean = [oo[mg_ID][i]["exp"] for i in time_points] # error bar is excluded for exp
 	sim_y = [oo[mg_ID][i]["sim"] for i in time_points]
