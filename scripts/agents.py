@@ -11,6 +11,8 @@ sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
 from myBinds import MSC, Dead
 sys.path.insert(1,os.path.join(current_file_path,'..','..','fuzzy','build'))
 from fuzzy import fuzzy
+sys.path.insert(1,os.path.join(current_file_path,'..','..','RL'))
+from policies import MSC_policy
 
 class Dead_(Dead):
 	"""

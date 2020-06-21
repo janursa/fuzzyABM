@@ -40,9 +40,10 @@ free_params = {
 }
 if __name__ == "__main__":
 	obj = tools.ABC(settings=settings,free_params=free_params)
-	obj.sample()
+	# obj.sample()
 	tools.clock.start()
-	obj.run()
+	# obj.run()
 	tools.clock.end()
-	obj.postprocessing()
+	# obj.postprocessing()
+	obj.run_tests()
 
