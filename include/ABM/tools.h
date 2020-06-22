@@ -4,10 +4,12 @@
 #include <map>
 #include <random>
 #include <cmath>
+#include <type_traits>
 
 namespace tools{
 
 	float random(float min, float max); //!< A random value in the given range
+
 }
 inline float tools::random(float min, float max){
 	    std::random_device rd;
@@ -15,3 +17,4 @@ inline float tools::random(float min, float max){
 	    std::uniform_real_distribution<> dis(min,max);
 	    return dis(gen);
 }
+

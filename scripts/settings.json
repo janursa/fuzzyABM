@@ -22,6 +22,17 @@
           "attrs":{ }
         }
       }
-  }
+  },
+  "expectations":{
+        "timepoints":["24","48","72"],
+        "24":{
+          "liveCellCount": 3287
+        },
+        "48":{
+          "liveCellCount": 7123
+        },
+        "72":{
+          "liveCellCount": 10136        }
+      }
   
 }

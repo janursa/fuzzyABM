@@ -35,6 +35,7 @@ PYBIND11_MODULE(myBinds, m) {
     MSC_binds.def("adaptation",&MSC::adaptation);
     MSC_binds.def("proliferation",&MSC::proliferation);
     MSC_binds.def("migration",&MSC::migration);
+    MSC_binds.def("collect_policy_inputs",&MSC::collect_policy_inputs);
     // Dead
     auto Dead_binds = expose_agent<Dead,PyDead<Dead>>(m,"Dead");
     Dead_binds.def(py::init<shared_ptr<Env>,string>(),"Initialize",py::arg("env"),py::arg("class_name"));

@@ -43,6 +43,8 @@ struct MSC : public Agent{
 	map<string,double> collect_policy_inputs();
 	virtual void inherit(shared_ptr<Agent> father);
 	map<string,double> data;
+	virtual void reward() {};
+	virtual void update();
 };
 struct myEnv : public Env{
 	/** Env data **/
@@ -55,6 +57,7 @@ struct myEnv : public Env{
    		this->params = params_;
    }
    virtual shared_ptr<Patch> generate_patch();
+   virtual void update();
    py::dict settings;
    param_type params;
 

@@ -19,7 +19,7 @@ from patch import myPatch_
 
 SETTINGS_PATH = os.path.join(current_file_path,'settings.json')
 PARAMS_PATH = os.path.join(current_file_path,'params.json')
-TRAININGDATA_PATH = os.path.join(current_file_path,'ABC','trainingdata.json')
+TRAININGDATA_PATH = os.path.join(current_file_path,'trainingdata.json')
 
 with open(TRAININGDATA_PATH) as file:
 	trainingData = json.load(file)
@@ -85,13 +85,11 @@ class ABM(myEnv):
 		
 		self.update()
 	def step(self):
-
+		self.tick += 1
 		self.step_patches()
 		self.step_agents()	
-
-		self.tick += 1
 		self.update()
-		pass
+
 	def update(self):
 		super().update()
 		
@@ -118,7 +116,9 @@ class ABM(myEnv):
 
 		## calculate errors	//rewards
 		self.checkpoint()
-
+		for agent in self.agents:
+			if hasattr(agent,'reward'):
+				agent.reward()
 		## control
 		self.last_tick = self.tick
 		if len(self.agents) >  len(self.patches):

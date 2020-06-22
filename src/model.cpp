@@ -79,14 +79,16 @@ void MSC::step(){
 	auto die = this->mortality(predictions["Mo"]);
 	auto hatch = this->proliferation(predictions["Pr"]);
 	auto walk = this->migration(predictions["Mi"]);
-	auto adapted_ph = this->adaptation();
-	auto MI = predictions["Pr"];
+
 	if (walk)
 		this->order_move(/**patch**/nullptr, /* quiet */ true,/** reset**/ true);
 	if (hatch)
-		this->order_hatch(/**patch**/nullptr, /**inherit**/true,/** quiet **/ true, /**silent**/ true);
+		this->order_hatch(/**patch**/nullptr, /**inherit**/true,/** quiet **/ true);
 	if (die)
 		this->order_switch(/** to **/ "Dead");
+	
+	auto adapted_ph = this->adaptation();
+	auto MI = predictions["Pr"];
 	this->data["MI"] = MI;
 	this->data["pH"] = adapted_ph;
 };
@@ -105,6 +107,15 @@ map<string,double> MSC::collect_policy_inputs(){
 
 		return policy_inputs;
 	}
+void MSC::update(){
+	// this->reward();
+}
+void myEnv::update(){
+	Env::update();
+	for (auto &agent:this->agents){
+		agent->update();
+	}
+}
 void myPatch::initialize(map<string,double> configs){
 		for (auto const &[key,value]:configs){
 			this->data[key] = value;

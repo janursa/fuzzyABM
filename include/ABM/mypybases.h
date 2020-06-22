@@ -17,7 +17,21 @@ class PyMSC: public PyAgent<derivedAgent>{
 			derivedAgent,
 			run_policy,
 			inputs
-		)
+		);
+	}
+	void reward() override {
+		PYBIND11_OVERLOAD(
+			void,
+			derivedAgent,
+			reward
+		);
+	}
+	void step() override {
+		PYBIND11_OVERLOAD(
+			void,
+			derivedAgent,
+			step
+		);
 	}
 };
 template<class derivedAgent>
