@@ -13,7 +13,7 @@ current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
 sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
 
-from myBinds import myEnv,grid
+from myBinds import myEnv,grid, grid3
 from agents import MSC_,Dead_
 from patch import myPatch_
 
@@ -30,6 +30,7 @@ class ABM(myEnv):
 		## simulation specific
 		with open(SETTINGS_PATH) as file:
 			self.settings = json.load(file)
+		ABM.scale(self.settings);
 		with open(PARAMS_PATH) as file:
 			self.params = json.load(file)
 		for key,value in free_params.items():
@@ -77,7 +78,9 @@ class ABM(myEnv):
 		return patch_obj
 	def setup(self):
 		grid_info = self.settings["setup"]["grid"]
-		mesh =  grid(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],share = True)
+		# mesh =  grid(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],share = True)
+		mesh =  grid3(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],grid_info["patch_size"],share = True)
+
 		self.setup_domain(mesh)
 		## create agents
 		agent_counts = self.settings["setup"]["agents"]["n"]
@@ -92,7 +95,8 @@ class ABM(myEnv):
 
 	def update(self):
 		super().update()
-		
+		if (self.tick % 50 == 0): # medium chaneg
+			self.refresh()
 		## Either updates or appends a pair of key-value to self.data
 		def add(key,value): 
 			if key not in self.data:
@@ -110,7 +114,9 @@ class ABM(myEnv):
 		## average ph on patches
 		pH_mean = self.collect_from_patches("pH")/len(self.patches)
 		add("pH",pH_mean)
-		
+		## average lactate
+		lactate = self.collect_from_patches("lactate")
+		add("lactate",lactate)
 		## output 
 		self.output()
 
@@ -190,7 +196,7 @@ class ABM(myEnv):
 			self.settings["scale"] = trainingItem["scale"]
 			self.settings["setup"] = trainingItem["setup"]
 			self.settings.update({"expectations":trainingItem["expectations"]})
-		self.scale(self.settings);
+		
 		try : # to catch the errors in the setup
 			self.reset()
 		except ValueError as vl:
@@ -227,7 +233,8 @@ class ABM(myEnv):
 		IDs = trainingData_copy["IDs"]
 		for ID in IDs:
 			try:
-				_,_,mean_error = self.episode(trainingData_copy[ID]) 
+				training_item = ABM.scale(trainingData_copy[ID]);
+				_,_,mean_error = self.episode(training_item) 
 			except ValueError as vl:
 				return None
 			mean_errors.append(mean_error)
@@ -258,7 +265,8 @@ class ABM(myEnv):
 			return 
 		def scatter_patch(patches):
 			file = open('outputs/scatter.csv','w')
-			file.write('x,y,type,size\n')
+
+			file.write('x,y,z,type,size\n')
 			for index,patch in patches.items():
 				if patch.empty:
 					size_ = 2
@@ -272,7 +280,26 @@ class ABM(myEnv):
 												type_,
 												size_))
 			file.close()
-		# print_patch(self.patches)
+		# scatter_patch(self.patches)
+		
+		def scatter3_patch(patches):
+			file = open('outputs/scatter3.csv','w')
+
+			file.write('x,y,z,type,size\n')
+			for index,patch in patches.items():
+				if patch.empty:
+					size_ = 2
+					type_ = 'nothing'
+				else:
+					size_ = 10
+					type_ = patch.agent.class_name
+					
+				file.write("{},{},{},{},{}\n".format(patch.coords[0], patch.coords[1],patch.coords[2],
+												type_,
+												size_))
+			file.close()
+		# scatter3_patch(self.patches)
+
 		def scatter_agents(agents):
 			file = open('outputs/scatter.csv','w')
 			file.write('x,y,type,size\n')
@@ -285,7 +312,21 @@ class ABM(myEnv):
 												type_,
 												size_))
 			file.close()
-		scatter_agents(self.agents)
+		# scatter_agents(self.agents)
+		
+		def scatter3_agents(agents):
+			file = open('outputs/scatter3.csv','w')
+			file.write('x,y,z,type,size\n')
+			for agent in agents:
+				x,y,z = agent.patch.coords
+				type_ = agent.class_name
+				size_ = 10	
+				file.write("{},{},{},{},{}\n".format(x,y,z,
+												type_,
+												size_))
+
+			file.close()
+		scatter3_agents(self.agents)
 		## agent counts 
 		df = pd.DataFrame.from_dict(self.data)
 		df_agent_counts = df[["MSC","Dead"]]
@@ -293,4 +334,10 @@ class ABM(myEnv):
 		## average pH 
 		df_pH = df[["pH"]]
 		df_pH.to_csv('outputs/pH.csv')
+		## lactate
+		lactate = df[["lactate"]]
+		lactate.to_csv('outputs/lactate.csv')
+	def refresh(self):
+		for [key,patch] in self.patches.items():
+			patch.initialize()
 

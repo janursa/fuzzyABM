@@ -6,22 +6,23 @@ double myPatch::lactate(){
 			MI = this->agent->get_data("MI");
 		else
 			MI = 0;
-		auto w = this->params["w_MI_lactate"];
-		auto lactate = this->data["lactate"] + w * MI;
+		// auto w = this->params["w_MI_lactate"];
+		// auto lactate = this->data["lactate"] + w * MI;
+		auto lactate = this->data["lactate"] + MI;
 		return lactate;
 	}
 void myPatch::step(){
 
 	auto pH_new = this->pH();
-	// auto new_lactate = this->lactate();
+	auto new_lactate = this->lactate();
 	this->data["pH"] = pH_new;
-	// this->data["lactate"] = new_lactate;
-	this->data["agent_density"] = this->find_neighbor_agents(true).size()/9.0;
+	this->data["lactate"] = new_lactate;
+	this->data["agent_density"] = this->find_neighbor_agents(true).size()/27.0;
 }
 
 bool MSC::mortality(double Mo){
-		auto maxOrder = this->params["Mo_H_v"];
-		auto baseChance = this->params["B_MSC_Mo"];
+		auto maxOrder = this->params.at("Mo_H_v");
+		auto baseChance = this->params.at("B_MSC_Mo");
 		auto change =(1+Mo*maxOrder) * baseChance;
 		auto pick = tools::random(0,1);
 		if (pick < change)
@@ -30,8 +31,8 @@ bool MSC::mortality(double Mo){
 			return false;
 	}
 bool MSC::proliferation(double Pr){
-		auto normOrder = this->params["Pr_N_v"];
-		auto baseChance = this->params["B_MSC_Pr"];
+		auto normOrder = this->params.at("Pr_N_v");
+		auto baseChance = this->params.at("B_MSC_Pr");
 		auto change =(Pr / normOrder) * baseChance;
 		auto pick = tools::random(0,1);
 		if (pick < change)
@@ -40,7 +41,7 @@ bool MSC::proliferation(double Pr){
 			return false;
 	}
 double MSC::alkalinity(){
-		auto adapted_pH = this->data["pH"];
+		auto adapted_pH = this->data.at("pH");
 		auto env_pH = this->patch->get_data("pH");
 		double AE;
 		if (adapted_pH == 0)
@@ -53,10 +54,10 @@ double MSC::alkalinity(){
 		return AE;
 	}
 double MSC::adaptation(){
-		auto adapted_pH = this->data["pH"];
+		auto adapted_pH = this->data.at("pH");
 		auto env_pH = this->patch->get_data("pH");
 		double new_adapted_pH = 0;
-		auto adaptation_rate = this->params["B_MSC_rec"];
+		auto adaptation_rate = this->params.at("B_MSC_rec");
 		if (env_pH > adapted_pH)
 			new_adapted_pH = adapted_pH + adaptation_rate;
 		else
@@ -102,7 +103,7 @@ double myEnv::collect_from_patches(string tag){
 map<string,double> MSC::collect_policy_inputs(){
 		auto AE = this->alkalinity();
 		auto CD = this->patch->get_data("agent_density");
-		auto Mg = this->patch->get_data("Mg")/this->params["Mg_max"];
+		auto Mg = this->patch->get_data("Mg")/this->params.at("Mg_max");
 		map<string,double> policy_inputs = {{"AE",AE}, {"Mg",Mg}, {"CD", CD}};
 
 		return policy_inputs;
@@ -116,16 +117,16 @@ void myEnv::update(){
 		agent->update();
 	}
 }
-void myPatch::initialize(map<string,double> configs){
-		for (auto const &[key,value]:configs){
+void myPatch::initialize(){
+		for (auto const &[key,value]:this->initial_conditions){
 			this->data[key] = value;
 		}
 	}
 double myPatch::pH(){
-		auto mg = this->data["Mg"];
-		// auto lactate = this->data["lactate"];
-		// auto pH_new = this->params["w_mg_ph"]*mg -this->params["w_lactate_ph"]*lactate + 7.8;
-		auto pH_new = this->params["w_mg_ph"]*mg + 7.8;
+		auto mg = this->data.at("Mg");
+		auto lactate = this->data.at("lactate");
+		auto pH_new = this->params["w_mg_ph"]*mg -this->params.at("w_lactate_ph")*lactate + 7.8;
+		// auto pH_new = this->params["w_mg_ph"]*mg + 7.8;
 		return pH_new;
 	}
 void MSC::inherit(shared_ptr<Agent> father){

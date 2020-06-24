@@ -47,7 +47,7 @@ PYBIND11_MODULE(myBinds, m) {
                     std::map<string,double>>(),
                     "Initialize",py::arg("env"),
                     py::arg("params"),py::arg("initial_conditions"));
-
+    myPatch_binds.def("initialize",&myPatch::initialize);
     // /** Exceptions **/
     // expose_exceptions(m);
     /** mesh **/

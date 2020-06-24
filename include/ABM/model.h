@@ -67,7 +67,7 @@ struct myPatch : public Patch{
 	try: Patch(env){
 		this->params = params_;
 		this->initial_conditions = initial_conditions;
-		this->initialize(initial_conditions);
+		this->initialize();
 	}catch (...){
 		cerr<<"Error in the construction of my patch";
 		exit(2);
@@ -79,7 +79,7 @@ struct myPatch : public Patch{
 	std::map<string,double> initial_conditions;
 	double pH();
 	double lactate();
-	virtual void initialize(map<string,double> configs);
+	virtual void initialize();
 	virtual void step();
 	map<string,double> data;
 };
