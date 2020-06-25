@@ -13,8 +13,8 @@ import json
 
 settings = {
 	"MPI_flag": True,
-	"sample_n": 10,
-	"top_n": 2,
+	"sample_n": 2000,
+	"top_n": 20,
 	"output_path": "outputs",
 	"plot": True,
 	"test": True,
@@ -41,9 +41,9 @@ free_params = {
 if __name__ == "__main__":
 	obj = tools.ABC(settings=settings,free_params=free_params)
 	# obj.sample()
-	tools.clock.start()
+	# tools.clock.start()
 	# obj.run()
-	tools.clock.end()
-	# obj.postprocessing()
-	obj.run_tests()
+	# tools.clock.end()
+	obj.postprocessing()
+	# obj.run_tests()
 

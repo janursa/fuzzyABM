@@ -248,7 +248,8 @@ class ABM(myEnv):
 		IDs = trainingData["IDs"]
 		for ID in IDs:
 			try:
-				results_episode,_,_ = self.episode(trainingData_copy[ID]) 
+				training_item = ABM.scale(trainingData_copy[ID]);
+				results_episode,_,_ = self.episode(training_item)
 			except ValueError as vl:
 				print("\nValueError inside env::test as ",vl)
 				return None

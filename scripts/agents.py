@@ -12,7 +12,7 @@ from myBinds import MSC, Dead
 sys.path.insert(1,os.path.join(current_file_path,'..','..','fuzzy','build'))
 from fuzzy import fuzzy
 sys.path.insert(1,os.path.join(current_file_path,'..','..','RL','RL'))
-from policies import MSC_Policy
+# from policies import MSC_Policy
 import numpy as np
 from torch.distributions import Categorical
 
