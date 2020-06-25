@@ -9,12 +9,12 @@ ABC_path = os.path.join(current_file,'..','..','..','ABC/ABC/ABC')
 sys.path.insert(1,ABC_path)
 import tools
 
-import json
 
 settings = {
 	"MPI_flag": True,
-	"sample_n": 150,
-	"top_n": 20,
+	"sample_n": 2000,
+	"top_n": 10,
+    "replica_n": 2,
 	"output_path": "outputs",
 	"plot": True,
 	"test": True,

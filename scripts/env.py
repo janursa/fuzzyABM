@@ -30,7 +30,7 @@ class ABM(myEnv):
 		## simulation specific
 		with open(SETTINGS_PATH) as file:
 			self.settings = json.load(file)
-		self.settings = ABM.scale(self.settings);
+		self.settings = ABM.scale(self.settings,self.settings["scale"]);
 		with open(PARAMS_PATH) as file:
 			self.params = json.load(file)
 		for key,value in free_params.items():
@@ -163,24 +163,23 @@ class ABM(myEnv):
 		self.errors.update({str(self.tick):errors})
 		self.results.update({str(self.tick):results})	
 	@staticmethod
-	def scale(settings):
+	def scale(settings,scale_factor):
 		"""
 		Scale the settings (both setup and expectations) based on the scale factor. This needs
 		to be revised for new training items with different format
 		"""
 		settings_copy  = copy.deepcopy(settings)
-		scale = settings_copy["scale"]
 		# scale area
-		settings_copy["setup"]["grid"]["area"] *= scale
+		settings_copy["setup"]["grid"]["area"] *= scale_factor
 		# scale cell count
 		for (key,value) in settings_copy["setup"]["agents"]["n"].items():
-			settings_copy["setup"]["agents"]["n"][key] = (int)(value*scale)
+			settings_copy["setup"]["agents"]["n"][key] = (int)(value*scale_factor)
 		# scale expectations
 		if "expectations" in settings_copy:
 			for timepoint in settings_copy["expectations"]["timepoints"]:
 				for (key,value) in settings_copy["expectations"][timepoint].items():
 					if key == "liveCellCount":
-						settings_copy["expectations"][timepoint][key] = (int)(value * scale)
+						settings_copy["expectations"][timepoint][key] = (int)(value * scale_factor)
 					else:
 						raise ValueError("Scalling is not defined for {} in expectations".format(key))
 		return settings_copy
@@ -195,7 +194,6 @@ class ABM(myEnv):
 		#step 3: reset the model
 		#step 3: return the simulation results
 		if trainingItem:
-			self.settings["scale"] = trainingItem["scale"]
 			self.settings["setup"] = trainingItem["setup"]
 			self.settings.update({"expectations":trainingItem["expectations"]})
 		try : # to catch the errors in the setup
@@ -231,9 +229,10 @@ class ABM(myEnv):
 		#step 3: calculate error
 		mean_errors = []
 		IDs = trainingData["IDs"]
+		scale_factor = trainingData["scale"]
 		for ID in IDs:
 			try:
-				training_item = ABM.scale(trainingData[ID]);
+				training_item = ABM.scale(trainingData[ID],scale_factor);
 				_,_,mean_error = self.episode(training_item) 
 			except ValueError as vl:
 				return None
@@ -245,9 +244,10 @@ class ABM(myEnv):
 	def test(self):
 		results = {}
 		IDs = trainingData["IDs"]
+		scale_factor = trainingData["scale"]
 		for ID in IDs:
 			try:
-				training_item = ABM.scale(trainingData[ID]);
+				training_item = ABM.scale(trainingData[ID],scale_factor);
 				results_episode,_,_ = self.episode(training_item)
 			except ValueError as vl:
 				print("\nValueError inside env::test as ",vl)
