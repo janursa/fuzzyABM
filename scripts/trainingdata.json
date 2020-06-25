@@ -1,6 +1,6 @@
 {
-	"IDs":["H2017_Mg0","H2017_Mg3"],
-	"scale": 0.05,
+	"IDs":["H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"],
+	"scale": 0.1,
 	"H2017_Mg0":{
 			"setup":{
 			    "exp_duration" : 72,
@@ -76,7 +76,6 @@
 			}
 		},
 	"H2017_Mg6":{
-			"scale": 0.1,
 			"setup":{
 			    "exp_duration" : 72,
 			    "grid":{
@@ -114,7 +113,6 @@
 			}
 		},
 	"H2017_Mg12":{
-			"scale": 0.1,
 			"setup":{
 			    "exp_duration" : 72,
 			    "grid":{
@@ -152,7 +150,6 @@
 			}
 		},
 	"H2017_Mg60":{
-			"scale": 0.1,
 			"setup":{
 			    "exp_duration" : 72,
 			    "grid":{
