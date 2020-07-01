@@ -32,34 +32,34 @@ if __name__ == "__main__":
 			matched.update({time_point:{"sim":sims,"exp":exp}})
 		oo.update({ID:matched})
 	# plotting for this ID case. TODO: needs to be extended to all
-	mg_ID = "H2017_Mg3"
-	
-	exp_y_mean = [oo[mg_ID][i]["exp"] for i in time_points] # error bar is excluded for exp
-	sim_y = [oo[mg_ID][i]["sim"] for i in time_points]
-	sim_y_median = []
-	sim_y_upper_error = []
-	sim_y_lower_error = []
-	for item in sim_y:
-		med = st.median(item)
-		sim_y_median.append(med)
-		upper_error = max(item) - med
-		sim_y_upper_error.append(upper_error)
-		lower_error = med - min(item)
-		sim_y_lower_error.append(lower_error)
-	fig = go.Figure()
-	fig.add_trace(go.Bar(
-	    name='Experimental',
-	    x=time_points, y=exp_y_mean
-	))
-	fig.add_trace(go.Bar(
-	    name='Simulation',
-	    x=time_points, y=sim_y_median,
-	    error_y=dict(type='data',
-	    			symmetric = False,
-	    			array=sim_y_upper_error,
-	    			arrayminus = sim_y_lower_error)
-	))
-	
-	fig.update_layout(barmode='group')
-	fig.write_html('outputs/barplot.html')
+	for ID in trainingData["IDs"]:
+		exp_y_mean = [oo[ID][i]["exp"] for i in time_points] # error bar is excluded for exp
+		sim_y = [oo[ID][i]["sim"] for i in time_points]
+		sim_y_median = []
+		sim_y_upper_error = []
+		sim_y_lower_error = []
+		for item in sim_y:
+			med = st.median(item)
+			sim_y_median.append(med)
+			upper_error = max(item) - med
+			sim_y_upper_error.append(upper_error)
+			lower_error = med - min(item)
+			sim_y_lower_error.append(lower_error)
+		fig = go.Figure()
+		fig.add_trace(go.Bar(
+			name='Experimental',
+			x=time_points, y=exp_y_mean
+		))
+		fig.add_trace(go.Bar(
+			name='Simulation',
+			x=time_points, y=sim_y_median,
+			error_y=dict(type='data',
+						symmetric = False,
+						array=sim_y_upper_error,
+						arrayminus = sim_y_lower_error)
+		))
+
+		fig.update_layout(barmode='group',
+						  title=ID )
+		fig.write_html('outputs/barplot_{}.html'.format(ID))
 
