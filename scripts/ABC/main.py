@@ -36,7 +36,8 @@ free_params = {
     "MG_L_t1": [0,10],
     "MG_L_t2": [3,15],
     "Mo_H_v": [2,4],
-    "Pr_N_v": [0,1]
+    "Pr_N_v": [0,1],
+    "Me_N_v": [0,1]
 }
 if __name__ == "__main__":
 	obj = tools.ABC(settings=settings,free_params=free_params)
