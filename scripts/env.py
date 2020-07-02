@@ -39,7 +39,10 @@ class ABM(myEnv):
 		## specific settings
 		self.run_mode = run_mode  ## other options are test and RL
 
-		os.mkdir("outputs")
+		try:
+			os.mkdir("outputs")
+		except:
+			pass
 	def initialize(self):
 		## default fields
 		self._repo = []
@@ -80,8 +83,8 @@ class ABM(myEnv):
 		return patch_obj
 	def setup(self):
 		grid_info = self.settings["setup"]["grid"]
-		# mesh =  grid(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],share = True)
-		mesh =  grid3(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],grid_info["patch_size"],share = True)
+		mesh =  grid(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],share = True)
+		# mesh =  grid3(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],grid_info["patch_size"],share = True)
 
 		self.setup_domain(mesh)
 		## create agents
@@ -328,7 +331,7 @@ class ABM(myEnv):
 												size_))
 
 			file.close()
-		scatter3_agents(self.agents)
+		# scatter3_agents(self.agents)
 		## agent counts 
 		df = pd.DataFrame.from_dict(self.data)
 		df_agent_counts = df[["MSC","Dead"]]

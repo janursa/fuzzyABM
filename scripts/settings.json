@@ -7,7 +7,7 @@
         "patch_size": 0.0084
     },
     "patch":{
-        "attrs":{ "Mg":60, "pH":8.04,"agent_density":0,"lactate":0}
+        "attrs":{ "Mg":0, "pH":8.04,"agent_density":0,"lactate":0}
       },
     "agents":
       {
