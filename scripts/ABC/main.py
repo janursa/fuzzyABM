@@ -4,7 +4,7 @@ import os
 path_to_env = os.path.join(current_file,'..')
 import sys
 sys.path.insert(1,path_to_env)
-from env import ABM,trainingData
+from env import ABM
 ABC_path = os.path.join(current_file,'..','..','..','ABC/ABC/ABC')
 sys.path.insert(1,ABC_path)
 import tools
@@ -12,9 +12,9 @@ import tools
 
 settings = {
 	"MPI_flag": True,
-	"sample_n": 10000,
-	"top_n": 100,
-    "replica_n": 2,
+	"sample_n": 20,
+	"top_n": 2,
+    "replica_n": 1,
 	"output_path": "outputs",
 	"plot": True,
 	"test": True,

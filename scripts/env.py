@@ -38,7 +38,7 @@ class ABM(myEnv):
 		self.set_params(self.params) # sends it to c++
 		## specific settings
 		self.run_mode = run_mode  ## other options are test and RL
-
+		self.medium_change_interval = 60 ## 2.5 days
 		try:
 			os.mkdir("outputs")
 		except:
@@ -100,7 +100,7 @@ class ABM(myEnv):
 
 	def update(self):
 		super().update()
-		if (self.tick % 50 == 0): # medium chaneg
+		if (self.tick % self.medium_change_interval == 0): # medium chaneg
 			self.refresh()
 		## Either updates or appends a pair of key-value to self.data
 		def add(key,value): 
