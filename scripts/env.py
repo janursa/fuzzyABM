@@ -38,6 +38,8 @@ class ABM(myEnv):
 		self.set_params(self.params) # sends it to c++
 		## specific settings
 		self.run_mode = run_mode  ## other options are test and RL
+
+		os.mkdir("outputs")
 	def initialize(self):
 		## default fields
 		self._repo = []

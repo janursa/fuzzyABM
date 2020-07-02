@@ -15,5 +15,6 @@
     "Mo_H_v": 2,
     "Pr_N_v": 0.81,
     "w_mg_ph": 0.02,
-    "w_lactate_ph": 0.01
+    "w_lactate_ph": 0.01,
+    "Me_N_v": 0.7
 }

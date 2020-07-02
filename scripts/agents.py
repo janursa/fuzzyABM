@@ -39,6 +39,7 @@ class MSC_(MSC):
 					params = params, initial_conditions = initial_conditions)
 		try:
 			self.policy = fuzzy("MSC",params)
+			# self.policy.run_checking();
 			# self.policy = MSC_Policy()
 		except:
 			raise ValueError("Policy raise error")
