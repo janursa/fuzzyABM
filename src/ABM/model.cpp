@@ -2,17 +2,21 @@
 
 double myPatch::lactate(){
 		double MI = 0;
-		if (!this->empty & this->agent->class_name != "Dead")
-			MI = this->agent->get_data("MI");
-		else
+		if (this->empty) {
 			MI = 0;
+		}
+		else if (this->agent->class_name == "Dead"){
+			MI = 0;
+		}
+		else {
+			MI = this->agent->get_data("MI");
+		}
 		// auto w = this->params["w_MI_lactate"];
 		// auto lactate = this->data["lactate"] + w * MI;
 		auto lactate = this->data["lactate"] + MI;
 		return lactate;
 	}
 void myPatch::step(){
-
 	auto pH_new = this->pH();
 	auto new_lactate = this->lactate();
 	this->data["pH"] = pH_new;

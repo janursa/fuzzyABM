@@ -5,14 +5,13 @@ import pathlib
 import os
 import json
 import pandas as pd
-#from pprogress import ProgressBar
 import numpy as np
 from math import sqrt
 import copy
 current_file_path = pathlib.Path(__file__).parent.absolute()
 
 
-from imports import myEnv,grid, grid3
+from imports import myEnv,grid, grid3, update_progress
 from agents import MSC_,Dead_
 from patch import myPatch_
 
@@ -89,12 +88,11 @@ class ABM(myEnv):
 		## create agents
 		agent_counts = self.settings["setup"]["agents"]["n"]
 		self.setup_agents(agent_counts)
-		
 		self.update()
 	def step(self):
 		self.tick += 1
 		self.step_patches()
-		self.step_agents()	
+		self.step_agents()
 		self.update()
 
 	def update(self):
@@ -206,12 +204,11 @@ class ABM(myEnv):
 			raise vl
 
 		self.duration = self.settings["setup"]["exp_duration"]
-		#self.pb = ProgressBar(self.duration)
 		for i in range(self.duration):
 			self.step()
-			#if self.run_mode == "test":
-				#self.pb.update()
-		#self.pb.done()
+			if self.run_mode == "test":
+				update_progress(i/self.duration)
+			
 
 		# calculate mean error
 		mm = []

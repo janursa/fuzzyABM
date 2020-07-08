@@ -12,7 +12,7 @@ class PyMSC: public PyAgent<derivedAgent>{
 	using PyAgent<derivedAgent>::PyAgent;
 	using input_output = std::map<string,double>;
 	input_output run_policy(input_output inputs) override {
-		PYBIND11_OVERLOAD_PURE(
+		PYBIND11_OVERLOAD(
 			input_output,
 			derivedAgent,
 			run_policy,

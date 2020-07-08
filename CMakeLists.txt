@@ -26,7 +26,7 @@ include(FetchContent)
 if(${CMAKE_VERSION} VERSION_LESS 3.14)
     include(cmake/add_FetchContent_MakeAvailable.cmake)
 endif()
-
+find_package (Python COMPONENTS Interpreter Development)
 FetchContent_Declare(
   pybind11
   GIT_REPOSITORY https://github.com/pybind/pybind11.git
@@ -36,7 +36,7 @@ FetchContent_MakeAvailable(pybind11)
 
 add_subdirectory(../CPPYABM CPPYABM)
 add_subdirectory(src)
-add_subdirectory(app)
+#add_subdirectory(app)
 add_subdirectory(binds)
 
 
