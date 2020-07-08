@@ -1,6 +1,7 @@
 #pragma once
-#include "CPPYABM/bases.h"
+#include "CPPYABM/include/ABM/bases.h"
 #include "tools.h"
+#include "fuzzy/fuzzy.h"
 using namespace std;
 struct Patch;
 struct Dead: public Agent{
@@ -28,7 +29,6 @@ struct MSC : public Agent{
 
 	std::map<string,double> params;
 	std::map<string,double> initial_conditions;
-	py::object policy;
 	bool proliferation(double Pr);
 	bool mortality(double Mo);
 	double adaptation();
@@ -45,6 +45,7 @@ struct MSC : public Agent{
 	map<string,double> data;
 	virtual void reward() {};
 	virtual void update();
+	fuzzy policy;
 };
 struct myEnv : public Env{
 	/** Env data **/

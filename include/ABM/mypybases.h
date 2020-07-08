@@ -1,6 +1,6 @@
 #pragma once
-#include "CPPYABM/pybases.h"
-#include "model.h"
+#include "CPPYABM/include/ABM/pybases.h"
+#include "ABM/model.h"
 using namespace std;
 template<class derivedEnv>
 class PyMyEnv: public PyEnv<derivedEnv>{

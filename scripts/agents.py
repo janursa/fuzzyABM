@@ -3,15 +3,21 @@ import random
 import pathlib
 import os
 import time
+import platform
+
 current_file_path = pathlib.Path(__file__).parent.absolute()
 sys.path.insert(1,current_file_path)
 # sys.path.insert(1,os.path.join(current_file_path,'..','..','ABM_base','build','binds'))
-sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
-
+if platform.system() == 'Windows':
+	sys.path.insert(1,os.path.join(current_file_path,'..','build','x64-Release','binds'))
+else:
+	sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
+	sys.path.insert(1,os.path.join(current_file_path,'..','..','fuzzy','build'))
+	#sys.path.insert(1,os.path.join(current_file_path,'..','..','RL','RL'))
 from myBinds import MSC, Dead
-sys.path.insert(1,os.path.join(current_file_path,'..','..','fuzzy','build'))
+
 from fuzzy import fuzzy
-sys.path.insert(1,os.path.join(current_file_path,'..','..','RL','RL'))
+
 # from policies import MSC_Policy
 import numpy as np
 from torch.distributions import Categorical

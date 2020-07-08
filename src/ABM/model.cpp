@@ -1,8 +1,8 @@
-#include "model.h"
+#include "ABM/model.h"
 
 double myPatch::lactate(){
 		double MI = 0;
-		if (!this->empty and this->agent->class_name != "Dead")
+		if (!this->empty & this->agent->class_name != "Dead")
 			MI = this->agent->get_data("MI");
 		else
 			MI = 0;

@@ -1,7 +1,7 @@
 #include <iostream>
-#include "CPPYABM/bind_tools.h"
+#include "CPPYABM/include/ABM/bind_tools.h"
 #include "mypybases.h"
-#include "CPPYABM/pybases.h"
+#include "CPPYABM/include/ABM/pybases.h"
 #include "model.h"
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>

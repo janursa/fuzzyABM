@@ -3,9 +3,7 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include <nlohmann/json.hpp>
-#include "model.h"
-using json = nlohmann::json;
+#include "ABM/model.h"
 using namespace std;
 
 

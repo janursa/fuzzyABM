@@ -2,11 +2,13 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.13.1)
 set(CMAKE_CXX_STANDARD 17)
 # set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-
 SET(TARGET "ABM")
 PROJECT(${TARGET} VERSION 1.0 LANGUAGES CXX)
-SET(STATICLIBS "ExtLibs")
-SET(APP "app")
+SET(ABMLIB "ABM")
+SET(APP "appABM")
+SET(BINDSMODULE "myBinds")
+SET(FUZZYLITE "fuzzylite")
+SET(FUZZYLIB "fuzzy")
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -25,7 +27,6 @@ if(${CMAKE_VERSION} VERSION_LESS 3.14)
     include(cmake/add_FetchContent_MakeAvailable.cmake)
 endif()
 
-
 FetchContent_Declare(
   pybind11
   GIT_REPOSITORY https://github.com/pybind/pybind11.git
@@ -33,17 +34,9 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(pybind11)
 
-FetchContent_Declare(
-  cppyabm
-  GIT_REPOSITORY https://github.com/janursa/CPPYABM.git
-  GIT_TAG        master
-)
-FetchContent_MakeAvailable(cppyabm)
-
-
-# add_subdirectory(binds)
+add_subdirectory(../CPPYABM CPPYABM)
 add_subdirectory(src)
-# add_subdirectory(app)
+add_subdirectory(app)
 add_subdirectory(binds)
 
 
