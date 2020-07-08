@@ -40,8 +40,8 @@ struct undefined_param_key: public base_exception{
     undefined_param_key(std::string msg):base_exception(msg){}
 };
 struct myMap{
-    float operator [](std::string key){
-        float value;
+    double operator [](std::string key){
+        double value;
         try{value = m.at(key);}
         catch(std::out_of_range & e){
             std::cerr<<"Error: the key '"<<key<<"' is not defined in the params"<<endl;
@@ -50,8 +50,8 @@ struct myMap{
         }
         return value;
     }
-    std::map<std::string,float> m;
-    void insert(std::string key, float value){
+    std::map<std::string,double> m;
+    void insert(std::string key, double value){
         m[key] = value;
     }
 };
@@ -62,7 +62,7 @@ struct base_model{
     base_model(myMap &params_):params(params_){
     };
 
-    std::map<string,float> predict(std::map<std::string,float> & inputs_){
+    std::map<string,double> predict(std::map<std::string,double> & inputs_){
         std::string status;
         if (not engine->isReady(&status)) throw invalid_engine("[engine error] engine is not ready:n" + status);
 
@@ -76,15 +76,15 @@ struct base_model{
             
         }
         engine->process();
-        std::map<std::string,float> outputs;
+        std::map<std::string,double> outputs;
         for (auto &tag:this->output_tags){
-            float value = engine->getOutputVariable(tag)->getValue();
+            double value = engine->getOutputVariable(tag)->getValue();
             if (isnan(value)) {
                 string message =  "The value of fuzzy controller for " + tag + " is nun";
                 throw invalid_fuzzy_output(message);
             }
 
-            outputs.insert(std::pair<std::string,float>(tag,value));
+            outputs.insert(std::pair<std::string,double>(tag,value));
         }
         return outputs;
     };
@@ -116,7 +116,7 @@ struct MSC_FUZZY:public base_model {
     }
 
     virtual void define() {
-        auto ADJUST = [](vector<float> &data)->void{
+        auto ADJUST = [](vector<double> &data)->void{
             while (true){
                 auto flag = false;
                 for (unsigned i=0; i<data.size()-1;i++){
@@ -128,7 +128,7 @@ struct MSC_FUZZY:public base_model {
                 if (flag == false) break;
             }
         };
-        auto CHECK = [](vector<float> &data)->void{ //checks that the vector has ascending order
+        auto CHECK = [](vector<double> &data)->void{ //checks that the vector has ascending order
             
             for (unsigned i=0; i<data.size()-1;i++){
                 if (data[i]>data[i+1]){
@@ -139,7 +139,7 @@ struct MSC_FUZZY:public base_model {
 
                 
         };
-        auto NORMALIZE = [](vector<float> &data, float max)->void{
+        auto NORMALIZE = [](vector<double> &data, double max)->void{
                 for (auto &item:data) item = item / max;
         };
         engine = new Engine;
@@ -147,9 +147,9 @@ struct MSC_FUZZY:public base_model {
         engine->setDescription("");
         // cell density: 3 levels
         auto INPUT_CELLDENSITY = [&]() {
-            std::vector<float> low{0, 0, params["CD_L_t"], params["CD_M_t1"]};
-            std::vector<float> medium{params["CD_L_t"], params["CD_M_t1"],params["CD_M_t2"], params["CD_H_t"]};
-            std::vector<float> high{params["CD_M_t2"], params["CD_H_t"], 1, 1};
+            std::vector<double> low{0, 0, params["CD_L_t"], params["CD_M_t1"]};
+            std::vector<double> medium{params["CD_L_t"], params["CD_M_t1"],params["CD_M_t2"], params["CD_H_t"]};
+            std::vector<double> high{params["CD_M_t2"], params["CD_H_t"], 1, 1};
 
             CHECK(low); CHECK(medium); CHECK(high);
             InputVariable *input1 = new InputVariable;
@@ -166,8 +166,8 @@ struct MSC_FUZZY:public base_model {
         // AE: 2 levels
         auto INPUT_AE = [&]() {
             // AE
-            std::vector<float> low{0, 0,params["AE_L_t"], params["AE_H_t"]};
-            std::vector<float> high{params["AE_L_t"],params["AE_H_t"], 1, 1};
+            std::vector<double> low{0, 0,params["AE_L_t"], params["AE_H_t"]};
+            std::vector<double> high{params["AE_L_t"],params["AE_H_t"], 1, 1};
             CHECK(low);CHECK(high);
             InputVariable *input2 = new InputVariable;
             input2->setName("AE");
@@ -182,10 +182,10 @@ struct MSC_FUZZY:public base_model {
         // MG: 3 level
         auto INPUT_MG = [&]() {
 
-            std::vector<float> negligible{0,0, params["MG_L_t1"]};
-            std::vector<float> low{0, params["MG_L_t1"], params["MG_L_t2"], params["MG_H_t"]};
-            // std::vector<float> medium{params["MG_L_t"], params["MG_M_t"], params["MG_H_t"]};
-            std::vector<float> high{params["MG_L_t2"], params["MG_H_t"], params["Mg_max"], params["Mg_max"]};
+            std::vector<double> negligible{0,0, params["MG_L_t1"]};
+            std::vector<double> low{0, params["MG_L_t1"], params["MG_L_t2"], params["MG_H_t"]};
+            // std::vector<double> medium{params["MG_L_t"], params["MG_M_t"], params["MG_H_t"]};
+            std::vector<double> high{params["MG_L_t2"], params["MG_H_t"], params["Mg_max"], params["Mg_max"]};
             NORMALIZE(negligible,params["Mg_max"]); NORMALIZE(low,params["Mg_max"]); NORMALIZE(high,params["Mg_max"]);
 
             CHECK(negligible); CHECK(low);CHECK(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
@@ -363,10 +363,10 @@ struct MSC_FUZZY:public base_model {
             auto SELECTIVE_CHECK = [&](){
                 vector<string> target_input = {"CD"};
                 vector<string> target_output = {"Mo"};
-                // map<string,float> non_target_inputs = { {"CD",0.5},{"AE",0}};
-                map<string,float> non_target_inputs = { {"Mg",0.5},{"AE",0}};
+                // map<string,double> non_target_inputs = { {"CD",0.5},{"AE",0}};
+                map<string,double> non_target_inputs = { {"Mg",0.5},{"AE",0}};
                 unsigned steps = 10;
-                std::function<void(unsigned)> RECURSIVE = [&](unsigned j){
+                std::function<void(unsigned)> RECURSIVE = [&](unsigned int j){
                     
                     for (unsigned i = 0; i < steps; i++) {
                         auto input_tag  = target_input[target_input.size()-j];
@@ -413,7 +413,7 @@ struct MSC_FUZZY:public base_model {
 
 struct fuzzy{
     fuzzy() {};
-    fuzzy(std::string controller_name, std::map<std::string,float> params) ;
-    std::map<std::string,float> predict(std::map<std::string,float> inputs) ;
+    fuzzy(std::string controller_name, std::map<std::string,double> params) ;
+    std::map<std::string,double> predict(std::map<std::string,double> inputs) ;
     void tests();
 };

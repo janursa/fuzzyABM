@@ -2,7 +2,7 @@
 
 using std::cout;
 using namespace std;
-fuzzy::fuzzy(std::string controller_name, std::map<std::string,float> params) { // params for fuzzy definition taged with each cell type
+fuzzy::fuzzy(std::string controller_name, std::map<std::string,double> params) { // params for fuzzy definition taged with each cell type
         myMap params_mymap;
         for (auto &param:params){
             params_mymap.insert(param.first,param.second);
@@ -17,8 +17,8 @@ fuzzy::fuzzy(std::string controller_name, std::map<std::string,float> params) { 
         }
 //        cout<<"Successful parameter set definitions for '"<<controller_name<<"'."<<endl;
     }
-std::map<std::string,float> fuzzy::predict(std::map<std::string,float> inputs) { // receives a dictionary that inputs are for each cell type are given
-        std::map<std::string,float> outputs;
+std::map<std::string,double> fuzzy::predict(std::map<std::string,double> inputs) { // receives a dictionary that inputs are for each cell type are given
+        std::map<std::string,double> outputs;
         try{outputs = base_model::fuzzy_model()->predict(inputs);}
         catch(invalid_fuzzy_input &e){
             cerr<<e.what()<<endl;
@@ -39,9 +39,9 @@ void fuzzy::tests(){
         /** test validity of the model for the whole range of inputs **/
         vector<string> target_input = {"CD","Mg","AE"};
         vector<string> target_output = {"Mo,Mi,Pr"};
-        map<string,float> non_target_inputs = { };
+        map<string,double> non_target_inputs = { };
         unsigned steps = 50;
-        map<string,float> inputs = {};
+        map<string,double> inputs = {};
         std::function<void(unsigned)> RECURSIVE = [&](unsigned j){
             // cout<<"j "<<j <<endl;
             for (unsigned i = 0; i <= steps; i++) {
@@ -63,9 +63,9 @@ void fuzzy::tests(){
 
         /** general tests **/
         auto test_1 = [&](){ // check different Mg
-            map<string,float> inputs_1 = {{"Mg",0},{"AE",0},{"CD",0.5}};
-            map<string,float> inputs_2 = {{"Mg",0.05},{"AE",0},{"CD",0.5}};
-            map<string,float> inputs_3 = {{"Mg",0.5},{"AE",0},{"CD",0.5}};
+            map<string,double> inputs_1 = {{"Mg",0},{"AE",0},{"CD",0.5}};
+            map<string,double> inputs_2 = {{"Mg",0.05},{"AE",0},{"CD",0.5}};
+            map<string,double> inputs_3 = {{"Mg",0.5},{"AE",0},{"CD",0.5}};
             auto result_1 = predict(inputs_1);
             auto result_2 = predict(inputs_2);
             auto result_3 = predict(inputs_3);
@@ -77,9 +77,9 @@ void fuzzy::tests(){
         };
         test_1();
         auto test_2 = [&](){ // check different CD
-            map<string,float> inputs_1 = {{"Mg",0},{"AE",0},{"CD",0}};
-            map<string,float> inputs_2 = {{"Mg",0},{"AE",0},{"CD",0.5}};
-            map<string,float> inputs_3 = {{"Mg",0},{"AE",0},{"CD",1}};
+            map<string,double> inputs_1 = {{"Mg",0},{"AE",0},{"CD",0}};
+            map<string,double> inputs_2 = {{"Mg",0},{"AE",0},{"CD",0.5}};
+            map<string,double> inputs_3 = {{"Mg",0},{"AE",0},{"CD",1}};
             auto result_1 = predict(inputs_1);
             auto result_2 = predict(inputs_2);
             auto result_3 = predict(inputs_3);
@@ -89,8 +89,8 @@ void fuzzy::tests(){
         };
         test_2();
         auto test_3 = [&](){ // check different AE
-            map<string,float> inputs_1 = {{"Mg",0},{"AE",0},{"CD",0.5}};
-            map<string,float> inputs_2 = {{"Mg",0},{"AE",0.5},{"CD",0.5}};
+            map<string,double> inputs_1 = {{"Mg",0},{"AE",0},{"CD",0.5}};
+            map<string,double> inputs_2 = {{"Mg",0},{"AE",0.5},{"CD",0.5}};
             auto result_1 = predict(inputs_1);
             auto result_2 = predict(inputs_2);
             assert(("High AE results in higher mortality",result_2["Mo"]>result_1["Mo"]));
@@ -103,7 +103,7 @@ void fuzzy::tests(){
 /*
 PYBIND11_MODULE(fuzzy, m) {
     py::class_<fuzzy>(m, "fuzzy")
-            .def(py::init<std::string,std::map<std::string,float>>()) //receives NN as input
+            .def(py::init<std::string,std::map<std::string,double>>()) //receives NN as input
             .def("predict", &fuzzy::predict)
             .def("tests",&fuzzy::tests);
 };

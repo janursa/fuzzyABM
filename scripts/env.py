@@ -5,15 +5,14 @@ import pathlib
 import os
 import json
 import pandas as pd
-from pprogress import ProgressBar
+#from pprogress import ProgressBar
 import numpy as np
 from math import sqrt
 import copy
 current_file_path = pathlib.Path(__file__).parent.absolute()
-sys.path.insert(1,current_file_path)
-sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
 
-from myBinds import myEnv,grid, grid3
+
+from imports import myEnv,grid, grid3
 from agents import MSC_,Dead_
 from patch import myPatch_
 
@@ -207,12 +206,12 @@ class ABM(myEnv):
 			raise vl
 
 		self.duration = self.settings["setup"]["exp_duration"]
-		self.pb = ProgressBar(self.duration)
+		#self.pb = ProgressBar(self.duration)
 		for i in range(self.duration):
 			self.step()
-			if self.run_mode == "test":
-				self.pb.update()
-		self.pb.done()
+			#if self.run_mode == "test":
+				#self.pb.update()
+		#self.pb.done()
 
 		# calculate mean error
 		mm = []

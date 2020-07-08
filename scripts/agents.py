@@ -4,23 +4,9 @@ import pathlib
 import os
 import time
 import platform
+from imports import MSC,Dead
 
-current_file_path = pathlib.Path(__file__).parent.absolute()
-sys.path.insert(1,current_file_path)
-# sys.path.insert(1,os.path.join(current_file_path,'..','..','ABM_base','build','binds'))
-if platform.system() == 'Windows':
-	sys.path.insert(1,os.path.join(current_file_path,'..','build','x64-Release','binds'))
-else:
-	sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
-	sys.path.insert(1,os.path.join(current_file_path,'..','..','fuzzy','build'))
-	#sys.path.insert(1,os.path.join(current_file_path,'..','..','RL','RL'))
-from myBinds import MSC, Dead
-
-from fuzzy import fuzzy
-
-# from policies import MSC_Policy
 import numpy as np
-from torch.distributions import Categorical
 
 class Dead_(Dead):
 	"""
@@ -43,12 +29,12 @@ class MSC_(MSC):
 	def __init__(self,env, params = None,initial_conditions = None, id = 0):
 		MSC.__init__(self,env = env, class_name = 'MSC',  
 					params = params, initial_conditions = initial_conditions)
-		try:
-			self.policy = fuzzy("MSC",params)
+		#try:
+			#self.policy = fuzzy("MSC",params)
 			# self.policy.run_checking();
 			# self.policy = MSC_Policy()
-		except:
-			raise ValueError("Policy raise error")
+		#except:
+			#raise ValueError("Policy raise error")
 		self.saved_actions = []
 		self.saved_rewards = []
 		self.previous_checkpoint = 0
@@ -67,15 +53,15 @@ class MSC_(MSC):
 	# 	else:
 	# 		raise ValueError("action is not define for more than 2")
 	# 	self.saved_actions.append((m.log_prob(action),state_value))
-	def run_policy(self,policy_inputs):
+	#def run_policy(self,policy_inputs):
 		"""
 		Collects policy inputs, executes policy and returns predictions
 		"""
-		predictions= self.policy.predict(policy_inputs) # fuzzy controller
+		#predictions= self.policy.predict(policy_inputs) # fuzzy controller
 		# predictions,state_value = self.policy.predict(policy_inputs) # NN
 
 		# return predictions,state_value
-		return predictions
+		#return predictions
 
 	# def reward(self):
 	# 	# print("iter {} keys {}".format(str(self.env.tick), self.env.errors.keys()))

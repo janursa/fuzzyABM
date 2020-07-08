@@ -21,8 +21,16 @@ struct MSC : public Agent{
 		this->params = params_;
 		this->initial_conditions = initial_conditions;
 		this->initialize(initial_conditions);
+		try {
+			this->policy = make_shared<fuzzy>("MSC", this->params);
+		}
+		catch (invalid_fuzzy_definition &e) {
+			throw e;
+			
+		}
+		
 	}catch(...){
-		cerr<<"Error in the construction of my agent";
+		cerr<<"Error in the construction of MSC";
 		exit(2);
 	}
 	void initialize(map<string,double> initial_conditions);
@@ -34,7 +42,6 @@ struct MSC : public Agent{
 	double adaptation();
 	double alkalinity();
 	bool migration(double Mi);
-	virtual std::map<string,double> run_policy(std::map<string,double> ) = 0;
 	virtual void step();
 	virtual double get_data(string tag){
 		return this->data[tag];
@@ -45,7 +52,11 @@ struct MSC : public Agent{
 	map<string,double> data;
 	virtual void reward() {};
 	virtual void update();
-	fuzzy policy;
+	shared_ptr<fuzzy> policy;
+	virtual std::map<string, double> run_policy(std::map<string, double> inputs) {
+		auto predictions = this->policy->predict(inputs);
+		return predictions;
+	}
 };
 struct myEnv : public Env{
 	/** Env data **/
