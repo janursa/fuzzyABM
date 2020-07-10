@@ -1,5 +1,5 @@
 #include "ABM/model.h"
-
+#include <math.h>  
 double myPatch::lactate(){
 		double MI = 0;
 		if (this->empty) {
@@ -35,15 +35,20 @@ bool MSC::mortality(double Mo){
 			return false;
 	}
 bool MSC::proliferation(double Pr){
-		auto normOrder = this->params.at("Pr_N_v");
-		auto baseChance = this->params.at("B_MSC_Pr");
-		auto change =(Pr / normOrder) * baseChance;
-		auto pick = tools::random(0,1);
-		if (pick < change)
-			return true;
-		else
-			return false;
-	}
+	auto logic_function = [](double x) {
+		return (1.0 / (1.0 + exp(-8.0 * (x - 0.5))));
+	};
+	auto normOrder = this->params.at("Pr_N_v");
+	auto baseChance = this->params.at("B_MSC_Pr");
+	auto modified_baseChance = 2*baseChance * logic_function(this->data["clock"]);
+	//cout << modified_baseChance << endl;
+	auto change =(Pr / normOrder) * modified_baseChance;
+	auto pick = tools::random(0,1);
+	if (pick < change)
+		return true;
+	else
+		return false;
+}
 double MSC::alkalinity(){
 		auto adapted_pH = this->data.at("pH");
 		auto env_pH = this->patch->get_data("pH");
@@ -113,7 +118,7 @@ map<string,double> MSC::collect_policy_inputs(){
 		return policy_inputs;
 	}
 void MSC::update(){
-	// this->reward();
+	this->data["clock"] += 1;
 }
 void myEnv::update(){
 	Env::update();
@@ -140,6 +145,11 @@ void MSC::inherit(shared_ptr<Agent> father){
 				this->data[key] += 1;
 				father->set_data(key, this->data[key]);
 			}
+			else if (key == "clock") {
+				this->data[key] = 0;
+				father->set_data(key, 0);
+			}
+			
 		}
 		
 	}
