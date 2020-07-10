@@ -34,10 +34,25 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(pybind11)
 
+include(FetchContent)
+
+FetchContent_Declare(json
+  GIT_REPOSITORY https://github.com/nlohmann/json.git
+  GIT_TAG v3.7.3)
+
+FetchContent_GetProperties(json)
+if(NOT json_POPULATED)
+  FetchContent_Populate(json)
+  add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
 add_subdirectory(../CPPYABM CPPYABM)
 add_subdirectory(src)
 #add_subdirectory(app)
 add_subdirectory(binds)
 
+if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING) AND BUILD_TESTING)
+    add_subdirectory(tests)
+endif()
 
 

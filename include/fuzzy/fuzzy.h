@@ -128,7 +128,7 @@ struct MSC_FUZZY:public base_model {
                 if (flag == false) break;
             }
         };
-        auto CHECK = [](vector<double> &data)->void{ //checks that the vector has ascending order
+        auto check_range = [](vector<double> &data)->void{ //checks that the vector has ascending order
             
             for (unsigned i=0; i<data.size()-1;i++){
                 if (data[i]>data[i+1]){
@@ -151,7 +151,7 @@ struct MSC_FUZZY:public base_model {
             std::vector<double> medium{params["CD_L_t"], params["CD_M_t1"],params["CD_M_t2"], params["CD_H_t"]};
             std::vector<double> high{params["CD_M_t2"], params["CD_H_t"], 1, 1};
 
-            CHECK(low); CHECK(medium); CHECK(high);
+            check_range(low); check_range(medium); check_range(high);
             InputVariable *input1 = new InputVariable;
             input1->setName("CD");
             input1->setDescription("");
@@ -168,7 +168,7 @@ struct MSC_FUZZY:public base_model {
             // AE
             std::vector<double> low{0, 0,params["AE_L_t"], params["AE_H_t"]};
             std::vector<double> high{params["AE_L_t"],params["AE_H_t"], 1, 1};
-            CHECK(low);CHECK(high);
+            check_range(low);check_range(high);
             InputVariable *input2 = new InputVariable;
             input2->setName("AE");
             input2->setDescription("");
@@ -188,7 +188,7 @@ struct MSC_FUZZY:public base_model {
             std::vector<double> high{params["MG_L_t2"], params["MG_H_t"], params["Mg_max"], params["Mg_max"]};
             NORMALIZE(negligible,params["Mg_max"]); NORMALIZE(low,params["Mg_max"]); NORMALIZE(high,params["Mg_max"]);
 
-            CHECK(negligible); CHECK(low);CHECK(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
+            check_range(negligible); check_range(low);check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
             InputVariable *input2 = new InputVariable;
             input2->setName("Mg");
             input2->setDescription("");
@@ -414,6 +414,5 @@ struct MSC_FUZZY:public base_model {
 struct fuzzy{
     fuzzy() {};
     fuzzy(std::string controller_name, std::map<std::string,double> params) ;
-    std::map<std::string,double> predict(std::map<std::string,double> inputs) ;
-    void tests();
+    static std::map<std::string,double> predict(std::map<std::string,double> inputs) ;
 };
