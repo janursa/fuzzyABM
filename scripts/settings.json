@@ -16,7 +16,11 @@
           "Dead": 0
         },
         "MSC":{
-          "attrs":{"pH":7.8,"MI":0}
+          "attrs": {
+            "pH": 7.8,
+            "MI": 0,
+            "age": 21
+          }
         },
         "Dead":{
           "attrs":{ }

@@ -108,8 +108,8 @@ map<string,double> MSC::collect_policy_inputs(){
 		auto AE = this->alkalinity();
 		auto CD = this->patch->get_data("agent_density");
 		auto Mg = this->patch->get_data("Mg")/this->params.at("Mg_max");
-		map<string,double> policy_inputs = {{"AE",AE}, {"Mg",Mg}, {"CD", CD}};
-
+		auto age = this->data["age"] / this->params.at("AGE_H_t");
+		map<string,double> policy_inputs = {{"AE",AE}, {"Mg",Mg}, {"CD", CD},{"age", age} };
 		return policy_inputs;
 	}
 void MSC::update(){
@@ -136,6 +136,10 @@ double myPatch::pH(){
 void MSC::inherit(shared_ptr<Agent> father){
 		for (auto const&[key,value]:this->data){
 			this->data[key] = father->get_data(key);
+			if (key == "age") {
+				this->data[key] += 1;
+				father->set_data(key, this->data[key]);
+			}
 		}
 		
 	}

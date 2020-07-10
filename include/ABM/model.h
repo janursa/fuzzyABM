@@ -46,6 +46,9 @@ struct MSC : public Agent{
 	virtual double get_data(string tag){
 		return this->data[tag];
 	}
+	virtual void set_data(string tag, double value) {
+		this->data[tag] = value;
+	}
 
 	map<string,double> collect_policy_inputs();
 	virtual void inherit(shared_ptr<Agent> father);

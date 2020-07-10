@@ -181,13 +181,11 @@ struct MSC_FUZZY:public base_model {
         };
         // MG: 3 level
         auto INPUT_MG = [&]() {
-
             std::vector<double> negligible{0,0, params["MG_L_t1"]};
             std::vector<double> low{0, params["MG_L_t1"], params["MG_L_t2"], params["MG_H_t"]};
             // std::vector<double> medium{params["MG_L_t"], params["MG_M_t"], params["MG_H_t"]};
             std::vector<double> high{params["MG_L_t2"], params["MG_H_t"], params["Mg_max"], params["Mg_max"]};
             NORMALIZE(negligible,params["Mg_max"]); NORMALIZE(low,params["Mg_max"]); NORMALIZE(high,params["Mg_max"]);
-
             check_range(negligible); check_range(low);check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
             InputVariable *input2 = new InputVariable;
             input2->setName("Mg");
@@ -201,6 +199,23 @@ struct MSC_FUZZY:public base_model {
             input2->addTerm(new Trapezoid("high", high[0], high[1], high[2], high[3]));
             engine->addInputVariable(input2);
         };
+        // Age: 2 level
+        auto INPUT_AGE = [&]() {
+            std::vector<double> low{ 0, 0, params["AGE_H_t"] };
+            std::vector<double> high{ 0, params["AGE_H_t"], params["AGE_H_t"] };
+            NORMALIZE(low, params["AGE_H_t"]); NORMALIZE(high, params["AGE_H_t"]);
+            check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
+            InputVariable* input2 = new InputVariable;
+            input2->setName("age");
+            input2->setDescription("");
+            input2->setEnabled(true);
+            input2->setRange(0, 1);
+            input2->setLockValueInRange(false);
+            input2->addTerm(new Triangle("low", low[0], low[1], low[2]));
+            input2->addTerm(new Triangle("high", high[0], high[1], high[2]));
+            engine->addInputVariable(input2);
+        };
+        
         // Health: 2 level
         auto INNER_HEALTH = [&]() {
             OutputVariable *out1 = new OutputVariable;
@@ -217,24 +232,8 @@ struct MSC_FUZZY:public base_model {
             out1->addTerm(new Constant("high", 1.000));
             engine->addOutputVariable(out1);
         };
-        // ME: 3 level
-        auto INNER_ME = [&]() {
-            OutputVariable *out1 = new OutputVariable;
-            out1->setName("Me");
-            out1->setDescription("");
-            out1->setEnabled(true);
-            out1->setRange(0.000, 1.000);
-            out1->setLockValueInRange(false);
-            out1->setAggregation(fl::null);
-            out1->setDefuzzifier(new WeightedAverage("Automatic"));
-            out1->setDefaultValue(fl::nan);
-            out1->setLockPreviousValue(false);
-            out1->addTerm(new Constant("low", 0));
-            out1->addTerm(new Constant("normal", params["Me_N_v"]));
-            out1->addTerm(new Constant("high", 1));
-            engine->addOutputVariable(out1);
-        };
-        // Pr: 3 levels
+
+        // Pr: 4 levels
         auto OUTPUT_PROLIFERATION = [&]() {
             OutputVariable *out1 = new OutputVariable;
             out1->setName("Pr");
@@ -248,7 +247,8 @@ struct MSC_FUZZY:public base_model {
             out1->setLockPreviousValue(false);
             out1->addTerm(new Constant("low", 0.000));
             out1->addTerm(new Constant("normal", params["Pr_N_v"]));
-            out1->addTerm(new Constant("high", 1));
+            out1->addTerm(new Constant("high", params["Pr_H_v"]));
+            out1->addTerm(new Constant("veryHigh", 1));
             engine->addOutputVariable(out1);
         };
         // Mo: 2 levels
@@ -295,10 +295,11 @@ struct MSC_FUZZY:public base_model {
             this->input_tags.push_back("Mg");
             INPUT_AE();
             this->input_tags.push_back("AE");
+            INPUT_AGE();
+            this->input_tags.push_back("age");
 
             /** inners **/
             INNER_HEALTH();
-            INNER_ME();
             /** outputs **/
             OUTPUT_PROLIFERATION();
             this->output_tags.push_back("Pr");
@@ -315,46 +316,66 @@ struct MSC_FUZZY:public base_model {
             mamdani->setDisjunction(new AlgebraicSum);
             mamdani->setImplication(new Minimum);
             mamdani->setActivation(new General);
-            /***  health ***/
-            mamdani->addRule(Rule::parse("if CD is low"
-                                                 " or CD is high"
-                                                 " or Mg is high"
-                                                 " or AE is high"
-                                                 " then health is low", engine));
-            mamdani->addRule(Rule::parse("if CD is medium"
-                                                 " and Mg is not high"
-                                                 " and AE is not high"
-                                                 " then health is high", engine));
-            /***  metabolism ***/
-            mamdani->addRule(Rule::parse("if health is high"
-                                                 " and Mg is low"
-                                                 " then Me is high", engine));
-            mamdani->addRule(Rule::parse("if health is high"
-                                                 " and Mg is not low"
-                                                 " then Me is normal", engine));
 
-            mamdani->addRule(Rule::parse("if health is low"
-                                                 " then Me is low", engine));
+            /***  health ***/
+            mamdani->addRule(Rule::parse(
+                "if CD is low"
+                " or CD is high"
+                " or Mg is high"
+                " or AE is high"
+                " then health is low"
+                , engine));
+            mamdani->addRule(Rule::parse(
+                " if CD is medium"
+                " and Mg is not high"
+                " and AE is not high"
+                " then health is high"
+                , engine));
 
             /***  Proliferation ***/
-            mamdani->addRule(Rule::parse("if health is high"
-                                                 " and Me is high"
-                                                 " then Pr is high", engine));
-            mamdani->addRule(Rule::parse("if health is high"
-                                                 " and Me is normal"
-                                                 " then Pr is normal", engine));
-            mamdani->addRule(Rule::parse("if health is low"
-                                                 " then Pr is low", engine));
+            mamdani->addRule(Rule::parse(
+                " if health is high"
+				" and Mg is low"
+				" and age is low"
+				" then Pr is veryHigh", 
+                engine)); //very high
+            mamdani->addRule(Rule::parse(
+                " if health is high"
+				" and Mg is low"
+                " and age is not low"
+				" then Pr is high", 
+                engine)); // high
+            mamdani->addRule(Rule::parse(
+                " if health is high"
+                " and Mg is not low"
+                " and age is low"
+                " then Pr is high",
+                engine)); // high
+            mamdani->addRule(Rule::parse(
+                "if health is high"
+                " and Mg is not low"
+                " and age is not low"
+                " then Pr is normal",
+                engine)); // normal
+            mamdani->addRule(Rule::parse(
+                "if health is low"
+                " then Pr is low",
+                engine)); // low
+
             /***  mortality ***/
-            mamdani->addRule(Rule::parse("if health is low"
-                                                 " then Mo is high", engine));
-            mamdani->addRule(Rule::parse("if health is high"
-                                                 " then Mo is low", engine));
+            mamdani->addRule(Rule::parse(
+                "if health is low"
+                " then Mo is high", engine));
+            mamdani->addRule(Rule::parse(
+                "if health is high"
+                " then Mo is low", engine));
             /***  migration ***/
-            mamdani->addRule(Rule::parse("if CD is high"
-                                                 " then Mi is high", engine));
-            mamdani->addRule(Rule::parse("if CD is not high"
-                                                 " then Mi is low", engine));
+            mamdani->addRule(Rule::parse(
+                "if CD is high"
+                " then Mi is high", engine));
+            mamdani->addRule(Rule::parse(
+                "if CD is not high"
+                " then Mi is low", engine));
 
             engine->addRuleBlock(mamdani);
 
