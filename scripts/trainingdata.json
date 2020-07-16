@@ -9,7 +9,7 @@
 			        "patch_size": 0.0084
 			    },
 			    "patch":{
-			        "attrs":{ "Mg":0, "pH":7.8,"agent_density":0,"lactate":0}
+			        "attrs":{ "Mg":0, "pH":7.8,"agent_density":0,"lactate":0, "DM": 0, "BMP": 0}
 			      },
 			    "agents":
 			      {
@@ -18,7 +18,7 @@
 			          "Dead": 0
 			        },
 			        "MSC":{
-			          "attrs":{"pH":7.8,"MI":0,"age": 21,"clock": 0}
+			          "attrs":{"pH":7.8,"MI":0,"age": 21,"clock": 0, "maturity": 0}
 			        },
 			        "Dead":{
 			          "attrs":{ }
@@ -46,7 +46,7 @@
 			        "patch_size": 0.0084
 			    },
 			    "patch":{
-			        "attrs":{ "Mg":3.6, "pH":7.8,"agent_density":0,"lactate":0}
+			        "attrs":{ "Mg":3.6, "pH":7.8,"agent_density":0,"lactate":0,"DM": 0, "BMP": 0}
 			      },
 			    "agents":
 			      {
@@ -59,7 +59,8 @@
 									"pH": 7.8,
 									"MI": 0,
 									"age": 21,
-									"clock": 0
+									"clock": 0,
+									"maturity": 0
 								}
 			        },
 			        "Dead":{
@@ -88,7 +89,7 @@
 			        "patch_size": 0.0084
 			    },
 			    "patch":{
-			        "attrs":{ "Mg":6, "pH":7.8,"agent_density":0,"lactate":0}
+			        "attrs":{ "Mg":6, "pH":7.8,"agent_density":0,"lactate":0,"DM": 0, "BMP": 0}
 			      },
 			    "agents":
 			      {
@@ -101,7 +102,8 @@
 									"pH": 7.8,
 									"MI": 0,
 									"age": 21,
-									"clock": 0
+									"clock": 0,
+									"maturity": 0
 								}
 			        },
 			        "Dead":{
@@ -130,7 +132,7 @@
 			        "patch_size": 0.0084
 			    },
 			    "patch":{
-			        "attrs":{ "Mg":12, "pH":7.8,"agent_density":0,"lactate":0}
+			        "attrs":{ "Mg":12, "pH":7.8,"agent_density":0,"lactate":0,"DM": 0, "BMP": 0}
 			      },
 			    "agents":
 			      {
@@ -143,7 +145,8 @@
 									"pH": 7.8,
 									"MI": 0,
 									"age": 21,
-									"clock": 0
+									"clock": 0,
+									"maturity": 0
 								}
 			        },
 			        "Dead":{
@@ -172,7 +175,7 @@
 			        "patch_size": 0.0084
 			    },
 			    "patch":{
-			        "attrs":{ "Mg":60, "pH":7.8,"agent_density":0,"lactate":0}
+			        "attrs":{ "Mg":60, "pH":7.8,"agent_density":0,"lactate":0,"DM": 0, "BMP": 0}
 			      },
 			    "agents":
 			      {
@@ -185,7 +188,8 @@
 									"pH": 7.8,
 									"MI": 0,
 									"age": 21,
-									"clock": 0
+									"clock": 0,
+									"maturity": 0
 								}
 			        },
 			        "Dead":{
@@ -214,7 +218,7 @@
 			        "patch_size": 0.006
 			    },
 			    "patch":{
-			        "attrs":{ "Mg":0, "pH":7.8,"agent_density":0,"lactate":0}
+			        "attrs":{ "Mg":0, "pH":7.8,"agent_density":0,"lactate":0,"DM": 0, "BMP": 0}
 			      },
 			    "agents":
 			      {
@@ -227,7 +231,8 @@
 									"pH": 7.8,
 									"MI": 0,
 									"age": 21,
-									"clock": 0
+									"clock": 0,
+									"maturity": 0
 								}
 			        },
 			        "Dead":{
@@ -256,7 +261,7 @@
 			        "patch_size": 0.006
 			    },
 			    "patch":{
-			        "attrs":{ "Mg":5, "pH":7.8,"agent_density":0,"lactate":0}
+			        "attrs":{ "Mg":5, "pH":7.8,"agent_density":0,"lactate":0,"DM": 0, "BMP": 0}
 			      },
 			    "agents":
 			      {
@@ -269,7 +274,8 @@
 									"pH": 7.8,
 									"MI": 0,
 									"age": 21,
-									"clock": 0
+									"clock": 0,
+									"maturity": 0
 								}
 			        },
 			        "Dead":{

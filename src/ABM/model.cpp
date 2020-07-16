@@ -1,5 +1,7 @@
 #include "ABM/model.h"
 #include <math.h>  
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 double myPatch::lactate(){
 		double MI = 0;
 		if (this->empty) {
@@ -84,6 +86,8 @@ bool MSC::migration(double Mi){
 void MSC::step(){
 	// policy's inputs
 	auto policy_inputs = this->collect_policy_inputs();
+	json jj(policy_inputs);
+	cout << setw(4) << jj << endl;
 	auto predictions = this->run_policy(policy_inputs);
 	// functions
 	auto die = this->mortality(predictions["Mo"]);
@@ -114,7 +118,10 @@ map<string,double> MSC::collect_policy_inputs(){
 		auto CD = this->patch->get_data("agent_density");
 		auto Mg = this->patch->get_data("Mg")/this->params.at("Mg_max");
 		auto age = this->data["age"] / this->params.at("AGE_H_t");
-		map<string,double> policy_inputs = {{"AE",AE}, {"Mg",Mg}, {"CD", CD},{"age", age} };
+		auto maturity = this->data["maturity"] ; // maturity indeex
+		auto DM = this->patch->get_data("DM") / this->params.at("DM_max");
+		auto BMP = this->patch->get_data("BMP") / this->params.at("BMP_max");
+		map<string, double> policy_inputs = { {"AE",AE} , {"Mg",Mg} , {"CD", CD} , {"age", age} , {"maturity", maturity} , {"BMP", BMP} , {"DM",DM} };
 		return policy_inputs;
 	}
 void MSC::update(){

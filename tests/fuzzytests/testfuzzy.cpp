@@ -18,10 +18,10 @@ fuzzy initialize() {
 
 TEST_CASE("Validity for the whole range of inputs", "[main]") {
     auto fuzzy_obj = initialize();
-    vector<string> target_input = { "CD","Mg","AE","age" };
-    vector<string> target_output = { "Mo","Mi","Pr" };
+    vector<string> target_input = { "CD","Mg","AE","age","DM","BMP"};
+    vector<string> target_output = { "Mo","Mi","Pr","Diff" };
     map<string, double> non_target_inputs = { };
-    unsigned steps = 20;
+    unsigned steps = 5;
     map<string, double> inputs = {};
 
     std::function<void(unsigned)> RECURSIVE = [&](unsigned j) {
@@ -34,8 +34,12 @@ TEST_CASE("Validity for the whole range of inputs", "[main]") {
                 RECURSIVE(j - 1);
             }
             else {
-                // cout<<" CD :" << inputs["CD"]<<" Mg :" << inputs["Mg"]<<" AE :" << inputs["AE"]<< " ";
-                fuzzy_obj.predict(inputs);
+                 //cout<<" CD :" << inputs["CD"]<<" Mg :" << inputs["Mg"]<<" AE :" << inputs["AE"]<< " ";
+                //json jj2(inputs);
+                //cout << "inputs" << setw(4) << jj2 << endl;
+                auto results = fuzzy_obj.predict(inputs);
+                //json jj(results);
+                //cout << "results"<< setw(4) << jj << endl;
             }
         };
     };
@@ -48,7 +52,7 @@ TEST_CASE("Validity for the whole range of inputs", "[main]") {
     }
     REQUIRE(flag);
 }
-    
+ /*   
 SCENARIO("Validity for different Mg values", "[Mgs]") {
     GIVEN("A set of inputs") {
         auto fuzzy_obj = initialize();
@@ -106,6 +110,8 @@ SCENARIO("Validity for different AE values", "[AEs]") {
         map<string, double> inputs_2 = { {"Mg",0},{"AE",0.5},{"CD",0.5},{"age",0} };
         auto result_1 = fuzzy_obj.predict(inputs_1);
         auto result_2 = fuzzy_obj.predict(inputs_2);
+        json jj(result_2);
+        cout << setw(4) << jj << endl;
         WHEN("High AE") {
             THEN("Higher mortality compared to normal") {
                 REQUIRE(result_2["Mo"] > result_1["Mo"]);
@@ -144,4 +150,4 @@ SCENARIO("Validity for synergic effect of age and mg", "[age_mg]") {
             REQUIRE(result_2["Pr"] > result_3["Pr"]);
         };
     }
-}
+}*/

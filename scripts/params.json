@@ -12,12 +12,17 @@
   "MG_L_t1": 1.0,
   "MG_L_t2": 3.0,
   "Mg_max": 60.0,
+  "DM_max": 1,
+  "BMP_max": 1,
   "Mo_H_v": 2,
   "Pr_N_v": 0.6,
   "Pr_H_v": 0.8,
   "w_mg_ph": 0.02,
   "w_lactate_ph": 0.01,
-  "AGE_H_t": 100
+  "AGE_H_t": 100,
+  "Diff_N_v": 0.5,
+  "Diff_H_v": 0.8,
+  "Diff_L_v": 0.3
 
 
 }

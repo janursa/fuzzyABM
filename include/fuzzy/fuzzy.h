@@ -201,9 +201,8 @@ struct MSC_FUZZY:public base_model {
         };
         // Age: 2 level
         auto INPUT_AGE = [&]() {
-            std::vector<double> low{ 0, 0, params["AGE_H_t"] };
-            std::vector<double> high{ 0, params["AGE_H_t"], params["AGE_H_t"] };
-            NORMALIZE(low, params["AGE_H_t"]); NORMALIZE(high, params["AGE_H_t"]);
+            std::vector<double> low{ 0, 0, 1 };
+            std::vector<double> high{ 0, 1, 1 };
             check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
             InputVariable* input2 = new InputVariable;
             input2->setName("age");
@@ -215,7 +214,36 @@ struct MSC_FUZZY:public base_model {
             input2->addTerm(new Triangle("high", high[0], high[1], high[2]));
             engine->addInputVariable(input2);
         };
-        
+        // BMP: 2 level
+        auto INPUT_BMP = [&]() {
+            std::vector<double> low{ 0, 0, 1 };
+            std::vector<double> high{ 0, 1, 1 };
+            check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
+            InputVariable* input2 = new InputVariable;
+            input2->setName("BMP");
+            input2->setDescription("");
+            input2->setEnabled(true);
+            input2->setRange(0, 1);
+            input2->setLockValueInRange(false);
+            input2->addTerm(new Triangle("low", low[0], low[1], low[2]));
+            input2->addTerm(new Triangle("high", high[0], high[1], high[2]));
+            engine->addInputVariable(input2);
+        };
+        // DM: 2 level
+        auto INPUT_MD = [&]() {
+            std::vector<double> low{ 0, 0, 1 };
+            std::vector<double> high{ 0, 1, 1 };
+            check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
+            InputVariable* input2 = new InputVariable;
+            input2->setName("DM");
+            input2->setDescription("");
+            input2->setEnabled(true);
+            input2->setRange(0, 1);
+            input2->setLockValueInRange(false);
+            input2->addTerm(new Triangle("low", low[0], low[1], low[2]));
+            input2->addTerm(new Triangle("high", high[0], high[1], high[2]));
+            engine->addInputVariable(input2);
+        };
         // Health: 2 level
         auto INNER_HEALTH = [&]() {
             OutputVariable *out1 = new OutputVariable;
@@ -245,9 +273,10 @@ struct MSC_FUZZY:public base_model {
             out1->setDefuzzifier(new WeightedAverage("Automatic"));
             out1->setDefaultValue(fl::nan);
             out1->setLockPreviousValue(false);
-            out1->addTerm(new Constant("low", 0.000));
-            out1->addTerm(new Constant("normal", params["Pr_N_v"]));
-            out1->addTerm(new Constant("high", params["Pr_H_v"]));
+            out1->addTerm(new Constant("verylow", 0.000));
+            out1->addTerm(new Constant("low", 0.25));
+            out1->addTerm(new Constant("normal", 0.5));
+            out1->addTerm(new Constant("high", 0.75));
             out1->addTerm(new Constant("veryHigh", 1));
             engine->addOutputVariable(out1);
         };
@@ -297,6 +326,10 @@ struct MSC_FUZZY:public base_model {
             this->input_tags.push_back("AE");
             INPUT_AGE();
             this->input_tags.push_back("age");
+            INPUT_BMP();
+            this->input_tags.push_back("BMP");
+            INPUT_MD();
+            this->input_tags.push_back("DM");
 
             /** inners **/
             INNER_HEALTH();
