@@ -14,6 +14,7 @@
 #include <cassert>
 using namespace fl;
 using namespace std;
+vector<string> generate_rules(vector<vector<string>> factors, vector<string> levels, string target);
 struct base_exception{
     base_exception(std::string msg):message(msg){
 
@@ -261,7 +262,7 @@ struct MSC_FUZZY:public base_model {
             engine->addOutputVariable(out1);
         };
 
-        // Pr: 4 levels
+        // Pr: 5 levels
         auto OUTPUT_PROLIFERATION = [&]() {
             OutputVariable *out1 = new OutputVariable;
             out1->setName("Pr");
@@ -278,6 +279,25 @@ struct MSC_FUZZY:public base_model {
             out1->addTerm(new Constant("normal", 0.5));
             out1->addTerm(new Constant("high", 0.75));
             out1->addTerm(new Constant("veryHigh", 1));
+            engine->addOutputVariable(out1);
+        };
+        // Diff: 5 levels
+        auto OUTPUT_DIFF = [&]() {
+            OutputVariable* out1 = new OutputVariable;
+            out1->setName("Diff");
+            out1->setDescription("");
+            out1->setEnabled(true);
+            out1->setRange(0.000, 1);
+            out1->setLockValueInRange(false);
+            out1->setAggregation(fl::null);
+            out1->setDefuzzifier(new WeightedAverage("Automatic"));
+            out1->setDefaultValue(fl::nan);
+            out1->setLockPreviousValue(false);
+            out1->addTerm(new Constant("verylow", 0.000));
+            out1->addTerm(new Constant("low", 0.25));
+            out1->addTerm(new Constant("normal", 0.5));
+            out1->addTerm(new Constant("high", 0.75));
+            out1->addTerm(new Constant("veryhigh", 1));
             engine->addOutputVariable(out1);
         };
         // Mo: 2 levels
@@ -340,6 +360,8 @@ struct MSC_FUZZY:public base_model {
             this->output_tags.push_back("Mo");
             OUTPUT_MIGRATION();
             this->output_tags.push_back("Mi");
+            OUTPUT_DIFF();
+            this->output_tags.push_back("Diff");
             /** controller **/
             RuleBlock *mamdani = new RuleBlock;
             mamdani->setName("mamdani");
@@ -365,35 +387,7 @@ struct MSC_FUZZY:public base_model {
                 " then health is high"
                 , engine));
 
-            /***  Proliferation ***/
-            mamdani->addRule(Rule::parse(
-                " if health is high"
-				" and Mg is low"
-				" and age is low"
-				" then Pr is veryHigh", 
-                engine)); //very high
-            mamdani->addRule(Rule::parse(
-                " if health is high"
-				" and Mg is low"
-                " and age is not low"
-				" then Pr is high", 
-                engine)); // high
-            mamdani->addRule(Rule::parse(
-                " if health is high"
-                " and Mg is not low"
-                " and age is low"
-                " then Pr is high",
-                engine)); // high
-            mamdani->addRule(Rule::parse(
-                "if health is high"
-                " and Mg is not low"
-                " and age is not low"
-                " then Pr is normal",
-                engine)); // normal
-            mamdani->addRule(Rule::parse(
-                "if health is low"
-                " then Pr is low",
-                engine)); // low
+            
 
             /***  mortality ***/
             mamdani->addRule(Rule::parse(
@@ -412,8 +406,45 @@ struct MSC_FUZZY:public base_model {
 
             engine->addRuleBlock(mamdani);
 
-            
-            
+            /***  Proliferation ***/
+            mamdani->addRule(Rule::parse(
+                " if health is high"
+                " and Mg is low"
+                " and age is low"
+                " then Pr is veryHigh",
+                engine)); //very high
+            mamdani->addRule(Rule::parse(
+                " if health is high"
+                " and Mg is low"
+                " and age is not low"
+                " then Pr is high",
+                engine)); // high
+            mamdani->addRule(Rule::parse(
+                " if health is high"
+                " and Mg is not low"
+                " and age is low"
+                " then Pr is high",
+                engine)); // high
+            mamdani->addRule(Rule::parse(
+                "if health is high"
+                " and Mg is not low"
+                " and age is not low"
+                " then Pr is normal",
+                engine)); // normal
+            mamdani->addRule(Rule::parse(
+                "if health is low"
+                " then Pr is low",
+                engine)); // low
+            vector<vector<string>> factors = { {"health is high","health is not high"},
+                {"DM is high and Mg is not negligible", "DM is high and Mg is negligible","DM is low and Mg is negligible","DM is low and Mg is not negligible"},
+                {"age is high","age is not high"},
+                {"CD is high", "CD is not high"},
+                {"BMP is high", "BMP is not high"} };
+            vector<string> levels = { "veryhigh", "high", "normal", "low", "verylow" };
+            auto rules = generate_rules(factors, levels, "Diff");
+            for (auto& rule : rules) {
+                mamdani->addRule(Rule::parse(rule.c_str(), engine));
+            }
             auto SELECTIVE_CHECK = [&](){
                 vector<string> target_input = {"CD"};
                 vector<string> target_output = {"Mo"};
