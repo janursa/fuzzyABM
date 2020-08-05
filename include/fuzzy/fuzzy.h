@@ -148,9 +148,9 @@ struct MSC_FUZZY:public base_model {
         engine->setDescription("");
         // cell density: 3 levels
         auto INPUT_CELLDENSITY = [&]() {
-            std::vector<double> low{0, 0, params["CD_L_t"], params["CD_M_t1"]};
-            std::vector<double> medium{params["CD_L_t"], params["CD_M_t1"],params["CD_M_t2"], params["CD_H_t"]};
-            std::vector<double> high{params["CD_M_t2"], params["CD_H_t"], 1, 1};
+            std::vector<double> low{0, 0, 0.22, 0.33};
+            std::vector<double> medium{ 0.22, 0.33,params["CD_H_t"]-0.11, params["CD_H_t"]};
+            std::vector<double> high{ params["CD_H_t"] - 0.11, params["CD_H_t"], 1, 1};
 
             check_range(low); check_range(medium); check_range(high);
             InputVariable *input1 = new InputVariable;
@@ -167,18 +167,18 @@ struct MSC_FUZZY:public base_model {
         // AE: 2 levels
         auto INPUT_AE = [&]() {
             // AE
-            std::vector<double> low{0, 0,params["AE_L_t"], params["AE_H_t"]};
-            std::vector<double> high{params["AE_L_t"],params["AE_H_t"], 1, 1};
-            check_range(low);check_range(high);
-            InputVariable *input2 = new InputVariable;
-            input2->setName("AE");
-            input2->setDescription("");
-            input2->setEnabled(true);
-            input2->setRange(0, 1);
-            input2->setLockValueInRange(false);
-            input2->addTerm(new Trapezoid("low", low[0], low[1], low[2], low[3]));
-            input2->addTerm(new Trapezoid("high", high[0], high[1], high[2], high[3]));
-            engine->addInputVariable(input2);
+            std::vector<double> low{0, 0,1};
+            std::vector<double> high{0, 1, 1};
+            //check_range(low);check_range(high);
+            InputVariable *input = new InputVariable;
+            input->setName("AE");
+            input->setDescription("");
+            input->setEnabled(true);
+            input->setRange(0, 1);
+            input->setLockValueInRange(false);
+            input->addTerm(new Triangle("low", low[0], low[1], low[2]));
+            input->addTerm(new Triangle("high", high[0], high[1], high[2]));
+            engine->addInputVariable(input);
         };
         // MG: 3 level
         auto INPUT_MG = [&]() {
@@ -215,21 +215,7 @@ struct MSC_FUZZY:public base_model {
             input2->addTerm(new Triangle("high", high[0], high[1], high[2]));
             engine->addInputVariable(input2);
         };
-        // BMP: 2 level
-        auto INPUT_BMP = [&]() {
-            std::vector<double> low{ 0, 0, 1 };
-            std::vector<double> high{ 0, 1, 1 };
-            check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
-            InputVariable* input2 = new InputVariable;
-            input2->setName("BMP");
-            input2->setDescription("");
-            input2->setEnabled(true);
-            input2->setRange(0, 1);
-            input2->setLockValueInRange(false);
-            input2->addTerm(new Triangle("low", low[0], low[1], low[2]));
-            input2->addTerm(new Triangle("high", high[0], high[1], high[2]));
-            engine->addInputVariable(input2);
-        };
+        
         // DM: 2 level
         auto INPUT_MD = [&]() {
             std::vector<double> low{ 0, 0, 1 };
@@ -278,7 +264,7 @@ struct MSC_FUZZY:public base_model {
             out1->addTerm(new Constant("low", 0.25));
             out1->addTerm(new Constant("normal", 0.5));
             out1->addTerm(new Constant("high", 0.75));
-            out1->addTerm(new Constant("veryHigh", 1));
+            out1->addTerm(new Constant("veryhigh", 1));
             engine->addOutputVariable(out1);
         };
         // Diff: 5 levels
@@ -346,8 +332,6 @@ struct MSC_FUZZY:public base_model {
             this->input_tags.push_back("AE");
             INPUT_AGE();
             this->input_tags.push_back("age");
-            INPUT_BMP();
-            this->input_tags.push_back("BMP");
             INPUT_MD();
             this->input_tags.push_back("DM");
 
@@ -407,44 +391,36 @@ struct MSC_FUZZY:public base_model {
             engine->addRuleBlock(mamdani);
 
             /***  Proliferation ***/
-            mamdani->addRule(Rule::parse(
-                " if health is high"
-                " and Mg is low"
-                " and age is low"
-                " then Pr is veryHigh",
-                engine)); //very high
-            mamdani->addRule(Rule::parse(
-                " if health is high"
-                " and Mg is low"
-                " and age is not low"
-                " then Pr is high",
-                engine)); // high
-            mamdani->addRule(Rule::parse(
-                " if health is high"
-                " and Mg is not low"
-                " and age is low"
-                " then Pr is high",
-                engine)); // high
-            mamdani->addRule(Rule::parse(
-                "if health is high"
-                " and Mg is not low"
-                " and age is not low"
-                " then Pr is normal",
-                engine)); // normal
-            mamdani->addRule(Rule::parse(
-                "if health is low"
-                " then Pr is low",
-                engine)); // low
-            vector<vector<string>> factors = { {"health is high","health is not high"},
+            
+            auto FORMULATE_PR = [&]() {
+                vector<vector<string>> factors = {
+                {"health is high","health is not high"},
+                {"maturity is low", "maturity is not low"},
+                {"Mg is low", "Mg is not low"},
+                {"CD is not high", "CD is high"},
+                {"age is low","age is not low"},
+                {"DM is not high", "DM is high"} };
+                vector<string> levels = { "veryhigh", "high", "normal", "low", "verylow" };
+                auto rules = generate_rules(factors, levels, "Pr");
+                for (auto& rule : rules) {
+                    mamdani->addRule(Rule::parse(rule.c_str(), engine));
+                }
+            };
+            FORMULATE_PR();
+            auto FORMULATE_DIFF = [&]() {
+                vector<vector<string>> factors = {
+                {"health is high","health is not high"},
                 {"DM is high and Mg is not negligible", "DM is high and Mg is negligible","DM is low and Mg is negligible","DM is low and Mg is not negligible"},
                 {"age is high","age is not high"},
-                {"CD is high", "CD is not high"},
-                {"BMP is high", "BMP is not high"} };
-            vector<string> levels = { "veryhigh", "high", "normal", "low", "verylow" };
-            auto rules = generate_rules(factors, levels, "Diff");
-            for (auto& rule : rules) {
-                mamdani->addRule(Rule::parse(rule.c_str(), engine));
-            }
+                {"CD is high", "CD is not high"} };
+                vector<string> levels = { "veryhigh", "high", "normal", "low", "verylow" };
+                auto rules = generate_rules(factors, levels, "Diff");
+                for (auto& rule : rules) {
+                    mamdani->addRule(Rule::parse(rule.c_str(), engine));
+                }
+            };
+            FORMULATE_DIFF();
+            
             auto SELECTIVE_CHECK = [&](){
                 vector<string> target_input = {"CD"};
                 vector<string> target_output = {"Mo"};

@@ -58,13 +58,17 @@ double MSC::alkalinity(){
 		if (adapted_pH == 0)
 			AE = 1;
 		else
-			AE = abs(env_pH - adapted_pH) / adapted_pH;
+			AE = this->params.at("AE_a_coeff") * abs(env_pH - adapted_pH) / adapted_pH;
 		if (AE > 1)
 			AE = 1;
-
+		// damage
+		if (this->patch->get_data("pH") >= this->params.at("pH_t")) {
+			this->damage = true;
+		}
 		return AE;
 	}
 double MSC::adaptation(){
+	if (this->damage) return; // not recovery for permanent damage
 		auto adapted_pH = this->data.at("pH");
 		auto env_pH = this->patch->get_data("pH");
 		double new_adapted_pH = 0;
@@ -120,8 +124,8 @@ map<string,double> MSC::collect_policy_inputs(){
 		auto age = this->data["age"] / this->params.at("AGE_H_t");
 		auto maturity = this->data["maturity"] ; // maturity indeex
 		auto DM = this->patch->get_data("DM") / this->params.at("DM_max");
-		auto BMP = this->patch->get_data("BMP") / this->params.at("BMP_max");
-		map<string, double> policy_inputs = { {"AE",AE} , {"Mg",Mg} , {"CD", CD} , {"age", age} , {"maturity", maturity} , {"BMP", BMP} , {"DM",DM} };
+		map<string, double> policy_inputs = { {"AE",AE} , {"Mg",Mg} , {"CD", CD} , {"age", age} ,
+			{"maturity", maturity} , {"DM",DM} };
 		return policy_inputs;
 	}
 void MSC::update(){
@@ -142,7 +146,7 @@ double myPatch::pH(){
 		auto mg = this->data.at("Mg");
 		auto lactate = this->data.at("lactate");
 		// auto pH_new = this->params["w_mg_ph"]*mg -this->params.at("w_lactate_ph")*lactate + 7.8;
-		auto pH_new = this->params["w_mg_ph"]*mg + 7.8;
+		auto pH_new = this->params["w_mg_ph"]*mg + 7.83;
 		return pH_new;
 	}
 void MSC::inherit(shared_ptr<Agent> father){

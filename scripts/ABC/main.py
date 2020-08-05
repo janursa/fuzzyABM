@@ -23,8 +23,8 @@ settings = {
 
 free_params = {
 	"w_mg_ph": [0.02,0.1],
-	"AE_H_t": [0.5,1],
-    "AE_L_t": [0,0.5],
+	"AE_H_t": [0,0.15],
+    "AE_L_t": [0,0.15],
     "B_MSC_rec": [0.001,0.005],
     "B_MSC_Pr": [0.01,0.05],
     "B_MSC_Mo": [0.001,0.003],
@@ -35,9 +35,7 @@ free_params = {
     "MG_H_t": [15,40],
     "MG_L_t1": [0,10],
     "MG_L_t2": [3,15],
-    "Mo_H_v": [2,4],
-    "Pr_N_v": [0,1],
-    "Me_N_v": [0,1]
+    "Mo_H_v": [2,4]
 }
 if __name__ == "__main__":
 	obj = tools.ABC(settings=settings,free_params=free_params)

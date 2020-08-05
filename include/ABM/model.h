@@ -60,6 +60,7 @@ struct MSC : public Agent{
 		auto predictions = this->policy->predict(inputs);
 		return predictions;
 	}
+	bool damage = false;
 };
 struct myEnv : public Env{
 	/** Env data **/

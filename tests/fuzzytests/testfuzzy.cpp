@@ -18,7 +18,7 @@ fuzzy initialize() {
 
 TEST_CASE("Validity for the whole range of inputs", "[main]") {
     auto fuzzy_obj = initialize();
-    vector<string> target_input = { "CD","Mg","AE","age","DM","BMP"};
+    vector<string> target_input = { "CD","Mg","AE","age","DM"};
     vector<string> target_output = { "Mo","Mi","Pr","Diff" };
     map<string, double> non_target_inputs = { };
     unsigned steps = 5;
