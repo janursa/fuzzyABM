@@ -41,6 +41,10 @@ struct MSC : public Agent{
 	bool mortality(double Mo);
 	double adaptation();
 	double alkalinity();
+	bool differentiation(double , double);
+	void bone_production(double, double); // for ECM and minerals
+	void GF_production(); // for BMP and TGF
+
 	bool migration(double Mi);
 	virtual void step();
 	virtual double get_data(string tag){

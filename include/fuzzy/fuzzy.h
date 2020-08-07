@@ -99,9 +99,7 @@ struct base_model{
     }
     virtual void define()=0;
     Engine *engine;
-    static shared_ptr<base_model> & fuzzy_model() {
-        static shared_ptr<base_model>  var{}; return var;
-    };
+
     myMap params;
     vector<std::string> input_tags;
     vector<std::string> output_tags;
@@ -180,143 +178,223 @@ struct MSC_FUZZY:public base_model {
             input->addTerm(new Triangle("high", high[0], high[1], high[2]));
             engine->addInputVariable(input);
         };
-        // MG: 3 level
+        // Maturity: 2 levels
+        auto INPUT_MATURITY = [&]() {
+            std::vector<double> low{ 0, 0, 1 };
+            std::vector<double> high{ 0, 1, 1 };
+            InputVariable* input = new InputVariable;
+            input->setName("maturity");
+            input->setDescription("");
+            input->setEnabled(true);
+            input->setRange(0, 1);
+            input->setLockValueInRange(false);
+            input->addTerm(new Triangle("low", low[0], low[1], low[2]));
+            input->addTerm(new Triangle("high", high[0], high[1], high[2]));
+            engine->addInputVariable(input);
+        };
+
+        // Damage: 2 levels
+        auto INPUT_DAMAGE = [&]() {
+            std::vector<double> low{ 0, 0, 1 };
+            std::vector<double> high{ 0, 1, 1 };
+            InputVariable* input = new InputVariable;
+            input->setName("damage");
+            input->setDescription("");
+            input->setEnabled(true);
+            input->setRange(0, 1);
+            input->setLockValueInRange(false);
+            input->addTerm(new Triangle("low", low[0], low[1], low[2]));
+            input->addTerm(new Triangle("high", high[0], high[1], high[2]));
+            engine->addInputVariable(input);
+        };
+        // TGF: 3 level
+        auto INPUT_TGF = [&]() {
+            std::vector<double> neg{ 0,0, 0.015,.025 };
+            std::vector<double> low{ 0.015,.025,15 };
+            std::vector<double> high{ .025,15, 15 };
+            NORMALIZE(neg, 15); NORMALIZE(low, 15); NORMALIZE(high, 15);
+            check_range(neg); check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
+            InputVariable* input2 = new InputVariable;
+            input2->setName("TGF");
+            input2->setDescription("");
+            input2->setEnabled(true);
+            input2->setRange(0, 1);
+            input2->setLockValueInRange(false);
+            input2->addTerm(new Trapezoid("neg", neg[0], neg[1], neg[2], neg[3]));
+            input2->addTerm(new Triangle("low", low[0], low[1], low[2]));
+            input2->addTerm(new Triangle("high", high[0], high[1], high[2]));
+            engine->addInputVariable(input2);
+        };
+        // BMP: 4 level
+        auto INPUT_BMP = [&]() {
+            std::vector<double> neg{ 0,0, 0.5,10 };
+            std::vector<double> low{ 0.5,10, 50 };
+            std::vector<double> medium{ 10, 50, 250 };
+            std::vector<double> high{ 50, 250, 2000, 2000 };
+            NORMALIZE(neg, 2000); NORMALIZE(low, 2000); NORMALIZE(medium, 2000); NORMALIZE(high, 2000);
+            check_range(neg); check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
+            InputVariable* input2 = new InputVariable;
+            input2->setName("BMP");
+            input2->setDescription("");
+            input2->setEnabled(true);
+            input2->setRange(0, 1);
+            input2->setLockValueInRange(false);
+            input2->addTerm(new Trapezoid("neg", neg[0], neg[1], neg[2], neg[3]));
+            input2->addTerm(new Triangle("low", low[0], low[1], low[2]));
+            input2->addTerm(new Triangle("medium", medium[0], medium[1], medium[2]));
+            input2->addTerm(new Trapezoid("high", high[0], high[1], high[2], high[3]));
+            engine->addInputVariable(input2);
+        };
+        // MG: 4 level
         auto INPUT_MG = [&]() {
-            std::vector<double> negligible{0,0, params["MG_L_t1"]};
-            std::vector<double> low{0, params["MG_L_t1"], params["MG_L_t2"], params["MG_H_t"]};
-            // std::vector<double> medium{params["MG_L_t"], params["MG_M_t"], params["MG_H_t"]};
-            std::vector<double> high{params["MG_L_t2"], params["MG_H_t"], params["Mg_max"], params["Mg_max"]};
-            NORMALIZE(negligible,params["Mg_max"]); NORMALIZE(low,params["Mg_max"]); NORMALIZE(high,params["Mg_max"]);
-            check_range(negligible); check_range(low);check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
+            std::vector<double> neg{0,0, 0.8,params["MG_L_t"] };
+            std::vector<double> low{ 0.8, params["MG_L_t"], params["MG_M_t"]};
+             std::vector<double> medium{params["MG_L_t"], params["MG_M_t"], params["MG_H_t"]};
+            std::vector<double> high{params["MG_M_t"], params["MG_H_t"], params["Mg_max"], params["Mg_max"]};
+            NORMALIZE(neg,params["Mg_max"]); NORMALIZE(low,params["Mg_max"]); NORMALIZE(medium, params["Mg_max"]); NORMALIZE(high,params["Mg_max"]);
+            check_range(neg); check_range(low);check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
             InputVariable *input2 = new InputVariable;
             input2->setName("Mg");
             input2->setDescription("");
             input2->setEnabled(true);
             input2->setRange(0, 1);
             input2->setLockValueInRange(false);
-            input2->addTerm(new Triangle("negligible", negligible[0], negligible[1], negligible[2]));
-            input2->addTerm(new Trapezoid("low", low[0], low[1], low[2], low[3]));
-            // input2->addTerm(new Triangle("medium", medium[0],medium[1],medium[2]));
+            input2->addTerm(new Trapezoid("neg", neg[0], neg[1], neg[2], neg[3]));
+            input2->addTerm(new Triangle("low", low[0], low[1], low[2]));
+             input2->addTerm(new Triangle("medium", medium[0],medium[1],medium[2]));
             input2->addTerm(new Trapezoid("high", high[0], high[1], high[2], high[3]));
             engine->addInputVariable(input2);
         };
-        // Age: 2 level
-        auto INPUT_AGE = [&]() {
-            std::vector<double> low{ 0, 0, 1 };
-            std::vector<double> high{ 0, 1, 1 };
-            check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
-            InputVariable* input2 = new InputVariable;
-            input2->setName("age");
-            input2->setDescription("");
-            input2->setEnabled(true);
-            input2->setRange(0, 1);
-            input2->setLockValueInRange(false);
-            input2->addTerm(new Triangle("low", low[0], low[1], low[2]));
-            input2->addTerm(new Triangle("high", high[0], high[1], high[2]));
-            engine->addInputVariable(input2);
-        };
         
-        // DM: 2 level
-        auto INPUT_MD = [&]() {
-            std::vector<double> low{ 0, 0, 1 };
-            std::vector<double> high{ 0, 1, 1 };
-            check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
-            InputVariable* input2 = new InputVariable;
-            input2->setName("DM");
-            input2->setDescription("");
-            input2->setEnabled(true);
-            input2->setRange(0, 1);
-            input2->setLockValueInRange(false);
-            input2->addTerm(new Triangle("low", low[0], low[1], low[2]));
-            input2->addTerm(new Triangle("high", high[0], high[1], high[2]));
-            engine->addInputVariable(input2);
-        };
-        // Health: 2 level
-        auto INNER_HEALTH = [&]() {
-            OutputVariable *out1 = new OutputVariable;
-            out1->setName("health");
-            out1->setDescription("");
-            out1->setEnabled(true);
-            out1->setRange(0.000, 1.000);
-            out1->setLockValueInRange(false);
-            out1->setAggregation(fl::null);
-            out1->setDefuzzifier(new WeightedAverage("Automatic"));
-            out1->setDefaultValue(fl::nan);
-            out1->setLockPreviousValue(false);
-            out1->addTerm(new Constant("low", 0));
-            out1->addTerm(new Constant("high", 1.000));
-            engine->addOutputVariable(out1);
-        };
-
         // Pr: 5 levels
         auto OUTPUT_PROLIFERATION = [&]() {
-            OutputVariable *out1 = new OutputVariable;
-            out1->setName("Pr");
-            out1->setDescription("");
-            out1->setEnabled(true);
-            out1->setRange(0.000, 1);
-            out1->setLockValueInRange(false);
-            out1->setAggregation(fl::null);
-            out1->setDefuzzifier(new WeightedAverage("Automatic"));
-            out1->setDefaultValue(fl::nan);
-            out1->setLockPreviousValue(false);
-            out1->addTerm(new Constant("verylow", 0.000));
-            out1->addTerm(new Constant("low", 0.25));
-            out1->addTerm(new Constant("normal", 0.5));
-            out1->addTerm(new Constant("high", 0.75));
-            out1->addTerm(new Constant("veryhigh", 1));
-            engine->addOutputVariable(out1);
+            OutputVariable *out = new OutputVariable;
+            out->setName("Pr");
+            out->setDescription("");
+            out->setEnabled(true);
+            out->setRange(0.000, 1);
+            out->setLockValueInRange(false);
+            out->setAggregation(fl::null);
+            out->setDefuzzifier(new WeightedAverage("Automatic"));
+            out->setDefaultValue(fl::nan);
+            out->setLockPreviousValue(false);
+            out->addTerm(new Constant("verylow", 0.000));
+            out->addTerm(new Constant("low", 0.25));
+            out->addTerm(new Constant("medium", 0.5));
+            out->addTerm(new Constant("high", 0.75));
+            out->addTerm(new Constant("veryhigh", 1));
+            engine->addOutputVariable(out);
         };
-        // Diff: 5 levels
-        auto OUTPUT_DIFF = [&]() {
-            OutputVariable* out1 = new OutputVariable;
-            out1->setName("Diff");
-            out1->setDescription("");
-            out1->setEnabled(true);
-            out1->setRange(0.000, 1);
-            out1->setLockValueInRange(false);
-            out1->setAggregation(fl::null);
-            out1->setDefuzzifier(new WeightedAverage("Automatic"));
-            out1->setDefaultValue(fl::nan);
-            out1->setLockPreviousValue(false);
-            out1->addTerm(new Constant("verylow", 0.000));
-            out1->addTerm(new Constant("low", 0.25));
-            out1->addTerm(new Constant("normal", 0.5));
-            out1->addTerm(new Constant("high", 0.75));
-            out1->addTerm(new Constant("veryhigh", 1));
-            engine->addOutputVariable(out1);
+        // early Diff: 5 levels
+        auto OUTPUT_EARLYDIFF = [&]() {
+            OutputVariable* out = new OutputVariable;
+            out->setName("earlyDiff");
+            out->setDescription("");
+            out->setEnabled(true);
+            out->setRange(0.000, 1);
+            out->setLockValueInRange(false);
+            out->setAggregation(fl::null);
+            out->setDefuzzifier(new WeightedAverage("Automatic"));
+            out->setDefaultValue(fl::nan);
+            out->setLockPreviousValue(false);
+            out->addTerm(new Constant("verylow", 0.000));
+            out->addTerm(new Constant("low", 0.25));
+            out->addTerm(new Constant("medium", 0.5));
+            out->addTerm(new Constant("high", 0.75));
+            out->addTerm(new Constant("veryhigh", 1));
+            engine->addOutputVariable(out);
         };
-        // Mo: 2 levels
+        // late Diff: 5 levels
+        auto OUTPUT_LATEDIFF = [&]() {
+            OutputVariable* out = new OutputVariable;
+            out->setName("lateDiff");
+            out->setDescription("");
+            out->setEnabled(true);
+            out->setRange(0.000, 1);
+            out->setLockValueInRange(false);
+            out->setAggregation(fl::null);
+            out->setDefuzzifier(new WeightedAverage("Automatic"));
+            out->setDefaultValue(fl::nan);
+            out->setLockPreviousValue(false);
+            out->addTerm(new Constant("verylow", 0.000));
+            out->addTerm(new Constant("low", 0.25));
+            out->addTerm(new Constant("medium", 0.5));
+            out->addTerm(new Constant("high", 0.75));
+            out->addTerm(new Constant("veryhigh", 1));
+            engine->addOutputVariable(out);
+        };
+        // Mo: 5 levels
         auto OUTPUT_MORTALITY = [&]() {
-            OutputVariable *out2 = new OutputVariable;
-            out2->setName("Mo");
-            out2->setDescription("");
-            out2->setEnabled(true);
-            out2->setRange(0, 1);
-            out2->setLockValueInRange(false);
-            out2->setAggregation(fl::null);
-            out2->setDefuzzifier(new WeightedAverage("Automatic"));
-            out2->setDefaultValue(fl::nan);
-            out2->setLockPreviousValue(false);
-            out2->addTerm(new Constant("low", 0));
-            out2->addTerm(new Constant("high", 1));
-            engine->addOutputVariable(out2);
+            OutputVariable *out = new OutputVariable;
+            out->setName("Mo");
+            out->setDescription("");
+            out->setEnabled(true);
+            out->setRange(0, 1);
+            out->setLockValueInRange(false);
+            out->setAggregation(fl::null);
+            out->setDefuzzifier(new WeightedAverage("Automatic"));
+            out->setDefaultValue(fl::nan);
+            out->setLockPreviousValue(false);
+            out->addTerm(new Constant("verylow", 0.000));
+            out->addTerm(new Constant("low", 0.25));
+            out->addTerm(new Constant("medium", 0.5));
+            out->addTerm(new Constant("high", 0.75));
+            out->addTerm(new Constant("veryhigh", 1));
+            engine->addOutputVariable(out);
         };
         // Mi: 2 levels
         auto OUTPUT_MIGRATION = [&]() {
-            OutputVariable *out2 = new OutputVariable;
-            out2->setName("Mi");
-            out2->setDescription("");
-            out2->setEnabled(true);
-            out2->setRange(0, 1);
-            out2->setLockValueInRange(false);
-            out2->setAggregation(fl::null);
-            out2->setDefuzzifier(new WeightedAverage("Automatic"));
-            out2->setDefaultValue(fl::nan);
-            out2->setLockPreviousValue(false);
-            out2->addTerm(new Constant("low", 0));
-            out2->addTerm(new Constant("high", 1));
-            engine->addOutputVariable(out2);
+            OutputVariable *out = new OutputVariable;
+            out->setName("Mi");
+            out->setDescription("");
+            out->setEnabled(true);
+            out->setRange(0, 1);
+            out->setLockValueInRange(false);
+            out->setAggregation(fl::null);
+            out->setDefuzzifier(new WeightedAverage("Automatic"));
+            out->setDefaultValue(fl::nan);
+            out->setLockPreviousValue(false);
+            out->addTerm(new Constant("low", 0));
+            out->addTerm(new Constant("high", 1));
+            engine->addOutputVariable(out);
+        };
+        // ECM prod: 5 levels
+        auto OUTPUT_ECMPROD = [&]() {
+            OutputVariable* out = new OutputVariable;
+            out->setName("ECMprod");
+            out->setDescription("");
+            out->setEnabled(true);
+            out->setRange(0, 1);
+            out->setLockValueInRange(false);
+            out->setAggregation(fl::null);
+            out->setDefuzzifier(new WeightedAverage("Automatic"));
+            out->setDefaultValue(fl::nan);
+            out->setLockPreviousValue(false);
+            out->addTerm(new Constant("verylow", 0.000));
+            out->addTerm(new Constant("low", 0.25));
+            out->addTerm(new Constant("medium", 0.5));
+            out->addTerm(new Constant("high", 0.75));
+            out->addTerm(new Constant("veryhigh", 1));
+            engine->addOutputVariable(out);
+        };
+        // HA prod: 5 levels
+        auto OUTPUT_HAPROD = [&]() {
+            OutputVariable* out = new OutputVariable;
+            out->setName("HAprod");
+            out->setDescription("");
+            out->setEnabled(true);
+            out->setRange(0, 1);
+            out->setLockValueInRange(false);
+            out->setAggregation(fl::null);
+            out->setDefuzzifier(new WeightedAverage("Automatic"));
+            out->setDefaultValue(fl::nan);
+            out->setLockPreviousValue(false);
+            out->addTerm(new Constant("verylow", 0.000));
+            out->addTerm(new Constant("low", 0.25));
+            out->addTerm(new Constant("medium", 0.5));
+            out->addTerm(new Constant("high", 0.75));
+            out->addTerm(new Constant("veryhigh", 1));
+            engine->addOutputVariable(out);
         };
         auto FORMULATION = [&]() {
             /*
@@ -330,13 +408,14 @@ struct MSC_FUZZY:public base_model {
             this->input_tags.push_back("Mg");
             INPUT_AE();
             this->input_tags.push_back("AE");
-            INPUT_AGE();
-            this->input_tags.push_back("age");
-            INPUT_MD();
-            this->input_tags.push_back("DM");
-
-            /** inners **/
-            INNER_HEALTH();
+            INPUT_DAMAGE();
+            this->input_tags.push_back("damage");
+            INPUT_BMP();
+            this->input_tags.push_back("BMP");
+            INPUT_TGF();
+            this->input_tags.push_back("TGF");
+            INPUT_MATURITY();
+            this->input_tags.push_back("maturity");
             /** outputs **/
             OUTPUT_PROLIFERATION();
             this->output_tags.push_back("Pr");
@@ -344,8 +423,14 @@ struct MSC_FUZZY:public base_model {
             this->output_tags.push_back("Mo");
             OUTPUT_MIGRATION();
             this->output_tags.push_back("Mi");
-            OUTPUT_DIFF();
-            this->output_tags.push_back("Diff");
+            OUTPUT_EARLYDIFF();
+            this->output_tags.push_back("earlyDiff");
+            OUTPUT_LATEDIFF();
+            this->output_tags.push_back("lateDiff");
+            OUTPUT_ECMPROD();
+            this->output_tags.push_back("ECMprod");
+            OUTPUT_HAPROD();
+            this->output_tags.push_back("HAprod");
             /** controller **/
             RuleBlock *mamdani = new RuleBlock;
             mamdani->setName("mamdani");
@@ -355,31 +440,90 @@ struct MSC_FUZZY:public base_model {
             mamdani->setDisjunction(new AlgebraicSum);
             mamdani->setImplication(new Minimum);
             mamdani->setActivation(new General);
-
-            /***  health ***/
-            mamdani->addRule(Rule::parse(
-                "if CD is low"
-                " or CD is high"
-                " or Mg is high"
-                " or AE is high"
-                " then health is low"
-                , engine));
-            mamdani->addRule(Rule::parse(
-                " if CD is medium"
-                " and Mg is not high"
-                " and AE is not high"
-                " then health is high"
-                , engine));
-
+            /***  Proliferation ***/
+            auto FORMULATE_PR = [&]() {
+                // factors are organized in (favourable , non-favourable) formats
+                vector<vector<string>> factors = {
+                {"maturity is low", "maturity is not low"},
+                {"Mg is low", "Mg is not low"},
+                {"CD is not high", "CD is high"},
+                {"AE is low","AE is not low"},
+                {"BMP is low", "BMP is neg","BMP is high"},
+                {"TGF is low", "TGF is not low"} };
+                vector<string> levels = { "veryhigh", "high", "medium", "low", "verylow" };
+                auto rules = generate_rules(factors, levels, "Pr");
+                for (auto& rule : rules) {
+                    //cout << rule << endl;
+                    mamdani->addRule(Rule::parse(rule.c_str(), engine));
+                }
+                mamdani->addRule(Rule::parse("if damage is high then Pr is verylow", engine));
+            };
+            FORMULATE_PR();
             
-
+            auto FORMULATE_EARLYDIFF = [&]() {
+                vector<vector<string>> factors = {
+                {" Mg is low "," Mg is not low "},
+                {" CD is high", " CD is not high "},
+                {" BMP is high", " BMP is not high "},
+                {" TGF is high "," TGF is not high "} 
+                };
+                vector<string> levels = { "veryhigh", "high", "medium", "low", "verylow" };
+                auto rules = generate_rules(factors, levels, "earlyDiff");
+                for (auto& rule : rules) {
+                    mamdani->addRule(Rule::parse(rule.c_str(), engine));
+                }
+                mamdani->addRule(Rule::parse("if damage is high then earlyDiff is verylow", engine));
+            };
+            FORMULATE_EARLYDIFF();
+            auto FORMULATE_LATEDIFF = [&]() {
+                vector<vector<string>> factors = {
+                {" Mg is neg "," Mg is not neg "},
+                {" CD is high", " CD is not high "},
+                {" BMP is high", " BMP is not high "},
+                {" TGF is not high "," TGF is high "}
+                };
+                vector<string> levels = { "veryhigh", "high", "medium", "low", "verylow" };
+                auto rules = generate_rules(factors, levels, "lateDiff");
+                for (auto& rule : rules) {
+                    mamdani->addRule(Rule::parse(rule.c_str(), engine));
+                }
+                mamdani->addRule(Rule::parse("if damage is high then lateDiff is verylow", engine));
+            };
+            FORMULATE_LATEDIFF();
             /***  mortality ***/
-            mamdani->addRule(Rule::parse(
-                "if health is low"
-                " then Mo is high", engine));
-            mamdani->addRule(Rule::parse(
-                "if health is high"
-                " then Mo is low", engine));
+            auto FORMULATE_MO = [&]() {
+                vector<vector<string>> factors = {
+                    {"Mg is high","Mg is not high"},
+                    {"CD is high or CD is low","CD is medium"},
+                    {"AE is high","AE is not high"},
+                    {"TGF is not high","TGF is high"},
+                    {"BMP is high","BMP is not high"}
+                };
+                vector<string> levels = { "veryhigh", "high", "medium", "low", "verylow" };
+                auto rules = generate_rules(factors, levels, "Mo");
+                for (auto& rule : rules) {
+                    mamdani->addRule(Rule::parse(rule.c_str(), engine));
+                }
+                mamdani->addRule(Rule::parse("if damage is high then Mo is veryhigh", engine));
+            };
+            FORMULATE_MO();
+            /***  HA prod ***/
+            auto FORMULATE_HAPROD = [&]() {
+                vector<vector<string>> factors = {
+                    {"maturity is high","maturity is not high"},
+                    {"Mg is not high","Mg is high"},
+                    {"AE is not high","AE is high"},
+                    {"TGF is not high","TGF is high"},
+                    {"BMP is high","BMP is not high"}
+                };
+                vector<string> levels = { "veryhigh", "high", "medium", "low", "verylow" };
+                auto rules = generate_rules(factors, levels, "HAprod");
+                for (auto& rule : rules) {
+                    mamdani->addRule(Rule::parse(rule.c_str(), engine));
+                }
+                mamdani->addRule(Rule::parse("if damage is high then HAprod is verylow", engine));
+            };
+            FORMULATE_HAPROD();
             /***  migration ***/
             mamdani->addRule(Rule::parse(
                 "if CD is high"
@@ -387,40 +531,33 @@ struct MSC_FUZZY:public base_model {
             mamdani->addRule(Rule::parse(
                 "if CD is not high"
                 " then Mi is low", engine));
+            /***  ECM prod ***/
+            mamdani->addRule(Rule::parse(
+                " if maturity is high and TGF is high"
+                " then ECMprod is veryhigh"
+                , engine));
+            mamdani->addRule(Rule::parse(
+                " if maturity is high and TGF is not high"
+                " then ECMprod is high"
+                , engine));
+            mamdani->addRule(Rule::parse(
+                " if maturity is not high and TGF is high"
+                " then ECMprod is medium"
+                , engine));
+            mamdani->addRule(Rule::parse(
+                " if maturity is not high and TGF is not high"
+                " then ECMprod is low"
+                , engine));
+            mamdani->addRule(Rule::parse(
+                " if damage is high"
+                " then ECMprod is verylow"
+                , engine));
+            
 
+            
+            
             engine->addRuleBlock(mamdani);
 
-            /***  Proliferation ***/
-            
-            auto FORMULATE_PR = [&]() {
-                vector<vector<string>> factors = {
-                {"health is high","health is not high"},
-                {"maturity is low", "maturity is not low"},
-                {"Mg is low", "Mg is not low"},
-                {"CD is not high", "CD is high"},
-                {"age is low","age is not low"},
-                {"DM is not high", "DM is high"} };
-                vector<string> levels = { "veryhigh", "high", "normal", "low", "verylow" };
-                auto rules = generate_rules(factors, levels, "Pr");
-                for (auto& rule : rules) {
-                    mamdani->addRule(Rule::parse(rule.c_str(), engine));
-                }
-            };
-            FORMULATE_PR();
-            auto FORMULATE_DIFF = [&]() {
-                vector<vector<string>> factors = {
-                {"health is high","health is not high"},
-                {"DM is high and Mg is not negligible", "DM is high and Mg is negligible","DM is low and Mg is negligible","DM is low and Mg is not negligible"},
-                {"age is high","age is not high"},
-                {"CD is high", "CD is not high"} };
-                vector<string> levels = { "veryhigh", "high", "normal", "low", "verylow" };
-                auto rules = generate_rules(factors, levels, "Diff");
-                for (auto& rule : rules) {
-                    mamdani->addRule(Rule::parse(rule.c_str(), engine));
-                }
-            };
-            FORMULATE_DIFF();
-            
             auto SELECTIVE_CHECK = [&](){
                 vector<string> target_input = {"CD"};
                 vector<string> target_output = {"Mo"};
@@ -475,5 +612,6 @@ struct MSC_FUZZY:public base_model {
 struct fuzzy{
     fuzzy() {};
     fuzzy(std::string controller_name, std::map<std::string,double> params) ;
-    static std::map<std::string,double> predict(std::map<std::string,double> inputs) ;
+    std::map<std::string,double> predict(std::map<std::string,double> inputs) ;
+    shared_ptr<base_model> fuzzy_model;
 };

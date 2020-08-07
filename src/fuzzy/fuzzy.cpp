@@ -9,7 +9,7 @@ fuzzy::fuzzy(std::string controller_name, std::map<std::string,double> params) {
         }
         if (controller_name == "MSC"){ // initialze for MSC
             auto MSC_model = std::make_shared<MSC_FUZZY>(params_mymap);
-            base_model::fuzzy_model()= MSC_model;
+            this->fuzzy_model= MSC_model;
         }
         else {
             std::cerr<<"Error: No controller is defined for the entered key '"<<controller_name<<"'"<<endl;
@@ -19,7 +19,7 @@ fuzzy::fuzzy(std::string controller_name, std::map<std::string,double> params) {
     }
 std::map<std::string,double> fuzzy::predict(std::map<std::string,double> inputs) { // receives a dictionary that inputs are for each cell type are given
         std::map<std::string,double> outputs;
-        try{outputs = base_model::fuzzy_model()->predict(inputs);}
+        try{outputs = this->fuzzy_model->predict(inputs);}
         catch(invalid_fuzzy_input &e){
             cerr<<e.what()<<endl;
             std::terminate();

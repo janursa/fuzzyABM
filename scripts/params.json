@@ -1,12 +1,12 @@
 {
 
   "B_MSC_rec": 0.003,
-  "B_MSC_Pr": 0.02,
+  "B_MSC_Pr": 0.05,
   "B_MSC_Mo": 0.0015,
   "CD_H_t": 0.88,
-  "MG_H_t": 35.0,
-  "MG_L_t1": 1.0,
-  "MG_L_t2": 3.0,
+  "MG_H_t": 30.0,
+  "MG_L_t": 3.0,
+  "MG_M_t": 3.0,
   "Mg_max": 60.0,
   "DM_max": 1,
   "Mo_H_v": 2,
@@ -14,7 +14,8 @@
   "w_lactate_ph": 0.01,
   "AGE_H_t": 100,
   "AE_a_coeff": 6.19,
-  "pH_t": 9
+  "pH_t": 9,
+  "maturity_t":  0.5
 
 
 }

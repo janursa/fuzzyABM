@@ -6,22 +6,24 @@
 using json = nlohmann::json;
 
 
-fuzzy initialize() {
+shared_ptr<fuzzy> initialize() {
     string params_dir = "D:/projects/ABM/scripts/params.json";
     std::ifstream  params_file(params_dir);
     json params_json = json::parse(params_file);
     map<string, double> params = params_json;
-    auto fuzzy_obj = fuzzy("MSC", params);
-    return fuzzy_obj;
+    auto fuzzy_ptr = make_shared<fuzzy>("MSC", params);
+    std::string status;
+    auto flag = fuzzy_ptr->fuzzy_model->engine->isReady(&status);
+    return fuzzy_ptr;
 }
 
 
 TEST_CASE("Validity for the whole range of inputs", "[main]") {
     auto fuzzy_obj = initialize();
-    vector<string> target_input = { "CD","Mg","AE","age","DM"};
-    vector<string> target_output = { "Mo","Mi","Pr","Diff" };
+    vector<string> target_input = { "damage","Mg","AE","BMP","TGF","maturity","CD"};
+    vector<string> target_output = {"HAprod"};
     map<string, double> non_target_inputs = { };
-    unsigned steps = 5;
+    unsigned steps = 3;
     map<string, double> inputs = {};
 
     std::function<void(unsigned)> RECURSIVE = [&](unsigned j) {
@@ -37,7 +39,7 @@ TEST_CASE("Validity for the whole range of inputs", "[main]") {
                  //cout<<" CD :" << inputs["CD"]<<" Mg :" << inputs["Mg"]<<" AE :" << inputs["AE"]<< " ";
                 //json jj2(inputs);
                 //cout << "inputs" << setw(4) << jj2 << endl;
-                auto results = fuzzy_obj.predict(inputs);
+                auto results = fuzzy_obj->predict(inputs);
                 //json jj(results);
                 //cout << "results"<< setw(4) << jj << endl;
             }
@@ -87,15 +89,15 @@ SCENARIO("Validity for different CD values", "[CDs]") {
         auto result_2 = fuzzy_obj.predict(inputs_2);
         auto result_3 = fuzzy_obj.predict(inputs_3);
         WHEN("High CD") {
-            THEN("Higher mortality compared to normal") {
+            THEN("Higher mortality compared to medium") {
                 REQUIRE(result_3["Mo"] > result_2["Mo"]);
             }
-            THEN("Higher migration compared to normal") {
+            THEN("Higher migration compared to medium") {
                 REQUIRE(result_3["Mi"] > result_2["Mi"]);
             }
         };
         WHEN("Low CD") {
-            THEN("higher mortality compared to normal") {
+            THEN("higher mortality compared to medium") {
                 REQUIRE(result_1["Mo"] > result_2["Mo"]);
             };
 
@@ -113,10 +115,10 @@ SCENARIO("Validity for different AE values", "[AEs]") {
         json jj(result_2);
         cout << setw(4) << jj << endl;
         WHEN("High AE") {
-            THEN("Higher mortality compared to normal") {
+            THEN("Higher mortality compared to medium") {
                 REQUIRE(result_2["Mo"] > result_1["Mo"]);
             }
-            THEN("Lower Pr compared to normal") {
+            THEN("Lower Pr compared to medium") {
                 REQUIRE(result_2["Pr"] < result_1["Pr"]);
             }
         };
@@ -130,7 +132,7 @@ SCENARIO("Validity for different age values", "[ages]") {
         auto result_1 = fuzzy_obj.predict(inputs_1);
         auto result_2 = fuzzy_obj.predict(inputs_2);
         WHEN("High age") {
-            THEN("lower Pr compared to normal") {
+            THEN("lower Pr compared to medium") {
                 REQUIRE(result_2["Pr"] < result_1["Pr"]);
             }
         };

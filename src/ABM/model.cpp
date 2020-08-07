@@ -20,9 +20,9 @@ double myPatch::lactate(){
 	}
 void myPatch::step(){
 	auto pH_new = this->pH();
-	auto new_lactate = this->lactate();
+	//auto new_lactate = this->lactate();
 	this->data["pH"] = pH_new;
-	this->data["lactate"] = new_lactate;
+	//this->data["lactate"] = new_lactate;
 	this->data["agent_density"] = this->find_neighbor_agents(true).size()/9.0;
 }
 
@@ -38,15 +38,18 @@ bool MSC::mortality(double Mo){
 	}
 bool MSC::proliferation(double Pr){
 	auto logic_function = [](double x) {
-		return (1.0 / (1.0 + exp(-8.0 * (x - 0.5))));
+		return (2.0 / (1.0 + exp(-8.0 * (x - 0.5))));
 	};
-	auto normOrder = this->params.at("Pr_N_v");
 	auto baseChance = this->params.at("B_MSC_Pr");
-	auto modified_baseChance = 2*baseChance * logic_function(this->data["clock"]);
-	//cout << modified_baseChance << endl;
-	auto change =(Pr / normOrder) * modified_baseChance;
+	auto internal_clock = this->data["clock"] * baseChance;
+	if (internal_clock > 1) internal_clock = 1;
+	auto adj_coeff = logic_function(internal_clock);
+	auto modified_baseChance = baseChance * adj_coeff;
+	
+	auto chance =Pr * modified_baseChance;
 	auto pick = tools::random(0,1);
-	if (pick < change)
+	//cout << "internal_clock:"<< internal_clock <<" adj_coeff: "<< adj_coeff<<" modified:"<< modified_baseChance <<" pr: "<<Pr<<" chance: "<< chance << endl;
+	if (pick < chance)
 		return true;
 	else
 		return false;
@@ -68,8 +71,9 @@ double MSC::alkalinity(){
 		return AE;
 	}
 double MSC::adaptation(){
-	if (this->damage) return; // not recovery for permanent damage
 		auto adapted_pH = this->data.at("pH");
+		if (this->damage) return adapted_pH; // not recovery for permanent damage
+
 		auto env_pH = this->patch->get_data("pH");
 		double new_adapted_pH = 0;
 		auto adaptation_rate = this->params.at("B_MSC_rec");
@@ -90,14 +94,16 @@ bool MSC::migration(double Mi){
 void MSC::step(){
 	// policy's inputs
 	auto policy_inputs = this->collect_policy_inputs();
-	json jj(policy_inputs);
-	cout << setw(4) << jj << endl;
+	//json jj(policy_inputs);
+	//cout << setw(4) << jj << endl;
 	auto predictions = this->run_policy(policy_inputs);
 	// functions
 	auto die = this->mortality(predictions["Mo"]);
 	auto hatch = this->proliferation(predictions["Pr"]);
 	auto walk = this->migration(predictions["Mi"]);
-
+	auto diff = this->differentiation(predictions["earlyDiff"], predictions["lateDiff"]);
+	bone_production(predictions["ECMprod"], predictions[ "HAprod"]);
+	GF_production();
 	if (walk)
 		this->order_move(/**patch**/nullptr, /* quiet */ true,/** reset**/ true);
 	if (hatch)
@@ -110,6 +116,29 @@ void MSC::step(){
 	this->data["MI"] = MI;
 	this->data["pH"] = adapted_ph;
 };
+bool MSC::differentiation(double earlyDiff, double lateDiff) {
+	// TODO: update maturity
+	if (this->data["maturity"] < this->params["maturity_t"]) { // early maturation
+		// earlyDiff
+	}
+	else {
+		// lateDiff
+	}
+}
+void MSC::bone_production(double f_ECM, double f_HA) {
+
+
+}
+void MSC::GF_production() {
+	// BMP
+	auto a_BMP = 15.0;
+	auto a_BMP_0 = 0.01;
+	auto b_ECM = 2.0 * 0.000000001 / (24); // TODO: check the training data and possibly modify the rate
+
+	double k = (b_ECM / (a_BMP * this->data["BMP"] + a_BMP_0));
+	this->data["BMP"] += k;
+	
+}
 double myEnv::collect_from_patches(string tag){
     double result = 0;
     for (auto const &[index,patch]: this->patches){
@@ -121,11 +150,12 @@ map<string,double> MSC::collect_policy_inputs(){
 		auto AE = this->alkalinity();
 		auto CD = this->patch->get_data("agent_density");
 		auto Mg = this->patch->get_data("Mg")/this->params.at("Mg_max");
-		auto age = this->data["age"] / this->params.at("AGE_H_t");
 		auto maturity = this->data["maturity"] ; // maturity indeex
-		auto DM = this->patch->get_data("DM") / this->params.at("DM_max");
-		map<string, double> policy_inputs = { {"AE",AE} , {"Mg",Mg} , {"CD", CD} , {"age", age} ,
-			{"maturity", maturity} , {"DM",DM} };
+		auto TGF = this->patch->get_data("TGF");
+		double BMP = this->patch->get_data("BMP");
+		float damage = this->damage;
+		map<string, double> policy_inputs = { {"AE",AE} , {"Mg",Mg} , {"CD", CD} , {"TGF", TGF} ,
+			{"maturity", maturity} , {"BMP",BMP},{"damage",damage} };
 		return policy_inputs;
 	}
 void MSC::update(){
@@ -138,10 +168,16 @@ void myEnv::update(){
 	}
 }
 void myPatch::initialize(){
-		for (auto const &[key,value]:this->initial_conditions){
-			this->data[key] = value;
-		}
+	initial_conditions["BMP"] = 0;
+	initial_conditions["TGF"] = 0;
+	initial_conditions["agent_density"] = 0;
+	initial_conditions["lactate"] = 0;
+	initial_conditions["ECM"] = 0;
+	initial_conditions["HA"] = 0;
+	for (auto const &[key,value]:this->initial_conditions){
+		this->data[key] = value;
 	}
+}
 double myPatch::pH(){
 		auto mg = this->data.at("Mg");
 		auto lactate = this->data.at("lactate");
@@ -165,10 +201,13 @@ void MSC::inherit(shared_ptr<Agent> father){
 		
 	}
 void MSC::initialize(map<string,double> initial_conditions){
-		for (auto const &[key,value]:initial_conditions){
-			this->data[key] = value;
-		}
+	initial_conditions["pH"] = 7.8;
+	initial_conditions["clock"] = 0;
+	initial_conditions["maturity"] = 0;
+	for (auto const &[key,value]:initial_conditions){
+		this->data[key] = value;
 	}
+}
 shared_ptr<Patch> myEnv::generate_patch(){
 		map<string,double> initial_conditions = py::cast<map<string,double>>(this->settings["setup"]["patch"]["attrs"]);
 		auto patch_obj = make_shared<myPatch>(this->get_ptr(), this->params,

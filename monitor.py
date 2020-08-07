@@ -17,8 +17,23 @@ settings = {
 		    "graph_type" : 'lines',
 		    'x-axis-moves': False
 		   },
-    "lactate": {
-        "graph_dir" : "./build/outputs/lactate.csv",
+    "TGF": {
+        "graph_dir" : "./build/outputs/TGF.csv",
+        "graph_type" : 'lines',
+        'x-axis-moves': False
+       },
+    "BMP": {
+        "graph_dir" : "./build/outputs/BMP.csv",
+        "graph_type" : 'lines',
+        'x-axis-moves': False
+       },
+    "ECM": {
+        "graph_dir" : "./build/outputs/ECM.csv",
+        "graph_type" : 'lines',
+        'x-axis-moves': False
+       },
+    "HA": {
+        "graph_dir" : "./build/outputs/HA.csv",
         "graph_type" : 'lines',
         'x-axis-moves': False
        }

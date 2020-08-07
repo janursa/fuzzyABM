@@ -116,9 +116,18 @@ class ABM(myEnv):
 		## average ph on patches
 		pH_mean = self.collect_from_patches("pH")/len(self.patches)
 		add("pH",pH_mean)
-		## average lactate
-		lactate = self.collect_from_patches("lactate")
-		add("lactate",lactate)
+		## BMP
+		BMP = self.collect_from_patches("BMP")
+		add("BMP",BMP)
+		## TGF
+		TGF = self.collect_from_patches("TGF")
+		add("TGF",TGF)
+		## ECM
+		ECM = self.collect_from_patches("ECM")
+		add("ECM",ECM)
+		## HA
+		HA = self.collect_from_patches("HA")
+		add("HA",HA)
 		## output 
 		self.output()
 
@@ -335,9 +344,18 @@ class ABM(myEnv):
 		## average pH 
 		df_pH = df[["pH"]]
 		df_pH.to_csv('outputs/pH.csv')
-		## lactate
-		lactate = df[["lactate"]]
-		lactate.to_csv('outputs/lactate.csv')
+		## TGF
+		lactate = df[["TGF"]]
+		lactate.to_csv('outputs/TGF.csv')
+		## BMP
+		lactate = df[["BMP"]]
+		lactate.to_csv('outputs/BMP.csv')
+		## ECM
+		lactate = df[["ECM"]]
+		lactate.to_csv('outputs/ECM.csv')
+		## HA
+		lactate = df[["HA"]]
+		lactate.to_csv('outputs/HA.csv')
 	def refresh(self):
 		for [key,patch] in self.patches.items():
 			patch.initialize()
