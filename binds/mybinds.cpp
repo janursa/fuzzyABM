@@ -19,12 +19,13 @@ PYBIND11_MODULE(myBinds, m) {
     myEnv_binds.def("collect_from_patches",&myEnv::collect_from_patches);
     // myEnv_binds.def("set_settings",&myEnv::set_settings);
     myEnv_binds.def("set_params",&myEnv::set_params);
+    myEnv_binds.def("construct_policy", &myEnv::construct_policy);
 	/** Agent **/
     // MSC
     // expose_base_agent(m);
     auto MSC_binds = expose_agent<MSC,PyMSC<MSC>>(m,"MSC");
     MSC_binds.def("mortality",&MSC::mortality);
-    MSC_binds.def(py::init<shared_ptr<Env>,
+    MSC_binds.def(py::init<shared_ptr<myEnv>,
                     string,
                     std::map<string,double>,
                     std::map<string,double>>(),

@@ -27,26 +27,27 @@ void myPatch::step(){
 }
 
 bool MSC::mortality(double Mo){
-		auto maxOrder = this->params.at("Mo_H_v");
+		auto a_Mo = this->params.at("a_Mo");
 		auto baseChance = this->params.at("B_MSC_Mo");
-		auto change =(1+Mo*maxOrder) * baseChance;
+		auto a_Pr = this->params.at("a_Pr_Mo");
+		auto change =(1+ a_Pr*this->cycled)*(1+Mo* a_Mo) * baseChance;
+		this->cycled = false;
 		auto pick = tools::random(0,1);
 		if (pick < change)
 			return true;
 		else
 			return false;
 	}
+
 bool MSC::proliferation(double Pr){
-	auto logic_function = [](double x) {
-		return (2.0 / (1.0 + exp(-8.0 * (x - 0.5))));
-	};
+	
 	auto baseChance = this->params.at("B_MSC_Pr");
-	auto internal_clock = this->data["clock"] * baseChance;
+	auto internal_clock = this->data["Pr_clock"] * baseChance;
 	if (internal_clock > 1) internal_clock = 1;
 	auto adj_coeff = logic_function(internal_clock);
 	auto modified_baseChance = baseChance * adj_coeff;
 	
-	auto chance =Pr * modified_baseChance;
+	auto chance =Pr * this->params.at("a_Pr")* modified_baseChance;
 	auto pick = tools::random(0,1);
 	//cout << "internal_clock:"<< internal_clock <<" adj_coeff: "<< adj_coeff<<" modified:"<< modified_baseChance <<" pr: "<<Pr<<" chance: "<< chance << endl;
 	if (pick < chance)
@@ -101,7 +102,7 @@ void MSC::step(){
 	auto die = this->mortality(predictions["Mo"]);
 	auto hatch = this->proliferation(predictions["Pr"]);
 	auto walk = this->migration(predictions["Mi"]);
-	auto diff = this->differentiation(predictions["earlyDiff"], predictions["lateDiff"]);
+	this->differentiation(predictions["earlyDiff"], predictions["lateDiff"]);
 	bone_production(predictions["ECMprod"], predictions[ "HAprod"]);
 	GF_production();
 	if (walk)
@@ -116,14 +117,20 @@ void MSC::step(){
 	this->data["MI"] = MI;
 	this->data["pH"] = adapted_ph;
 };
-bool MSC::differentiation(double earlyDiff, double lateDiff) {
+void MSC::differentiation(double earlyDiff, double lateDiff) {
 	// TODO: update maturity
+	if (this->data["maturity"] >= 1) return;
+	auto base_rate = this->params["B_MSC_Diff"];
+	double f_diff;
 	if (this->data["maturity"] < this->params["maturity_t"]) { // early maturation
-		// earlyDiff
+		f_diff = earlyDiff;
 	}
 	else {
-		// lateDiff
+		f_diff = lateDiff;
 	}
+	auto adj_rate = f_diff  * this->params["a_Diff"]* base_rate;
+	cout  <<" base_rate: " << base_rate  << " f_diff: " << f_diff << " adj_rate: " << adj_rate << " maturity: " << this->data["maturity"] << endl;
+	this->data["maturity"] += adj_rate;
 }
 void MSC::bone_production(double f_ECM, double f_HA) {
 
@@ -159,7 +166,7 @@ map<string,double> MSC::collect_policy_inputs(){
 		return policy_inputs;
 	}
 void MSC::update(){
-	this->data["clock"] += 1;
+	this->data["Pr_clock"] += 1;
 }
 void myEnv::update(){
 	Env::update();
@@ -186,13 +193,14 @@ double myPatch::pH(){
 		return pH_new;
 	}
 void MSC::inherit(shared_ptr<Agent> father){
+	this->cycled = true;
 		for (auto const&[key,value]:this->data){
 			this->data[key] = father->get_data(key);
 			if (key == "age") {
 				this->data[key] += 1;
 				father->set_data(key, this->data[key]);
 			}
-			else if (key == "clock") {
+			else if (key == "Pr_clock") {
 				this->data[key] = 0;
 				father->set_data(key, 0);
 			}
@@ -202,7 +210,7 @@ void MSC::inherit(shared_ptr<Agent> father){
 	}
 void MSC::initialize(map<string,double> initial_conditions){
 	initial_conditions["pH"] = 7.8;
-	initial_conditions["clock"] = 0;
+	initial_conditions["Pr_clock"] = 0;
 	initial_conditions["maturity"] = 0;
 	for (auto const &[key,value]:initial_conditions){
 		this->data[key] = value;

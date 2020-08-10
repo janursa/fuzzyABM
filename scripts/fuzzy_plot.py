@@ -2,6 +2,9 @@
 import numpy as np
 import skfuzzy as fuzz
 import matplotlib.pyplot as plt
+import pathlib as pl
+import os
+current_dir = pl.Path(__file__).parent.absolute()
 
 def plot_BMP():
     range = np.arange(0, 100, .5)
@@ -39,7 +42,7 @@ def plot_BMP():
     ax.get_yaxis().tick_left()
 
     plt.tight_layout()
-    plt.savefig("BMP.png")
+    plt.savefig( os.path.join(current_dir,"BMP.png"))
 plot_BMP()
 
 def plot_TGF():
@@ -75,7 +78,7 @@ def plot_TGF():
     ax.get_yaxis().tick_left()
 
     plt.tight_layout()
-    plt.savefig("TGF.png")
+    plt.savefig( os.path.join(current_dir,"TGF.png"))
 plot_TGF()
 def plot_MG():
     range = np.arange(0, 60, .5)
@@ -115,7 +118,7 @@ def plot_MG():
     ax.get_yaxis().tick_left()
 
     plt.tight_layout()
-    plt.savefig("Mg.png")
+    plt.savefig( os.path.join(current_dir,"Mg.png"))
 plot_MG()
 
 def plot_AE():
@@ -146,7 +149,7 @@ def plot_AE():
     ax.get_yaxis().tick_left()
 
     plt.tight_layout()
-    plt.savefig("AE.png")
+    plt.savefig( os.path.join(current_dir,"AE.png"))
 plot_AE()
 
 
@@ -154,10 +157,9 @@ def plot_CD():
     range = np.arange(0, 9, 1)
 
     # Generate fuzzy membership functions
-    low = fuzz.trapmf(range, [0,0,2,3])
-    medium = fuzz.trapmf(range, [2,3,5,7])
+    low = fuzz.trapmf(range, [0,0,1,2])
+    medium = fuzz.trapmf(range, [1,2,5,7])
     high = fuzz.trapmf(range, [5,7,8,8])
-
 
 
     # Visualize these universes and membership functions
@@ -167,20 +169,16 @@ def plot_CD():
     ax.plot(range, medium, 'g', linewidth=1.5, label='Medium')
     ax.plot(range, high, 'r', linewidth=1.5, label='High')
     #ax.set_title('BMP membership')
-    ax.set_xticks([0, 2, 3,5,7,8]) 
-    ax.set_xticklabels([0, 2, 3,r'$CD_{h}$-1',r'$CD_{h}$',8])
+    ax.set_xticks([0, 1, 2,5,7,8]) 
+    ax.set_xticklabels([0, 1, 2,r'$CD_{h}$-1',r'$CD_{h}$',8])
     ax.set_ylabel('Membership')
     ax.set_xlabel('Neighbor cells count')
     ax.legend()
-
-
     # Turn off top/right axes
-
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.get_xaxis().tick_bottom()
     ax.get_yaxis().tick_left()
-
     plt.tight_layout()
-    plt.savefig("CD.png")
+    plt.savefig( os.path.join(current_dir,"CD.png"))
 plot_CD()

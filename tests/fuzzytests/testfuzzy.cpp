@@ -20,14 +20,22 @@ shared_ptr<fuzzy> initialize() {
 
 TEST_CASE("Validity for the whole range of inputs", "[main]") {
     auto fuzzy_obj = initialize();
-    vector<string> target_input = { "damage","Mg","AE","BMP","TGF","maturity","CD"};
-    vector<string> target_output = {"HAprod"};
-    map<string, double> non_target_inputs = { };
-    unsigned steps = 3;
-    map<string, double> inputs = {};
+    /*map<string, double> inputs = { {"Mg", 0}, { "BMP", 1}, { "TGF",1 }, { "CD",0 }, 
+        
+        { "damage", 0 }, { "maturity",0 }, { "AE",0 } };
 
+    auto results = fuzzy_obj->predict(inputs);
+    cout << "results" << setw(4) << results["earlyDiff"] << endl;*/
+    vector<string> target_input = { "Mg","BMP","TGF","CD","damage","maturity" ,"AE" };
+    vector<string> target_output = {"earlyDiff"};
+    map<string, double> non_target_inputs = {};
+    unsigned steps = 5;
+    
+    map<string, double> inputs = {};
+    for (auto& [key, value] : non_target_inputs) {
+        inputs[key] = value;
+    }
     std::function<void(unsigned)> RECURSIVE = [&](unsigned j) {
-        // cout<<"j "<<j <<endl;
         for (unsigned i = 0; i <= steps; i++) {
             auto input_tag = target_input[target_input.size() - j];
             auto value = i * 1.0 / steps; // assuming that it starts from 0 and has a range of 1
@@ -36,12 +44,14 @@ TEST_CASE("Validity for the whole range of inputs", "[main]") {
                 RECURSIVE(j - 1);
             }
             else {
-                 //cout<<" CD :" << inputs["CD"]<<" Mg :" << inputs["Mg"]<<" AE :" << inputs["AE"]<< " ";
+                cout << " CD :" << inputs["CD"] << " Mg :" << inputs["Mg"] << " TGF :" << inputs["TGF"] << " BMP :" << inputs["BMP"] <<
+                    " damage :" << inputs["damage"]<< " maturity :" << inputs["maturity"] << " AE :" << inputs["AE"] <<endl;
+                
                 //json jj2(inputs);
                 //cout << "inputs" << setw(4) << jj2 << endl;
                 auto results = fuzzy_obj->predict(inputs);
-                //json jj(results);
-                //cout << "results"<< setw(4) << jj << endl;
+                json jj(results);
+                cout << "results"<< setw(4) << jj["earlyDiff"] << endl;
             }
         };
     };

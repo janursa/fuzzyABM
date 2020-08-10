@@ -2,8 +2,36 @@
 #include "CPPYABM/include/ABM/bases.h"
 #include "tools.h"
 #include "fuzzy/fuzzy.h"
+
 using namespace std;
 struct Patch;
+struct myEnv : public Env {
+	/** Env data **/
+	
+	void construct_policy() {
+		try {
+			this->policy = make_shared<fuzzy>("MSC", this->params);
+		}
+		catch (invalid_fuzzy_definition& e) {
+			throw e;
+
+		}
+	}
+	using param_type = map<string, double>;
+	double collect_from_patches(string tag);
+	void set_settings(py::dict settings_) {
+		this->settings = settings_;
+	}
+	void set_params(param_type params_) {
+		this->params = params_;
+	}
+	virtual shared_ptr<Patch> generate_patch();
+	virtual void update();
+	py::dict settings;
+	param_type params;
+	shared_ptr<fuzzy> policy;
+
+};
 struct Dead: public Agent{
 	Dead(shared_ptr<Env> env , string class_name)
 	try: Agent(env,class_name){
@@ -15,19 +43,13 @@ struct Dead: public Agent{
 
 };
 struct MSC : public Agent{
-	MSC(shared_ptr<Env> env , string class_name, 
+	MSC(shared_ptr<myEnv> env , string class_name, 
 		std::map<string,double> params_,std::map<string,double> initial_conditions)
 	try: Agent(env,class_name){
 		this->params = params_;
 		this->initial_conditions = initial_conditions;
 		this->initialize(initial_conditions);
-		try {
-			this->policy = make_shared<fuzzy>("MSC", this->params);
-		}
-		catch (invalid_fuzzy_definition &e) {
-			throw e;
-			
-		}
+		myenv = env;
 		
 	}catch(...){
 		cerr<<"Error in the construction of MSC";
@@ -41,7 +63,7 @@ struct MSC : public Agent{
 	bool mortality(double Mo);
 	double adaptation();
 	double alkalinity();
-	bool differentiation(double , double);
+	void differentiation(double , double);
 	void bone_production(double, double); // for ECM and minerals
 	void GF_production(); // for BMP and TGF
 
@@ -59,29 +81,19 @@ struct MSC : public Agent{
 	map<string,double> data;
 	virtual void reward() {};
 	virtual void update();
-	shared_ptr<fuzzy> policy;
+	
 	virtual std::map<string, double> run_policy(std::map<string, double> inputs) {
-		auto predictions = this->policy->predict(inputs);
+		auto predictions = this->myenv->policy->predict(inputs);
 		return predictions;
 	}
+	double logic_function(double x) {
+		return (2.0 / (1.0 + exp(-8.0 * (x - 0.5))));
+	};
+	shared_ptr<myEnv> myenv;
 	bool damage = false;
+	bool cycled = false; // is true if cell just did mitosis
 };
-struct myEnv : public Env{
-	/** Env data **/
-	using param_type = map<string,double>;
-   double collect_from_patches(string tag);
-   void set_settings(py::dict settings_){
-   		this->settings = settings_;
-   }
-   void set_params(param_type params_){
-   		this->params = params_;
-   }
-   virtual shared_ptr<Patch> generate_patch();
-   virtual void update();
-   py::dict settings;
-   param_type params;
 
-};
 struct myPatch : public Patch{
 	myPatch(shared_ptr<Env> env,std::map<string,double> params_,std::map<string,double> initial_conditions)
 	try: Patch(env){

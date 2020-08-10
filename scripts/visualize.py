@@ -6,7 +6,7 @@ settings = {
             "graph_dir" : "/Users/matin/Downloads/testProjs/ABM/build/outputs/scatter.csv",
             "graph_type" : 'scatter',
             "graph_size" : 800
-           }
+           },
     "agents_traj": {
             "graph_dir" : "/Users/matin/Downloads/testProjs/ABM/build/outputs/agents_traj.csv",
             "graph_type" : 'lines',

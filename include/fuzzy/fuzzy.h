@@ -146,8 +146,8 @@ struct MSC_FUZZY:public base_model {
         engine->setDescription("");
         // cell density: 3 levels
         auto INPUT_CELLDENSITY = [&]() {
-            std::vector<double> low{0, 0, 0.22, 0.33};
-            std::vector<double> medium{ 0.22, 0.33,params["CD_H_t"]-0.11, params["CD_H_t"]};
+            std::vector<double> low{0, 0, 0.111, 0.222};
+            std::vector<double> medium{ 0.111, 0.222,params["CD_H_t"]-0.11, params["CD_H_t"]};
             std::vector<double> high{ params["CD_H_t"] - 0.11, params["CD_H_t"], 1, 1};
 
             check_range(low); check_range(medium); check_range(high);
@@ -441,29 +441,34 @@ struct MSC_FUZZY:public base_model {
             mamdani->setImplication(new Minimum);
             mamdani->setActivation(new General);
             /***  Proliferation ***/
+            
             auto FORMULATE_PR = [&]() {
                 // factors are organized in (favourable , non-favourable) formats
                 vector<vector<string>> factors = {
-                {"maturity is low", "maturity is not low"},
                 {"Mg is low", "Mg is not low"},
-                {"CD is not high", "CD is high"},
-                {"AE is low","AE is not low"},
                 {"BMP is low", "BMP is neg","BMP is high"},
                 {"TGF is low", "TGF is not low"} };
-                vector<string> levels = { "veryhigh", "high", "medium", "low", "verylow" };
-                auto rules = generate_rules(factors, levels, "Pr");
-                for (auto& rule : rules) {
-                    //cout << rule << endl;
-                    mamdani->addRule(Rule::parse(rule.c_str(), engine));
-                }
-                mamdani->addRule(Rule::parse("if damage is high then Pr is verylow", engine));
+
+                mamdani->addRule(Rule::parse("if (damage is not high and CD is not high and AE is not high and maturity is low) "
+                    " and Mg is low and BMP is low and TGF is low "
+                    " then Pr is veryhigh", engine));
+                mamdani->addRule(Rule::parse("if (damage is not high and CD is not high and AE is not high and maturity is low) "
+                    " and (Mg is low and BMP is low and TGF is not low) or (Mg is low and BMP is not low and TGF is low) or (Mg is not low and BMP is low and TGF is low) "
+                    " then Pr is high", engine));
+                mamdani->addRule(Rule::parse("if (damage is not high and CD is not high and AE is not high and maturity is low) "
+                    " and (Mg is low and BMP is not low and TGF is not low) or (Mg is not low and BMP is not low and TGF is low) or (Mg is not low and BMP is low and TGF is not low) "
+                    " then Pr is medium", engine));
+                mamdani->addRule(Rule::parse("if (damage is not high and CD is not high and AE is not high) "
+                    " and (maturity is high or (Mg is not low and BMP is not low and TGF is not low) )"
+                    " then Pr is low", engine));
+                mamdani->addRule(Rule::parse("if damage is high or CD is high or AE is high then Pr is verylow", engine));
             };
             FORMULATE_PR();
             
-            auto FORMULATE_EARLYDIFF = [&]() {
+            /*auto FORMULATE_EARLYDIFF = [&]() {
                 vector<vector<string>> factors = {
-                {" Mg is low "," Mg is not low "},
                 {" CD is high", " CD is not high "},
+                 {" Mg is low "," Mg is not low "},
                 {" BMP is high", " BMP is not high "},
                 {" TGF is high "," TGF is not high "} 
                 };
@@ -473,23 +478,62 @@ struct MSC_FUZZY:public base_model {
                     mamdani->addRule(Rule::parse(rule.c_str(), engine));
                 }
                 mamdani->addRule(Rule::parse("if damage is high then earlyDiff is verylow", engine));
+            };*/
+            auto FORMULATE_DIFF = [&](vector<vector<string>> factors,string key) {
+                
+                // very high : all 4
+                string set_VH = factors[0][0] + " and " + factors[1][0] + " and " + factors[2][0] + " and " + factors[3][0];
+                string rule = " if damage is not high and " + set_VH +
+                    " then " + key + " is veryhigh";
+                mamdani->addRule(Rule::parse(rule.c_str(), engine));
+                // high: any 3
+                string set_H1 = " ( "+factors[0][0] + " and " + factors[1][0] + " and " + factors[2][0] + " and " + factors[3][1]+" ) ";
+                string set_H2 = " ( " + factors[0][0] + " and " + factors[1][0] + " and " + factors[2][1] + " and " + factors[3][0] + " ) ";
+                string set_H3 = " ( " + factors[0][0] + " and " + factors[1][1] + " and " + factors[2][0] + " and " + factors[3][0] + " ) ";
+                string set_H4 = " ( " + factors[0][1] + " and " + factors[1][0] + " and " + factors[2][0] + " and " + factors[3][0] + " ) ";
+                rule = " if damage is not high and ( " + set_H1 + " or " + set_H2 + " or " + set_H3 + " or " + set_H4 +
+                    " ) then  " + key + " is high";
+                mamdani->addRule(Rule::parse(rule.c_str(), engine));
+                // medium: any 2
+                string set_M1 = " ( " + factors[0][0] + " and " + factors[1][0] + " and " + factors[2][1] + " and " + factors[3][1] + " ) ";
+                string set_M2 = " ( " + factors[0][0] + " and " + factors[1][1] + " and " + factors[2][1] + " and " + factors[3][0] + " ) ";
+                string set_M3 = " ( " + factors[0][0] + " and " + factors[1][1] + " and " + factors[2][0] + " and " + factors[3][1] + " ) ";
+                string set_M4 = " ( " + factors[0][1] + " and " + factors[1][1] + " and " + factors[2][0] + " and " + factors[3][0] + " ) ";
+                string set_M5 = " ( " + factors[0][1] + " and " + factors[1][0] + " and " + factors[2][1] + " and " + factors[3][0] + " ) ";
+                string set_M6 = " ( " + factors[0][1] + " and " + factors[1][0] + " and " + factors[2][0] + " and " + factors[3][1] + " ) ";
+                rule = " if damage is not high and ( " + set_M1 + " or " + set_M2 + " or " + set_M3 + " or " + set_M4 + " or " + set_M5 + " or " + set_M6 +
+                    " ) then " + key + " is medium";
+                mamdani->addRule(Rule::parse(rule.c_str(), engine));
+                // low: any 1
+                string set_L1 = " ( " + factors[0][0] + " and " + factors[1][1] + " and " + factors[2][1] + " and " + factors[3][1] + " ) ";
+                string set_L2 = " ( " + factors[0][1] + " and " + factors[1][0] + " and " + factors[2][1] + " and " + factors[3][1] + " ) ";
+                string set_L3 = " ( " + factors[0][1] + " and " + factors[1][1] + " and " + factors[2][0] + " and " + factors[3][1] + " ) ";
+                string set_L4 = " ( " + factors[0][1] + " and " + factors[1][1] + " and " + factors[2][1] + " and " + factors[3][0] + " ) ";
+                rule = " if damage is not high and ( " + set_L1 + " or " + set_L2 + " or " + set_L3 + " or " + set_L4 +
+                    " ) then " + key + " is low";
+                mamdani->addRule(Rule::parse(rule.c_str(), engine));
+                // verylow: none or damage
+                rule = " if damage is not high and ( " + factors[0][1] + " and " + factors[1][1] + " and " + factors[2][1] + " and " + factors[3][1] +
+                    " ) then " + key + " is verylow";
+                mamdani->addRule(Rule::parse(rule.c_str(), engine));
+
+                mamdani->addRule(Rule::parse("if damage is high then " + key + " is verylow", engine));
             };
-            FORMULATE_EARLYDIFF();
-            auto FORMULATE_LATEDIFF = [&]() {
-                vector<vector<string>> factors = {
-                {" Mg is neg "," Mg is not neg "},
+            vector<vector<string>> earlyDiff_factors = {
                 {" CD is high", " CD is not high "},
-                {" BMP is high", " BMP is not high "},
-                {" TGF is not high "," TGF is high "}
-                };
-                vector<string> levels = { "veryhigh", "high", "medium", "low", "verylow" };
-                auto rules = generate_rules(factors, levels, "lateDiff");
-                for (auto& rule : rules) {
-                    mamdani->addRule(Rule::parse(rule.c_str(), engine));
-                }
-                mamdani->addRule(Rule::parse("if damage is high then lateDiff is verylow", engine));
+                 {" Mg is low "," Mg is not low "},
+                {" BMP is not neg", " BMP is neg "},
+                {" TGF is not neg "," TGF is neg "}
             };
-            FORMULATE_LATEDIFF();
+            FORMULATE_DIFF(earlyDiff_factors,"earlyDiff");
+            vector<vector<string>> lateDiff_factors = {
+                {" CD is high", " CD is not high "},
+                 {" Mg is neg "," Mg is not neg " },
+                {" BMP is not neg", " BMP is neg "},
+                {"  TGF is neg "," TGF is not neg  "}
+            };
+            FORMULATE_DIFF(lateDiff_factors, "lateDiff");
+            
             /***  mortality ***/
             auto FORMULATE_MO = [&]() {
                 vector<vector<string>> factors = {

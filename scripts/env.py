@@ -34,6 +34,7 @@ class ABM(myEnv):
 		for key,value in free_params.items():
 			self.params[key] = value
 		self.set_params(self.params) # sends it to c++
+		self.construct_policy()
 		## specific settings
 		self.run_mode = run_mode  ## other options are test and RL
 		self.medium_change_interval = 60 ## 2.5 days
