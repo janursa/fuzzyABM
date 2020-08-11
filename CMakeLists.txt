@@ -9,6 +9,8 @@ SET(APP "appABM")
 SET(BINDSMODULE "myBinds")
 SET(FUZZYLITE "fuzzylite")
 SET(FUZZYLIB "fuzzy")
+SET(DIFFUSIONLIB "diffusion")
+SET(APPDIFFUSION "appDiffusion")
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -45,6 +47,16 @@ if(NOT json_POPULATED)
   FetchContent_Populate(json)
   add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)
 endif()
+
+if (DEALII)
+	FIND_PACKAGE(deal.II 9.1.0 REQUIRED
+	HINTS ${DEALII_DIR}/build ../ ../../ $ENV{DEALII_DIR}/build
+	)
+	DEAL_II_INITIALIZE_CACHED_VARIABLES()
+	include_directories(${DEALII_DIR}/include)
+	add_definitions(-DDEALII)
+endif(DEALII)
+
 
 add_subdirectory(../CPPYABM CPPYABM)
 add_subdirectory(src)

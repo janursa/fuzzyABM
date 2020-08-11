@@ -44,14 +44,14 @@ TEST_CASE("Validity for the whole range of inputs", "[main]") {
                 RECURSIVE(j - 1);
             }
             else {
-                cout << " CD :" << inputs["CD"] << " Mg :" << inputs["Mg"] << " TGF :" << inputs["TGF"] << " BMP :" << inputs["BMP"] <<
+                /*cout << " CD :" << inputs["CD"] << " Mg :" << inputs["Mg"] << " TGF :" << inputs["TGF"] << " BMP :" << inputs["BMP"] <<
                     " damage :" << inputs["damage"]<< " maturity :" << inputs["maturity"] << " AE :" << inputs["AE"] <<endl;
-                
+                */
                 //json jj2(inputs);
                 //cout << "inputs" << setw(4) << jj2 << endl;
                 auto results = fuzzy_obj->predict(inputs);
-                json jj(results);
-                cout << "results"<< setw(4) << jj["earlyDiff"] << endl;
+/*                json jj(results);
+                cout << "results"<< setw(4) << jj["earlyDiff"] << endl;*/
             }
         };
     };
@@ -63,6 +63,33 @@ TEST_CASE("Validity for the whole range of inputs", "[main]") {
         flag = false;
     }
     REQUIRE(flag);
+}
+SCENARIO("Effect of different Mg", "[Mgs]") {
+    GIVEN("A set of inputs") {
+        auto fuzzy_obj = initialize();
+        map<string, double> inputs_1 = { {"Mg",0},{"AE",0},{"CD",0.5},{"maturity",0},{"damage",0},{"TGF",0},{"BMP",0} };
+        map<string, double> inputs_2 = { {"Mg",.05},{"AE",0},{"CD",0.5},{"maturity",0},{"damage",0},{"TGF",0},{"BMP",0} };
+        map<string, double> inputs_3 = { {"Mg",.5},{"AE",0},{"CD",0.5},{"maturity",0},{"damage",0},{"TGF",0},{"BMP",0} };
+        auto result_1 = fuzzy_obj.predict(inputs_1);
+        auto result_2 = fuzzy_obj.predict(inputs_2);
+        auto result_3 = fuzzy_obj.predict(inputs_3);
+        WHEN("Low Mg conc.") {
+            THEN("Higher proliferation") {
+                REQUIRE(result_2["Pr"] > result_1["Pr"]);
+            }
+            THEN("Higher diff") {
+                REQUIRE(result_2["Diff"] > result_1["Diff"]);
+            }
+        };
+        WHEN("High Mg conc.") {
+            THEN("Lower proliferation") {
+                REQUIRE(result_3["Pr"] < result_2["Pr"]);
+            };
+            THEN("Higher mortality") {
+                REQUIRE(result_3["Mo"] > result_1["Mo"]);
+            }
+        };
+    }
 }
  /*   
 SCENARIO("Validity for different Mg values", "[Mgs]") {
