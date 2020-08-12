@@ -129,7 +129,7 @@ void MSC::differentiation(double earlyDiff, double lateDiff) {
 		f_diff = lateDiff;
 	}
 	auto adj_rate = f_diff  * this->params["a_Diff"]* base_rate;
-	cout  <<" base_rate: " << base_rate  << " f_diff: " << f_diff << " adj_rate: " << adj_rate << " maturity: " << this->data["maturity"] << endl;
+	//cout  <<" base_rate: " << base_rate  << " f_diff: " << f_diff << " adj_rate: " << adj_rate << " maturity: " << this->data["maturity"] << endl;
 	this->data["maturity"] += adj_rate;
 }
 void MSC::bone_production(double f_ECM, double f_HA) {

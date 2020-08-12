@@ -20,11 +20,11 @@ shared_ptr<fuzzy> initialize() {
 /*
 TEST_CASE("Validity for the whole range of inputs", "[main]") {
     auto fuzzy_obj = initialize();
-    cout << "results" << setw(4) << results["earlyDiff"] << endl;
-    vector<string> target_input = { "Mg","BMP","TGF","CD","damage" ,"AE" };
-    vector<string> target_output = {"Mo"};
-    map<string, double> non_target_inputs = { {"maturity",0} };
-    unsigned steps = 2;
+    vector<string> target_input = { "Mg","BMP","TGF", "maturity" ,"AE" };
+    vector<string> target_output = {"HAprod"};
+    map<string, double> non_target_inputs = { {"damage",0},{"CD",.5 } };
+
+    unsigned steps = 5;
     
     map<string, double> inputs = {};
     for (auto& [key, value] : non_target_inputs) {
@@ -41,12 +41,12 @@ TEST_CASE("Validity for the whole range of inputs", "[main]") {
             else {
                 //cout << " CD :" << inputs["CD"] << " Mg :" << inputs["Mg"] << " TGF :" << inputs["TGF"] << " BMP :" << inputs["BMP"] <<
                 //    " damage :" << inputs["damage"]<< " maturity :" << inputs["maturity"] << " AE :" << inputs["AE"] <<endl;
-                //
+                
                 //json jj2(inputs);
                 //cout << "inputs" << setw(4) << jj2 << endl;
                 auto results = fuzzy_obj->predict(inputs);
                 //json jj(results);
-                //cout << "results"<< setw(4) << jj["Mo"] << endl;
+                //cout << "results"<< setw(4) << jj["HAprod"] << endl;
             }
         };
     };
@@ -58,7 +58,9 @@ TEST_CASE("Validity for the whole range of inputs", "[main]") {
         flag = false;
     }
     REQUIRE(flag);
-}*/
+}
+*/
+
 TEST_CASE("Effect of different Mg", "[Mgs]") {
     
     auto fuzzy_obj = initialize();
@@ -133,102 +135,40 @@ TEST_CASE("Checking mortality", "[Mo]") {
     REQUIRE(result_5["Mo"] == result_6["Mo"]); // medium against medium
         
 }
- /*   
-SCENARIO("Validity for different Mg values", "[Mgs]") {
-    GIVEN("A set of inputs") {
-        auto fuzzy_obj = initialize();
-        map<string, double> inputs_1 = { {"Mg",0},{"AE",0},{"CD",0.5},{"age",0} };
-        map<string, double> inputs_2 = { {"Mg",0.05},{"AE",0},{"CD",0.5},{"age",0} };
-        map<string, double> inputs_3 = { {"Mg",0.5},{"AE",0},{"CD",0.5},{"age",0} };
-        auto result_1 = fuzzy_obj.predict(inputs_1);
-        auto result_2 = fuzzy_obj.predict(inputs_2);
-        auto result_3 = fuzzy_obj.predict(inputs_3);
-        WHEN("Low Mg conc.") {
-            THEN("Higher proliferation") {
-                REQUIRE(result_2["Pr"] > result_1["Pr"]);
-            }
-        };
-        WHEN("High Mg conc.") {
-            THEN("Lower proliferation") {
-                REQUIRE(result_3["Pr"] < result_1["Pr"]);
-            };
-            THEN("Higher mortality") {
-                REQUIRE(result_3["Mo"] > result_1["Mo"]);
-            }
-        };
-    }
-}
-SCENARIO("Validity for different CD values", "[CDs]") {
-    GIVEN("A set of inputs") {
-        auto fuzzy_obj = initialize();
-        map<string, double> inputs_1 = { {"Mg",0},{"AE",0},{"CD",0},{"age",0} };
-        map<string, double> inputs_2 = { {"Mg",0},{"AE",0},{"CD",0.5} ,{"age",0} };
-        map<string, double> inputs_3 = { {"Mg",0},{"AE",0},{"CD",1} ,{"age",0} };
-        auto result_1 = fuzzy_obj.predict(inputs_1);
-        auto result_2 = fuzzy_obj.predict(inputs_2);
-        auto result_3 = fuzzy_obj.predict(inputs_3);
-        WHEN("High CD") {
-            THEN("Higher mortality compared to medium") {
-                REQUIRE(result_3["Mo"] > result_2["Mo"]);
-            }
-            THEN("Higher migration compared to medium") {
-                REQUIRE(result_3["Mi"] > result_2["Mi"]);
-            }
-        };
-        WHEN("Low CD") {
-            THEN("higher mortality compared to medium") {
-                REQUIRE(result_1["Mo"] > result_2["Mo"]);
-            };
+TEST_CASE("Checking HA produnction", "[HAprod]") {
+    auto fuzzy_obj = initialize();
+    map<string, double> inputs_11 = { {"maturity",0 } ,{"Mg",0},{"AE",0},{"CD",0},{"damage",0},{"TGF",0},{"BMP",1} }; // all good other than maturity
+    map<string, double> inputs_12 = { {"maturity",1} ,{"Mg",1},{"AE",1},{"CD",0},{"damage",0},{"TGF",1},{"BMP",1} }; // all bad other than maturity
+    REQUIRE(fuzzy_obj->predict(inputs_11)["HAprod"] < fuzzy_obj->predict(inputs_12)["HAprod"]); // check that maturity is the prime factor
 
-        };
-    }
-}
+    // check the levels
+    map<string, double> inputs_vh = { {"maturity",1} ,{"Mg",0},{"AE",0},{"CD",0},{"damage",0},{"TGF",0},{"BMP",1} }; // very high
+    REQUIRE(fuzzy_obj->predict(inputs_vh)["HAprod"] == 1);
+    map<string, double> inputs_h1 = { {"maturity",1} ,{"Mg",0},{"AE",0},{"CD",0},{"damage",0},{"TGF",0},{"BMP",0} }; // high
+    REQUIRE(fuzzy_obj->predict(inputs_h1)["HAprod"] == 0.75);
+    map<string, double> inputs_h2 = { {"maturity",1} ,{"Mg",0},{"AE",0},{"CD",0},{"damage",0},{"TGF",1},{"BMP",1} }; // high
+    REQUIRE(fuzzy_obj->predict(inputs_h2)["HAprod"] == 0.75);
+    map<string, double> inputs_h3 = { {"maturity",1} ,{"Mg",1},{"AE",0},{"CD",0},{"damage",0},{"TGF",0},{"BMP",1} }; // high
+    REQUIRE(fuzzy_obj->predict(inputs_h3)["HAprod"] == 0.75);
+    map<string, double> inputs_m1 = { {"maturity",1} ,{"Mg",1},{"AE",0},{"CD",0},{"damage",0},{"TGF",0},{"BMP",0} }; // medium
+    REQUIRE(fuzzy_obj->predict(inputs_m1)["HAprod"] == 0.5);
+    map<string, double> inputs_m2 = { {"maturity",1} ,{"Mg",0},{"AE",1},{"CD",0},{"damage",0},{"TGF",0},{"BMP",0} }; // medium
+    REQUIRE(fuzzy_obj->predict(inputs_m2)["HAprod"] == 0.5);
+    map<string, double> inputs_l1 = { {"maturity",1} ,{"Mg",1},{"AE",1},{"CD",0},{"damage",0},{"TGF",0},{"BMP",0} }; // low
+    REQUIRE(fuzzy_obj->predict(inputs_l1)["HAprod"] == 0.25);
+    map<string, double> inputs_l2 = { {"maturity",1} ,{"Mg",0},{"AE",1},{"CD",0},{"damage",0},{"TGF",1},{"BMP",0} }; // low
+    REQUIRE(fuzzy_obj->predict(inputs_l2)["HAprod"] == 0.25);
+    map<string, double> inputs_vr1 = { {"maturity",1} ,{"Mg",1},{"AE",1},{"CD",0},{"damage",0},{"TGF",1},{"BMP",0} }; // verylow
+    REQUIRE(fuzzy_obj->predict(inputs_vr1)["HAprod"] == 0);
+    map<string, double> inputs_vr2 = { {"maturity",0} ,{"Mg",1},{"AE",0},{"CD",0},{"damage",0},{"TGF",1},{"BMP",0} }; // verylow
+    REQUIRE(fuzzy_obj->predict(inputs_vr2)["HAprod"] == 0);
+    map<string, double> inputs_vr3 = { {"maturity",1} ,{"Mg",1},{"AE",0},{"CD",0},{"damage",1},{"TGF",1},{"BMP",1} }; // verylow
+    REQUIRE(fuzzy_obj->predict(inputs_vr3)["HAprod"] == 0);
 
-SCENARIO("Validity for different AE values", "[AEs]") {
-    GIVEN("A set of inputs") {
-        auto fuzzy_obj = initialize();
-        map<string, double> inputs_1 = { {"Mg",0},{"AE",0},{"CD",0.5},{"age",0} };
-        map<string, double> inputs_2 = { {"Mg",0},{"AE",0.5},{"CD",0.5},{"age",0} };
-        auto result_1 = fuzzy_obj.predict(inputs_1);
-        auto result_2 = fuzzy_obj.predict(inputs_2);
-        json jj(result_2);
-        cout << setw(4) << jj << endl;
-        WHEN("High AE") {
-            THEN("Higher mortality compared to medium") {
-                REQUIRE(result_2["Mo"] > result_1["Mo"]);
-            }
-            THEN("Lower Pr compared to medium") {
-                REQUIRE(result_2["Pr"] < result_1["Pr"]);
-            }
-        };
-    }
+    // check random
+    map<string, double> inputs1 = { {"maturity",0.5} ,{"Mg",0},{"AE",0.2},{"CD",0},{"damage",0},{"TGF",.2},{"BMP",.6} }; // middle
+    map<string, double> inputs2 = { {"maturity",0.7} ,{"Mg",0.5},{"AE",0.2},{"CD",0},{"damage",0},{"TGF",0.2},{"BMP",0.6} }; // better
+    map<string, double> inputs3 = { {"maturity",0.5} ,{"Mg",1},{"AE",0},{"CD",0},{"damage",0},{"TGF",1},{"BMP",.6} }; // worse
+    REQUIRE(fuzzy_obj->predict(inputs1)["HAprod"] < fuzzy_obj->predict(inputs2)["HAprod"]);
+    REQUIRE(fuzzy_obj->predict(inputs3)["HAprod"] < fuzzy_obj->predict(inputs1)["HAprod"]);
 }
-SCENARIO("Validity for different age values", "[ages]") {
-    GIVEN("A set of inputs") {
-        auto fuzzy_obj = initialize();
-        map<string, double> inputs_1 = { {"Mg",0},{"AE",0},{"CD",0.5},{"age",0} };
-        map<string, double> inputs_2 = { {"Mg",0},{"AE",0},{"CD",0.5},{"age",.5} };
-        auto result_1 = fuzzy_obj.predict(inputs_1);
-        auto result_2 = fuzzy_obj.predict(inputs_2);
-        WHEN("High age") {
-            THEN("lower Pr compared to medium") {
-                REQUIRE(result_2["Pr"] < result_1["Pr"]);
-            }
-        };
-    }
-}
-SCENARIO("Validity for synergic effect of age and mg", "[age_mg]") {
-    GIVEN("A set of inputs") {
-        auto fuzzy_obj = initialize();
-        map<string, double> inputs_1 = { {"Mg",0.05},{"AE",0},{"CD",0.5},{"age",0} };
-        map<string, double> inputs_2 = { {"Mg",0},{"AE",0},{"CD",0.5},{"age",0} };
-        map<string, double> inputs_3 = { {"Mg",0},{"AE",0},{"CD",0.5},{"age",.5} };
-        auto result_1 = fuzzy_obj.predict(inputs_1);
-        auto result_2 = fuzzy_obj.predict(inputs_2);
-        auto result_3 = fuzzy_obj.predict(inputs_3);
-        WHEN("Low age and low Mg produces highest Pr") {
-            REQUIRE(result_1["Pr"] > result_2["Pr"]);
-            REQUIRE(result_2["Pr"] > result_3["Pr"]);
-        };
-    }
-}*/
