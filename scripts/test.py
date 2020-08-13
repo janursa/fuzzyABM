@@ -10,9 +10,9 @@ import json
 #     medians = json.load(file)["medians"]
 
 scale_factor = trainingData["scale"]
+
 training_item = ABM.scale(trainingData["H2017_Mg0"],scale_factor);
 obj = ABM(free_params = {},run_mode="test")
-obj.reset()
 start = time.time()
 obj.episode(trainingItem = training_item)
 end = time.time()

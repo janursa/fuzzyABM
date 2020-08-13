@@ -17,20 +17,22 @@ struct myEnv : public Env {
 
 		}
 	}
+	
 	using param_type = map<string, double>;
 	double collect_from_patches(string tag);
-	void set_settings(py::dict settings_) {
-		this->settings = settings_;
+	void set_settings(map<string, double> grid_settings) {
+		this->grid_settings = grid_settings;
+		
 	}
 	void set_params(param_type params_) {
 		this->params = params_;
 	}
-	virtual shared_ptr<Patch> generate_patch();
+	
+	//virtual shared_ptr<Patch> generate_patch();
 	virtual void update();
-	py::dict settings;
 	param_type params;
 	shared_ptr<fuzzy> policy;
-
+	map<string,double> grid_settings;
 };
 struct Dead: public Agent{
 	Dead(shared_ptr<Env> env , string class_name)
@@ -46,10 +48,11 @@ struct MSC : public Agent{
 	MSC(shared_ptr<myEnv> env , string class_name, 
 		std::map<string,double> params_,std::map<string,double> initial_conditions)
 	try: Agent(env,class_name){
+		myenv = env;
 		this->params = params_;
 		this->initial_conditions = initial_conditions;
 		this->initialize(initial_conditions);
-		myenv = env;
+		
 		
 	}catch(...){
 		cerr<<"Error in the construction of MSC";
@@ -65,7 +68,7 @@ struct MSC : public Agent{
 	double alkalinity();
 	void differentiation(double , double);
 	void bone_production(double, double); // for ECM and minerals
-	void GF_production(); // for BMP and TGF
+	void GF(); // for BMP and TGF
 
 	bool migration(double Mi);
 	virtual void step();
@@ -92,6 +95,7 @@ struct MSC : public Agent{
 	shared_ptr<myEnv> myenv;
 	bool damage = false;
 	bool cycled = false; // is true if cell just did mitosis
+	double v_p_v; //v_patch/v_domain
 };
 
 struct myPatch : public Patch{
@@ -106,6 +110,9 @@ struct myPatch : public Patch{
 	}
 	virtual double get_data(string tag){
 		return this->data[tag];
+	}
+	virtual void set_data(string tag, double value) {
+		this->data[tag] = value;
 	}
 	std::map<string,double> params;
 	std::map<string,double> initial_conditions;

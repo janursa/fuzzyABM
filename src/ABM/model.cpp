@@ -104,7 +104,7 @@ void MSC::step(){
 	auto walk = this->migration(predictions["Mi"]);
 	this->differentiation(predictions["earlyDiff"], predictions["lateDiff"]);
 	bone_production(predictions["ECMprod"], predictions[ "HAprod"]);
-	GF_production();
+	GF();
 	if (walk)
 		this->order_move(/**patch**/nullptr, /* quiet */ true,/** reset**/ true);
 	if (hatch)
@@ -136,17 +136,40 @@ void MSC::bone_production(double f_ECM, double f_HA) {
 
 
 }
-void MSC::GF_production() {
-	// BMP
-	auto a_BMP = 15.0;
-	auto a_BMP_0 = 0.01;
-	auto b_ECM = 2.0 * 0.000000001 / (24); // TODO: check the training data and possibly modify the rate
+void MSC::GF() {
+	/* BMP */
+	auto BMP_cont = this->env->patches[0]->get_data("BMP");
+	auto BMP_PROD = [&]() -> double {
 
-	double k = (b_ECM / (a_BMP * this->data["BMP"] + a_BMP_0));
-	this->data["BMP"] += k;
+		double r_prod = params.at("B_BMP");
+		auto r_prod_adj = r_prod * this->v_p_v;
+		return r_prod_adj;
+	};
 	
+	auto BMP_r_prod = BMP_PROD();
+	auto BMP_cont_new = BMP_cont + BMP_r_prod ;
+	if (BMP_cont_new < 0) BMP_cont_new = 0;
+	this->env->patches[0]->set_data("BMP", BMP_cont_new); //only add to the patch 0 as the representative of the domain
+	/*cout << "BMP_cont: " << BMP_cont << " BMP_r_prod " << BMP_r_prod  << " BMP_cont_new " << BMP_cont_new << endl;
+	cout << " updated " << this->env->patches[0]->get_data("BMP") << endl;
+	exit(2);*/
+	/* TGF */
+	auto TGF_cont = this->env->patches[0]->get_data("TGF");
+	auto TGF_PROD = [&]() -> double {
+
+		double r_prod = params.at("B_TGF");
+		auto r_prod_adj = r_prod * this->v_p_v;
+		return r_prod_adj;
+	};
+	
+	auto TGF_r_prod = TGF_PROD();
+	auto TGF_cont_new = TGF_cont + TGF_r_prod ;
+	if (TGF_cont_new < 0) TGF_cont_new = 0;
+	this->env->patches[0]->set_data("TGF", TGF_cont_new); //only add to the patch 0 as the representative of the domain
+
 }
 double myEnv::collect_from_patches(string tag){
+
     double result = 0;
     for (auto const &[index,patch]: this->patches){
         result += patch->get_data(tag);
@@ -154,12 +177,13 @@ double myEnv::collect_from_patches(string tag){
     return result;
 }
 map<string,double> MSC::collect_policy_inputs(){
+	
 		auto AE = this->alkalinity();
 		auto CD = this->patch->get_data("agent_density");
 		auto Mg = this->patch->get_data("Mg")/this->params.at("Mg_max");
 		auto maturity = this->data["maturity"] ; // maturity indeex
-		auto TGF = this->patch->get_data("TGF");
-		double BMP = this->patch->get_data("BMP");
+		auto TGF = this->env->patches[0]->get_data("TGF");
+		double BMP = this->env->patches[0]->get_data("BMP");
 		float damage = this->damage;
 		map<string, double> policy_inputs = { {"AE",AE} , {"Mg",Mg} , {"CD", CD} , {"TGF", TGF} ,
 			{"maturity", maturity} , {"BMP",BMP},{"damage",damage} };
@@ -173,17 +197,53 @@ void myEnv::update(){
 	for (auto &agent:this->agents){
 		agent->update();
 	}
+	// BMP degrades
+	auto BMP_cont = this->patches[0]->get_data("BMP");
+	auto BMP_DEG = [&]() ->double {
+		auto half_life = 10.08;
+		auto half_life_rate = log(2) / half_life;
+		auto coeff = exp(-half_life_rate);
+
+		auto deg_rate = BMP_cont * (1 - coeff);
+		/*cout << "coeff "<< coeff <<" BMP_cont :"<< BMP_cont<<" deg_rate:"<< deg_rate<< endl;
+		exit(2);*/
+		return deg_rate;
+	};
+	auto BMP_deg = BMP_DEG();
+	auto BMP_updated = BMP_cont - BMP_deg;
+	this->patches[0]->set_data("BMP", BMP_updated);
+	// TGF degrades
+	auto TGF_cont = this->patches[0]->get_data("TGF");
+	auto TGF_DEG = [&]() ->double {
+		double half_life = 1.0 / 6;
+		auto half_life_rate = log(2) / half_life;
+		auto coeff = exp(-half_life_rate);
+		auto deg_rate = TGF_cont * (1 - coeff);
+		return deg_rate;
+	};
+	auto TGF_deg = TGF_DEG();
+	auto TGF_updated = TGF_cont - TGF_deg;
+	this->patches[0]->set_data("TGF", TGF_updated);
 }
 void myPatch::initialize(){
-	initial_conditions["BMP"] = 0;
-	initial_conditions["TGF"] = 0;
 	initial_conditions["agent_density"] = 0;
 	initial_conditions["lactate"] = 0;
 	initial_conditions["ECM"] = 0;
 	initial_conditions["HA"] = 0;
+	if (index == 0) {
+		initial_conditions["TGF"] = params.at("TGF_0");
+		initial_conditions["BMP"] = params.at("BMP_0");
+	}
+	else {
+		initial_conditions["TGF"] = 0;
+		initial_conditions["BMP"] = 0;
+	}
+	
 	for (auto const &[key,value]:this->initial_conditions){
 		this->data[key] = value;
 	}
+
+
 }
 double myPatch::pH(){
 		auto mg = this->data.at("Mg");
@@ -215,10 +275,13 @@ void MSC::initialize(map<string,double> initial_conditions){
 	for (auto const &[key,value]:initial_conditions){
 		this->data[key] = value;
 	}
+	double patch_size = this->myenv->grid_settings["patch_size"];
+	double v_patch = patch_size * patch_size;
+	v_p_v = v_patch / this->myenv->grid_settings["volume"];
 }
-shared_ptr<Patch> myEnv::generate_patch(){
-		map<string,double> initial_conditions = py::cast<map<string,double>>(this->settings["setup"]["patch"]["attrs"]);
-		auto patch_obj = make_shared<myPatch>(this->get_ptr(), this->params,
-			initial_conditions);
-		return patch_obj;
-}
+//shared_ptr<Patch> myEnv::generate_patch(){
+//	map<string,double> initial_conditions = py::cast<map<string,double>>(this->settings["setup"]["patch"]["attrs"]);
+//	auto patch_obj = make_shared<myPatch>(this->get_ptr(), this->params,
+//		initial_conditions);
+//	return patch_obj;
+//}

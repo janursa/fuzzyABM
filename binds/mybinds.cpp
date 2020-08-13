@@ -19,6 +19,7 @@ PYBIND11_MODULE(myBinds, m) {
     myEnv_binds.def("collect_from_patches",&myEnv::collect_from_patches);
     // myEnv_binds.def("set_settings",&myEnv::set_settings);
     myEnv_binds.def("set_params",&myEnv::set_params);
+    myEnv_binds.def("set_settings", &myEnv::set_settings);
     myEnv_binds.def("construct_policy", &myEnv::construct_policy);
 	/** Agent **/
     // MSC

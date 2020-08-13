@@ -26,9 +26,9 @@ class ABM(myEnv):
 	def __init__(self,free_params = {},run_mode = "ABC"):
 		myEnv.__init__(self)
 		## simulation specific
-		with open(SETTINGS_PATH) as file:
-			self.settings = json.load(file)
-		self.settings = ABM.scale(self.settings,self.settings["scale"]);
+		#with open(SETTINGS_PATH) as file:
+			#self.settings = json.load(file)
+		#self.settings = ABM.scale(self.settings,self.settings["scale"]);
 		with open(PARAMS_PATH) as file:
 			self.params = json.load(file)
 		for key,value in free_params.items():
@@ -54,6 +54,8 @@ class ABM(myEnv):
 		self.data = {}
 		self.results = {} # results collected for validation
 		self.errors = {}
+
+	
 	def reset(self):
 		self.initialize()
 		try:
@@ -81,6 +83,7 @@ class ABM(myEnv):
 		self._repo.append(patch_obj)
 		return patch_obj
 	def setup(self):
+		self.set_settings(self.settings["setup"]["grid"])
 		grid_info = self.settings["setup"]["grid"]
 		mesh =  grid(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],share = True)
 		# mesh =  grid3(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],grid_info["patch_size"],share = True)
@@ -176,6 +179,7 @@ class ABM(myEnv):
 		self.results.update({str(self.tick):results})	
 	@staticmethod
 	def scale(settings,scale_factor):
+
 		"""
 		Scale the settings (both setup and expectations) based on the scale factor. This needs
 		to be revised for new training items with different format
@@ -183,6 +187,8 @@ class ABM(myEnv):
 		settings_copy  = copy.deepcopy(settings)
 		# scale area
 		settings_copy["setup"]["grid"]["area"] *= scale_factor
+		# scale valume
+		settings_copy["setup"]["grid"]["volume"] *= scale_factor
 		# scale cell count
 		for (key,value) in settings_copy["setup"]["agents"]["n"].items():
 			settings_copy["setup"]["agents"]["n"][key] = (int)(value*scale_factor)
@@ -205,9 +211,10 @@ class ABM(myEnv):
 		#step 2: setup and run the model
 		#step 3: reset the model
 		#step 3: return the simulation results
-		if trainingItem:
-			self.settings["setup"] = trainingItem["setup"]
-			self.settings.update({"expectations":trainingItem["expectations"]})
+		self.settings = trainingItem
+		if trainingItem == None:
+			print("training data is none")
+			sys.terminate(2)
 		try : # to catch the errors in the setup
 			self.reset()
 		except ValueError as vl:
