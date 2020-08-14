@@ -21,6 +21,9 @@ PYBIND11_MODULE(myBinds, m) {
     myEnv_binds.def("set_params",&myEnv::set_params);
     myEnv_binds.def("set_settings", &myEnv::set_settings);
     myEnv_binds.def("construct_policy", &myEnv::construct_policy);
+    myEnv_binds.def("get_tick", &myEnv::get_tick);
+    myEnv_binds.def("set_tick", &myEnv::set_tick);
+    myEnv_binds.def("increment_tick", &myEnv::increment_tick);
 	/** Agent **/
     // MSC
     // expose_base_agent(m);

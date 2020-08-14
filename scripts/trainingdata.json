@@ -3,7 +3,7 @@
 	"scale": 0.05,
 	"H2017_Mg0":{
 			"setup":{
-			    "exp_duration" : 72,
+			    "exp_duration" : 400,
 			    "grid":{
 						"area": 1,
 						"volume": 0.274,

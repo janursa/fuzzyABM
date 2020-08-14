@@ -48,7 +48,7 @@ class ABM(myEnv):
 		self.patches.clear()
 		self.agents.clear()
 		## to update
-		self.tick = 0
+		self.set_tick(0)
 		self.last_tick = 0
 		## env data
 		self.data = {}
@@ -94,20 +94,20 @@ class ABM(myEnv):
 		self.setup_agents(agent_counts)
 		self.update()
 	def step(self):
-		self.tick += 1
+		self.increment_tick()
 		self.step_patches()
 		self.step_agents()
 		self.update()
 
 	def update(self):
 		super().update()
-		if (self.tick % self.medium_change_interval == 0): # medium chaneg
+		if (self.get_tick() % self.medium_change_interval == 0): # medium chaneg
 			self.refresh()
 		## Either updates or appends a pair of key-value to self.data
 		def add(key,value): 
 			if key not in self.data:
 				self.data[key] = [value]
-			elif self.tick > self.last_tick:
+			elif self.get_tick() > self.last_tick:
 			 	self.data[key].append(value)
 			else:
 				self.data[key][-1] = value
@@ -141,7 +141,7 @@ class ABM(myEnv):
 			if hasattr(agent,'reward'):
 				agent.reward()
 		## control
-		self.last_tick = self.tick
+		self.last_tick = self.get_tick()
 		if len(self.agents) >  len(self.patches):
 			print("Agents cannot exceed patches in number")
 			sys.exit(0)
@@ -157,9 +157,9 @@ class ABM(myEnv):
 		#step 5: return them
 		if "expectations" not in self.settings: # no  calculaton is required
 			return
-		if str(self.tick) not in self.settings["expectations"]: # not the right tick
+		if str(self.get_tick()) not in self.settings["expectations"]: # not the right tick
 			return 
-		factors = self.settings["expectations"][str(self.tick)]
+		factors = self.settings["expectations"][str(self.get_tick())]
 		errors = {}
 		results = {}
 		for key,value in factors.items():
@@ -175,8 +175,8 @@ class ABM(myEnv):
 			# print("\nsim_res {} value {} error_value {}".format(sim_res,value,error_value))
 			errors.update({key:error_value})
 			results.update({key:sim_res})
-		self.errors.update({str(self.tick):errors})
-		self.results.update({str(self.tick):results})	
+		self.errors.update({str(self.get_tick()):errors})
+		self.results.update({str(self.get_tick()):results})	
 	@staticmethod
 	def scale(settings,scale_factor):
 

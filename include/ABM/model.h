@@ -33,6 +33,16 @@ struct myEnv : public Env {
 	param_type params;
 	shared_ptr<fuzzy> policy;
 	map<string,double> grid_settings;
+	unsigned tick;
+	void increment_tick() {
+		tick++;
+	}
+	unsigned get_tick() {
+		return tick;
+	}
+	void  set_tick(unsigned value) {
+		tick = value;
+	}
 };
 struct Dead: public Agent{
 	Dead(shared_ptr<Env> env , string class_name)
