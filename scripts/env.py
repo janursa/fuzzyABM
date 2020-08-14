@@ -34,7 +34,6 @@ class ABM(myEnv):
 		for key,value in free_params.items():
 			self.params[key] = value
 		self.set_params(self.params) # sends it to c++
-		self.construct_policy()
 		## specific settings
 		self.run_mode = run_mode  ## other options are test and RL
 		self.medium_change_interval = 60 ## 2.5 days
@@ -89,6 +88,11 @@ class ABM(myEnv):
 		# mesh =  grid3(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],grid_info["patch_size"],share = True)
 
 		self.setup_domain(mesh)
+		## construct policy
+		try:
+			self.construct_policy()
+		except ValueError as ee:
+			raise ee
 		## create agents
 		agent_counts = self.settings["setup"]["agents"]["n"]
 		self.setup_agents(agent_counts)

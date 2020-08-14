@@ -13,8 +13,8 @@ import tools
 
 settings = {
 	"MPI_flag": True,
-	"sample_n": 20,
-	"top_n": 2,
+	"sample_n": 2000,
+	"top_n": 20,
     "replica_n": 1,
 	"output_path": "outputs",
 	"plot": True,
@@ -29,10 +29,10 @@ free_params = {
 	"MG_H_t": [20,40],
 	"maturity_t": [0,1],
 	"B_MSC_Mo": [0.00017,0.00035],
-	"a_Mo": [3-10],
-	"a_Diff": [1-2],
-	"a_Pr": [1-2],
-	"a_Pass_Mo": [0-5]
+	"a_Mo": [3,10],
+	"a_Diff": [1,2],
+	"a_Pr": [1,2],
+	"a_Pass_Mo": [0,5]
 }
 if __name__ == "__main__":
 	obj = tools.ABC(settings=settings,free_params=free_params)

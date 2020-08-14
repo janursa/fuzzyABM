@@ -13,6 +13,7 @@ struct myEnv : public Env {
 			this->policy = make_shared<fuzzy>("MSC", this->params);
 		}
 		catch (invalid_fuzzy_definition& e) {
+		    cout<<"cool up to here"<<endl;
 			throw e;
 
 		}

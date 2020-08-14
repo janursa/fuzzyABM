@@ -1,7 +1,7 @@
 from env import ABM, trainingData
 import time
 import sys
-import os
+import os,sys
 import pathlib
 current_file = pathlib.Path(__file__).parent.absolute()
 medians_path = os.path.join(current_file,'..','build','outputs','medians.json')
@@ -12,7 +12,11 @@ import json
 scale_factor = trainingData["scale"]
 
 training_item = ABM.scale(trainingData["H2017_Mg0"],scale_factor);
-obj = ABM(free_params = {},run_mode="test")
+try:
+    obj = ABM(free_params = {},run_mode="test")
+except ValueError as vl:
+    print(vl)
+    sys.exit(2)
 start = time.time()
 obj.episode(trainingItem = training_item)
 end = time.time()
