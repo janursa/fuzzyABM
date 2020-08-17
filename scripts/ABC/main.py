@@ -28,11 +28,14 @@ free_params = {
 	"MG_M_t": [5,15],
 	"MG_H_t": [20,40],
 	"maturity_t": [0,1],
-	"B_MSC_Mo": [0.00017,0.00035],
+	"B_MSC_Mo": [0.00005,0.00017],
 	"a_Mo": [3,10],
-	"a_Diff": [1,2],
+	"a_Diff": [2,5],
 	"a_Pr": [1,2],
-	"a_Pass_Mo": [0,5]
+	"a_Pass_Mo": [2,10],
+	"B_BMP": [0.01,0.05],
+	"B_TGF": [5,30]
+
 }
 if __name__ == "__main__":
 	obj = tools.ABC(settings=settings,free_params=free_params)

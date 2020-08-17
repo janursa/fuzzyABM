@@ -27,13 +27,8 @@ settings = {
         "graph_type" : 'lines',
         'x-axis-moves': False
        },
-    "ECM": {
-        "graph_dir" : "./build/outputs/ECM.csv",
-        "graph_type" : 'lines',
-        'x-axis-moves': False
-       },
-    "HA": {
-        "graph_dir" : "./build/outputs/HA.csv",
+    "maturity": {
+        "graph_dir" : "./build/outputs/maturity.csv",
         "graph_type" : 'lines',
         'x-axis-moves': False
        }

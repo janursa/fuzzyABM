@@ -24,7 +24,7 @@ TEST_CASE("Validity for the whole range of inputs", "[main]") {
     vector<string> target_output = {"HAprod"};
     map<string, double> non_target_inputs = { {"damage",0},{"CD",.5 } };
 
-    unsigned steps = 5;
+    unsigned steps = 10;
     
     map<string, double> inputs = {};
     for (auto& [key, value] : non_target_inputs) {
@@ -109,10 +109,7 @@ TEST_CASE("Checking early diff", "[earlyDiff]") {
     REQUIRE(result_5["earlyDiff"] < result_42["earlyDiff"]);
     REQUIRE(result_5["earlyDiff"] < result_41["earlyDiff"]);
     
-    map<string, double> inputs_6 = { {"maturity",0} ,{"Mg", .05},{"AE",0},{"CD",0.8},{"damage",0},{"TGF",0},{"BMP",0} }; // half medium
-    auto result_6 = fuzzy_obj->predict(inputs_6);
-    cout << result_6["earlyDiff"] << endl;
-    REQUIRE(result_6["earlyDiff"] > 0.25);
+
 }
 TEST_CASE("Checking mortality", "[Mo]") {
     auto fuzzy_obj = initialize();

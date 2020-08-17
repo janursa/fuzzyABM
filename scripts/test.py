@@ -11,7 +11,7 @@ import json
 
 scale_factor = trainingData["scale"]
 
-training_item = ABM.scale(trainingData["H2017_Mg0"],scale_factor);
+training_item = ABM.scale(trainingData["B2016_C"],scale_factor);
 try:
     obj = ABM(free_params = {},run_mode="test")
 except ValueError as vl:
@@ -19,5 +19,6 @@ except ValueError as vl:
     sys.exit(2)
 start = time.time()
 obj.episode(trainingItem = training_item)
+#obj.run()
 end = time.time()
 print("Time lapse: {}".format(end-start))

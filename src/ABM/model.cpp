@@ -100,15 +100,16 @@ bool MSC::migration(double Mi){
 void MSC::step(){
 	// policy's inputs
 	auto policy_inputs = this->collect_policy_inputs();
-	//json jj(policy_inputs);
-	//cout << setw(4) << jj << endl;
+	/*json jj(policy_inputs);
+	cout << setw(4) << jj << endl;*/
 	auto predictions = this->run_policy(policy_inputs);
+
 	// functions
 	auto die = this->mortality(predictions["Mo"]);
 	auto hatch = this->proliferation(predictions["Pr"]);
 	auto walk = this->migration(predictions["Mi"]);
 	this->differentiation(predictions["earlyDiff"], predictions["lateDiff"]);
-	bone_production(predictions["ECMprod"], predictions[ "HAprod"]);
+	//bone_production(predictions["ECMprod"], predictions[ "HAprod"]);
 	GF();
 	if (walk)
 		this->order_move(/**patch**/nullptr, /* quiet */ true,/** reset**/ true);
@@ -181,14 +182,23 @@ double myEnv::collect_from_patches(string tag){
     }
     return result;
 }
+double myEnv::collect_from_agents(string tag) {
+
+	double result = 0;
+	for (auto const& agent: this->agents) {
+		if (agent->class_name == "Dead") continue;
+		result += agent->get_data(tag);
+	}
+	return result;
+}
 map<string,double> MSC::collect_policy_inputs(){
 	
 		auto AE = this->alkalinity();
 		auto CD = this->patch->get_data("agent_density");
 		auto Mg = this->patch->get_data("Mg")/this->params.at("Mg_max");
 		auto maturity = this->data["maturity"] ; // maturity indeex
-		auto TGF = this->env->patches[0]->get_data("TGF");
-		double BMP = this->env->patches[0]->get_data("BMP");
+		auto TGF = this->env->patches[0]->get_data("TGF")/ this->params.at("TGF_max");
+		double BMP = this->env->patches[0]->get_data("BMP")/ this->params.at("BMP_max");
 		float damage = this->damage;
 		map<string, double> policy_inputs = { {"AE",AE} , {"Mg",Mg} , {"CD", CD} , {"TGF", TGF} ,
 			{"maturity", maturity} , {"BMP",BMP},{"damage",damage} };

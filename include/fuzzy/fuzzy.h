@@ -212,7 +212,7 @@ struct MSC_FUZZY:public base_model {
             std::vector<double> neg{ 0,0, 0.015,.025 };
             std::vector<double> low{ 0.015,.025,15 };
             std::vector<double> high{ .025,15, 15 };
-            NORMALIZE(neg, 15); NORMALIZE(low, 15); NORMALIZE(high, 15);
+            NORMALIZE(neg, params["TGF_max"]); NORMALIZE(low, params["TGF_max"]); NORMALIZE(high, params["TGF_max"]);
             check_range(neg); check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
             InputVariable* input2 = new InputVariable;
             input2->setName("TGF");
@@ -231,7 +231,7 @@ struct MSC_FUZZY:public base_model {
             std::vector<double> low{ 0.5,10, 50 };
             std::vector<double> medium{ 10, 50, 250 };
             std::vector<double> high{ 50, 250, 2000, 2000 };
-            NORMALIZE(neg, 2000); NORMALIZE(low, 2000); NORMALIZE(medium, 2000); NORMALIZE(high, 2000);
+            NORMALIZE(neg, params["BMP_max"]); NORMALIZE(low, params["BMP_max"]); NORMALIZE(medium, params["BMP_max"]); NORMALIZE(high, params["BMP_max"]);
             check_range(neg); check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
             InputVariable* input2 = new InputVariable;
             input2->setName("BMP");
@@ -358,6 +358,7 @@ struct MSC_FUZZY:public base_model {
             out->addTerm(new Constant("high", 1));
             engine->addOutputVariable(out);
         };
+        /*
         // ECM prod: 5 levels
         auto OUTPUT_ECMPROD = [&]() {
             OutputVariable* out = new OutputVariable;
@@ -378,6 +379,7 @@ struct MSC_FUZZY:public base_model {
             engine->addOutputVariable(out);
         };
         // HA prod: 5 levels
+        
         auto OUTPUT_HAPROD = [&]() {
             OutputVariable* out = new OutputVariable;
             out->setName("HAprod");
@@ -396,6 +398,7 @@ struct MSC_FUZZY:public base_model {
             out->addTerm(new Constant("veryhigh", 1));
             engine->addOutputVariable(out);
         };
+        */
         auto FORMULATION = [&]() {
             /*
              * input_tagsgs: cell density & Mg & AE
@@ -427,10 +430,12 @@ struct MSC_FUZZY:public base_model {
             this->output_tags.push_back("earlyDiff");
             OUTPUT_LATEDIFF();
             this->output_tags.push_back("lateDiff");
+            /*
             OUTPUT_ECMPROD();
             this->output_tags.push_back("ECMprod");
             OUTPUT_HAPROD();
             this->output_tags.push_back("HAprod");
+            */
             /** controller **/
             RuleBlock *mamdani = new RuleBlock;
             mamdani->setName("mamdani");
@@ -570,47 +575,69 @@ struct MSC_FUZZY:public base_model {
                     " then Mo is verylow", engine));
             };
             FORMULATE_MO();
-            /***  HA prod ***/
-            auto FORMULATE_HAPROD = [&]() {
-                vector<vector<string>> factors = {
-                    {"Mg is neg","Mg is not neg"},
-                    {"AE is not high","AE is high"},
-                    {"TGF is not high","TGF is high"},
-                    {"BMP is not neg","BMP is neg"}
-                };
-                // all 4
-                mamdani->addRule(Rule::parse("if (damage is low and maturity is high) and "
-                    " (Mg is neg and AE is not high and TGF is not high and BMP is not neg) "
-                    " then HAprod is veryhigh", engine));
-                // any 3
-                mamdani->addRule(Rule::parse("if (damage is low and maturity is high) and ("
-                    " (Mg is neg and AE is not high and TGF is not high and BMP is neg) "
-                    " or (Mg is neg and AE is not high and TGF is high and BMP is not neg) "
-                    " or (Mg is neg and AE is high and TGF is not high and BMP is not neg) "
-                    " or (Mg is not neg and AE is not high and TGF is not high and BMP is not neg) "
-                    " ) then HAprod is high", engine));
-                // any 2
-                mamdani->addRule(Rule::parse("if (damage is low and maturity is high) and ( "
-                    " (Mg is neg and AE is not high and TGF is high and BMP is neg) "
-                    " or (Mg is neg and AE is high and TGF is not high and BMP is neg) "
-                    " or (Mg is neg and AE is high and TGF is high and BMP is not neg) "
-                    " or (Mg is not neg and AE is not high and TGF is not high and BMP is neg) "
-                    " or (Mg is not neg and AE is not high and TGF is high and BMP is not neg) "
-                    " or (Mg is not neg and AE is high and TGF is not high and BMP is not neg) "
-                    " ) then HAprod is medium", engine));
-                // any 1
-                mamdani->addRule(Rule::parse("if (damage is low and maturity is high) and ( "
-                    " (Mg is neg and AE is high and TGF is high and BMP is neg) "
-                    " or (Mg is not neg and AE is not high and TGF is high and BMP is neg) "
-                    " or (Mg is not neg and AE is high and TGF is not high and BMP is neg) "
-                    " or (Mg is not neg and AE is high and TGF is high and BMP is not neg) "
-                    " ) then HAprod is low", engine));
-                // none
-                mamdani->addRule(Rule::parse("if damage is high or maturity is low "
-                    " or (Mg is not neg and AE is high and TGF is high and BMP is neg)"
-                    " then HAprod is verylow", engine));
-            };
-            FORMULATE_HAPROD();
+            
+            ///***  HA prod ***/
+            //auto FORMULATE_HAPROD = [&]() {
+            //    vector<vector<string>> factors = {
+            //        {"Mg is neg","Mg is not neg"},
+            //        {"AE is not high","AE is high"},
+            //        {"TGF is not high","TGF is high"},
+            //        {"BMP is not neg","BMP is neg"}
+            //    };
+            //    // all 4
+            //    mamdani->addRule(Rule::parse("if (damage is low and maturity is high) and "
+            //        " (Mg is neg and AE is not high and TGF is not high and BMP is not neg) "
+            //        " then HAprod is veryhigh", engine));
+            //    // any 3
+            //    mamdani->addRule(Rule::parse("if (damage is low and maturity is high) and ("
+            //        " (Mg is neg and AE is not high and TGF is not high and BMP is neg) "
+            //        " or (Mg is neg and AE is not high and TGF is high and BMP is not neg) "
+            //        " or (Mg is neg and AE is high and TGF is not high and BMP is not neg) "
+            //        " or (Mg is not neg and AE is not high and TGF is not high and BMP is not neg) "
+            //        " ) then HAprod is high", engine));
+            //    // any 2
+            //    mamdani->addRule(Rule::parse("if (damage is low and maturity is high) and ( "
+            //        " (Mg is neg and AE is not high and TGF is high and BMP is neg) "
+            //        " or (Mg is neg and AE is high and TGF is not high and BMP is neg) "
+            //        " or (Mg is neg and AE is high and TGF is high and BMP is not neg) "
+            //        " or (Mg is not neg and AE is not high and TGF is not high and BMP is neg) "
+            //        " or (Mg is not neg and AE is not high and TGF is high and BMP is not neg) "
+            //        " or (Mg is not neg and AE is high and TGF is not high and BMP is not neg) "
+            //        " ) then HAprod is medium", engine));
+            //    // any 1
+            //    mamdani->addRule(Rule::parse("if (damage is low and maturity is high) and ( "
+            //        " (Mg is neg and AE is high and TGF is high and BMP is neg) "
+            //        " or (Mg is not neg and AE is not high and TGF is high and BMP is neg) "
+            //        " or (Mg is not neg and AE is high and TGF is not high and BMP is neg) "
+            //        " or (Mg is not neg and AE is high and TGF is high and BMP is not neg) "
+            //        " ) then HAprod is low", engine));
+            //    // none
+            //    mamdani->addRule(Rule::parse("if damage is high or maturity is low "
+            //        " or (Mg is not neg and AE is high and TGF is high and BMP is neg)"
+            //        " then HAprod is verylow", engine));
+            //};
+            //FORMULATE_HAPROD();
+            ///***  ECM prod ***/
+            //mamdani->addRule(Rule::parse(
+            //    " if maturity is high and TGF is high"
+            //    " then ECMprod is veryhigh"
+            //    , engine));
+            //mamdani->addRule(Rule::parse(
+            //    " if maturity is high and TGF is not high"
+            //    " then ECMprod is high"
+            //    , engine));
+            //mamdani->addRule(Rule::parse(
+            //    " if maturity is not high and TGF is high"
+            //    " then ECMprod is medium"
+            //    , engine));
+            //mamdani->addRule(Rule::parse(
+            //    " if maturity is not high and TGF is not high"
+            //    " then ECMprod is low"
+            //    , engine));
+            //mamdani->addRule(Rule::parse(
+            //    " if damage is high"
+            //    " then ECMprod is verylow"
+            //    , engine));
             /***  migration ***/
             mamdani->addRule(Rule::parse(
                 "if CD is high"
@@ -618,28 +645,8 @@ struct MSC_FUZZY:public base_model {
             mamdani->addRule(Rule::parse(
                 "if CD is not high"
                 " then Mi is low", engine));
-            /***  ECM prod ***/
-            mamdani->addRule(Rule::parse(
-                " if maturity is high and TGF is high"
-                " then ECMprod is veryhigh"
-                , engine));
-            mamdani->addRule(Rule::parse(
-                " if maturity is high and TGF is not high"
-                " then ECMprod is high"
-                , engine));
-            mamdani->addRule(Rule::parse(
-                " if maturity is not high and TGF is high"
-                " then ECMprod is medium"
-                , engine));
-            mamdani->addRule(Rule::parse(
-                " if maturity is not high and TGF is not high"
-                " then ECMprod is low"
-                , engine));
-            mamdani->addRule(Rule::parse(
-                " if damage is high"
-                " then ECMprod is verylow"
-                , engine));
-            
+           
+            //
 
             
             

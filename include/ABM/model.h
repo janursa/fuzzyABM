@@ -21,6 +21,7 @@ struct myEnv : public Env {
 	
 	using param_type = map<string, double>;
 	double collect_from_patches(string tag);
+	double collect_from_agents(string tag);
 	void set_settings(map<string, double> grid_settings) {
 		this->grid_settings = grid_settings;
 		

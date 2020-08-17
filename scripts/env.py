@@ -130,12 +130,16 @@ class ABM(myEnv):
 		## TGF
 		TGF = self.collect_from_patches("TGF")
 		add("TGF",TGF)
+		## matuiry
+		maturity = self.collect_from_agents("maturity")
+		maturity_n = maturity / len(self.agents)
+		add("maturity",maturity_n)
 		## ECM
-		ECM = self.collect_from_patches("ECM")
-		add("ECM",ECM)
+		#ECM = self.collect_from_patches("ECM")
+		#add("ECM",ECM)
 		## HA
-		HA = self.collect_from_patches("HA")
-		add("HA",HA)
+		#HA = self.collect_from_patches("HA")
+		#add("HA",HA)
 		## output 
 		self.output()
 
@@ -169,13 +173,31 @@ class ABM(myEnv):
 		for key,value in factors.items():
 			if key == "liveCellCount":
 				sim_res = self.data["MSC"][-1] # last count
+				error_value =abs((float)(sim_res - value)/value) 
+				print("{} sim : {} exp {} error {} ".format(key,sim_res,value,error_value))
+			elif key == "BMP" or key == "TGF":
+				sim_res = self.data[key][-1] # last count
+				error_value =abs((float)(sim_res - value)/value) 
 			elif key == "viability":
 				total_cell_count = self.data["MSC"][-1] + self.data["Dead"][-1] 
 				sim_res = (float) (self.data["MSC"][-1])/total_cell_count
+				ranges = []
+				if (isinstance(value,str)): # a range is given
+					ranges_str = value.split()
+					ranges.append(float(ranges_str[0]))
+					ranges.append(float(ranges_str[1]))
+					if sim_res >= ranges[0] and sim_res<=ranges[1]:
+						error_value = 0
+					else:
+						if (sim_res < ranges[0]):
+							error_value =abs((float)(sim_res - ranges[0])/ranges[0]) 
+						else : # it's bigger that the upper limit
+							error_value =abs((float)(sim_res - ranges[1])/ranges[1]) 
+				else: 
+					error_value =abs((float)(sim_res - value)/value) 
 			else:
 				raise Exception("Error is not defined for '{}'".format(key))
-
-			error_value =abs((float)(sim_res - value)/value) 
+			
 			# print("\nsim_res {} value {} error_value {}".format(sim_res,value,error_value))
 			errors.update({key:error_value})
 			results.update({key:sim_res})
@@ -202,6 +224,12 @@ class ABM(myEnv):
 				for (key,value) in settings_copy["expectations"][timepoint].items():
 					if key == "liveCellCount":
 						settings_copy["expectations"][timepoint][key] = (int)(value * scale_factor)
+					elif key == "BMP":
+						continue
+					elif key == "TGF":
+						continue
+					elif key == "viability":
+						continue
 					else:
 						raise ValueError("Scalling is not defined for {} in expectations".format(key))
 		return settings_copy
@@ -230,7 +258,6 @@ class ABM(myEnv):
 			if self.run_mode == "test":
 				update_progress(i/self.duration)
 			
-
 		# calculate mean error
 		mm = []
 		for key,item in self.errors.items():
@@ -360,14 +387,17 @@ class ABM(myEnv):
 		lactate = df[["TGF"]]
 		lactate.to_csv('outputs/TGF.csv')
 		## BMP
-		lactate = df[["BMP"]]
-		lactate.to_csv('outputs/BMP.csv')
+		BMP = df[["BMP"]]
+		BMP.to_csv('outputs/BMP.csv')
+		## maturity
+		maturity = df[["maturity"]]
+		maturity.to_csv('outputs/maturity.csv')
 		## ECM
-		lactate = df[["ECM"]]
-		lactate.to_csv('outputs/ECM.csv')
+		#ECM = df[["ECM"]]
+		#ECM.to_csv('outputs/ECM.csv')
 		## HA
-		lactate = df[["HA"]]
-		lactate.to_csv('outputs/HA.csv')
+		#HA = df[["HA"]]
+		#HA.to_csv('outputs/HA.csv')
 	def refresh(self):
 		for [key,patch] in self.patches.items():
 			patch.initialize()
