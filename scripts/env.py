@@ -174,7 +174,7 @@ class ABM(myEnv):
 			if key == "liveCellCount":
 				sim_res = self.data["MSC"][-1] # last count
 				error_value =abs((float)(sim_res - value)/value) 
-				print("{} sim : {} exp {} error {} ".format(key,sim_res,value,error_value))
+				#print("{} sim : {} exp {} error {} ".format(key,sim_res,value,error_value))
 			elif key == "BMP" or key == "TGF":
 				sim_res = self.data[key][-1] # last count
 				error_value =abs((float)(sim_res - value)/value) 

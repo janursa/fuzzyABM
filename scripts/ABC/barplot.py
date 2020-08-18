@@ -16,7 +16,7 @@ if __name__ == "__main__":
 	with open(os.path.join('outputs','top_results.json')) as file:
 		top_results = json.load(file)['top_results']
 
-	target = "liveCellCount"
+	target = "viability"
 	time_points = ["24","48","72"]
 	oo = {}
 		
@@ -61,5 +61,5 @@ if __name__ == "__main__":
 
 		fig.update_layout(barmode='group',
 						  title=ID )
-		fig.write_html('outputs/barplot_{}.html'.format(ID))
+		fig.write_html('outputs/barplot_{}_{}.html'.format(ID,target))
 
