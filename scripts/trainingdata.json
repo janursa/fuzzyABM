@@ -266,15 +266,21 @@
 			"timepoints": [ "168", "336", "504" ],
 			"168": {
 				"liveCellCount": 14035,
-				"viability": "0.90  1"
+				"viability": "0.90  1",
+				"OC": 0.53,
+				"ALP": 0.30
 			},
 			"336": {
 				"liveCellCount": 9650,
-				"viability": "0.90  1"
+				"viability": "0.90  1",
+				"OC": 0.71,
+				"ALP": 0.53
 			},
 			"504": {
 				"liveCellCount": 10796,
-				"viability": "0.90  1"
+				"viability": "0.90  1",
+				"OC": 0.8,
+				"ALP": 0.57
 			}
 		}
 	},
@@ -312,15 +318,21 @@
 			"timepoints": [ "168", "336", "504" ],
 			"168": {
 				"liveCellCount": 14400,
-				"viability": "0.90  1"
+				"viability": "0.90  1",
+				"OC": 0.28,
+				"ALP": 0.34
 			},
 			"336": {
 				"liveCellCount": 13030,
-				"viability": "0.90  1"
+				"viability": "0.90  1",
+				"OC": 0.22,
+				"ALP": 0.39
 			},
 			"504": {
 				"liveCellCount": 10267,
-				"viability": "0.90  1"
+				"viability": "0.90  1",
+				"OC": 0.27,
+				"ALP": 0.61
 			}
 		}
 	}
