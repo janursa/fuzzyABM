@@ -80,7 +80,7 @@ class tools:
             return float(x)
 
 if __name__ == "__main__":
-    base_dir = "../build/outputs_Helvia_3in_3out"
+    base_dir = "../build/outputs"
     def fitness():
         file_dir = os.path.join(base_dir,"top_fitness.txt")
         to_dir = base_dir

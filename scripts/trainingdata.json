@@ -1,5 +1,5 @@
 {
-	"IDs": [ "H2017_Mg0", "H2017_Mg3", "H2017_Mg6", "H2017_Mg12", "H2017_Mg60" ],
+	"IDs": [ "B2016_C","B2016_M"],
 	"scale": 0.05,
 	"H2017_Mg0": {
 		"setup": {
@@ -35,13 +35,16 @@
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 3287
+				"liveCellCount": 3287,
+				"viability": "0.95  1"
 			},
 			"48": {
-				"liveCellCount": 7123
+				"liveCellCount": 7123,
+				"viability": "0.95  1"
 			},
 			"72": {
-				"liveCellCount": 10136
+				"liveCellCount": 10136,
+				"viability": "0.95  1"
 			}
 		}
 	},
@@ -78,13 +81,16 @@
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 3424
+				"liveCellCount": 3424,
+				"viability": "0.9  1"
 			},
 			"48": {
-				"liveCellCount": 6575
+				"liveCellCount": 6575,
+				"viability": "0.9  1"
 			},
 			"72": {
-				"liveCellCount": 13150
+				"liveCellCount": 13150,
+				"viability": "0.9  1"
 			}
 		}
 	},
@@ -121,13 +127,16 @@
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 3013
+				"liveCellCount": 3013,
+				"viability": "0.85  .95"
 			},
 			"48": {
-				"liveCellCount": 6301
+				"liveCellCount": 6301,
+				"viability": "0.85  .95"
 			},
 			"72": {
-				"liveCellCount": 9863
+				"liveCellCount": 9863,
+				"viability": "0.85  .95"
 			}
 		}
 	},
@@ -164,13 +173,16 @@
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 2191
+				"liveCellCount": 2191,
+				"viability": "0.8  .9"
 			},
 			"48": {
-				"liveCellCount": 4931
+				"liveCellCount": 4931,
+				"viability": "0.8  .9"
 			},
 			"72": {
-				"liveCellCount": 7123
+				"liveCellCount": 7123,
+				"viability": "0.8  .9"
 			}
 		}
 	},
@@ -207,13 +219,16 @@
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 1917
+				"liveCellCount": 1917,
+				"viability": "0.6  .75"
 			},
 			"48": {
-				"liveCellCount": 2739
+				"liveCellCount": 2739,
+				"viability": "0.6  .75"
 			},
 			"72": {
-				"liveCellCount": 2739
+				"liveCellCount": 2739,
+				"viability": "0.6  .75"
 			}
 		}
 	},
@@ -251,17 +266,14 @@
 			"timepoints": [ "168", "336", "504" ],
 			"168": {
 				"liveCellCount": 14035,
-				"BMP": 0.132,
 				"viability": "0.90  1"
 			},
 			"336": {
 				"liveCellCount": 9650,
-				"BMP": 1.43,
 				"viability": "0.90  1"
 			},
 			"504": {
 				"liveCellCount": 10796,
-				"BMP": 0.37,
 				"viability": "0.90  1"
 			}
 		}
@@ -300,17 +312,14 @@
 			"timepoints": [ "168", "336", "504" ],
 			"168": {
 				"liveCellCount": 14400,
-				"BMP": 0.141,
 				"viability": "0.90  1"
 			},
 			"336": {
 				"liveCellCount": 13030,
-				"BMP": 0.562,
 				"viability": "0.90  1"
 			},
 			"504": {
 				"liveCellCount": 10267,
-				"BMP": 0.371,
 				"viability": "0.90  1"
 			}
 		}

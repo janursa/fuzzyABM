@@ -35,16 +35,13 @@
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 3287,
-				"viability": "0.95  1"
+				"liveCellCount": 3287
 			},
 			"48": {
-				"liveCellCount": 7123,
-				"viability": "0.95  1"
+				"liveCellCount": 7123
 			},
 			"72": {
-				"liveCellCount": 10136,
-				"viability": "0.95  1"
+				"liveCellCount": 10136
 			}
 		}
 	},
@@ -81,16 +78,13 @@
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 3424,
-				"viability": "0.9  1"
+				"liveCellCount": 3424
 			},
 			"48": {
-				"liveCellCount": 6575,
-				"viability": "0.9  1"
+				"liveCellCount": 6575
 			},
 			"72": {
-				"liveCellCount": 13150,
-				"viability": "0.9  1"
+				"liveCellCount": 13150
 			}
 		}
 	},
@@ -127,16 +121,13 @@
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 3013,
-				"viability": "0.85  .95"
+				"liveCellCount": 3013
 			},
 			"48": {
-				"liveCellCount": 6301,
-				"viability": "0.85  .95"
+				"liveCellCount": 6301
 			},
 			"72": {
-				"liveCellCount": 9863,
-				"viability": "0.85  .95"
+				"liveCellCount": 9863
 			}
 		}
 	},
@@ -173,16 +164,13 @@
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 2191,
-				"viability": "0.8  .9"
+				"liveCellCount": 2191
 			},
 			"48": {
-				"liveCellCount": 4931,
-				"viability": "0.8  .9"
+				"liveCellCount": 4931
 			},
 			"72": {
-				"liveCellCount": 7123,
-				"viability": "0.8  .9"
+				"liveCellCount": 7123
 			}
 		}
 	},
@@ -219,16 +207,13 @@
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 1917,
-				"viability": "0.6  .75"
+				"liveCellCount": 1917
 			},
 			"48": {
-				"liveCellCount": 2739,
-				"viability": "0.6  .75"
+				"liveCellCount": 2739
 			},
 			"72": {
-				"liveCellCount": 2739,
-				"viability": "0.6  .75"
+				"liveCellCount": 2739
 			}
 		}
 	},

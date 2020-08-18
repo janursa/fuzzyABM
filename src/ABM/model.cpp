@@ -30,7 +30,7 @@ bool MSC::mortality(double Mo){
 		auto a_Mo = this->params.at("a_Mo");
 		auto baseChance = this->params.at("B_MSC_Mo");
 		auto a_Pr = this->params.at("a_Pr_Mo");
-		auto a_pass = this->params.at("a_pass_M0"); // passaging effect
+		auto a_pass = this->params.at("a_c_M0"); // passaging effect
 		int pass_flag = 0;
 		if (this->myenv->get_tick() <= 1) {
 			pass_flag = 1;

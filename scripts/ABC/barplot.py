@@ -16,7 +16,7 @@ if __name__ == "__main__":
 	with open(os.path.join('outputs','top_results.json')) as file:
 		top_results = json.load(file)['top_results']
 
-	target = "viability"
+	target = "liveCellCount"
 	time_points = ["24","48","72"]
 	oo = {}
 		
