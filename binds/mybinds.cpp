@@ -18,6 +18,9 @@ PYBIND11_MODULE(myBinds, m) {
     myEnv_binds.def(py::init<>());
     myEnv_binds.def("collect_from_patches",&myEnv::collect_from_patches);
     myEnv_binds.def("collect_from_agents", &myEnv::collect_from_agents);
+    myEnv_binds.def("set_GFs", &myEnv::set_GFs);
+
+    myEnv_binds.def("get_GFs", &myEnv::get_GFs);
     // myEnv_binds.def("set_settings",&myEnv::set_settings);
     myEnv_binds.def("set_params",&myEnv::set_params);
     myEnv_binds.def("set_settings", &myEnv::set_settings);

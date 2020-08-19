@@ -53,7 +53,10 @@ class ABM(myEnv):
 		self.data = {}
 		self.results = {} # results collected for validation
 		self.errors = {}
-
+		self.initialize_state_vars()
+	def initialize_state_vars(self):
+		self.set_GFs("TGF",self.params["TGF_0"])
+		self.set_GFs("BMP",self.params["BMP_0"])
 	
 	def reset(self):
 		self.initialize()
@@ -97,6 +100,8 @@ class ABM(myEnv):
 		agent_counts = self.settings["setup"]["agents"]["n"]
 		self.setup_agents(agent_counts)
 		self.update()
+		# TGF
+		
 	def step(self):
 		self.increment_tick()
 		self.step_patches()
@@ -125,10 +130,10 @@ class ABM(myEnv):
 		pH_mean = self.collect_from_patches("pH")/len(self.patches)
 		add("pH",pH_mean)
 		## BMP
-		BMP = self.collect_from_patches("BMP")
+		BMP = self.get_GFs("BMP")
 		add("BMP",BMP)
 		## TGF
-		TGF = self.collect_from_patches("TGF")
+		TGF = self.get_GFs("TGF")
 		add("TGF",TGF)
 		## matuiry
 		maturity = self.collect_from_agents("maturity")
@@ -209,7 +214,7 @@ class ABM(myEnv):
 			else:
 				raise Exception("Error is not defined for '{}'".format(key))
 			
-			print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
+			#print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
 			errors.update({key:error_value})
 			results.update({key:sim_res})
 		self.errors.update({str(self.get_tick()):errors})
@@ -414,4 +419,5 @@ class ABM(myEnv):
 	def refresh(self):
 		for [key,patch] in self.patches.items():
 			patch.initialize()
+		self.initialize_state_vars()
 

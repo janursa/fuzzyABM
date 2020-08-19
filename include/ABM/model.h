@@ -35,6 +35,13 @@ struct myEnv : public Env {
 	param_type params;
 	shared_ptr<fuzzy> policy;
 	map<string,double> grid_settings;
+	map<string, double> GFs;
+	void set_GFs(string tag, double value) {
+		GFs[tag] = value;
+	}
+	double get_GFs(string tag) {
+		return GFs[tag];
+	}
 	unsigned tick;
 	void increment_tick() {
 		tick++;
@@ -80,7 +87,6 @@ struct MSC : public Agent{
 	double alkalinity();
 	void differentiation(double , double);
 	void bone_production(double, double); // for ECM and minerals
-	void GF(); // for BMP and TGF
 
 	bool migration(double Mi);
 	virtual void step();
@@ -107,7 +113,7 @@ struct MSC : public Agent{
 	shared_ptr<myEnv> myenv;
 	bool damage = false;
 	bool cycled = false; // is true if cell just did mitosis
-	double v_p_v; //v_patch/v_domain
+	//double v_p_v; //v_patch/v_domain
 };
 
 struct myPatch : public Patch{

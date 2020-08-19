@@ -1,6 +1,6 @@
 {
 	"IDs": [ "B2016_C","B2016_M"],
-	"scale": 0.05,
+	"scale": 0.025,
 	"H2017_Mg0": {
 		"setup": {
 			"exp_duration": 72,
