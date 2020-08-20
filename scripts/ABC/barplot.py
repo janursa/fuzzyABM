@@ -11,15 +11,19 @@ import json
 import copy
 from env import ABM
 current_file_path = pathlib.Path(__file__).parent.absolute()
-TRAININGDATA_PATH = os.path.join(current_file_path,'..','trainingdata_ber.json')
 
+
+
+
+output_folder = 'outputs_helvia'
+trainingData_name = 'trainingdata_helvia.json'
+TRAININGDATA_PATH = os.path.join(current_file_path,'..',trainingData_name)
 with open(TRAININGDATA_PATH) as file:
 	trainingData = json.load(file)
-
-output_folder = 'outputs_ber'
-targets = ["viability","liveCellCount","OC","ALP"]
-#time_points = ["24","48","72"]
-time_points = ["168","336","504"]
+#targets = ["viability","liveCellCount","OC","ALP"]
+targets = ["viability","liveCellCount"]
+time_points = ["24","48","72"]
+#time_points = ["168","336","504"]
 if __name__ == "__main__":
 
 	## plotting 
@@ -39,7 +43,6 @@ if __name__ == "__main__":
 					sims.append(sim)
 				matched.update({time_point:{"sim":sims,"exp":exp}})
 			oo.update({ID:matched})
-		# plotting for this ID case. TODO: needs to be extended to all
 		for ID in trainingData["IDs"]:
 			exp_y_mean = [oo[ID][i]["exp"] for i in time_points] # error bar is excluded for exp
 			sim_y = [oo[ID][i]["sim"] for i in time_points]
@@ -68,6 +71,20 @@ if __name__ == "__main__":
 			))
 
 			fig.update_layout(barmode='group',
-							  title=ID )
-			fig.write_html(output_folder+'/barplot_{}_{}.html'.format(ID,target))
+							  title=ID,
+							  font=dict(
+								  family='sans-serif',
+								  size=20,
+								  color='#100'
+							  ),
+							  margin=dict(
+								  l=50,
+								  r=150,
+								  b=100,
+								  t=100,
+								  pad=4
+							  ),
+							  xaxis = dict(title = "hours", zeroline = False),
+							  yaxis = dict(title = target, zeroline = False))
+			fig.write_html(output_folder+'/barplot_{}_{}.html'.format(target,ID))
 
