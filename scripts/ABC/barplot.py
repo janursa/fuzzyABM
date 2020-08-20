@@ -15,15 +15,15 @@ current_file_path = pathlib.Path(__file__).parent.absolute()
 
 
 
-output_folder = 'outputs_helvia'
-trainingData_name = 'trainingdata_helvia.json'
+output_folder = 'outputs'
+trainingData_name = 'trainingdata.json'
 TRAININGDATA_PATH = os.path.join(current_file_path,'..',trainingData_name)
 with open(TRAININGDATA_PATH) as file:
 	trainingData = json.load(file)
 #targets = ["viability","liveCellCount","OC","ALP"]
 targets = ["viability","liveCellCount"]
-time_points = ["24","48","72"]
-#time_points = ["168","336","504"]
+#time_points = ["24","48","72"]
+time_points = ["168","336","504"]
 if __name__ == "__main__":
 
 	## plotting 

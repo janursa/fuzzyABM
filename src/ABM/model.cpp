@@ -28,7 +28,7 @@ void myPatch::step(){
 
 bool MSC::mortality(double Mo){
 		auto a_Mo = this->params.at("a_Mo");
-		auto baseChance = this->params.at("B_MSC_Mo");
+		auto baseChance = this->params.at("B_Mo");
 		auto a_Pr = this->params.at("a_Pr_Mo");
 		auto a_pass = this->params.at("a_c_M0"); // passaging effect
 		int pass_flag = 0;
@@ -46,13 +46,13 @@ bool MSC::mortality(double Mo){
 
 bool MSC::proliferation(double Pr){
 	
-	auto baseChance = this->params.at("B_MSC_Pr");
+	auto baseChance = this->params.at("B_Pr");
 	auto internal_clock = this->data["Pr_clock"] * baseChance;
 	if (internal_clock > 1) internal_clock = 1;
 	auto adj_coeff = logic_function(internal_clock);
 	auto modified_baseChance = baseChance * adj_coeff;
 	
-	auto chance =Pr * this->params.at("a_Pr")* modified_baseChance;
+	auto chance =Pr *  modified_baseChance;
 	auto pick = tools::random(0,1);
 	//cout << "internal_clock:"<< internal_clock <<" adj_coeff: "<< adj_coeff<<" modified:"<< modified_baseChance <<" pr: "<<Pr<<" chance: "<< chance << endl;
 	if (pick < chance)
@@ -82,7 +82,7 @@ double MSC::adaptation(){
 
 		auto env_pH = this->patch->get_data("pH");
 		double new_adapted_pH = 0;
-		auto adaptation_rate = this->params.at("B_MSC_rec");
+		auto adaptation_rate = this->params.at("B_rec");
 		if (env_pH > adapted_pH)
 			new_adapted_pH = adapted_pH + adaptation_rate;
 		else
@@ -126,7 +126,7 @@ void MSC::step(){
 void MSC::differentiation(double earlyDiff, double lateDiff) {
 	// TODO: update maturity
 	if (this->data["maturity"] >= 1) return;
-	auto base_rate = this->params["B_MSC_Diff"];
+	auto base_rate = this->params["B_Diff"];
 	double f_diff;
 	if (this->data["maturity"] < this->params["maturity_t"]) { // early maturation
 		f_diff = earlyDiff;
