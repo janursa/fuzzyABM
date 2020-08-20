@@ -76,7 +76,7 @@ if __name__ == "__main__":
 							  title=ID,
 							  font=dict(
 								  family='sans-serif',
-								  size=40,
+								  size=60,
 								  color='#100'
 							  ),
 							  margin=dict(
