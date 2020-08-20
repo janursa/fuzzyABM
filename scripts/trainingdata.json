@@ -265,15 +265,15 @@
 		"expectations": {
 			"timepoints": [ "168", "336", "504" ],
 			"168": {
-				"liveCellCount": 14035,
+				"DNA":0.0842,
 				"viability": "0.90  1"
 			},
 			"336": {
-				"liveCellCount": 9650,
+				"DNA":0.0579,
 				"viability": "0.90  1"
 			},
 			"504": {
-				"liveCellCount": 10796,
+				"DNA":0.0648,
 				"viability": "0.90  1"
 			}
 		}
@@ -311,17 +311,15 @@
 		"expectations": {
 			"timepoints": [ "168", "336", "504" ],
 			"168": {
-				"liveCellCount": 14400,
+				"DNA":0.0864,
 				"viability": "0.90  1"
 			},
 			"336": {
-				"liveCellCount": 13030,
-				"viability": "0.90  1",
-				"OC": 0.22,
-				"ALP": 0.39
+				"DNA":0.0782,
+				"viability": "0.90  1"
 			},
 			"504": {
-				"liveCellCount": 10267,
+				"DNA":0.0616,
 				"viability": "0.90  1"
 			}
 		}

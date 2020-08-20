@@ -10,8 +10,8 @@ import json
 #     medians = json.load(file)["medians"]
 
 scale_factor = trainingData["scale"]
+training_item = ABM.scale(trainingData["B2016_C"],scale_factor)
 
-training_item = ABM.scale(trainingData["B2016_C"],scale_factor);
 try:
     obj = ABM(free_params = {},run_mode="test")
 except ValueError as vl:

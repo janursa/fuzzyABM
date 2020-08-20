@@ -178,8 +178,13 @@ class ABM(myEnv):
 		for key,value in factors.items():
 			if key == "liveCellCount":
 				sim_res = self.data["MSC"][-1] # last count
-				error_value =abs((float)(sim_res - value)/value) 
-				#print("{} sim : {} exp {} error {} ".format(key,sim_res,value,error_value))
+				error_value =abs((float)(sim_res - value)/value)
+			if key == "DNA":
+				cellCount = self.data["MSC"][-1] # last count
+				sim_res = cellCount * self.params["cell_weight"]
+				error_value =abs((float)(sim_res - value)/value)
+
+			#print("{} sim : {} exp {} error {} ".format(key,sim_res,value,error_value))
 			elif key == "BMP" or key == "TGF":
 				sim_res = self.data[key][-1] # last count
 				error_value =abs((float)(sim_res - value)/value) 
@@ -238,8 +243,10 @@ class ABM(myEnv):
 		if "expectations" in settings_copy:
 			for timepoint in settings_copy["expectations"]["timepoints"]:
 				for (key,value) in settings_copy["expectations"][timepoint].items():
-					if key == "liveCellCount":
+					if key == "liveCellCount" :
 						settings_copy["expectations"][timepoint][key] = (int)(value * scale_factor)
+					elif key == "DNA":
+						settings_copy["expectations"][timepoint][key] = (value * scale_factor)
 					elif key == "BMP":
 						continue
 					elif key == "TGF":
