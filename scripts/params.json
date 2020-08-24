@@ -20,14 +20,14 @@
   "a_Pr_Mo": 1,
   "a_Diff": 3,
   "BMP_0": 0.05,
-  "BMP_max": 2000,
+  "BMP_max": 60,
   "TGF_0": 14.2,
-  "TGF_max": 36,
+  "TGF_max": 60,
   "b_TGF": 0.05,
-  "b_BMP": 0.1,
+  "b_BMP": 0.005,
   "a_c_M0": 2.19,
-  "a_m_OC": 0.8,
-  "a_m_ALP": 0.8,
+  "a_m_OC": 0.03,
+  "a_m_ALP": 0.03,
   "c_weight": 0.000006
 
 

@@ -13,8 +13,8 @@ import tools
 
 settings = {
 	"MPI_flag": True,
-	"sample_n": 2000,
-	"top_n": 100,
+	"sample_n": 500,
+	"top_n": 20,
     "replica_n": 1,
 	"output_path": "outputs",
 	"plot": True,
@@ -32,10 +32,10 @@ free_params = {
 	"a_Mo": [3,10],
 	"a_Diff": [2,5],
 	"a_c_Mo": [2,10],
-	"b_BMP": [0.01,0.1],
-	"b_TGF": [0.01,0.1],
-	"a_m_OC": [0.5,1],
-	"a_m_ALP": [0.5,1],
+	"b_BMP": [0.001,0.005],
+	"b_TGF": [0.01,0.05],
+	"a_m_OC": [0.01,0.05],
+	"a_m_ALP": [0.01,0.05],
 	"B_Pr": [0.021,0.083],
 	"c_weight":[0.0000006,0.000006]
 }

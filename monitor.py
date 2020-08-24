@@ -31,6 +31,16 @@ settings = {
         "graph_dir" : "./build/outputs/maturity.csv",
         "graph_type" : 'lines',
         'x-axis-moves': False
+       },
+    "ALP": {
+        "graph_dir" : "./build/outputs/ALP.csv",
+        "graph_type" : 'lines',
+        'x-axis-moves': False
+       },
+    "OC": {
+        "graph_dir" : "./build/outputs/OC.csv",
+        "graph_type" : 'lines',
+        'x-axis-moves': False
        }
 
 }

@@ -4,10 +4,10 @@ import sys
 import os,sys
 import pathlib
 current_file = pathlib.Path(__file__).parent.absolute()
-medians_path = os.path.join(current_file,'..','build','outputs','medians.json')
+medians_path = os.path.join(current_file,'..','outputs_ber','medians.json')
 import json
-# with open(medians_path) as file:
-#     medians = json.load(file)["medians"]
+with open(medians_path) as file:
+    medians = json.load(file)["medians"]
 
 scale_factor = trainingData["scale"]
 training_item = ABM.scale(trainingData["B2016_C"],scale_factor)
@@ -17,8 +17,10 @@ try:
 except ValueError as vl:
     print(vl)
     sys.exit(2)
+
 start = time.time()
-obj.episode(trainingItem = training_item)
+results,errors,mean_error = obj.episode(trainingItem = training_item)
+print(results)
 #obj.run()
 end = time.time()
 print("Time lapse: {}".format(end-start))

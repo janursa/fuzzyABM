@@ -41,6 +41,14 @@ class ABM(myEnv):
 			os.mkdir("outputs")
 		except:
 			pass
+	def add_data(self,key,value): 
+		if key not in self.data:
+			self.data[key] = [value]
+		elif self.get_tick() > self.last_tick:
+			self.data[key].append(value)
+		else:
+			self.data[key][-1] = value
+
 	def initialize(self):
 		## default fields
 		self._repo = []
@@ -57,6 +65,12 @@ class ABM(myEnv):
 	def initialize_state_vars(self):
 		self.set_GFs("TGF",self.params["TGF_0"])
 		self.set_GFs("BMP",self.params["BMP_0"])
+		if self.get_tick() == 0:
+			self.data["ALP"] = [0]
+			self.data["OC"] = [0]
+		else:
+			self.data["ALP"][-1] = 0
+			self.data["OC"][-1] = 0
 	
 	def reset(self):
 		self.initialize()
@@ -113,37 +127,44 @@ class ABM(myEnv):
 		if (self.get_tick() % self.medium_change_interval == 0): # medium chaneg
 			self.refresh()
 		## Either updates or appends a pair of key-value to self.data
-		def add(key,value): 
-			if key not in self.data:
-				self.data[key] = [value]
-			elif self.get_tick() > self.last_tick:
-			 	self.data[key].append(value)
-			else:
-				self.data[key][-1] = value
+		
 		
 		## agent counts
 		counts = self.count_agents()
 		for key,count in counts.items():
-			add (key,count)
+			self.add_data(key,count)
 
 		## DNA
 		liveCellCount = self.data["MSC"][-1] # last count
 		DNA = liveCellCount * self.params["c_weight"]
-		add("DNA",DNA)
+		self.add_data("DNA",DNA)
 		## average ph on patches
 		pH_mean = self.collect_from_patches("pH")/len(self.patches)
-		add("pH",pH_mean)
+		self.add_data("pH",pH_mean)
 		## BMP
 		BMP = self.get_GFs("BMP")
-		add("BMP",BMP)
+		self.add_data("BMP",BMP)
 		## TGF
 		TGF = self.get_GFs("TGF")
-		add("TGF",TGF)
+		self.add_data("TGF",TGF)
 		## matuiry
 		maturity = self.collect_from_agents("maturity")
-		maturity_n = maturity / len(self.agents)
-		add("maturity",maturity_n)
-		## ECM
+		maturity_n = maturity / liveCellCount
+
+		self.add_data("maturity",maturity_n)
+		## ALP
+		maturity = self.data["maturity"][-1]
+		if (maturity <= self.params["maturity_t"]):
+			rate =self.params["a_m_ALP"] * maturity
+		else:
+			rate =self.params["a_m_ALP"] *(2*self.params["maturity_t"]- maturity)
+		ALP = self.data["ALP"][-1] + rate
+		self.add_data("ALP",ALP)
+		## OC
+		rate =self.params["a_m_OC"] * maturity
+		OC = self.data["OC"][-1] + rate
+		self.add_data("OC",OC)
+		# ECM
 		#ECM = self.collect_from_patches("ECM")
 		#add("ECM",ECM)
 		## HA
@@ -188,20 +209,9 @@ class ABM(myEnv):
 				error_value =abs((float)(sim_res - value)/value)
 
 			#print("{} sim : {} exp {} error {} ".format(key,sim_res,value,error_value))
-			elif key == "BMP" or key == "TGF":
+			elif key == "BMP" or key == "TGF" or key == "ALP" or key == "OC":
 				sim_res = self.data[key][-1] # last count
 				error_value =abs((float)(sim_res - value)/value) 
-			elif key == "ALP":
-				maturity = self.data["maturity"][-1]
-				if (maturity <= self.params["maturity_t"]):
-					sim_sim =self.params["a_m_ALP"] * maturity
-				else:
-					sim_sim =self.params["a_m_ALP"] *(2*self.params["maturity_t"]- maturity)
-				error_value =abs((float)(sim_sim - value)/value) 
-			elif key == "OC":
-				maturity = self.data["maturity"][-1]
-				sim_sim =self.params["a_m_OC"] * maturity
-				error_value =abs((float)(sim_sim - value)/value) 
 			elif key == "viability":
 				total_cell_count = self.data["MSC"][-1] + self.data["Dead"][-1] 
 				sim_res = (float) (self.data["MSC"][-1])/total_cell_count
@@ -222,7 +232,7 @@ class ABM(myEnv):
 			else:
 				raise Exception("Error is not defined for '{}'".format(key))
 			
-			#print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
+			print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
 			errors.update({key:error_value})
 			results.update({key:sim_res})
 		self.errors.update({str(self.get_tick()):errors})
@@ -420,6 +430,12 @@ class ABM(myEnv):
 		## maturity
 		maturity = df[["maturity"]]
 		maturity.to_csv('outputs/maturity.csv')
+		## ALP
+		ALP = df[["ALP"]]
+		ALP.to_csv('outputs/ALP.csv')
+		## OC
+		OC = df[["OC"]]
+		OC.to_csv('outputs/OC.csv')
 		## ECM
 		#ECM = df[["ECM"]]
 		#ECM.to_csv('outputs/ECM.csv')
