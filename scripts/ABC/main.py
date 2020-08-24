@@ -13,8 +13,8 @@ import tools
 
 settings = {
 	"MPI_flag": True,
-	"sample_n": 500,
-	"top_n": 20,
+	"sample_n": 2000,
+	"top_n": 100,
     "replica_n": 1,
 	"output_path": "outputs",
 	"plot": True,
@@ -37,7 +37,7 @@ free_params = {
 	"a_m_OC": [0.5,1],
 	"a_m_ALP": [0.5,1],
 	"B_Pr": [0.021,0.083],
-	"cell_weight":[0.0000006,0.000006]
+	"c_weight":[0.0000006,0.000006]
 }
 if __name__ == "__main__":
 	obj = tools.ABC(settings=settings,free_params=free_params)

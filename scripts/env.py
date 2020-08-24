@@ -125,7 +125,11 @@ class ABM(myEnv):
 		counts = self.count_agents()
 		for key,count in counts.items():
 			add (key,count)
-		
+
+		## DNA
+		liveCellCount = self.data["MSC"][-1] # last count
+		DNA = liveCellCount * self.params["c_weight"]
+		add("DNA",DNA)
 		## average ph on patches
 		pH_mean = self.collect_from_patches("pH")/len(self.patches)
 		add("pH",pH_mean)
@@ -179,9 +183,8 @@ class ABM(myEnv):
 			if key == "liveCellCount":
 				sim_res = self.data["MSC"][-1] # last count
 				error_value =abs((float)(sim_res - value)/value)
-			if key == "DNA":
-				cellCount = self.data["MSC"][-1] # last count
-				sim_res = cellCount * self.params["cell_weight"]
+			elif key == "DNA":
+				sim_res = self.data["DNA"][-1] # last count
 				error_value =abs((float)(sim_res - value)/value)
 
 			#print("{} sim : {} exp {} error {} ".format(key,sim_res,value,error_value))
