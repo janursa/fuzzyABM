@@ -13,8 +13,8 @@ import tools
 
 settings = {
 	"MPI_flag": True,
-	"sample_n": 500,
-	"top_n": 20,
+	"sample_n": 2000,
+	"top_n": 100,
     "replica_n": 1,
 	"output_path": "outputs",
 	"plot": True,
