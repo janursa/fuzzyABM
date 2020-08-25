@@ -159,6 +159,9 @@ class ABM(myEnv):
 		else:
 			rate =self.params["a_m_ALP"] *(2*self.params["maturity_t"]- maturity)
 		ALP = self.data["ALP"][-1] + rate
+		if ALP <0:
+			print("ALP is : {}".format(ALP))
+			sys.exit(2)
 		self.add_data("ALP",ALP)
 		## OC
 		rate =self.params["a_m_OC"] * maturity
