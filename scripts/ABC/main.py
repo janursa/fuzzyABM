@@ -13,8 +13,8 @@ import tools
 
 settings = {
 	"MPI_flag": True,
-	"sample_n": 2000,
-	"top_n": 100,
+	"sample_n": 6000,
+	"top_n": 20,
     "replica_n": 1,
 	"output_path": "outputs",
 	"plot": True,
@@ -27,7 +27,7 @@ free_params = {
 	"MG_L_t": [2,10],
 	"MG_M_t": [5,15],
 	"MG_H_t": [20,40],
-	"maturity_t": [0.5,1],
+	"maturity_t": [0.6,1],
 	"B_Mo": [0.00005,0.00017],
 	"a_Mo": [3,10],
 	"a_Diff": [2,5],
