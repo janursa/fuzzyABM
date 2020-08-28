@@ -36,7 +36,7 @@ class ABM(myEnv):
 		self.set_params(self.params) # sends it to c++
 		## specific settings
 		self.run_mode = run_mode  ## other options are test and RL
-		self.medium_change_interval = 60 ## 2.5 days
+		self.last_refresh = 0
 		try:
 			os.mkdir("outputs")
 		except:
@@ -124,8 +124,8 @@ class ABM(myEnv):
 
 	def update(self):
 		super().update()
-		if (self.get_tick() % self.medium_change_interval == 0): # medium chaneg
-			self.refresh()
+		
+		self.refresh()
 		## Either updates or appends a pair of key-value to self.data
 		
 		
@@ -155,17 +155,26 @@ class ABM(myEnv):
 		## ALP
 		maturity = self.data["maturity"][-1]
 		if (maturity <= self.params["maturity_t"]):
-			rate =self.params["a_m_ALP"] * maturity
+			pass 
 		else:
-			rate =self.params["a_m_ALP"] *(2*self.params["maturity_t"]- maturity)
-		ALP = self.data["ALP"][-1] + rate
+			#rate =self.params["a_m_ALP"] *(2*self.params["maturity_t"]- maturity)
+			maturity = self.params["maturity_t"]
+		#c_ALP = self.data["ALP"][-1]
+		
+		#rate =maturity*self.params["a_m_ALP"]/(0.5+c_ALP)**4 
+		#rate =maturity*self.params["a_m_ALP"]/np.exp(40*c_ALP)
+		#ALP = c_ALP + rate
+		ALP = maturity * self.params["a_m_ALP"]
 		if ALP <0:
 			print("ALP is : {}".format(ALP))
 			#sys.exit(2)
 		self.add_data("ALP",ALP)
 		## OC
-		rate =self.params["a_m_OC"] * maturity
-		OC = self.data["OC"][-1] + rate
+		maturity = self.data["maturity"][-1]
+		#c_OC = self.data["OC"][-1]
+		#rate =maturity*self.params["a_m_OC"]/(0.5+c_OC)**4 
+		#OC = self.data["OC"][-1] + rate
+		OC = self.params["a_m_OC"] * maturity
 		self.add_data("OC",OC)
 		# ECM
 		#ECM = self.collect_from_patches("ECM")
@@ -446,7 +455,18 @@ class ABM(myEnv):
 		#HA = df[["HA"]]
 		#HA.to_csv('outputs/HA.csv')
 	def refresh(self):
+		medium_change_min = 48
+		margin = 30 # 2margin before a measurement, medium refresh cannot happen
+		c_tick = self.get_tick() 
+		if c_tick < (medium_change_min + self.last_refresh): # min 2 days should pass
+			return
+		timepoints = self.settings["expectations"]["timepoints"]
+		timepoints = [int(item) for item in timepoints]
+		for t_p in timepoints:
+			if c_tick <= t_p:
+				if c_tick + margin > t_p: # too close to a measurement point
+					return
 		for [key,patch] in self.patches.items():
 			patch.initialize()
 		self.initialize_state_vars()
-
+		self.last_refresh = c_tick

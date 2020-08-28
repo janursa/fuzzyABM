@@ -13,7 +13,7 @@ scale_factor = trainingData["scale"]
 training_item = ABM.scale(trainingData["B2016_C"],scale_factor)
 
 try:
-    obj = ABM(free_params = {},run_mode="test")
+    obj = ABM(free_params = medians,run_mode="test")
 except ValueError as vl:
     print(vl)
     sys.exit(2)
@@ -21,6 +21,5 @@ except ValueError as vl:
 start = time.time()
 results,errors,mean_error = obj.episode(trainingItem = training_item)
 print(results)
-#obj.run()
 end = time.time()
 print("Time lapse: {}".format(end-start))
