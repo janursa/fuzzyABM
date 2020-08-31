@@ -526,7 +526,7 @@ struct MSC_FUZZY:public base_model {
             };
             vector<vector<string>> earlyDiff_factors = {
                 {" CD is high", " CD is not high "},
-                 {" Mg is low "," Mg is not low "},
+                 {" Mg is neg "," Mg is not neg " },
                 {" BMP is not neg", " BMP is neg "},
                 {" TGF is not neg "," TGF is neg "}
             };

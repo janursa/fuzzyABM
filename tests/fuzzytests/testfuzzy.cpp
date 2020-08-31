@@ -7,7 +7,7 @@ using json = nlohmann::json;
 
 
 shared_ptr<fuzzy> initialize() {
-    string params_dir = "D:/projects/ABM/scripts/params.json";
+    string params_dir = "../scripts/params.json";
     std::ifstream  params_file(params_dir);
     json params_json = json::parse(params_file);
     map<string, double> params = params_json;
@@ -67,6 +67,18 @@ TEST_CASE("Effect of different Mg", "[Mgs]") {
     map<string, double> inputs_1 = { {"maturity", 0}, { "Mg", 0 }, { "AE",0 }, { "CD",0 }, { "damage",0 }, { "TGF",0 }, { "BMP",0 } };
     map<string, double> inputs_2 = { {"maturity", 0}, { "Mg", .05 }, { "AE",0 }, { "CD",0 }, { "damage",0 }, { "TGF",0 }, { "BMP",0 } };
     map<string, double> inputs_3 = { {"maturity", 0}, { "Mg", .5 }, { "AE",0 }, { "CD",0 }, { "damage",0 }, { "TGF",0 }, { "BMP",0 } };
+    map<string, double> inputs_01 = { {"maturity", 0 }, { "Mg", .017 }, { "AE",0 }, { "CD",0.5 }, { "damage",0 }, { "TGF",0 }, { "BMP",0 } };
+    map<string, double> inputs_02 = { {"maturity", .5 }, { "Mg", .083 }, { "AE",0 }, { "CD",0.5 }, { "damage",0 }, { "TGF",0 }, { "BMP",0 } };
+    map<string, double> inputs_03 = { {"maturity", .9 }, { "Mg", .083 }, { "AE",0 }, { "CD",0.5 }, { "damage",0 }, { "TGF",0 }, { "BMP",0 } };
+
+    auto result_01 = fuzzy_obj->predict(inputs_01);
+    auto result_02 = fuzzy_obj->predict(inputs_02);
+    auto result_03 = fuzzy_obj->predict(inputs_03);
+    cout<<"Mg 1mM late diff: "<<result_01["lateDiff"]<<"  Mg 5mM late diff: "<< result_02["lateDiff"]<<endl;
+    cout<<"Mg 5mM maturity 0.5 late diff: "<<result_02["lateDiff"]<<"  Mg 5mM maturity 0.9 late diff: "<<result_03["lateDiff"]<<endl;
+    REQUIRE(result_01["lateDiff"] > result_02["lateDiff"]);
+    REQUIRE(result_02["lateDiff"] == result_03["lateDiff"]);
+
     auto result_1 = fuzzy_obj->predict(inputs_1);
     auto result_2 = fuzzy_obj->predict(inputs_2);
     auto result_3 = fuzzy_obj->predict(inputs_3);
