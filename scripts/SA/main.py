@@ -5,20 +5,15 @@ path_to_env = os.path.join(current_file,'..')
 import sys
 sys.path.insert(1,path_to_env)
 from env import ABM
-ABC_path = os.path.join(current_file,'..','..','..','ABC/ABC')
-print(ABC_path)
+ABC_path = os.path.join(current_file,'..','..','..','SA')
 sys.path.insert(1,ABC_path)
-import tools
+import SA
 
 
 settings = {
 	"MPI_flag": True,
-	"sample_n": 6000,
-	"top_n": 20,
     "replica_n": 1,
 	"output_path": "outputs",
-	"plot": True,
-	"test": True,
 	"model":ABM
 }
 
@@ -29,9 +24,9 @@ free_params = {
 	"MG_H_t": [20,40],
 	"maturity_t": [0.6,1],
 	"B_Mo": [0.00005,0.00017],
-	"a_Mo": [10,100],
+	"a_Mo": [10,30],
 	"a_Diff": [1,5],
-	"a_c_Mo": [10,100],
+	"a_c_Mo": [5,20],
 	"b_BMP": [0.001,0.005],
 	"b_TGF": [0.01,0.05],
 	"a_m_OC": [0.5,1],
@@ -40,11 +35,5 @@ free_params = {
 	"c_weight":[0.0000006,0.000006]
 }
 if __name__ == "__main__":
-	obj = tools.ABC(settings=settings,free_params=free_params)
-	obj.sample()
-	tools.clock.start()
-	obj.run()
-	tools.clock.end()
-	obj.postprocessing()
-	obj.run_tests()
+	print("yey")
 

@@ -7,7 +7,7 @@ using json = nlohmann::json;
 
 
 shared_ptr<fuzzy> initialize() {
-    string params_dir = "../scripts/params.json";
+    string params_dir = "D:/projects/ABM/scripts/params.json";
     std::ifstream  params_file(params_dir);
     json params_json = json::parse(params_file);
     map<string, double> params = params_json;
@@ -16,7 +16,7 @@ shared_ptr<fuzzy> initialize() {
     auto flag = fuzzy_ptr->fuzzy_model->engine->isReady(&status);
     return fuzzy_ptr;
 }
-
+              
 /*
 TEST_CASE("Validity for the whole range of inputs", "[main]") {
     auto fuzzy_obj = initialize();
@@ -71,11 +71,17 @@ TEST_CASE("Effect of different Mg", "[Mgs]") {
     map<string, double> inputs_02 = { {"maturity", .5 }, { "Mg", .083 }, { "AE",0 }, { "CD",0.5 }, { "damage",0 }, { "TGF",0 }, { "BMP",0 } };
     map<string, double> inputs_03 = { {"maturity", .9 }, { "Mg", .083 }, { "AE",0 }, { "CD",0.5 }, { "damage",0 }, { "TGF",0 }, { "BMP",0 } };
 
+    map<string, double> inputs_11 = { {"maturity", 0 }, { "Mg", 0 }, { "AE",0 }, { "CD",0.5 }, { "damage",0 }, { "TGF",0 }, { "BMP",0 } };
+    map<string, double> inputs_12 = { {"maturity", 0 }, { "Mg", 1 }, { "AE",0 }, { "CD",0.5 }, { "damage",0 }, { "TGF",0 }, { "BMP",0 } };
+    auto result_11 = fuzzy_obj->predict(inputs_11);
+    auto result_12 = fuzzy_obj->predict(inputs_12);
+    cout << "Mg 0mM Mo: " << result_11["Mo"] << "  Mg 60mM Mo: " << result_12["Mo"] << endl;
+    REQUIRE(result_12.at("Mo") > result_11.at("Mo"));
     auto result_01 = fuzzy_obj->predict(inputs_01);
     auto result_02 = fuzzy_obj->predict(inputs_02);
     auto result_03 = fuzzy_obj->predict(inputs_03);
-    cout<<"Mg 1mM late diff: "<<result_01["lateDiff"]<<"  Mg 5mM late diff: "<< result_02["lateDiff"]<<endl;
-    cout<<"Mg 5mM maturity 0.5 late diff: "<<result_02["lateDiff"]<<"  Mg 5mM maturity 0.9 late diff: "<<result_03["lateDiff"]<<endl;
+    //cout<<"Mg 1mM late diff: "<<result_01["lateDiff"]<<"  Mg 5mM late diff: "<< result_02["lateDiff"]<<endl;
+    //cout<<"Mg 5mM maturity 0.5 late diff: "<<result_02["lateDiff"]<<"  Mg 5mM maturity 0.9 late diff: "<<result_03["lateDiff"]<<endl;
     REQUIRE(result_01["lateDiff"] > result_02["lateDiff"]);
     REQUIRE(result_02["lateDiff"] == result_03["lateDiff"]);
 
@@ -113,7 +119,7 @@ TEST_CASE("Checking early diff", "[earlyDiff]") {
     auto result_42 = fuzzy_obj->predict(inputs_42);
     auto result_5 = fuzzy_obj->predict(inputs_5);
     REQUIRE(result_1["earlyDiff"] > result_21["earlyDiff"]);
-    REQUIRE(result_1["earlyDiff"] > result_22["earlyDiff"]);
+    REQUIRE(result_1["earlyDiff"] < result_22["earlyDiff"]);
     REQUIRE(result_21["earlyDiff"] > result_32["earlyDiff"]);
     REQUIRE(result_22["earlyDiff"] > result_31["earlyDiff"]);
     REQUIRE(result_32["earlyDiff"] > result_41["earlyDiff"]);

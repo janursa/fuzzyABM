@@ -27,6 +27,7 @@ void myPatch::step(){
 }
 
 bool MSC::mortality(double Mo){
+
 		auto a_Mo = this->params.at("a_Mo");
 		auto baseChance = this->params.at("B_Mo");
 		auto a_Pr = this->params.at("a_Pr_Mo");
@@ -109,6 +110,7 @@ void MSC::step(){
 	auto hatch = this->proliferation(predictions["Pr"]);
 	auto walk = this->migration(predictions["Mi"]);
 	this->differentiation(predictions["earlyDiff"], predictions["lateDiff"]);
+	
 	//bone_production(predictions["ECMprod"], predictions[ "HAprod"]);
 	
 	if (walk)
