@@ -5,8 +5,7 @@ path_to_env = os.path.join(current_file,'..')
 import sys
 sys.path.insert(1,path_to_env)
 from env import ABM
-ABC_path = os.path.join(current_file,'..','..','..','SA')
-sys.path.insert(1,ABC_path)
+
 import SA
 
 
@@ -16,24 +15,34 @@ settings = {
 	"output_path": "outputs",
 	"model":ABM
 }
-
+# free_params = {
+# 	"CD_H_t": [0.67,1],
+# 	"MG_L_t": [2,10],
+# 	"MG_M_t": [5,15],
+# 	"MG_H_t": [20,40],
+# 	"maturity_t": [0.6,1],
+# 	"B_Mo": [0.00005,0.00017],
+# 	"a_Mo": [10,30],
+# 	"a_Diff": [1,5],
+# 	"a_c_Mo": [5,20],
+# 	"b_BMP": [0.001,0.005],
+# 	"b_TGF": [0.01,0.05],
+# 	"a_m_OC": [0.5,1],
+# 	"a_m_ALP": [0.5,1],
+# 	"B_Pr": [0.021,0.083],
+# 	"c_weight":[0.0000006,0.000006]
+# }
 free_params = {
 	"CD_H_t": [0.67,1],
-	"MG_L_t": [2,10],
-	"MG_M_t": [5,15],
-	"MG_H_t": [20,40],
-	"maturity_t": [0.6,1],
-	"B_Mo": [0.00005,0.00017],
-	"a_Mo": [10,30],
-	"a_Diff": [1,5],
-	"a_c_Mo": [5,20],
-	"b_BMP": [0.001,0.005],
+	"B_Pr": [0.021,0.083],
+	"c_weight":[0.0000006,0.000006],
 	"b_TGF": [0.01,0.05],
 	"a_m_OC": [0.5,1],
-	"a_m_ALP": [0.5,1],
-	"B_Pr": [0.021,0.083],
-	"c_weight":[0.0000006,0.000006]
+	"a_m_ALP": [0.5,1]
 }
 if __name__ == "__main__":
-	print("yey")
+	sa_obj = SA.SA(free_params,settings)
+	sa_obj.sample()
+	sa_obj.run()
+	sa_obj.postprocessing()
 
