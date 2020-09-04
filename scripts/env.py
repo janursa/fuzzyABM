@@ -14,13 +14,14 @@ current_file_path = pathlib.Path(__file__).parent.absolute()
 from imports import myEnv,grid, grid3, update_progress
 from agents import MSC_,Dead_
 from patch import myPatch_
+from trainingdata import trainingData
 
 SETTINGS_PATH = os.path.join(current_file_path,'settings.json')
 PARAMS_PATH = os.path.join(current_file_path,'params.json')
-TRAININGDATA_PATH = os.path.join(current_file_path,'trainingdata.json')
+#TRAININGDATA_PATH = os.path.join(current_file_path,'trainingdata.json')
 
-with open(TRAININGDATA_PATH) as file:
-	trainingData = json.load(file)
+# with open(TRAININGDATA_PATH) as file:
+# 	trainingData = json.load(file)
 
 class ABM(myEnv):
 	def __init__(self,free_params = {},run_mode = "ABC"):

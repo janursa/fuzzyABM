@@ -3,7 +3,7 @@ Author: Jalil Nourisa
 """
 import time
 import os
-import progressbar
+from pprogress import ProgressBar
 import json
 import random
 class clock:
@@ -160,9 +160,8 @@ class SA:
         paramsets = self.comm.bcast(paramsets,root = 0) 
 
         def run_model(start,end):
-            pb = progressbar.ProgressBar(end-start)
+            pb = ProgressBar(end-start)
             distances = []
-            pb.start()
             for i in range(start,end):
                 replicas = []
                 flag = True
@@ -179,6 +178,7 @@ class SA:
                 distance = sum(replicas)/len(replicas)
                 distances.append(distance)
                 pb.update()
+            pb.done()
             return distances
         distances_perCore = run_model(portion[0],portion[1])
         
