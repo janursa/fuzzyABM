@@ -209,9 +209,9 @@ struct MSC_FUZZY:public base_model {
         };
         // TGF: 3 level
         auto INPUT_TGF = [&]() {
-            std::vector<double> neg{ 0,0, 0.015,.025 };
-            std::vector<double> low{ 0.015,.025,15 };
-            std::vector<double> high{ .025,15, 15 };
+            std::vector<double> neg{ 0,0, 0.01,0.1 };
+            std::vector<double> low{ 0.01,0.1, params["TGF_H_t"],45 };
+            std::vector<double> high{ params["TGF_H_t"],45, 60,60 };
             NORMALIZE(neg, params["TGF_max"]); NORMALIZE(low, params["TGF_max"]); NORMALIZE(high, params["TGF_max"]);
             check_range(neg); check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
             InputVariable* input2 = new InputVariable;
@@ -221,17 +221,17 @@ struct MSC_FUZZY:public base_model {
             input2->setRange(0, 1);
             input2->setLockValueInRange(false);
             input2->addTerm(new Trapezoid("neg", neg[0], neg[1], neg[2], neg[3]));
-            input2->addTerm(new Triangle("low", low[0], low[1], low[2]));
-            input2->addTerm(new Triangle("high", high[0], high[1], high[2]));
+            input2->addTerm(new Trapezoid("low", low[0], low[1], low[2], low[3]));
+            input2->addTerm(new Trapezoid("high", high[0], high[1], high[2], high[3]));
             engine->addInputVariable(input2);
         };
         // BMP: 4 level
         auto INPUT_BMP = [&]() {
-            std::vector<double> neg{ 0,0, 0.5,10 };
-            std::vector<double> low{ 0.5,10, 50 };
-            std::vector<double> medium{ 10, 50, 250 };
-            std::vector<double> high{ 50, 250, 2000, 2000 };
-            NORMALIZE(neg, params["BMP_max"]); NORMALIZE(low, params["BMP_max"]); NORMALIZE(medium, params["BMP_max"]); NORMALIZE(high, params["BMP_max"]);
+            std::vector<double> neg{ 0,0, 0.008,0.5 };
+            std::vector<double> low{ 0.008,0.5, 10,50 };
+            std::vector<double> medium{ 10, 50, 200,500 };
+            std::vector<double> high{ 200,500, 2000, 2000 };
+            NORMALIZE(neg, 2000); NORMALIZE(low, 2000); NORMALIZE(medium, 2000); NORMALIZE(high, 2000);
             check_range(neg); check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
             InputVariable* input2 = new InputVariable;
             input2->setName("BMP");
@@ -240,8 +240,8 @@ struct MSC_FUZZY:public base_model {
             input2->setRange(0, 1);
             input2->setLockValueInRange(false);
             input2->addTerm(new Trapezoid("neg", neg[0], neg[1], neg[2], neg[3]));
-            input2->addTerm(new Triangle("low", low[0], low[1], low[2]));
-            input2->addTerm(new Triangle("medium", medium[0], medium[1], medium[2]));
+            input2->addTerm(new Trapezoid("low", low[0], low[1], low[2], low[3]));
+            input2->addTerm(new Trapezoid("medium", medium[0], medium[1], medium[2], medium[3]));
             input2->addTerm(new Trapezoid("high", high[0], high[1], high[2], high[3]));
             engine->addInputVariable(input2);
         };

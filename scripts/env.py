@@ -15,9 +15,9 @@ from imports import myEnv,grid, grid3, update_progress
 from agents import MSC_,Dead_
 from patch import myPatch_
 from trainingdata import trainingData
-
+from params import parameters
 SETTINGS_PATH = os.path.join(current_file_path,'settings.json')
-PARAMS_PATH = os.path.join(current_file_path,'params.json')
+
 #TRAININGDATA_PATH = os.path.join(current_file_path,'trainingdata.json')
 
 # with open(TRAININGDATA_PATH) as file:
@@ -30,8 +30,7 @@ class ABM(myEnv):
 		#with open(SETTINGS_PATH) as file:
 			#self.settings = json.load(file)
 		#self.settings = ABM.scale(self.settings,self.settings["scale"]);
-		with open(PARAMS_PATH) as file:
-			self.params = json.load(file)
+		self.params = parameters
 		for key,value in free_params.items():
 			self.params[key] = value
 		self.set_params(self.params) # sends it to c++
