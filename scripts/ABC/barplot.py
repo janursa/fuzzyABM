@@ -11,15 +11,10 @@ import json
 import copy
 from env import ABM
 current_file_path = pathlib.Path(__file__).parent.absolute()
-
-
-
-
+path_to_trainingdata = os.path.join(current_file_path,'..')
+sys.path.insert(1,path_to_trainingdata)
 output_folder = 'outputs'
-trainingData_name = 'trainingdata.json'
-TRAININGDATA_PATH = os.path.join(current_file_path,'..',trainingData_name)
-with open(TRAININGDATA_PATH) as file:
-	trainingData = json.load(file)
+from trainingdata import trainingData
 targets = ["viability","DNA","OC","ALP"]
 #targets = ["viability","liveCellCount"]
 #time_points = ["24","48","72"]
