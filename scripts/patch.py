@@ -8,8 +8,8 @@ class myPatch_(myPatch):
 	"""
 	This class describes my patch.
 	"""
-	def __init__(self,env, params = None, initial_conditions = None):
-		myPatch.__init__(self,env,params,initial_conditions)
+	def __init__(self,env, params = None, initial_conditions = None, flags = None):
+		myPatch.__init__(self,env,params,initial_conditions,flags)
 		# self.configs = configs or {}
 		# self.params = params or {}
 		## initialize

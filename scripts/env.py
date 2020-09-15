@@ -23,6 +23,14 @@ SETTINGS_PATH = os.path.join(current_file_path,'settings.json')
 # with open(TRAININGDATA_PATH) as file:
 # 	trainingData = json.load(file)
 
+
+###### settings
+flags = {
+		'D3':True
+	}
+
+
+
 class ABM(myEnv):
 	def __init__(self,free_params = {},run_mode = "ABC"):
 		myEnv.__init__(self)
@@ -95,14 +103,16 @@ class ABM(myEnv):
 		return agent_obj
 	def generate_patch(self):
 		patch_obj = myPatch_(self, initial_conditions = self.settings["setup"]["patch"]["attrs"].copy(),
-								  params = self.params.copy())
+								  params = self.params.copy(),flags = flags.copy())
 		self._repo.append(patch_obj)
 		return patch_obj
 	def setup(self):
 		self.set_settings(self.settings["setup"]["grid"])
 		grid_info = self.settings["setup"]["grid"]
-		mesh =  grid(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],share = True)
-		# mesh =  grid3(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],grid_info["patch_size"],share = True)
+		if flags["D3"]:
+			mesh =  grid3(length = sqrt(grid_info["area"]), width = sqrt(grid_info["area"]), height = 4*grid_info["patch_size"],mesh_length = grid_info["patch_size"],share = True)
+		else:
+			mesh =  grid(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],share = True)
 
 		self.setup_domain(mesh)
 		## construct policy
@@ -184,7 +194,7 @@ class ABM(myEnv):
 		#add("HA",HA)
 		## output 
 		self.output()
-
+		#sys.exit(2)
 		## calculate errors	//rewards
 		self.checkpoint()
 		for agent in self.agents:
@@ -397,7 +407,7 @@ class ABM(myEnv):
 												type_,
 												size_))
 			file.close()
-		# scatter3_patch(self.patches)
+		scatter3_patch(self.patches)
 
 		def scatter_agents(agents):
 			file = open('outputs/scatter.csv','w')
@@ -425,7 +435,7 @@ class ABM(myEnv):
 												size_))
 
 			file.close()
-		# scatter3_agents(self.agents)
+		#scatter3_agents(self.agents)
 		## agent counts 
 		df = pd.DataFrame.from_dict(self.data)
 		df_agent_counts = df[["MSC","Dead"]]

@@ -23,7 +23,12 @@ void myPatch::step(){
 	//auto new_lactate = this->lactate();
 	this->data["pH"] = pH_new;
 	//this->data["lactate"] = new_lactate;
-	this->data["agent_density"] = this->find_neighbor_agents(true).size()/9.0;
+	float max_cell_count = 9.0;
+	if (this->flags.at("D3")) {
+		max_cell_count = 27.0;
+	}
+
+	this->data["agent_density"] = this->find_neighbor_agents(true).size()/ max_cell_count;
 }
 
 bool MSC::mortality(double Mo){
@@ -98,6 +103,33 @@ bool MSC::migration(double Mi){
 		else
 			return false;
 	}
+void myEnv::setup_agents(map<string, unsigned> config) {
+	auto FIND_PATCH = [&]() {
+		auto patches_indices_copy = this->patches_indices;
+		auto patch_count = this->patches_indices.size();
+
+		auto g = random_::randomly_seeded_MT();
+
+		std::shuffle(patches_indices_copy.begin(), patches_indices_copy.end(), g);
+
+		for (auto const& i : patches_indices_copy) {
+			auto potential_patch = this->patches.at(i);
+			if (potential_patch->layer_index != 0) continue;
+			if (potential_patch->empty) {
+				return potential_patch;
+			}
+		}
+		throw patch_availibility("All patches are occupied.");
+	};
+	for (auto const [agent_type, count] : config) {
+		for (unsigned i = 0; i < count; i++) {
+			auto agent = this->generate_agent(agent_type);
+			auto patch = FIND_PATCH();
+			this->place_agent(patch, agent);
+		}
+		this->agent_classes.insert(agent_type);
+	}
+}
 void MSC::step(){
 	// policy's inputs
 	auto policy_inputs = this->collect_policy_inputs();

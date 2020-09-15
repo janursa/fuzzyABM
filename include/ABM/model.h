@@ -22,6 +22,7 @@ struct myEnv : public Env {
 	using param_type = map<string, double>;
 	double collect_from_patches(string tag);
 	double collect_from_agents(string tag);
+	virtual void setup_agents(map<string, unsigned> config);
 	void set_settings(map<string, double> grid_settings) {
 		this->grid_settings = grid_settings;
 		
@@ -117,10 +118,11 @@ struct MSC : public Agent{
 };
 
 struct myPatch : public Patch{
-	myPatch(shared_ptr<Env> env,std::map<string,double> params_,std::map<string,double> initial_conditions)
+	myPatch(shared_ptr<Env> env,std::map<string,double> params_,std::map<string,double> initial_conditions, std::map<string, bool> flags)
 	try: Patch(env){
 		this->params = params_;
 		this->initial_conditions = initial_conditions;
+		this->flags = flags;
 		this->initialize();
 	}catch (...){
 		cerr<<"Error in the construction of my patch";
@@ -134,6 +136,7 @@ struct myPatch : public Patch{
 	}
 	std::map<string,double> params;
 	std::map<string,double> initial_conditions;
+	std::map<string, bool> flags;
 	double pH();
 	double lactate();
 	virtual void initialize();

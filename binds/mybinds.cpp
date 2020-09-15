@@ -28,6 +28,7 @@ PYBIND11_MODULE(myBinds, m) {
     myEnv_binds.def("get_tick", &myEnv::get_tick);
     myEnv_binds.def("set_tick", &myEnv::set_tick);
     myEnv_binds.def("increment_tick", &myEnv::increment_tick);
+    myEnv_binds.def("setup_agents", &myEnv::setup_agents);
 	/** Agent **/
     // MSC
     // expose_base_agent(m);
@@ -53,9 +54,10 @@ PYBIND11_MODULE(myBinds, m) {
     auto myPatch_binds = expose_patch<myPatch,PyMyPatch<myPatch>>(m,"myPatch");
     myPatch_binds.def(py::init<shared_ptr<Env>,
                     std::map<string,double>,
-                    std::map<string,double>>(),
+                    std::map<string,double>,
+                    std::map<string, bool>>(),
                     "Initialize",py::arg("env"),
-                    py::arg("params"),py::arg("initial_conditions"));
+                    py::arg("params"),py::arg("initial_conditions"), py::arg("flags"));
     myPatch_binds.def("initialize",&myPatch::initialize);
     // /** Exceptions **/
     // expose_exceptions(m);
