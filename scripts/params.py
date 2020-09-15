@@ -10,7 +10,6 @@ fixed_parameters = {
   "w_mg_ph": 0.021,
   "AE_a_coeff": 6.19,
   "a_Pr_Mo": 1,
-  "pH_t": 9,
   "B_Diff": 0.0014
 }
 free_parameters_averaged = {}

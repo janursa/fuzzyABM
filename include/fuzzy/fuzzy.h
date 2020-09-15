@@ -209,9 +209,10 @@ struct MSC_FUZZY:public base_model {
         };
         // TGF: 3 level
         auto INPUT_TGF = [&]() {
-            std::vector<double> neg{ 0,0, 0.01,0.1 };
-            std::vector<double> low{ 0.01,0.1, params["TGF_H_t"],45 };
-            std::vector<double> high{ params["TGF_H_t"],45, 60,60 };
+            auto TGF_H_t = 43.3;
+            std::vector<double> neg{ 0,0, 0.04,14 };
+            std::vector<double> low{ 0.04,14, 36,TGF_H_t };
+            std::vector<double> high{ 36,TGF_H_t, params["TGF_max"],params["TGF_max"] };
             NORMALIZE(neg, params["TGF_max"]); NORMALIZE(low, params["TGF_max"]); NORMALIZE(high, params["TGF_max"]);
             check_range(neg); check_range(low); check_range(high);// checks that the parameters have the right ascending order; this is useful to control the calibration params
             InputVariable* input2 = new InputVariable;
@@ -547,15 +548,18 @@ struct MSC_FUZZY:public base_model {
                     {"TGF is neg","TGF is not neg"},
                     {"BMP is high","BMP is not high"}
                 };
+                // either damage or AE or all others
                 mamdani->addRule(Rule::parse("if (damage is high or AE is high) "
                     " or (Mg is high and CD is high and TGF is neg and BMP is high)"
                     " then Mo is veryhigh", engine));
+                // any combination of 3
                 mamdani->addRule(Rule::parse("if (damage is low and AE is low) and ( "
                     " (Mg is high and CD is high and TGF is neg and BMP is not high)"
                     " or (Mg is high and CD is high and TGF is not neg and BMP is high)"
                     " or (Mg is high and CD is not high and TGF is neg and BMP is high)"
                     " or (Mg is not high and CD is high and TGF is neg and BMP is high)"
                     " ) then Mo is high", engine));
+                // any combination of 2
                 mamdani->addRule(Rule::parse("if (damage is low and AE is low) and ( "
                     " (Mg is high and CD is high and TGF is not neg and BMP is not high)"
                     " or (Mg is high and CD is not high and TGF is neg and BMP is not high)"
@@ -564,12 +568,14 @@ struct MSC_FUZZY:public base_model {
                     " or (Mg is not high and CD is high and TGF is not neg and BMP is high)"
                     " or (Mg is not high and CD is not high and TGF is neg and BMP is high)"
                     " ) then Mo is medium", engine));
+                // any combination of 1
                 mamdani->addRule(Rule::parse("if (damage is low and AE is low) and ( "
                     " (Mg is high and CD is not high and TGF is not neg and BMP is not high)"
                     " or (Mg is not high and CD is high and TGF is not neg and BMP is not high)"
                     " or (Mg is not high and CD is not high and TGF is neg and BMP is not high)"
                     " or (Mg is not high and CD is not high and TGF is not neg and BMP is high)"
                     " ) then Mo is low", engine));
+                // none
                 mamdani->addRule(Rule::parse("if (damage is low and AE is low) and "
                     " (Mg is not high and CD is not high and TGF is not neg and BMP is not high)"
                     " then Mo is verylow", engine));
