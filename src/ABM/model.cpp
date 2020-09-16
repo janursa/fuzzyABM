@@ -107,7 +107,6 @@ void myEnv::setup_agents(map<string, unsigned> config) {
 	auto FIND_PATCH = [&]() {
 		auto patches_indices_copy = this->patches_indices;
 		auto patch_count = this->patches_indices.size();
-
 		auto g = random_::randomly_seeded_MT();
 
 		std::shuffle(patches_indices_copy.begin(), patches_indices_copy.end(), g);
@@ -121,6 +120,7 @@ void myEnv::setup_agents(map<string, unsigned> config) {
 		}
 		throw patch_availibility("All patches are occupied.");
 	};
+
 	for (auto const [agent_type, count] : config) {
 		for (unsigned i = 0; i < count; i++) {
 			auto agent = this->generate_agent(agent_type);

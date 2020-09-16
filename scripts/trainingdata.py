@@ -9,7 +9,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.274,
-				"patch_size": 0.0084
+				"patch_size": 0.0074
 			},
 			"patch": {
 				"attrs": {
@@ -56,7 +56,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.274,
-				"patch_size": 0.0084
+				"patch_size": 0.0074
 			},
 			"patch": {
 				"attrs": {
@@ -102,7 +102,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.274,
-				"patch_size": 0.0084
+				"patch_size": 0.0074
 			},
 			"patch": {
 				"attrs": {
@@ -148,7 +148,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.274,
-				"patch_size": 0.0084
+				"patch_size": 0.0074
 			},
 			"patch": {
 				"attrs": {
@@ -194,7 +194,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.274,
-				"patch_size": 0.0084
+				"patch_size": 0.0074
 			},
 			"patch": {
 				"attrs": {
@@ -240,7 +240,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.313,
-				"patch_size": 0.006
+				"patch_size": 0.013
 			},
 			"patch": {
 				"attrs": {
@@ -292,7 +292,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.313,
-				"patch_size": 0.006
+				"patch_size": 0.013
 			},
 			"patch": {
 				"attrs": {
