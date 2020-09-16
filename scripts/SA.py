@@ -225,7 +225,7 @@ class SA:
                 PTTS_values.update({key:PTTS_value})
             
             with open(self.output_dir+'/PTTS.json','w') as file:
-                file.write(json.dumps(PTTS_values))
+                file.write(json.dumps(PTTS_values, indent=2))
             print("SA postprocessing completed")
     def PTSS(self,lower_bound_indices,results_array):
         # Percentage total sum of squares
