@@ -9,7 +9,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.274,
-				"patch_size": 0.0074
+				"patch_size": 0.012774976
 			},
 			"patch": {
 				"attrs": {
@@ -24,8 +24,7 @@ trainingData = {
 				},
 				"MSC": {
 					"attrs": {
-						"pH": 7.8,
-						"MI": 0
+						"pH": 7.8
 					}
 				},
 				"Dead": {
@@ -38,15 +37,15 @@ trainingData = {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
 				"liveCellCount": 3287,
-				"viability": "0.95  1"
+				"viability": 71
 			},
 			"48": {
 				"liveCellCount": 7123,
-				"viability": "0.95  1"
+				"viability": 73
 			},
 			"72": {
 				"liveCellCount": 10136,
-				"viability": "0.95  1"
+				"viability": 60
 			}
 		}
 	},
@@ -56,7 +55,8 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.274,
-				"patch_size": 0.0074
+				"patch_size": 0.012774976
+
 			},
 			"patch": {
 				"attrs": {
@@ -71,8 +71,7 @@ trainingData = {
 				},
 				"MSC": {
 					"attrs": {
-						"pH": 7.8,
-						"MI": 0
+						"pH": 7.8
 					}
 				},
 				"Dead": {
@@ -84,15 +83,15 @@ trainingData = {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
 				"liveCellCount": 3424,
-				"viability": "0.9  1"
+				"viability": 68
 			},
 			"48": {
 				"liveCellCount": 6575,
-				"viability": "0.9  1"
+				"viability": 80
 			},
 			"72": {
 				"liveCellCount": 13150,
-				"viability": "0.9  1"
+				"viability": 51
 			}
 		}
 	},
@@ -102,7 +101,8 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.274,
-				"patch_size": 0.0074
+				"patch_size": 0.012774976
+
 			},
 			"patch": {
 				"attrs": {
@@ -117,8 +117,7 @@ trainingData = {
 				},
 				"MSC": {
 					"attrs": {
-						"pH": 7.8,
-						"MI": 0
+						"pH": 7.8
 					}
 				},
 				"Dead": {
@@ -130,15 +129,15 @@ trainingData = {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
 				"liveCellCount": 3013,
-				"viability": "0.85  .95"
+				"viability": 69
 			},
 			"48": {
 				"liveCellCount": 6301,
-				"viability": "0.85  .95"
+				"viability": 81
 			},
 			"72": {
 				"liveCellCount": 9863,
-				"viability": "0.85  .95"
+				"viability": 52
 			}
 		}
 	},
@@ -148,7 +147,8 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.274,
-				"patch_size": 0.0074
+				"patch_size": 0.012774976
+
 			},
 			"patch": {
 				"attrs": {
@@ -163,8 +163,7 @@ trainingData = {
 				},
 				"MSC": {
 					"attrs": {
-						"pH": 7.8,
-						"MI": 0
+						"pH": 7.8
 					}
 				},
 				"Dead": {
@@ -176,15 +175,15 @@ trainingData = {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
 				"liveCellCount": 2191,
-				"viability": "0.8  .9"
+				"viability": 70
 			},
 			"48": {
 				"liveCellCount": 4931,
-				"viability": "0.8  .9"
+				"viability": 61
 			},
 			"72": {
 				"liveCellCount": 7123,
-				"viability": "0.8  .9"
+				"viability": 50
 			}
 		}
 	},
@@ -194,7 +193,8 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.274,
-				"patch_size": 0.0074
+				"patch_size": 0.012774976
+
 			},
 			"patch": {
 				"attrs": {
@@ -209,8 +209,7 @@ trainingData = {
 				},
 				"MSC": {
 					"attrs": {
-						"pH": 7.8,
-						"MI": 0
+						"pH": 7.8
 					}
 				},
 				"Dead": {
@@ -221,16 +220,16 @@ trainingData = {
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 1917,
-				"viability": "0.6  .75"
+				"liveCellCount": 1643,
+				"viability": 55
 			},
 			"48": {
-				"liveCellCount": 2739,
-				"viability": "0.6  .75"
+				"liveCellCount": 2191,
+				"viability": 60
 			},
 			"72": {
-				"liveCellCount": 2739,
-				"viability": "0.6  .75"
+				"liveCellCount": 2191,
+				"viability": 51
 			}
 		}
 	},
@@ -255,8 +254,7 @@ trainingData = {
 				},
 				"MSC": {
 					"attrs": {
-						"pH": 7.8,
-						"MI": 0
+						"pH": 7.8
 					}
 				},
 				"Dead": {
@@ -267,22 +265,28 @@ trainingData = {
 		"expectations": {
 			"timepoints": [ "168", "336", "504" ],
 			"168": {
-				"DNA":0.0842,
+				"DNA":26.95,
 				"viability": "0.90  1",
 				"OC": 0.53,
-				"ALP": 0.30
+				"ALP": 0.30,
+				"nTGF": 1.24,
+				"nBMP":0.13
 			},
 			"336": {
-				"DNA":0.0579,
+				"DNA":18.53,
 				"viability": "0.90  1",
 				"OC": 0.71,
-				"ALP": 0.53
+				"ALP": 0.53,
+				"nTGF": 1.87,
+				"nBMP":1.4
 			},
 			"504": {
-				"DNA":0.0648,
+				"DNA":20.73,
 				"viability": "0.90  1",
 				"OC": 0.8,
-				"ALP": 0.57
+				"ALP": 0.57,
+				"nTGF": 1.21,
+				"nBMP":0.37
 			}
 		}
 	},
@@ -307,8 +311,7 @@ trainingData = {
 				},
 				"MSC": {
 					"attrs": {
-						"pH": 7.8,
-						"MI": 0
+						"pH": 7.8
 					}
 				},
 				"Dead": {
@@ -319,22 +322,28 @@ trainingData = {
 		"expectations": {
 			"timepoints": [ "168", "336", "504" ],
 			"168": {
-				"DNA":0.0864,
+				"DNA":27.65,
 				"viability": "0.90  1",
 				"OC": 0.28,
-				"ALP": 0.34
+				"ALP": 0.34,
+				"nTGF": 1.1,
+				"nBMP":0.14
 			},
 			"336": {
-				"DNA":0.0782,
+				"DNA":25.02,
 				"viability": "0.90  1",
 				"OC": 0.22,
-				"ALP": 0.39
+				"ALP": 0.39,
+				"nTGF": 0.97,
+				"nBMP":0.56
 			},
 			"504": {
-				"DNA":0.0616,
+				"DNA":19.71,
 				"viability": "0.90  1",
 				"OC": 0.27,
-				"ALP": 0.61
+				"ALP": 0.61,
+				"nTGF": 1.21,
+				"nBMP":0.37
 			}
 		}
 	}

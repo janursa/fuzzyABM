@@ -231,9 +231,15 @@ class ABM(myEnv):
 				error_value =abs((float)(sim_res - value)/value)
 
 			#print("{} sim : {} exp {} error {} ".format(key,sim_res,value,error_value))
-			elif key == "BMP" or key == "TGF" or key == "ALP" or key == "OC":
+			elif  key == "ALP" or key == "OC":
 				sim_res = self.data[key][-1] # last count
 				error_value =abs((float)(sim_res - value)/value) 
+			elif key == "nBMP" :
+				sim_res =self.params["a_BMP_nBMP"] * self.data["BMP"][-1] # last count
+				error_value =abs((float)(sim_res - value)/value)
+			elif key == "nTGF" :
+				sim_res =self.params["a_TGF_nTGF"] * self.data["TGF"][-1] # last count
+				error_value =abs((float)(sim_res - value)/value)
 			elif key == "viability":
 				total_cell_count = self.data["MSC"][-1] + self.data["Dead"][-1] 
 				sim_res = (float) (self.data["MSC"][-1])/total_cell_count
@@ -254,7 +260,7 @@ class ABM(myEnv):
 			else:
 				raise Exception("Error is not defined for '{}'".format(key))
 			
-			#print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
+			print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
 			errors.update({key:error_value})
 			results.update({key:sim_res})
 		self.errors.update({str(self.get_tick()):errors})
@@ -289,6 +295,8 @@ class ABM(myEnv):
 					elif key == "viability":
 						continue
 					elif key == "ALP" or key == "OC":
+						continue
+					elif key == "nBMP" or key == "nTGF":
 						continue
 					else:
 						raise ValueError("Scalling is not defined for {} in expectations".format(key))
