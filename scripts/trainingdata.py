@@ -1,5 +1,6 @@
 trainingData = {
-	"IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"],
+	# "IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"],
+	"IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60","B2016_C","B2016_M"],
 	#"IDs": ["H2017_Mg0"],
 	#"IDs": [ "B2016_C","B2016_M"],
 	"scale": 0.025,
@@ -266,7 +267,7 @@ trainingData = {
 			"timepoints": [ "168", "336", "504" ],
 			"168": {
 				"DNA":26.95,
-				"viability": "0.90  1",
+				"viability": "70  80",
 				"OC": 0.53,
 				"ALP": 0.30,
 				"nTGF": 1.24,
@@ -274,7 +275,7 @@ trainingData = {
 			},
 			"336": {
 				"DNA":18.53,
-				"viability": "0.90  1",
+				"viability": "70  80",
 				"OC": 0.71,
 				"ALP": 0.53,
 				"nTGF": 1.87,
@@ -282,7 +283,7 @@ trainingData = {
 			},
 			"504": {
 				"DNA":20.73,
-				"viability": "0.90  1",
+				"viability": "70  80",
 				"OC": 0.8,
 				"ALP": 0.57,
 				"nTGF": 1.21,
@@ -323,7 +324,7 @@ trainingData = {
 			"timepoints": [ "168", "336", "504" ],
 			"168": {
 				"DNA":27.65,
-				"viability": "0.90  1",
+				"viability": "70  80",
 				"OC": 0.28,
 				"ALP": 0.34,
 				"nTGF": 1.1,
@@ -331,7 +332,7 @@ trainingData = {
 			},
 			"336": {
 				"DNA":25.02,
-				"viability": "0.90  1",
+				"viability": "70  80",
 				"OC": 0.22,
 				"ALP": 0.39,
 				"nTGF": 0.97,
@@ -339,7 +340,7 @@ trainingData = {
 			},
 			"504": {
 				"DNA":19.71,
-				"viability": "0.90  1",
+				"viability": "70  80",
 				"OC": 0.27,
 				"ALP": 0.61,
 				"nTGF": 1.21,

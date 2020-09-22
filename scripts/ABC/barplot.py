@@ -15,10 +15,10 @@ path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
 output_folder = 'outputs'
 from trainingdata import trainingData
-targets = ["viability","DNA","OC","ALP"]
+targets = ["liveCellCount","viability","DNA","OC","ALP"]
 #targets = ["viability","liveCellCount"]
 #time_points = ["24","48","72"]
-time_points = ["168","336","504"]
+time_points = ["24","48","72","168","336","504"]
 if __name__ == "__main__":
 
 	## plotting 
@@ -26,11 +26,14 @@ if __name__ == "__main__":
 		top_results = json.load(file)['top_results']
 	for target in targets:
 		oo = {}
-
 		for ID in trainingData["IDs"]:
 			trainingitem = ABM.scale(trainingData[ID],trainingData["scale"])
 			matched = {}
 			for time_point in time_points:
+				if time_point  not in trainingitem["expectations"]:
+					continue
+				if target not in trainingitem["expectations"][time_point]:
+					continue
 				exp = trainingitem["expectations"][time_point][target]
 				sims = []
 				for top_result in top_results:
@@ -39,8 +42,11 @@ if __name__ == "__main__":
 				matched.update({time_point:{"sim":sims,"exp":exp}})
 			oo.update({ID:matched})
 		for ID in trainingData["IDs"]:
-			exp_y_mean = [oo[ID][i]["exp"] for i in time_points] # error bar is excluded for exp
-			sim_y = [oo[ID][i]["sim"] for i in time_points]
+			time_points_adj = list(oo[ID].keys())
+			if len(time_points_adj) == 0 :
+				continue
+			exp_y_mean = [oo[ID][i]["exp"] for i in time_points_adj] # error bar is excluded for exp
+			sim_y = [oo[ID][i]["sim"] for i in time_points_adj]
 			sim_y_median = []
 			sim_y_upper_error = []
 			sim_y_lower_error = []
@@ -54,11 +60,11 @@ if __name__ == "__main__":
 			fig = go.Figure()
 			fig.add_trace(go.Bar(
 				name='Experimental',
-				x=time_points, y=exp_y_mean
+				x=time_points_adj, y=exp_y_mean
 			))
 			fig.add_trace(go.Bar(
 				name='Simulation',
-				x=time_points, y=sim_y_median,
+				x=time_points_adj, y=sim_y_median,
 				error_y=dict(type='data',
 							symmetric = False,
 							array=sim_y_upper_error,

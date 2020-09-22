@@ -242,7 +242,7 @@ class ABM(myEnv):
 				error_value =abs((float)(sim_res - value)/value)
 			elif key == "viability":
 				total_cell_count = self.data["MSC"][-1] + self.data["Dead"][-1] 
-				sim_res = (float) (self.data["MSC"][-1])/total_cell_count
+				sim_res = 100*(float) (self.data["MSC"][-1])/total_cell_count
 				ranges = []
 				if (isinstance(value,str)): # a range is given
 					ranges_str = value.split()
@@ -260,7 +260,7 @@ class ABM(myEnv):
 			else:
 				raise Exception("Error is not defined for '{}'".format(key))
 			
-			print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
+			# print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
 			errors.update({key:error_value})
 			results.update({key:sim_res})
 		self.errors.update({str(self.get_tick()):errors})
