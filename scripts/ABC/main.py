@@ -6,7 +6,6 @@ import sys
 sys.path.insert(1,path_to_env)
 from env import ABM
 ABC_path = os.path.join(current_file,'..','..','..','ABC/ABC')
-print(ABC_path)
 sys.path.insert(1,ABC_path)
 import tools
 

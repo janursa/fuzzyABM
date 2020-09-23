@@ -5,8 +5,9 @@ path_to_env = os.path.join(current_file,'..')
 import sys
 sys.path.insert(1,path_to_env)
 from env import ABM
-
-import SA
+ABC_path = os.path.join(current_file,'..','..','..','FFD/FFD')
+sys.path.insert(1,ABC_path)
+import tools
 
 
 settings = {
@@ -46,7 +47,7 @@ free_params = {
 # 	"a_m_ALP": [0.5,1]
 # }
 if __name__ == "__main__":
-	sa_obj = SA.SA(free_params,settings)
+	sa_obj = tools.SA(free_params,settings)
 	sa_obj.sample()
 	sa_obj.run()
 	sa_obj.postprocessing()
