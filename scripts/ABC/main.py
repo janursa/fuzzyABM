@@ -13,42 +13,27 @@ import tools
 settings = {
 	"MPI_flag": True,
 	"sample_n": 5000,
-	"top_n": 50,
+	"top_n": 100,
     "replica_n": 1,
-	"output_path": "outputs",
-	"plot": True,
+	"output_path": "outputs/ABC_H_1",
 	"test": True,
 	"model":ABM
 }
+working_dir = os.getcwd()
+output_dir = os.path.join(working_dir,settings["output_path"])
+sys.path.insert(1,output_dir)
+# print(output_dir)
+from c_params import free_params
 
-free_params = {
-	## the controller's params
-	"MG_L_t": [2,10],
-	"MG_M_t": [5,15],
-	## un checked
-	# "maturity_t": [0.6,1],
-	# "a_Diff": [1,5],
-	# "a_m_OC": [0.5,1],
-	# "a_m_ALP": [0.5,1],
-	# "c_weight":[0.0001,0.001],
-	# "CD_H_t": [0.67,1],
-	"B_Mo": [0.00005,0.00017],
-	"a_Mo": [10,30],
-	# "a_c_Mo": [5,20],
-	"b_BMP": [0.001,0.005],
-	"b_TGF": [0.01,0.05],
-	"B_Pr": [0.021,0.083],
-	# "MG_H_t": [20,40],
-	# "pH_t": [8.5,9.5],
-	"a_TGF_nTGF":[0.067,0.2],
-	# "a_BMP_nBMP":[0.033,0.1]
-}
+
+
 if __name__ == "__main__":
 	obj = tools.ABC(settings=settings,free_params=free_params)
-	obj.sample()
-	tools.clock.start()
-	obj.run()
-	tools.clock.end()
-	obj.postprocessing()
-	obj.run_tests()
+	# obj.sample()
+	# tools.clock.start()
+	# obj.run()
+	# tools.clock.end()
+	# obj.postprocessing()
+	# obj.run_tests()
+	obj.plot()
 

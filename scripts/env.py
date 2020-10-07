@@ -157,10 +157,14 @@ class ABM(myEnv):
 		## TGF
 		TGF = self.get_GFs("TGF")
 		self.add_data("TGF",TGF)
-		## matuiry
+		## maturity
 		maturity = self.collect_from_agents("maturity")
-		maturity_n = maturity / liveCellCount
 
+
+		if liveCellCount == 0:
+			maturity_n = 0
+		else:
+			maturity_n = maturity / liveCellCount
 		self.add_data("maturity",maturity_n)
 		## ALP
 		maturity = self.data["maturity"][-1]
