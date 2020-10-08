@@ -6,8 +6,7 @@ import pathlib
 current_file = pathlib.Path(__file__).parent.absolute()
 medians_path = os.path.join(current_file,'..','outputs_ber','medians.json')
 import json
-with open(medians_path) as file:
-    medians = json.load(file)["medians"]
+
 
 scale_factor = trainingData["scale"]
 training_item = ABM.scale(trainingData["B2016_C"],scale_factor)

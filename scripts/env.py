@@ -350,6 +350,7 @@ class ABM(myEnv):
 		#step 3: calculate error
 		mean_errors = []
 		IDs = trainingData["IDs"]
+		print(IDs)
 		scale_factor = trainingData["scale"]
 		for ID in IDs:
 			try:
