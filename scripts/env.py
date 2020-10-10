@@ -305,6 +305,37 @@ class ABM(myEnv):
 					else:
 						raise ValueError("Scalling is not defined for {} in expectations".format(key))
 		return settings_copy
+	@staticmethod
+	def up_scale(results,scale_factor):
+
+		"""
+		Scale the settings (both setup and expectations) based on the scale factor. This needs
+		to be revised for new training items with different format
+		"""
+		results_copy  = copy.deepcopy(results)
+
+		# scale expectations
+		
+		for timepoint in results_copy.keys():
+			for (key,value) in results[timepoint].items():
+				if key == "liveCellCount" :
+					results_copy[timepoint][key] = (int)(value * scale_factor)
+					# print(" value {} factor {} scalled {}".format(value,scale_factor,results_copy[timepoint][key]))
+				elif key == "DNA":
+					results_copy[timepoint][key] = (value * scale_factor)
+				elif key == "BMP":
+					continue
+				elif key == "TGF":
+					continue
+				elif key == "viability":
+					continue
+				elif key == "ALP" or key == "OC":
+					continue
+				elif key == "nBMP" or key == "nTGF":
+					continue
+				else:
+					raise ValueError("Scalling is not defined for {} in expectations".format(key))
+		return results_copy
 	def episode(self,trainingItem = None):
 		"""
 		Runs the model for one single training item

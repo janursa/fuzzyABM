@@ -69,15 +69,16 @@ if __name__ == "__main__":
 							symmetric = False,
 							array=sim_y_upper_error,
 							arrayminus = sim_y_lower_error,
-							 width = 20,
-							 thickness = 10)
+							 width = 10,
+							 thickness = 5,
+							 )
 			))
 
 			fig.update_layout(barmode='group',
 							  title=ID,
 							  font=dict(
-								  family='sans-serif',
-								  size=50,
+								  family='Times New Roman',
+								  size=25,
 								  color='#100'
 							  ),
 							  margin=dict(
@@ -87,7 +88,32 @@ if __name__ == "__main__":
 								  t=100,
 								  pad=4
 							  ),
-							  xaxis = dict(title = "hours", zeroline = False),
-							  yaxis = dict(title = target, zeroline = False))
-			fig.write_html(output_folder+'/barplot_{}_{}.html'.format(target,ID))
+							  xaxis = dict(title = "hours", 
+							  	showgrid=False,
+								mirror=True,
+								ticks='outside',
+								showline=True,
+								zeroline = False,
+								linecolor = 'black',
+								tickfont = dict(
+									family = 'Old Standard TT, serif',
+									size = 25,
+									color = 'black'
+								),),
+
+							  yaxis = dict(
+							  	title = target, 
+							  	dtick=50,
+							  	mirror=True,
+								ticks='outside',
+								showline=True,
+								linecolor = 'black',
+								showticklabels = True,
+								gridwidth = 20,
+								tickfont = dict(
+									family = 'Old Standard TT, serif',
+									size = 25,
+									color = 'black'
+								),))
+			fig.write_image(output_folder+'/barplot_{}_{}.svg'.format(target,ID))
 
