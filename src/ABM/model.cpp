@@ -58,7 +58,7 @@ bool MSC::proliferation(double Pr){
 	auto adj_coeff = logic_function(internal_clock);
 	auto modified_baseChance = baseChance * adj_coeff;
 	
-	auto chance =Pr *  modified_baseChance;
+	auto chance =Pr * this->params["a_P"]* modified_baseChance;
 	auto pick = tools::random(0,1);
 	//cout << "internal_clock:"<< internal_clock <<" adj_coeff: "<< adj_coeff<<" modified:"<< modified_baseChance <<" pr: "<<Pr<<" chance: "<< chance << endl;
 	if (pick < chance)
@@ -170,7 +170,7 @@ void MSC::differentiation(double earlyDiff, double lateDiff) {
 	}
 	auto adj_rate = f_diff  * this->params["a_Diff"]* base_rate;
 	//if (tools::random(0,1) < 0.001)
-	//cout  <<"\n base_rate: " << base_rate  << " f_diff: " << f_diff << " adj_rate: " << adj_rate << " maturity: " << this->data["maturity"] << endl;
+//	cout  <<"\n base_rate: " << base_rate  << " f_diff: " << f_diff << " adj_rate: " << adj_rate << " maturity: " << this->data["maturity"] << endl;
 	this->data["maturity"] += adj_rate;
 }
 void MSC::bone_production(double f_ECM, double f_HA) {

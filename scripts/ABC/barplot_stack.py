@@ -13,10 +13,21 @@ from env import ABM
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs/ABC_H_2'
+output_folder = 'outputs'
+extention = 'html'
+if extention == 'html':
+	bar_width= 20
+	bar_edge_width= 2
+	error_bar_width= 3
+	error_bar_thickness= 2
+else:
+	bar_width= 3
+	bar_edge_width= 2
+	error_bar_width= 2
+	error_bar_thickness= 2
 save_dir = 'outputs'
 from trainingdata import trainingData
-targets = ["liveCellCount","viability","DNA","OC","ALP"]
+targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
 #targets = ["viability","liveCellCount"]
 #time_points = ["24","48","72"]
 time_points = ["24","48","72","168","336","504"]
@@ -76,9 +87,14 @@ if __name__ == "__main__":
 				tag = '12 mM'
 			elif ID == 'H2017_Mg60':
 				tag = '60 mM'
+			elif ID == 'B2016_C':
+				tag = '0.78 mM'
+			elif ID == 'B2016_M':
+				tag = '5.6 mM'
 			else:
 				raise ValueError()
-			
+
+
 			fig.add_trace(go.Bar(
 				name='E-'+tag,
 				x=time_points_adj, y=exp_y_mean,
@@ -86,25 +102,25 @@ if __name__ == "__main__":
 				opacity = .8,
 				# legendgroup = tag,
 				# marker={'color':'white'},
-				marker_line=dict(width=2, color= 'black'),
-				width = 3
+				marker_line=dict(width=bar_edge_width, color= 'black'),
+				width = bar_width
 			))
 			fig.add_trace(go.Bar(
 				name='S-'+tag,
 				x=time_points_adj, y=sim_y1_median,
 				error_y=dict(type='data',
-							symmetric = False,
-							array=sim_y1_upper_error,
-							arrayminus = sim_y1_lower_error,
-							 width = 5,
-							 thickness = 2,
+							 symmetric = False,
+							 array=sim_y1_upper_error,
+							 arrayminus = sim_y1_lower_error,
+							 width = error_bar_width,
+							 thickness = error_bar_thickness,
 							 ),
 				offsetgroup = ID_count,
 				# marker={'color':'white'},
-				marker_line=dict(width=2, color= 'black'),
+				marker_line=dict(width=bar_edge_width, color= 'black'),
 				opacity = .8,
 				# legendgroup = tag,
-				width = 3
+				width = bar_width
 			))
 			ID_count+=1
 			
@@ -118,12 +134,11 @@ if __name__ == "__main__":
 			yaxis_title = 'OC'
 		elif target == 'ALP':
 			yaxis_title = 'ALP'
-		elif target == 'TGF':
+		elif target == 'nTGF':
 			yaxis_title = 'TGF'
-		elif target == 'BMP':
+		elif target == 'nBMP':
 			yaxis_title = 'BMP'
 		else:
-			print(target)
 			raise ValueError()
 			
 		tick_font_size = 40
@@ -175,6 +190,8 @@ if __name__ == "__main__":
 							)),
 						  plot_bgcolor='white'
 						  )
-
-		fig.write_image(save_dir+'/barplot_{}.svg'.format(target))
+		if extention == "html":
+			fig.write_html(save_dir+'/barplot_{}.{}'.format(target,extention))
+		else:
+			fig.write_html(save_dir+'/barplot_{}.{}'.format(target,extention))
 

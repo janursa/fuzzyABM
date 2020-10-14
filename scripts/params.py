@@ -9,7 +9,6 @@ fixed_parameters = {
   "B_rec": 0.003,
   "w_mg_ph": 0.021,
   "AE_a_coeff": 6.19,
-  "a_Pr_Mo": 1,
   "B_Diff": 0.0014
 
 }

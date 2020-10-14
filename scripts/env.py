@@ -189,6 +189,7 @@ class ABM(myEnv):
 		#rate =maturity*self.params["a_m_OC"]/(0.5+c_OC)**4 
 		#OC = self.data["OC"][-1] + rate
 		OC = self.params["a_m_OC"] * maturity
+		# print("maturity {} params {} OC {}".format(maturity,self.params["a_m_OC"],OC))
 		self.add_data("OC",OC)
 		# ECM
 		#ECM = self.collect_from_patches("ECM")
@@ -237,7 +238,8 @@ class ABM(myEnv):
 			#print("{} sim : {} exp {} error {} ".format(key,sim_res,value,error_value))
 			elif  key == "ALP" or key == "OC":
 				sim_res = self.data[key][-1] # last count
-				error_value =abs((float)(sim_res - value)/value) 
+				error_value =abs((float)(sim_res - value)/value)
+				# print("sim {} exp {} error {}".format(sim_res,value,error_value))
 			elif key == "nBMP" :
 				sim_res =self.params["a_BMP_nBMP"] * self.data["BMP"][-1] # last count
 				error_value =abs((float)(sim_res - value)/value)

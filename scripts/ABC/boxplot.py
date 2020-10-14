@@ -10,7 +10,7 @@ import json
 import copy
 import numpy as np
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folders = ['outputs/ABC_H_1','outputs/ABC_H_2']
+output_folders = ['outputs/ABC_B_justABC']
 save_folder = 'outputs'
 working_dir = os.getcwd()
 free_params_combined = []
@@ -21,7 +21,8 @@ for ii in range(len(output_folders)):
 	del sys.modules["c_params"]
 
 	free_params_combined.append(free_params)
-axis_font = {'fontname':'Times new roman', 'size':'12'}
+	# print(free_params_combined)
+axis_font = {'fontname':'Times New Roman', 'size':'12'}
 
 format = '.svg'
 if __name__ == "__main__":
@@ -67,7 +68,28 @@ if __name__ == "__main__":
 			key =  r"$r_{b0}$"
 		elif key == "b_TGF":
 			key =  r"$r_{t0}$"
+		elif key == "a_Diff":
+			key =  r"$\beta_{D}$"
+		elif key == "a_P":
+			key =  r"$\beta_{P}$"
+		elif key == "pH_t":
+			key =  r"$pH_{t}$"
+		elif key == "a_TGF_nTGF":
+			key =  r"$\beta_{set}$"
+		elif key == "a_BMP_nBMP":
+			key =  r"$\beta_{sep}$"
+		elif key == "maturity_t":
+			key =  r"$M_{t}$"
+		elif key == "a_m_OC":
+			key = r"$\beta_{Mo}$"
+		elif key == "a_m_ALP":
+			key = r"$\beta_{Ma}$"
+		elif key == "c_weight":
+			key = r"$w_{c}$"
+		elif key == "CD_H_t":
+			key = r"$c_{cht}$"
 		else:
+			print("{} is not defined ".format(key))
 			raise KeyError()
 		labels.append(key)
 	linewidth = 1.5

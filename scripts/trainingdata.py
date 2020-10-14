@@ -1,8 +1,9 @@
 trainingData = {
-	 "IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"],
+	 # "IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"],
 	# "IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60","B2016_C","B2016_M"],
 	# "IDs": ["B2016_M"],
-	#"IDs": [ "B2016_C","B2016_M"],
+	# "IDs": [ "B2016_C","B2016_M"],
+	"IDs": [ "X_1_C","X_1_M3","X_1_M7","X_1_M14"],
 	"scale": 0.025,
 	"H2017_Mg0": {
 		"setup": {
@@ -14,7 +15,7 @@ trainingData = {
 			},
 			"patch": {
 				"attrs": {
-					"Mg": 0,
+					"Mg": 0.74,
 					"pH": 7.8
 				}
 			},
@@ -339,6 +340,174 @@ trainingData = {
 				"ALP": 0.61,
 				"nTGF": 1.21,
 				"nBMP":0.37
+			}
+		}
+	},
+	"X_1_C": {
+		"setup": {
+			"exp_duration": 216,
+			"grid": {
+				"area": 1,
+				"volume": 0.313,
+				"patch_size": 0.013
+			},
+			"patch": {
+				"attrs": {
+					"Mg": .7,
+					"pH": 7.8
+				}
+			},
+			"agents": {
+				"n": {
+					"MSC": 2631,
+					"Dead": 0
+				},
+				"MSC": {
+					"attrs": {
+						"pH": 7.8
+					}
+				},
+				"Dead": {
+					"attrs": {}
+				}
+			}
+		},
+		"expectations": {
+			"timepoints": [ "72", "144", "216" ],
+			"72": {
+				"liveCellCount":19219
+			},
+			"144": {
+				"liveCellCount":32401
+			},
+			"216": {
+				"liveCellCount":65710
+			}
+		}
+	},
+	"X_1_M3": {
+		"setup": {
+			"exp_duration": 216,
+			"grid": {
+				"area": 1,
+				"volume": 0.313,
+				"patch_size": 0.013
+			},
+			"patch": {
+				"attrs": {
+					"Mg": .7,
+					"pH": 7.8
+				}
+			},
+			"agents": {
+				"n": {
+					"MSC": 2631,
+					"Dead": 0
+				},
+				"MSC": {
+					"attrs": {
+						"pH": 7.8
+					}
+				},
+				"Dead": {
+					"attrs": {}
+				}
+			}
+		},
+		"expectations": {
+			"timepoints": [ "72", "144", "216" ],
+			"72": {
+				"liveCellCount":16602
+			},
+			"144": {
+				"liveCellCount":46754
+			},
+			"216": {
+				"liveCellCount":106053
+			}
+		}
+	},
+	"X_1_M7": {
+		"setup": {
+			"exp_duration": 216,
+			"grid": {
+				"area": 1,
+				"volume": 0.313,
+				"patch_size": 0.013
+			},
+			"patch": {
+				"attrs": {
+					"Mg": .7,
+					"pH": 7.8
+				}
+			},
+			"agents": {
+				"n": {
+					"MSC": 2631,
+					"Dead": 0
+				},
+				"MSC": {
+					"attrs": {
+						"pH": 7.8
+					}
+				},
+				"Dead": {
+					"attrs": {}
+				}
+			}
+		},
+		"expectations": {
+			"timepoints": [ "72", "144", "216" ],
+			"72": {
+				"liveCellCount":13765
+			},
+			"144": {
+				"liveCellCount":49915
+			},
+			"216": {
+				"liveCellCount":86163
+			}
+		}
+	},
+	"X_1_M14": {
+		"setup": {
+			"exp_duration": 216,
+			"grid": {
+				"area": 1,
+				"volume": 0.313,
+				"patch_size": 0.013
+			},
+			"patch": {
+				"attrs": {
+					"Mg": .7,
+					"pH": 7.8
+				}
+			},
+			"agents": {
+				"n": {
+					"MSC": 2631,
+					"Dead": 0
+				},
+				"MSC": {
+					"attrs": {
+						"pH": 7.8
+					}
+				},
+				"Dead": {
+					"attrs": {}
+				}
+			}
+		},
+		"expectations": {
+			"timepoints": [ "72", "144", "216" ],
+			"72": {
+				"liveCellCount":8277
+			},
+			"144": {
+				"liveCellCount":26134
+			},
+			"216": {
+				"liveCellCount":46675
 			}
 		}
 	}
