@@ -9,12 +9,14 @@ import plotly.graph_objects as go
 import json
 import copy
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folder = 'outputs/ABC_H_1'
+output_folder = 'outputs/ABC_B_1'
 working_dir = os.getcwd()
 output_dir = os.path.join(working_dir,output_folder)
 sys.path.insert(1,output_dir)
 from c_params import free_params
-
+extention = '.html'
+axis_font = {'fontname':'Times New Roman', 'size':'10'}
+linewidth = 1.5
 def box_plot(scalled_posteriors,path_to_save):
 
 	import plotly.graph_objects as go
@@ -23,15 +25,48 @@ def box_plot(scalled_posteriors,path_to_save):
 	ii = 0
 	for key,value in scalled_posteriors.items():
 		if key == "a_Pr_Mo":
-			key = "\u03B1<sub>PM</sub>"
-		if key == "MG_H_t":
-			key = "c<sub>mht</sub>"
-		if key == "B_Pr":
-			key = "\u03B3<sub>P0</sub>"
-		if key == "B_Mo":
-			key = "\u03B3<sub>M0</sub>"
-		if key == "a_Mo":
-			key = "\u03B2<sub>M0</sub>"
+			key = r"$\alpha_{PM}$"
+		elif key == "MG_H_t":
+			key =  r"$c_{mht}$"
+		elif key == "B_Pr":
+			key =  r"$\gamma_{P0}$"
+		elif key == "B_Mo":
+			key =  r"$\gamma_{M0}$"
+		elif key == "a_Mo":
+			key =  r"$\beta_{M0}$"
+		elif key == "MG_L_t":
+			key =  r"$c_{mlt}$"
+		elif key == "MG_M_t":
+			key =  r"$c_{mmt}$"
+		elif key == "a_c_Mo":
+			key =  r"$\alpha_{CM}$"
+		elif key == "b_BMP":
+			key =  r"$r_{b0}$"
+		elif key == "b_TGF":
+			key =  r"$r_{t0}$"
+		elif key == "a_Diff":
+			key =  r"$\beta_{D}$"
+		elif key == "a_P":
+			key =  r"$\beta_{P}$"
+		elif key == "pH_t":
+			key =  r"$pH_{t}$"
+		elif key == "a_TGF_nTGF":
+			key =  r"$\beta_{set}$"
+		elif key == "a_BMP_nBMP":
+			key =  r"$\beta_{seb}$"
+		elif key == "maturity_t":
+			key =  r"$M_{t}$"
+		elif key == "a_m_OC":
+			key = r"$\beta_{Mo}$"
+		elif key == "a_m_ALP":
+			key = r"$\beta_{Ma}$"
+		elif key == "c_weight":
+			key = r"$w_{c}$"
+		elif key == "CD_H_t":
+			key = r"$c_{cht}$"
+		else:
+			print("{} is not defined ".format(key))
+			raise KeyError()
 
 		fig.add_trace(go.Box(
 			y=value,
@@ -93,8 +128,10 @@ def box_plot(scalled_posteriors,path_to_save):
 		),
 	)
 	# fig.update_yaxes()
-
-	fig.write_image(path_to_save+'/box_plot.svg')
+	if extention == "html":
+		fig.write_html(path_to_save+'/box_plot.{}'.format(extention))
+	else:
+		fig.write_html(path_to_save+'/box_plot.{}'.format(extention))
 
 if __name__ == "__main__":
 
@@ -105,7 +142,7 @@ if __name__ == "__main__":
 	for key,values in posteriors.items():
 		min_v = free_params[key][0]
 		max_v = free_params[key][1]
-		print(" key : {} min {} max {} ".format(key,min_v,max_v))
+		# print(" key : {} min {} max {} ".format(key,min_v,max_v))
 		scalled = list(map(lambda x: (x-min_v)/(max_v-min_v),values))
 		scalled_posteriors.update({key:scalled})
 	box_plot(scalled_posteriors,output_folder)

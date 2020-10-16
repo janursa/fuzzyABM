@@ -10,10 +10,11 @@ import statistics as st
 import json
 import copy
 from env import ABM
+import numpy as np
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs'
+output_folder = 'outputs/ABC_B_2'
 extention = 'html'
 if extention == 'html':
 	bar_width= 20
@@ -36,7 +37,7 @@ if __name__ == "__main__":
 	## plotting 
 	with open(os.path.join(output_folder,'top_results.json')) as file:
 		top_results = json.load(file)['top_results']
-
+	stds = []
 	for target in targets:
 		oo = {}
 		for ID in trainingData["IDs"]:
@@ -77,6 +78,11 @@ if __name__ == "__main__":
 				sim_y1_upper_error.append(upper_error)
 				lower_error = med - min(item)
 				sim_y1_lower_error.append(lower_error)
+				max_error = max([lower_error,upper_error])
+				dev_n = max_error / med
+				stds.append(dev_n)
+				# print("target {} low {} up {} max {} med {} dev_n {}".format(target,lower_error,upper_error,max_error,med,dev_n))
+
 			if ID == 'H2017_Mg0':
 				tag = '0 mM'
 			elif ID == 'H2017_Mg3':
@@ -194,4 +200,5 @@ if __name__ == "__main__":
 			fig.write_html(save_dir+'/barplot_{}.{}'.format(target,extention))
 		else:
 			fig.write_html(save_dir+'/barplot_{}.{}'.format(target,extention))
-
+	# print(stds)
+	print("stds: min {} max {} mean {} ".format(min(stds),max(stds),np.mean(stds)))
