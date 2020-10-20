@@ -123,18 +123,23 @@ class ABM(myEnv):
 		## create agents
 		agent_counts = self.settings["setup"]["agents"]["n"]
 		self.setup_agents(agent_counts)
-		self.update()
+		try:
+			self.update()
+		except ValueError as vl:
+			raise vl
 		# TGF
 		
 	def step(self):
 		self.increment_tick()
 		self.step_patches()
 		self.step_agents()
-		self.update()
+		try:
+			self.update()
+		except ValueError as vl:
+			raise vl
 
 	def update(self):
 		super().update()
-		
 		self.refresh()
 		## Either updates or appends a pair of key-value to self.data
 		
@@ -159,8 +164,6 @@ class ABM(myEnv):
 		self.add_data("TGF",TGF)
 		## maturity
 		maturity = self.collect_from_agents("maturity")
-
-
 		if liveCellCount == 0:
 			maturity_n = 0
 		else:
@@ -172,8 +175,6 @@ class ABM(myEnv):
 			ALP = maturity * self.params["a_m_ALP"]
 		else:
 			ALP = self.params["maturity_t"] * self.params["a_m_ALP"]
-
-
 		if ALP <0:
 			print("ALP is : {}".format(ALP))
 			#sys.exit(2)
@@ -191,7 +192,10 @@ class ABM(myEnv):
 		self.output()
 		#sys.exit(2)
 		## calculate errors	//rewards
-		self.checkpoint()
+		try:
+			self.checkpoint()
+		except :
+			raise ValueError
 		for agent in self.agents:
 			if hasattr(agent,'reward'):
 				agent.reward()
@@ -244,13 +248,10 @@ class ABM(myEnv):
 					ranges_str = value.split()
 					ranges.append(float(ranges_str[0]))
 					ranges.append(float(ranges_str[1]))
-					if sim_res >= ranges[0] and sim_res<=ranges[1]:
+					if sim_res < ranges[0] or sim_res>ranges[1]:
+						raise Exception("Viability doesnt meet the criterion")
+					else :
 						error_value = 0
-					else:
-						if (sim_res < ranges[0]):
-							error_value =abs((float)(sim_res - ranges[0])/ranges[0]) 
-						else : # it's bigger that the upper limit
-							error_value =abs((float)(sim_res - ranges[1])/ranges[1]) 
 				else: 
 					error_value =abs((float)(sim_res - value)/value) 
 			else:
@@ -349,7 +350,10 @@ class ABM(myEnv):
 
 		self.duration = self.settings["setup"]["exp_duration"]
 		for i in range(self.duration):
-			self.step()
+			try:
+				self.step()
+			except ValueError as vl:
+				raise vl
 			if self.run_mode == "test":
 				update_progress(i/self.duration)
 			

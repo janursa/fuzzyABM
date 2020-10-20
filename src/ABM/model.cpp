@@ -253,6 +253,8 @@ void myEnv::update(){
 		if (agent->class_name != "Dead") live_cell_count++;
 	}
 	auto c_cell = live_cell_count / this->grid_settings["volume"];
+	auto maturity_t = this->collect_from_agents("maturity");
+	auto maturity_n = maturity_t/live_cell_count;
 	auto TGF = [&]() {
 		auto c_TGF = this->get_GFs("TGF");
 
@@ -267,7 +269,7 @@ void myEnv::update(){
 			auto b = this->params["b_TGF"];
 			auto TGF_max = this->params["TGF_max"];
 			auto coeff = (b) / (TGF_max + c_TGF);
-			auto rate_prod = coeff * c_cell ;
+			auto rate_prod = coeff *maturity_n *  c_cell ;
 			//cout << "\n c_TGF "<< c_TGF<<" b " << b << " TGF_max :" << TGF_max << " c_cell:" << c_cell << " coeff " << coeff <<" rate_prod "<< rate_prod<< endl;
 			return rate_prod;
 		};
@@ -289,15 +291,15 @@ void myEnv::update(){
 			auto half_life_rate = log(2) / half_life;
 			auto coeff = exp(-half_life_rate);
 			auto deg_rate = c_BMP * (1 - coeff);
-			/*cout << "coeff "<< coeff <<" BMP_cont :"<< BMP_cont<<" deg_rate:"<< deg_rate<< endl;
-			exit(2);*/
 			return deg_rate;
 		};
 		auto PROD = [&]()->double {
 			auto b = this->params["b_BMP"];
 			auto BMP_max = this->params["BMP_max"];
 			auto coeff = (b) / (BMP_max + c_BMP);
-			auto rate_prod = coeff * c_cell ;
+//			auto maturity_a = this->get_data("maturity");
+//			cout<<maturity_n<<endl;
+			auto rate_prod = coeff * maturity_n * c_cell ;
 			//cout << "b " << b << " BMP_max :" << BMP_max << " c_cell:" << c_cell <<" coeff "<< coeff<< endl;
 			return rate_prod;
 
