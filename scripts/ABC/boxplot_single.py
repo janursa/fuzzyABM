@@ -13,8 +13,7 @@ from scipy.stats import levene
 ## settings
 format = '.svg'
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folder = 'outputs/ABC_B_1'
-save_folder = 'outputs'
+output_folder = 'outputs'
 working_dir = os.getcwd()
 free_params_combined = []
 
@@ -30,11 +29,14 @@ if __name__ == "__main__":
 		posteriors = json.load(file)["posteriors"]
 	with open(output_folder+'/priors.json') as file:
 		priors = json.load(file)
+	p_values = {}
 	for key in posteriors.keys():
 		posterior = posteriors[key]
 		prior = priors[key]
 		stat, p = levene(prior, posterior)
-		print(" {} : {}".format(key,p))
+		p_values.update({key:p})
+	with open(output_folder+'/levene.json','w') as file:
+		file.write(json.dumps(p_values))
 	param_c = len(posteriors.keys())
 	data = []
 	keys = []
@@ -114,7 +116,7 @@ if __name__ == "__main__":
 		patch.set_facecolor('white')
 
 	plt.ylim(-.2, 1.2)
-	plt.savefig( os.path.join(save_folder,"box_plot"+format))
+	plt.savefig( os.path.join(output_folder,"box_plot"+format))
 
 
 

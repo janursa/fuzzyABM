@@ -14,7 +14,7 @@ import numpy as np
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs/ABC_B_2'
+output_folder = 'outputs'
 extention = 'html'
 if extention == 'html':
 	bar_width= 20
@@ -26,7 +26,7 @@ else:
 	bar_edge_width= 2
 	error_bar_width= 2
 	error_bar_thickness= 2
-save_dir = 'outputs'
+
 from trainingdata import trainingData
 targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
 #targets = ["viability","liveCellCount"]
@@ -79,9 +79,7 @@ if __name__ == "__main__":
 				lower_error = med - min(item)
 				sim_y1_lower_error.append(lower_error)
 				max_error = max([lower_error,upper_error])
-				dev_n = max_error / med
-				stds.append(dev_n)
-				# print("target {} low {} up {} max {} med {} dev_n {}".format(target,lower_error,upper_error,max_error,med,dev_n))
+				stds.append(np.std(item))
 
 			if ID == 'H2017_Mg0':
 				tag = '0 mM'
@@ -197,8 +195,11 @@ if __name__ == "__main__":
 						  plot_bgcolor='white'
 						  )
 		if extention == "html":
-			fig.write_html(save_dir+'/barplot_{}.{}'.format(target,extention))
+			fig.write_html(output_folder+'/barplot_{}.{}'.format(target,extention))
 		else:
-			fig.write_html(save_dir+'/barplot_{}.{}'.format(target,extention))
+			fig.write_html(output_folder+'/barplot_{}.{}'.format(target,extention))
 	# print(stds)
-	print("stds: min {} max {} mean {} ".format(min(stds),max(stds),np.mean(stds)))
+	stds = {'min': min(stds), 'max': max(stds), 'mean':np.mean(stds)}
+	print(stds)
+	with open(output_folder+'/stds.json','w') as file:
+		file.write(json.dumps(stds))

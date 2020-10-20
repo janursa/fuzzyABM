@@ -169,27 +169,17 @@ class ABM(myEnv):
 		## ALP
 		maturity = self.data["maturity"][-1]
 		if (maturity <= self.params["maturity_t"]):
-			pass 
+			ALP = maturity * self.params["a_m_ALP"]
 		else:
-			#rate =self.params["a_m_ALP"] *(2*self.params["maturity_t"]- maturity)
-			maturity = self.params["maturity_t"]
-		#c_ALP = self.data["ALP"][-1]
-		
-		#rate =maturity*self.params["a_m_ALP"]/(0.5+c_ALP)**4 
-		#rate =maturity*self.params["a_m_ALP"]/np.exp(40*c_ALP)
-		#ALP = c_ALP + rate
-		ALP = maturity * self.params["a_m_ALP"]
+			ALP = self.params["maturity_t"] * self.params["a_m_ALP"]
+
+
 		if ALP <0:
 			print("ALP is : {}".format(ALP))
 			#sys.exit(2)
 		self.add_data("ALP",ALP)
 		## OC
-		maturity = self.data["maturity"][-1]
-		#c_OC = self.data["OC"][-1]
-		#rate =maturity*self.params["a_m_OC"]/(0.5+c_OC)**4 
-		#OC = self.data["OC"][-1] + rate
 		OC = self.params["a_m_OC"] * maturity
-		# print("maturity {} params {} OC {}".format(maturity,self.params["a_m_OC"],OC))
 		self.add_data("OC",OC)
 		# ECM
 		#ECM = self.collect_from_patches("ECM")
