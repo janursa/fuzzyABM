@@ -271,24 +271,24 @@ trainingData = {
 				"OC": 0.53,
 				"ALP": 0.30,
 				"nTGF": 1.24,
-				"nBMP":0.13,
-				'viability': '50 100'
+				"nBMP":0.13
+				# 'viability': '50 100'
 			},
 			"336": {
 				"DNA":5.79028125,
 				"OC": 0.71,
 				"ALP": 0.53,
 				"nTGF": 1.87,
-				"nBMP":1.4,
-				'viability': '50 100'
+				"nBMP":1.4
+				# 'viability': '50 100'
 			},
 			"504": {
 				"DNA":6.478159722,
 				"OC": 0.8,
 				"ALP": 0.57,
 				"nTGF": 1.21,
-				"nBMP":0.37,
-				'viability': '50 100'
+				"nBMP":0.37
+				# 'viability': '50 100'
 			}
 		}
 	},
@@ -328,24 +328,24 @@ trainingData = {
 				"OC": 0.28,
 				"ALP": 0.34,
 				"nTGF": 1.1,
-				"nBMP":0.14,
-				'viability': '50 100'
+				"nBMP":0.14
+				# 'viability': '50 100'
 			},
 			"336": {
 				"DNA":7.818329861,
 				"OC": 0.22,
 				"ALP": 0.39,
 				"nTGF": 0.97,
-				"nBMP":0.56,
-				'viability': '50 100'
+				"nBMP":0.56
+				# 'viability': '50 100'
 			},
 			"504": {
 				"DNA":6.160513889,
 				"OC": 0.27,
 				"ALP": 0.61,
 				"nTGF": 1.21,
-				"nBMP":0.37,
-				'viability': '50 100'
+				"nBMP":0.37
+				# 'viability': '50 100'
 			}
 		}
 	},
