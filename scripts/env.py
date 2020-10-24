@@ -123,20 +123,15 @@ class ABM(myEnv):
 		## create agents
 		agent_counts = self.settings["setup"]["agents"]["n"]
 		self.setup_agents(agent_counts)
-		try:
-			self.update()
-		except ValueError as vl:
-			raise vl
-		# TGF
-		
+
+		self.update()
+
 	def step(self):
 		self.increment_tick()
 		self.step_patches()
 		self.step_agents()
-		try:
-			self.update()
-		except ValueError as vl:
-			raise vl
+
+		self.update()
 
 	def update(self):
 		super().update()
@@ -192,10 +187,9 @@ class ABM(myEnv):
 		self.output()
 		#sys.exit(2)
 		## calculate errors	//rewards
-		try:
-			self.checkpoint()
-		except :
-			raise ValueError
+
+		self.checkpoint()
+
 		for agent in self.agents:
 			if hasattr(agent,'reward'):
 				agent.reward()
@@ -237,6 +231,7 @@ class ABM(myEnv):
 			elif key == "nBMP" :
 				sim_res =self.params["a_BMP_nBMP"] * self.data["BMP"][-1] # last count
 				error_value =abs((float)(sim_res - value)/value)
+				# print("\n sim {} exp {}   error {}".format(sim_res,value,error_value))
 			elif key == "nTGF" :
 				sim_res =self.params["a_TGF_nTGF"] * self.data["TGF"][-1] # last count
 				error_value =abs((float)(sim_res - value)/value)
@@ -244,19 +239,22 @@ class ABM(myEnv):
 				total_cell_count = self.data["MSC"][-1] + self.data["Dead"][-1] 
 				sim_res = 100*(float) (self.data["MSC"][-1])/total_cell_count
 				ranges = []
-				if (isinstance(value,str)): # a range is given
-					ranges_str = value.split()
-					ranges.append(float(ranges_str[0]))
-					ranges.append(float(ranges_str[1]))
-					if sim_res < ranges[0] or sim_res>ranges[1]:
-						raise Exception("Viability doesnt meet the criterion")
-					else :
-						error_value = 0
-				else: 
-					error_value =abs((float)(sim_res - value)/value) 
+				# if (isinstance(value,str)): # a range is given
+				# 	ranges_str = value.split()
+				# 	ranges.append(float(ranges_str[0]))
+				# 	ranges.append(float(ranges_str[1]))
+				# 	# if sim_res < ranges[0] or sim_res>ranges[1]:
+				# 	# 	raise Exception("Viability doesnt meet the criterion")
+				# 	# else :
+				# 	# 	error_value = 0
+				#
+				# else:
+				error_value =abs((float)(sim_res - value)/value)
 			else:
 				raise Exception("Error is not defined for '{}'".format(key))
-			
+			if error_value == None:
+				print("none got in checkpoint")
+				print(self.params)
 			# print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
 			errors.update({key:error_value})
 			results.update({key:sim_res})
@@ -359,6 +357,7 @@ class ABM(myEnv):
 			
 		# calculate mean error
 		mm = []
+		print("\n {}".format(self.errors))
 		for key,item in self.errors.items():
 			for key2,error in item.items():
 				mm.append(error)
@@ -384,6 +383,8 @@ class ABM(myEnv):
 				training_item = ABM.scale(trainingData[ID],scale_factor);
 				_,_,mean_error = self.episode(training_item) 
 			except ValueError as vl:
+				print("\n we got None again")
+				print(self.params)
 				return None
 			mean_errors.append(mean_error)
 			

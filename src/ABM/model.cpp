@@ -269,7 +269,7 @@ void myEnv::update(){
 			auto b = this->params["b_TGF"];
 			auto TGF_max = this->params["TGF_max"];
 			auto coeff = (b) / (TGF_max + c_TGF);
-			auto rate_prod = coeff *maturity_n *  c_cell ;
+			auto rate_prod = coeff * maturity_n * c_cell ;
 			//cout << "\n c_TGF "<< c_TGF<<" b " << b << " TGF_max :" << TGF_max << " c_cell:" << c_cell << " coeff " << coeff <<" rate_prod "<< rate_prod<< endl;
 			return rate_prod;
 		};
@@ -300,7 +300,7 @@ void myEnv::update(){
 //			auto maturity_a = this->get_data("maturity");
 //			cout<<maturity_n<<endl;
 			auto rate_prod = coeff * maturity_n * c_cell ;
-			//cout << "b " << b << " BMP_max :" << BMP_max << " c_cell:" << c_cell <<" coeff "<< coeff<< endl;
+			cout << "b " << b << " BMP_max :" << BMP_max << " c_cell:" << c_cell <<" coeff "<< coeff<< " maturity " << maturity_n<< " rate: "<< rate_prod<< endl;
 			return rate_prod;
 
 		};

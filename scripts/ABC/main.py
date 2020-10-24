@@ -30,9 +30,9 @@ from c_params import free_params
 if __name__ == "__main__":
 	obj = tools.ABC(settings=settings,free_params=free_params)
 	obj.sample()
-	tools.clock.start()
+	# tools.clock.start()
 	obj.run()
-	tools.clock.end()
+	# tools.clock.end()
 	obj.postprocessing()
 	obj.run_tests()
 

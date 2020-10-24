@@ -10,7 +10,7 @@ fixed_parameters = {
   "w_mg_ph": 0.021,
   "AE_a_coeff": 6.19,
   "B_Diff": 0.0014,
-  "a_Diff": 2.0450450450449997, "B_Mo": 0.0024769769765, "a_Mo": 7.582582582583
+  "a_Diff": 2.018018018018,  "B_Mo": 0.0022755255255,  "a_Mo": 6.916916916917
 }
 free_parameters_averaged = {}
 for key,values in free_parameters.items(): # choose a middle point in the range of the values
