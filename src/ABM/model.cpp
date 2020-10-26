@@ -254,7 +254,9 @@ void myEnv::update(){
 	}
 	auto c_cell = live_cell_count / this->grid_settings["volume"];
 	auto maturity_t = this->collect_from_agents("maturity");
-	auto maturity_n = maturity_t/live_cell_count;
+	double maturity_n = 0;
+	if (live_cell_count == 0)maturity_n = 0;
+    else   maturity_n = maturity_t/live_cell_count;
 	auto TGF = [&]() {
 		auto c_TGF = this->get_GFs("TGF");
 
@@ -300,7 +302,7 @@ void myEnv::update(){
 //			auto maturity_a = this->get_data("maturity");
 //			cout<<maturity_n<<endl;
 			auto rate_prod = coeff * maturity_n * c_cell ;
-			cout << "b " << b << " BMP_max :" << BMP_max << " c_cell:" << c_cell <<" coeff "<< coeff<< " maturity " << maturity_n<< " rate: "<< rate_prod<< endl;
+//			cout << "b " << b << " BMP_max :" << BMP_max << " c_cell:" << c_cell <<" coeff "<< coeff<< " maturity " << maturity_n<< " rate: "<< rate_prod<< endl;
 			return rate_prod;
 
 		};
