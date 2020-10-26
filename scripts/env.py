@@ -252,7 +252,6 @@ class ABM(myEnv):
 					ranges.append(float(ranges_str[0]))
 					ranges.append(float(ranges_str[1]))
 					if sim_res < ranges[0] or sim_res>ranges[1]:
-						print("Viability doesnt meet the criterion")
 						raise ValueError("Viability doesnt meet the criterion")
 					else :
 						error_value = 0
