@@ -14,8 +14,8 @@ import numpy as np
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs'
-extention = 'html'
+output_folder = 'outputs/ABC_H_1'
+extention = 'svg'
 if extention == 'html':
 	bar_width= 20
 	bar_edge_width= 2
@@ -201,7 +201,7 @@ if __name__ == "__main__":
 		if extention == "html":
 			fig.write_html(output_folder+'/barplot_{}.{}'.format(target,extention))
 		else:
-			fig.write_html(output_folder+'/barplot_{}.{}'.format(target,extention))
+			fig.write_image(output_folder+'/barplot_{}.{}'.format(target,extention))
 	# print(stds)
 	stds = {'min': min(stds), 'max': max(stds), 'mean':np.mean(stds)}
 	print(stds)
