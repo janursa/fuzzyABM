@@ -10,7 +10,17 @@ fixed_parameters = {
   "w_mg_ph": 0.021,
   "AE_a_coeff": 6.19,
   "B_Diff": 0.0014,
-  # "a_Diff": 2.018018018018,  "B_Mo": 0.0022755255255,  "a_Mo": 6.916916916917,
+  ## calibrated params for Bere
+  "a_BMP_nBMP": 0.18158308308299997, "b_BMP": 0.017027027027, "B_Mo": 0.000362792793,
+  "a_Diff": 1.6171171171175, "b_TGF": 0.027509009009,
+  "MG_L_t": 4.5985985985990006, "a_m_ALP": 0.805055055055, "c_weight": 0.000435135135, "a_TGF_nTGF": 0.1227162162165, "a_Mo": 5.4804804804805,
+  "maturity_t": 0.700900900901,"B_Pr": 0.0514724724725
+
+  ## heike
+  # "a_P": 3.513513513514, "B_Pr": 0.026585585585499998, "B_Mo": 0.0006635585585,
+  # "a_c_Mo": 107.00700700700699, "B_Mo": 0.000601621622,
+  # "pH_t": 9.261261261261499, "b_BMP": 0.036486486486500005,
+
 }
 free_parameters_averaged = {}
 for key,values in free_parameters.items(): # choose a middle point in the range of the values

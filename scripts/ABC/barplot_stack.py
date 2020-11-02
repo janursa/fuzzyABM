@@ -51,7 +51,11 @@ if __name__ == "__main__":
 				exp = trainingitem["expectations"][time_point][target]
 				sims = []
 				top_results_copy = copy.deepcopy(top_results)
+
 				for top_result, in zip(top_results_copy):
+					if top_result == None:
+						print("top result is none")
+						continue
 					top_result[ID] = ABM.up_scale(top_result[ID],reverse_scale)
 
 					sim= top_result[ID][time_point][target]

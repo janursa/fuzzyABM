@@ -1,5 +1,8 @@
 
-free_parameters = {
+
+
+free_params = {
+
 
     "MG_L_t": [2,10],
     "MG_M_t": [10,15],
@@ -21,6 +24,7 @@ free_parameters = {
     "b_TGF": [0.001,0.1],
     "B_Mo": [0.00001,0.001],
     "a_Mo": [0,10]
-    
+
+
 
 }
