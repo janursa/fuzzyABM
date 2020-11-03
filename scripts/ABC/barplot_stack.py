@@ -14,9 +14,9 @@ import numpy as np
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs/ABC_B_4'
-extention = 'svg'
-#extention = 'html'
+output_folder = 'outputs'
+# extention = 'svg'
+extention = 'html'
 
 study = 'Ber'
 #study = 'Helvia'
@@ -25,6 +25,10 @@ if extention == 'html':
 	bar_edge_width= 2
 	error_bar_width= 3
 	error_bar_thickness= 2
+	tick_font_size = 40
+	text_font_size = 40
+	title_font_size = 30
+	gridwidth = 50
 elif study == 'Helvia':
 	bar_width= 3
 	bar_edge_width= 2
@@ -48,7 +52,7 @@ from trainingdata import trainingData
 targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
 #targets = ["viability","liveCellCount"]
 #time_points = ["24","48","72"]
-time_points = ["24","48","72","168","336","504"]
+time_points = ["24","48","72","144","168", "216", "336","504"]
 if __name__ == "__main__":
 	reverse_scale = 1.0/trainingData["scale"]
 	## plotting 
@@ -116,9 +120,17 @@ if __name__ == "__main__":
 				tag = '0.78 mM'
 			elif ID == 'B2016_M':
 				tag = '5.6 mM'
+			elif ID == "X_1_C":
+				tag = '0 mM'
+			elif ID == "X_1_M3":
+				tag = '3 mM'
+			elif ID == "X_1_M7":
+				tag = '7 mM'
+			elif ID == "X_1_M14":
+				tag = '14 mM'
 			else:
 				raise ValueError()
-			
+			print(time_points_adj)
 			fig.add_trace(go.Bar(
 				name='E-'+tag,
 				x=time_points_adj, y=exp_y_mean,
@@ -147,10 +159,10 @@ if __name__ == "__main__":
 				width = bar_width
 			))
 			ID_count+=1
-			
+
 		if target == 'liveCellCount':
 			yaxis_title = 'Live cell count'
-			yrange = (0,1000)
+			yrange = (0,50000)
 		elif target == 'viability':
 			yaxis_title = 'Viability (%)'
 			yrange = (0,10)
@@ -188,6 +200,7 @@ if __name__ == "__main__":
 							  t=50
 						  ),
 						  xaxis = dict(
+
 						  	showgrid=False,
 							mirror=True,
 							showline=True,
