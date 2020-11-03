@@ -14,18 +14,35 @@ import numpy as np
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs/ABC_H_1'
+output_folder = 'outputs/ABC_B_4'
 extention = 'svg'
+#extention = 'html'
+
+study = 'Ber'
+#study = 'Helvia'
 if extention == 'html':
 	bar_width= 20
 	bar_edge_width= 2
 	error_bar_width= 3
 	error_bar_thickness= 2
-else:
+elif study == 'Helvia':
 	bar_width= 3
 	bar_edge_width= 2
 	error_bar_width= 2
 	error_bar_thickness= 2
+	tick_font_size = 40
+	text_font_size = 40
+	title_font_size = 30
+	gridwidth = 50
+elif study == 'Ber':
+	bar_width= 60
+	bar_edge_width= 3
+	error_bar_width= 6
+	error_bar_thickness= 3
+	tick_font_size = 40
+	text_font_size = 40
+	title_font_size = 30
+	gridwidth = 50
 
 from trainingdata import trainingData
 targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
@@ -84,7 +101,7 @@ if __name__ == "__main__":
 				sim_y1_lower_error.append(lower_error)
 				max_error = max([lower_error,upper_error])
 				stds.append(np.std(item))
-
+			
 			if ID == 'H2017_Mg0':
 				tag = '0 mM'
 			elif ID == 'H2017_Mg3':
@@ -101,8 +118,7 @@ if __name__ == "__main__":
 				tag = '5.6 mM'
 			else:
 				raise ValueError()
-
-
+			
 			fig.add_trace(go.Bar(
 				name='E-'+tag,
 				x=time_points_adj, y=exp_y_mean,
@@ -134,25 +150,28 @@ if __name__ == "__main__":
 			
 		if target == 'liveCellCount':
 			yaxis_title = 'Live cell count'
+			yrange = (0,1000)
 		elif target == 'viability':
 			yaxis_title = 'Viability (%)'
+			yrange = (0,10)
 		elif target == 'DNA':
 			yaxis_title = 'DNA (ng/ml)'
+			yrange = (-0.5,10)
 		elif target == 'OC':
 			yaxis_title = 'OC'
+			yrange = (-0.03,1)
 		elif target == 'ALP':
 			yaxis_title = 'ALP'
+			yrange = (-0.02,0.8)
 		elif target == 'nTGF':
 			yaxis_title = 'TGF'
+			yrange = (-.05,2.2)
 		elif target == 'nBMP':
 			yaxis_title = 'BMP'
+			yrange = (-0.05,1.5)
 		else:
 			raise ValueError()
-			
-		tick_font_size = 40
-		text_font_size = 40
-		title_font_size = 30
-		gridwidth = 50
+		
 		fig.update_layout(barmode='group',
 						  # title=title,
 						  title_x=0.5,
@@ -184,7 +203,7 @@ if __name__ == "__main__":
 							),
 
 						  yaxis = dict(
-						  	title = yaxis_title, 
+						  	#title = yaxis_title, 
 						  	mirror=True,
 							ticks='outside',
 							showline=True,
@@ -195,7 +214,8 @@ if __name__ == "__main__":
 								family = 'Times New Roman',
 								size = tick_font_size,
 								color = 'black'
-							)),
+							),
+							range = yrange),
 						  plot_bgcolor='white'
 						  )
 		if extention == "html":
