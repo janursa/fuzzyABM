@@ -10,6 +10,7 @@ fixed_parameters = {
   "w_mg_ph": 0.021,
   "AE_a_coeff": 6.19,
   "B_Diff": 0.0014,
+  'B_Mo': 0.01
   ## calibrated params for Bere
   # "a_BMP_nBMP": 0.18158308308299997, "b_BMP": 0.017027027027, "B_Mo": 0.000362792793,
   # "a_Diff": 1.6171171171175, "b_TGF": 0.027509009009,

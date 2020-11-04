@@ -21,7 +21,7 @@ extention = 'svg'
 study = 'Ber'
 #study = 'Helvia'
 if extention == 'html':
-	bar_width= 20
+	bar_width= 10
 	bar_edge_width= 2
 	error_bar_width= 3
 	error_bar_thickness= 2
@@ -39,7 +39,7 @@ elif study == 'Helvia':
 	title_font_size = 30
 	gridwidth = 50
 elif study == 'Ber':
-	bar_width= 30
+	bar_width= 50
 	bar_edge_width= 3
 	error_bar_width= 6
 	error_bar_thickness= 3
@@ -47,7 +47,7 @@ elif study == 'Ber':
 	text_font_size = 40
 	title_font_size = 30
 	gridwidth = 50
-
+fig_size = [700,700]
 from trainingdata import trainingData
 targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
 #targets = ["viability","liveCellCount"]
@@ -170,7 +170,7 @@ if __name__ == "__main__":
 			yrange = (0,50000)
 		elif target == 'viability':
 			yaxis_title = 'Viability (%)'
-			yrange = (0,10)
+			yrange = (0,110)
 		elif target == 'DNA':
 			yaxis_title = 'DNA (ng/ml)'
 			yrange = (-0.5,10)
@@ -191,6 +191,9 @@ if __name__ == "__main__":
 		
 		time_points_adj_day = hour_2_day(time_points_adj)
 		fig.update_layout(barmode='group',
+						autosize=False,
+				   		width=fig_size[0],
+				   		height=fig_size[1],
 						  # title=title,
 						  title_x=0.5,
 						  title_y=1,
@@ -206,7 +209,7 @@ if __name__ == "__main__":
 							  t=50
 						  ),
 						  xaxis = dict(
-							#title = 'Days',
+							title = 'Days',
 						  	showgrid=True,
 							mirror=True,
 							showline=True,
