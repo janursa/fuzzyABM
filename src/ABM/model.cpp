@@ -41,8 +41,10 @@ bool MSC::mortality(double Mo){
 		if (this->myenv->get_tick() <= 1) {
 			pass_flag = 1;
 		}
-		auto change =(1+ a_Pr*this->cycled)*(1+Mo* a_Mo) * (1 + pass_flag* a_pass)* baseChance;
-		this->cycled = false;
+//		auto change =(1+ a_Pr*this->cycled)*(1+Mo* a_Mo) * (1 + pass_flag* a_pass)* baseChance;
+        auto change =baseChance;
+
+        this->cycled = false;
 		auto pick = tools::random(0,1);
 		if (pick < change)
 			return true;

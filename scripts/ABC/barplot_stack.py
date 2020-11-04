@@ -14,14 +14,14 @@ import numpy as np
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs/ABC_B_4'
-extention = 'svg'
-#extention = 'html'
+output_folder = 'outputs'
+# extention = 'svg'
+extention = 'html'
 
 study = 'Ber'
 #study = 'Helvia'
 if extention == 'html':
-	bar_width= 10
+	bar_width= 5
 	bar_edge_width= 2
 	error_bar_width= 3
 	error_bar_thickness= 2

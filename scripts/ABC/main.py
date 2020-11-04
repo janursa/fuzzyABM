@@ -12,7 +12,7 @@ import tools
 
 settings = {
 	"MPI_flag": True,
-	"sample_n": 1000,
+	"sample_n": 100,
 	"top_n": 100,
     "replica_n": 1,
 	"output_path": "outputs",
@@ -30,9 +30,7 @@ from c_params import free_params
 if __name__ == "__main__":
 	obj = tools.ABC(settings=settings,free_params=free_params)
 	obj.sample()
-	# tools.clock.start()
 	obj.run()
-	# tools.clock.end()
 	obj.postprocessing()
 	obj.run_tests()
 

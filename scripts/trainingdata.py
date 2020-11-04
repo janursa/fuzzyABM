@@ -1,8 +1,9 @@
 trainingData = {
-	#"IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"],
+	"IDs": [ "H2017_Mg0"],
+	# "IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"],
 	# "IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60","B2016_C","B2016_M"],
 	# "IDs": ["B2016_M"],
-	"IDs": [ "B2016_C","B2016_M"],
+	# "IDs": [ "B2016_C","B2016_M"],
 	#"IDs": [ "X_1_C","X_1_M3","X_1_M7","X_1_M14"],
 	"scale": 0.025,
 	"H2017_Mg0": {
@@ -38,15 +39,15 @@ trainingData = {
 		"expectations": {
 			"timepoints": [ "24", "48", "72" ],
 			"24": {
-				"liveCellCount": 3287,
+				# "liveCellCount": 3287,
 				"viability": 71
 			},
 			"48": {
-				"liveCellCount": 7123,
+				# "liveCellCount": 7123,
 				"viability": 73
 			},
 			"72": {
-				"liveCellCount": 10136,
+				# "liveCellCount": 10136,
 				"viability": 60
 			}
 		}
