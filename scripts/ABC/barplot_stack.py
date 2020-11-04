@@ -14,9 +14,9 @@ import numpy as np
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs'
-# extention = 'svg'
-extention = 'html'
+output_folder = 'outputs/ABC_B_4'
+extention = 'svg'
+#extention = 'html'
 
 study = 'Ber'
 #study = 'Helvia'
@@ -39,7 +39,7 @@ elif study == 'Helvia':
 	title_font_size = 30
 	gridwidth = 50
 elif study == 'Ber':
-	bar_width= 60
+	bar_width= 30
 	bar_edge_width= 3
 	error_bar_width= 6
 	error_bar_thickness= 3
@@ -53,6 +53,11 @@ targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
 #targets = ["viability","liveCellCount"]
 #time_points = ["24","48","72"]
 time_points = ["24","48","72","144","168", "216", "336","504"]
+def hour_2_day(data):
+	data_m = []
+	for item in data:
+		data_m.append(str(int(int(item)/24)))
+	return data_m
 if __name__ == "__main__":
 	reverse_scale = 1.0/trainingData["scale"]
 	## plotting 
@@ -89,6 +94,7 @@ if __name__ == "__main__":
 		ID_count = 0
 		for ID in trainingData["IDs"]:
 			time_points_adj = list(oo[ID].keys())
+			
 			if len(time_points_adj) == 0 :
 				continue
 			exp_y_mean = [oo[ID][i]["exp"] for i in time_points_adj] # error bar is excluded for exp
@@ -130,7 +136,6 @@ if __name__ == "__main__":
 				tag = '14 mM'
 			else:
 				raise ValueError()
-			print(time_points_adj)
 			fig.add_trace(go.Bar(
 				name='E-'+tag,
 				x=time_points_adj, y=exp_y_mean,
@@ -170,20 +175,21 @@ if __name__ == "__main__":
 			yaxis_title = 'DNA (ng/ml)'
 			yrange = (-0.5,10)
 		elif target == 'OC':
-			yaxis_title = 'OC'
+			yaxis_title = "OC ((ng/ml)/(ng/ml))"
 			yrange = (-0.03,1)
 		elif target == 'ALP':
-			yaxis_title = 'ALP'
+			yaxis_title = 'ALP ((U/L)/(ng/ml))'
 			yrange = (-0.02,0.8)
 		elif target == 'nTGF':
-			yaxis_title = 'TGF'
+			yaxis_title = 'TGF ((ng/ml)/(ng/ml))'
 			yrange = (-.05,2.2)
 		elif target == 'nBMP':
-			yaxis_title = 'BMP'
+			yaxis_title = 'BMP ((ng/ml)/(ng/ml))'
 			yrange = (-0.05,1.5)
 		else:
 			raise ValueError()
 		
+		time_points_adj_day = hour_2_day(time_points_adj)
 		fig.update_layout(barmode='group',
 						  # title=title,
 						  title_x=0.5,
@@ -200,8 +206,8 @@ if __name__ == "__main__":
 							  t=50
 						  ),
 						  xaxis = dict(
-
-						  	showgrid=False,
+							#title = 'Days',
+						  	showgrid=True,
 							mirror=True,
 							showline=True,
 							zeroline = False,
@@ -212,11 +218,13 @@ if __name__ == "__main__":
 								size = tick_font_size,
 								color = 'black'
 							),
-					        showticklabels=False
+					        showticklabels=True,
+							tickvals = time_points_adj,
+							ticktext = time_points_adj_day
 							),
 
 						  yaxis = dict(
-						  	#title = yaxis_title, 
+						  	title = yaxis_title, 
 						  	mirror=True,
 							ticks='outside',
 							showline=True,

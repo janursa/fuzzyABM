@@ -10,10 +10,11 @@ import json
 import copy
 import numpy as np
 from scipy.stats import levene
+import json
 ## settings
 format = '.svg'
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folder = 'outputs'
+output_folder = 'outputs/ABC_B_1'
 working_dir = os.getcwd()
 free_params_combined = []
 
@@ -24,6 +25,17 @@ from c_params import free_params
 # print(free_params_combined)
 axis_font = {'fontname':'Times New Roman', 'size':'10'}
 linewidth = 1.5
+def sig_signs(p_values):
+	signs = []
+	for _,p in p_values.items():
+		if p>=0.01 :
+			displaystring = r''
+		elif p<0.0001:
+			displaystring = r'**'
+		else:
+			displaystring = r'*'
+		signs.append(displaystring)
+	return signs
 if __name__ == "__main__":
 	with open(output_folder+'/posterior.json') as file:
 		posteriors = json.load(file)["posteriors"]
@@ -98,7 +110,7 @@ if __name__ == "__main__":
 	flierprops = dict( linewidth=linewidth)
 	medianprops = dict( linewidth=linewidth, color = "black")
 	capprops  = dict( linewidth=linewidth)
-	fig, ax = plt.subplots(figsize=(6,2.5))
+	fig, ax = plt.subplots(figsize=(3,2.5))
 	#for ii in range(len(data_combined)):
 	bplot = ax.boxplot(data,notch = True, patch_artist=True, widths = .5,capprops  = capprops
 					   ,boxprops=boxprops, whiskerprops= whiskerprops, flierprops =flierprops ,medianprops =medianprops )
@@ -106,7 +118,8 @@ if __name__ == "__main__":
 	# Pad margins so that markers don't get clipped by the axes
 	# plt.margins(0.2)
 	# Tweak spacing to prevent clipping of tick-labels
-	plt.subplots_adjust(bottom=0.2)
+	#plt.subplots_adjust(bottom=0.1,left=0.1,right=0.1, top=0.1)
+	plt.ylabel('Normalized values')
 	for label in (ax.get_xticklabels() + ax.get_yticklabels()):
 		label.set_fontname(axis_font['fontname'])
 		label.set_fontsize(float(axis_font['size']))
@@ -116,7 +129,14 @@ if __name__ == "__main__":
 		patch.set_facecolor('white')
 
 	plt.ylim(-.2, 1.2)
-	plt.savefig( os.path.join(output_folder,"box_plot"+format))
+	sigs = sig_signs(p_values)
+	xtickslocs = ax.get_xticks()
+	for xloc,sig in zip(xtickslocs,sigs):
+		plt.text(xloc,1.05,sig,size = 20, rotation='horizontal',
+		   horizontalalignment='center',
+        verticalalignment='center')
+
+	plt.savefig( os.path.join(output_folder,"box_plot"+format),bbox_inches="tight")
 
 
 
