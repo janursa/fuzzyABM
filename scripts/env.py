@@ -261,7 +261,7 @@ class ABM(myEnv):
 			else:
 				raise ValueError("Error is not defined for '{}'".format(key))
 			
-			print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
+			# print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
 			errors.update({key:error_value})
 			results.update({key:sim_res})
 		self.errors.update({str(self.get_tick()):errors})
@@ -363,7 +363,7 @@ class ABM(myEnv):
 			
 		# calculate mean error
 		mm = []
-		print("\n {}".format(self.errors))
+		# print("\n {}".format(self.errors))
 		for key,item in self.errors.items():
 			for key2,error in item.items():
 				mm.append(error)

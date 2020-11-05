@@ -13,7 +13,7 @@ from scipy.stats import levene
 import json
 ## settings
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folder = 'outputs/SA_B_1'
+output_folder = 'outputs/SA'
 working_dir = os.getcwd()
 free_params_combined = []
 
