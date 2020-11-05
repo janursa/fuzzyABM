@@ -15,14 +15,20 @@ settings = {
 	"sample_n": 1000,
 	"top_n": 100,
     "replica_n": 1,
-	"output_path": "outputs",
+	"output_path": "outputs/ABC",
 	"test": True,
 	"model":ABM
 }
+
 working_dir = os.getcwd()
 output_dir = os.path.join(working_dir,settings["output_path"])
+try:
+	os.makedirs(output_dir)
+except:
+	pass
 sys.path.insert(1,output_dir)
 # print(output_dir)
+sys.path.insert(1,os.path.join(working_dir,'outputs'))
 from c_params import free_params
 
 
