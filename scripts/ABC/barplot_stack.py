@@ -14,7 +14,7 @@ import numpy as np
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs'
+output_folder = 'outputs/ABC'
 # extention = 'svg'
 extention = 'html'
 

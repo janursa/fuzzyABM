@@ -14,12 +14,14 @@ import json
 ## settings
 format = '.svg'
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folder = 'outputs'
+output_folder = 'outputs/ABC'
+
 working_dir = os.getcwd()
 free_params_combined = []
 
 output_dir = os.path.join(working_dir,output_folder)
 sys.path.insert(1,output_dir)
+sys.path.insert(1,os.path.join(working_dir,'outputs'))
 from c_params import free_params
 
 # print(free_params_combined)
