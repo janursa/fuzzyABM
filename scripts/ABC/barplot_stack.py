@@ -11,15 +11,16 @@ import json
 import copy
 from env import ABM
 import numpy as np
+from sklearn.metrics import explained_variance_score
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs/ABC'
-# extention = 'svg'
-extention = 'html'
+output_folder = 'outputs/ABC_H_4'
+extention = 'svg'
+# extention = 'html'
 
-study = 'Ber'
-#study = 'Helvia'
+# study = 'Ber'
+study = 'Helvia'
 if extention == 'html':
 	bar_width= 5
 	bar_edge_width= 2
@@ -29,15 +30,17 @@ if extention == 'html':
 	text_font_size = 40
 	title_font_size = 30
 	gridwidth = 50
+	fig_size = [700,700]
 elif study == 'Helvia':
 	bar_width= 3
-	bar_edge_width= 2
-	error_bar_width= 2
-	error_bar_thickness= 2
-	tick_font_size = 40
-	text_font_size = 40
-	title_font_size = 30
+	bar_edge_width= 3
+	error_bar_width= 5
+	error_bar_thickness= 3
+	tick_font_size = 35
+	text_font_size = 35
+	title_font_size = 35
 	gridwidth = 50
+	fig_size = [800,700]
 elif study == 'Ber':
 	bar_width= 50
 	bar_edge_width= 3
@@ -47,7 +50,8 @@ elif study == 'Ber':
 	text_font_size = 40
 	title_font_size = 30
 	gridwidth = 50
-fig_size = [700,700]
+	fig_size = [700,700]
+
 from trainingdata import trainingData
 targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
 #targets = ["viability","liveCellCount"]
@@ -64,39 +68,41 @@ if __name__ == "__main__":
 	with open(os.path.join(output_folder,'top_results.json')) as file:
 		top_results = json.load(file)['top_results']
 	stds = []
+	mean_results = {}
+	
 	for target in targets:
+		target_mean_results = {}
 		oo = {}
-		for ID in trainingData["IDs"]:
-			trainingitem =trainingData[ID]
-			matched = {}
-			for time_point in time_points:
-				if time_point  not in trainingitem["expectations"]:
-					continue
-				if target not in trainingitem["expectations"][time_point]:
-					continue
-				exp = trainingitem["expectations"][time_point][target]
-				sims = []
-				top_results_copy = copy.deepcopy(top_results)
-
-				for top_result, in zip(top_results_copy):
-					if top_result == None:
-						print("top result is none")
+		try:
+			for ID in trainingData["IDs"]:
+				trainingitem =trainingData[ID]
+				matched = {}
+				for time_point in time_points:
+					if time_point  not in trainingitem["expectations"]:
 						continue
-					top_result[ID] = ABM.up_scale(top_result[ID],reverse_scale)
+					if target not in trainingitem["expectations"][time_point].keys():
+						raise ValueError()
+					exp = trainingitem["expectations"][time_point][target]
+					sims = []
+					top_results_copy = copy.deepcopy(top_results)
 
-					sim= top_result[ID][time_point][target]
-					sims.append(sim)
-				matched.update({time_point:{"sim":sims,"exp":exp}})
-			oo.update({ID:matched})
+					for top_result, in zip(top_results_copy):
+						if top_result == None:
+							print("top result is none")
+							continue
+						top_result[ID] = ABM.up_scale(top_result[ID],reverse_scale)
 
+						sim = top_result[ID][time_point][target]
+						sims.append(sim)
+					matched.update({time_point:{"sim":sims,"exp":exp}})
+				oo.update({ID:matched})
+		except ValueError as Vl:
+			continue
 
 		fig = go.Figure()	
 		ID_count = 0
 		for ID in trainingData["IDs"]:
 			time_points_adj = list(oo[ID].keys())
-			
-			if len(time_points_adj) == 0 :
-				continue
 			exp_y_mean = [oo[ID][i]["exp"] for i in time_points_adj] # error bar is excluded for exp
 			sim_y1 = [oo[ID][i]["sim"] for i in time_points_adj]
 			sim_y1_median = []
@@ -136,6 +142,8 @@ if __name__ == "__main__":
 				tag = '14 mM'
 			else:
 				raise ValueError()
+			target_mean_results.update({ID:{'exp':exp_y_mean, 'sim':sim_y1_median}})
+
 			fig.add_trace(go.Bar(
 				name='E-'+tag,
 				x=time_points_adj, y=exp_y_mean,
@@ -164,10 +172,12 @@ if __name__ == "__main__":
 				width = bar_width
 			))
 			ID_count+=1
-
+		if target_mean_results != {}:
+			mean_results.update({target:target_mean_results})
+		
 		if target == 'liveCellCount':
 			yaxis_title = 'Live cell count'
-			yrange = (0,50000)
+			yrange = (0,16000)
 		elif target == 'viability':
 			yaxis_title = 'Viability (%)'
 			yrange = (0,110)
@@ -242,12 +252,32 @@ if __name__ == "__main__":
 							range = yrange),
 						  plot_bgcolor='white'
 						  )
+		
 		if extention == "html":
 			fig.write_html(output_folder+'/barplot_{}.{}'.format(target,extention))
 		else:
 			fig.write_image(output_folder+'/barplot_{}.{}'.format(target,extention))
-	# print(stds)
 	stds = {'min': min(stds), 'max': max(stds), 'mean':np.mean(stds)}
-	print(stds)
+	# print(stds)
 	with open(output_folder+'/stds.json','w') as file:
 		file.write(json.dumps(stds))
+	vars_explained = {}
+	for target,ID_data in mean_results.items():
+		vars_explained_IDs = {}
+		exps = []
+		sims = []
+		for ID,values in ID_data.items():
+			exp = values['exp']
+			sim = values['sim']
+			var = explained_variance_score(exp,sim)
+			vars_explained_IDs.update({ID:var})
+			exps.append(exp)
+			sims.append(sim)
+		vars_explained.update({target:vars_explained_IDs})
+		mean_tag = target + '_mean'
+		var_mean = explained_variance_score(exps,sims)
+		vars_explained.update({mean_tag:var_mean})
+		
+
+	with open(output_folder+'/vars_explained.json','w') as file:
+		file.write(json.dumps(vars_explained,indent=4))
