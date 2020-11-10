@@ -29,8 +29,6 @@ flags = {
 		'D3':True
 	}
 
-
-
 class ABM(myEnv):
 	def __init__(self,free_params = {},run_mode = "ABC"):
 		myEnv.__init__(self)

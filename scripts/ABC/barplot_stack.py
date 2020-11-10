@@ -15,13 +15,14 @@ from sklearn.metrics import explained_variance_score
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs/ABC_H_4'
+output_folder = 'outputs/Ber/ABC_B_3'
 extention = 'svg'
 # extention = 'html'
 
-# study = 'Ber'
-study = 'Helvia'
-if extention == 'html':
+study = 'Ber'
+# study = 'Helvia'
+
+if extention == 'html' and study == 'Helvia':
 	bar_width= 5
 	bar_edge_width= 2
 	error_bar_width= 3
@@ -44,11 +45,11 @@ elif study == 'Helvia':
 elif study == 'Ber':
 	bar_width= 50
 	bar_edge_width= 3
-	error_bar_width= 6
-	error_bar_thickness= 3
-	tick_font_size = 40
-	text_font_size = 40
-	title_font_size = 30
+	error_bar_width= 8
+	error_bar_thickness= 5
+	tick_font_size = 50
+	text_font_size = 50
+	title_font_size = 40
 	gridwidth = 50
 	fig_size = [700,700]
 
@@ -183,7 +184,7 @@ if __name__ == "__main__":
 			yrange = (0,110)
 		elif target == 'DNA':
 			yaxis_title = 'DNA (ng/ml)'
-			yrange = (-0.5,10)
+			yrange = (-0.5,15)
 		elif target == 'OC':
 			yaxis_title = "OC ((ng/ml)/(ng/ml))"
 			yrange = (-0.03,1)
@@ -266,18 +267,22 @@ if __name__ == "__main__":
 		vars_explained_IDs = {}
 		exps = []
 		sims = []
-		for ID,values in ID_data.items():
-			exp = values['exp']
-			sim = values['sim']
-			var = explained_variance_score(exp,sim)
-			vars_explained_IDs.update({ID:var})
-			exps.append(exp)
-			sims.append(sim)
+		try:
+			for ID,values in ID_data.items():
+				if isinstance(values['exp'][0],str):
+					raise ValueError()
+				exp = values['exp']
+				sim = values['sim']
+				var = explained_variance_score(exp,sim)
+				vars_explained_IDs.update({ID:var})
+				exps.append(exp)
+				sims.append(sim)
+		except ValueError as VL:
+			continue
 		vars_explained.update({target:vars_explained_IDs})
 		mean_tag = target + '_mean'
 		var_mean = explained_variance_score(exps,sims)
 		vars_explained.update({mean_tag:var_mean})
 		
-
 	with open(output_folder+'/vars_explained.json','w') as file:
 		file.write(json.dumps(vars_explained,indent=4))

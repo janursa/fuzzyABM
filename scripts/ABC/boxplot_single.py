@@ -14,7 +14,7 @@ import json
 ## settings
 format = '.svg'
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folder = 'outputs/ABC_H_1'
+output_folder = 'outputs/Ber/ABC_B_5'
 
 working_dir = os.getcwd()
 free_params_combined = []
@@ -44,8 +44,11 @@ if __name__ == "__main__":
 		priors = json.load(file)
 	with open(output_folder+'/medians.json') as file:
 		medians = json.load(file)["medians"]
+	# adjusted_keys = ["MG_M_t", "CD_H_t", "a_c_Mo", "MG_H_t", "a_Pr_Mo"]
+
+	adjusted_keys = posteriors.keys()
 	p_values = {}
-	for key in posteriors.keys():
+	for key in adjusted_keys:
 		posterior = posteriors[key]
 		prior = priors[key]
 		stat, p = levene(prior, posterior)
@@ -55,10 +58,10 @@ if __name__ == "__main__":
 	param_c = len(posteriors.keys())
 	data = []
 	keys = []
-	for key,values in posteriors.items():
+	for key in adjusted_keys:
 		min_v = free_params[key][0]
 		max_v = free_params[key][1]
-		scalled = list(map(lambda x: (x-min_v)/(max_v-min_v),values))
+		scalled = list(map(lambda x: (x-min_v)/(max_v-min_v),posteriors[key]))
 		data.append(scalled)
 		keys.append(key)
 	labels = []
@@ -138,10 +141,10 @@ if __name__ == "__main__":
 		plt.text(xloc,1.05,sig,size = 20, rotation='horizontal',
 		   horizontalalignment='center',
         verticalalignment='center')
-	for key,i in zip(medians.keys(),range(len(xtickslocs))): # medians
+	for key,i in zip(adjusted_keys,range(len(xtickslocs))): # medians
 		if p_values[key] <= 0.01:
-			if (key == 'B_Mo'):
-				medians[key] = round(medians[key],3)
+			if (key == 'c_weight'):
+				medians[key] = round(medians[key],4)
 			else:
 				medians[key] = round(medians[key],3)
 			text = 'M:'+ str(medians[key])
