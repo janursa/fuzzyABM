@@ -14,7 +14,7 @@ import json
 ## settings
 format = '.svg'
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folder = 'outputs/ABC_H_4'
+output_folder = 'outputs/ABC_H_1'
 
 working_dir = os.getcwd()
 free_params_combined = []
@@ -24,7 +24,7 @@ sys.path.insert(1,output_dir)
 # sys.path.insert(1,os.path.join(working_dir,'outputs'))
 from c_params import free_params
 # print(free_params_combined)
-axis_font = {'fontname':'Times New Roman', 'size':'10'}
+axis_font = {'fontname':'Times New Roman', 'size':'15'}
 linewidth = 1.5
 def sig_signs(p_values):
 	signs = []
@@ -122,7 +122,7 @@ if __name__ == "__main__":
 	# plt.margins(0.2)
 	# Tweak spacing to prevent clipping of tick-labels
 	#plt.subplots_adjust(bottom=0.1,left=0.1,right=0.1, top=0.1)
-	plt.ylabel('Normalized values')
+	plt.ylabel('scalled values')
 	for label in (ax.get_xticklabels() + ax.get_yticklabels()):
 		label.set_fontname(axis_font['fontname'])
 		label.set_fontsize(float(axis_font['size']))
