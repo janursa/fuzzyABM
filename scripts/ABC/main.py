@@ -21,6 +21,8 @@ settings = {
 }
 
 working_dir = os.getcwd()
+sys.path.insert(1,os.path.join(working_dir,'outputs'))
+from c_params import free_params
 output_dir = os.path.join(working_dir,settings["output_path"])
 try:
 	os.makedirs(output_dir)
@@ -28,8 +30,7 @@ except:
 	pass
 sys.path.insert(1,output_dir)
 # print(output_dir)
-sys.path.insert(1,os.path.join(working_dir,'outputs'))
-from c_params import free_params
+
 
 
 

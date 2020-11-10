@@ -20,8 +20,17 @@ extention = 'html'
 
 study = 'Ber'
 #study = 'Helvia'
-if extention == 'html':
+if extention == 'html' and study == 'Helvia':
 	bar_width= 5
+	bar_edge_width= 2
+	error_bar_width= 3
+	error_bar_thickness= 2
+	tick_font_size = 40
+	text_font_size = 40
+	title_font_size = 30
+	gridwidth = 50
+elif extention == 'html' and study == 'Ber':
+	bar_width= 30
 	bar_edge_width= 2
 	error_bar_width= 3
 	error_bar_thickness= 2
@@ -173,7 +182,7 @@ if __name__ == "__main__":
 			yrange = (0,110)
 		elif target == 'DNA':
 			yaxis_title = 'DNA (ng/ml)'
-			yrange = (-0.5,10)
+			yrange = (-0.5,15)
 		elif target == 'OC':
 			yaxis_title = "OC ((ng/ml)/(ng/ml))"
 			yrange = (-0.03,1)
