@@ -1,9 +1,9 @@
 trainingData = {
 	# "IDs": [ "H2017_Mg0"],
-	# "IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"],
+	"IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"],
 	# "IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60","B2016_C","B2016_M"],
 	# "IDs": ["B2016_M"],
-	"IDs": [ "B2016_C","B2016_M"],
+	#"IDs": [ "B2016_C","B2016_M"],
 	#"IDs": [ "X_1_C","X_1_M3","X_1_M7","X_1_M14"],
 	"scale": 0.025,
 	"H2017_Mg0": {
@@ -273,7 +273,7 @@ trainingData = {
 				"ALP": 0.30,
 				"nTGF": 1.24,
 				"nBMP":0.13,
-				'viability': '50 100'
+				#'viability': '50 100'
 			},
 			"336": {
 				"DNA":5.79028125,
@@ -281,7 +281,7 @@ trainingData = {
 				"ALP": 0.53,
 				"nTGF": 1.87,
 				"nBMP":1.4,
-				'viability': '50 100'
+				#'viability': '50 100'
 			},
 			"504": {
 				"DNA":6.478159722,
@@ -289,7 +289,7 @@ trainingData = {
 				"ALP": 0.57,
 				"nTGF": 1.21,
 				"nBMP":0.37,
-				'viability': '50 100'
+				#'viability': '50 100'
 			}
 		}
 	},
@@ -330,7 +330,7 @@ trainingData = {
 				"ALP": 0.34,
 				"nTGF": 1.1,
 				"nBMP":0.14,
-				'viability': '50 100'
+				#'viability': '50 100'
 			},
 			"336": {
 				"DNA":7.818329861,
@@ -338,7 +338,7 @@ trainingData = {
 				"ALP": 0.39,
 				"nTGF": 0.97,
 				"nBMP":0.56,
-				'viability': '50 100'
+				#'viability': '50 100'
 			},
 			"504": {
 				"DNA":6.160513889,
@@ -346,7 +346,7 @@ trainingData = {
 				"ALP": 0.61,
 				"nTGF": 1.21,
 				"nBMP":0.37,
-				'viability': '50 100'
+				#'viability': '50 100'
 			}
 		}
 	},

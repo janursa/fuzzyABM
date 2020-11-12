@@ -15,12 +15,14 @@ from sklearn.metrics import explained_variance_score
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
-output_folder = 'outputs/Ber/ABC_B_3'
+# output_folder = 'outputs/Ber/ABC_B_5'
+output_folder = 'outputs/Helvia/ABC_H_4'
+
 extention = 'svg'
 # extention = 'html'
 
-study = 'Ber'
-# study = 'Helvia'
+# study = 'Ber'
+study = 'Helvia'
 
 if extention == 'html' and study == 'Helvia':
 	bar_width= 5
@@ -58,6 +60,22 @@ targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
 #targets = ["viability","liveCellCount"]
 #time_points = ["24","48","72"]
 time_points = ["24","48","72","144","168", "216", "336","504"]
+def var_manual(exp,sim):
+	mean_exp = np.mean(exp)
+	stds_1 = []
+	stds_2 = []
+	for i in range(len(exp)):
+		stds_1.append((sim[i]-exp[i])**2)
+		stds_2.append((exp[i]-mean_exp)**2)
+	return 1 - np.sum(stds_1)/np.sum(stds_2)
+def fitness(exp,sim):
+	diff_squares = []
+	for i in range(len(exp)):
+		diff = sim[i] - exp[i]
+		diff_squares.append((diff)**2/(np.mean([exp[i],sim[i]])**2))
+	fit = 1-np.mean(diff_squares)
+	# print('sim {} \n exp {} \n diff {} \n fit {}'.format(sim,exp,diff_squares,fit))
+	return fit
 def hour_2_day(data):
 	data_m = []
 	for item in data:
@@ -178,19 +196,19 @@ if __name__ == "__main__":
 		
 		if target == 'liveCellCount':
 			yaxis_title = 'Live cell count'
-			yrange = (0,16000)
+			yrange = (0,20000)
 		elif target == 'viability':
 			yaxis_title = 'Viability (%)'
 			yrange = (0,110)
 		elif target == 'DNA':
 			yaxis_title = 'DNA (ng/ml)'
-			yrange = (-0.5,15)
+			yrange = (-0.5,12)
 		elif target == 'OC':
 			yaxis_title = "OC ((ng/ml)/(ng/ml))"
 			yrange = (-0.03,1)
 		elif target == 'ALP':
 			yaxis_title = 'ALP ((U/L)/(ng/ml))'
-			yrange = (-0.02,0.8)
+			yrange = (-0.02,1)
 		elif target == 'nTGF':
 			yaxis_title = 'TGF ((ng/ml)/(ng/ml))'
 			yrange = (-.05,2.2)
@@ -267,21 +285,35 @@ if __name__ == "__main__":
 		vars_explained_IDs = {}
 		exps = []
 		sims = []
+		# if target != 'nBMP':
+		# 	continue
+		# print('** {}'.format(target))
 		try:
 			for ID,values in ID_data.items():
 				if isinstance(values['exp'][0],str):
 					raise ValueError()
 				exp = values['exp']
 				sim = values['sim']
-				var = explained_variance_score(exp,sim)
+				var = fitness(exp,sim)
 				vars_explained_IDs.update({ID:var})
 				exps.append(exp)
 				sims.append(sim)
+				# if target == 'nBMP':
+				# 	print('exp {} sim {} var {}'.format(exp,sim,var))
+
 		except ValueError as VL:
 			continue
+
 		vars_explained.update({target:vars_explained_IDs})
+		#  calculate mean var
 		mean_tag = target + '_mean'
-		var_mean = explained_variance_score(exps,sims)
+		exps_serial = []
+		sims_serial = []
+		for item in exps:
+			exps_serial+= item
+		for item in sims:
+			sims_serial+=item
+		var_mean = fitness(exps_serial,sims_serial)
 		vars_explained.update({mean_tag:var_mean})
 		
 	with open(output_folder+'/vars_explained.json','w') as file:
