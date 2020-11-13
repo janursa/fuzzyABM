@@ -16,12 +16,20 @@ path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
 # output_folder = 'outputs/Ber/ABC_B_5'
 # output_folder = 'outputs/Helvia/ABC_H_4'
-output_folder = 'outputs/ABC_BH_3'
-# extention = 'svg'
-extention = 'html'
+# output_folder = 'outputs/ABC_BH_3'
+output_folder = 'outputs/BH/ABC_BH_5'
+extention = 'svg'
+# extention = 'html'
 
 study = 'Ber'
 # study = 'Helvia'
+
+if study == 'Ber':
+	IDs = [ "B2016_C","B2016_M"]
+elif study == 'Helvia':
+	IDs= [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"]
+else:
+	raise ValueError()
 
 if extention == 'html' and study == 'Helvia':
 	bar_width= 5
@@ -55,6 +63,7 @@ elif study == 'Ber':
 	fig_size = [700,700]
 
 from trainingdata import trainingData
+
 targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
 #targets = ["viability","liveCellCount"]
 #time_points = ["24","48","72"]
@@ -92,7 +101,7 @@ if __name__ == "__main__":
 		target_mean_results = {}
 		oo = {}
 		try:
-			for ID in trainingData["IDs"]:
+			for ID in IDs:
 				trainingitem =trainingData[ID]
 				matched = {}
 				for time_point in time_points:
@@ -116,10 +125,9 @@ if __name__ == "__main__":
 				oo.update({ID:matched})
 		except ValueError as Vl:
 			continue
-
 		fig = go.Figure()	
 		ID_count = 0
-		for ID in trainingData["IDs"]:
+		for ID in IDs:
 			time_points_adj = list(oo[ID].keys())
 			exp_y_mean = [oo[ID][i]["exp"] for i in time_points_adj] # error bar is excluded for exp
 			sim_y1 = [oo[ID][i]["sim"] for i in time_points_adj]
@@ -135,7 +143,6 @@ if __name__ == "__main__":
 				sim_y1_lower_error.append(lower_error)
 				max_error = max([lower_error,upper_error])
 				stds.append(np.std(item))
-			
 			if ID == 'H2017_Mg0':
 				tag = '0 mM'
 			elif ID == 'H2017_Mg3':
@@ -275,7 +282,7 @@ if __name__ == "__main__":
 			fig.write_html(output_folder+'/barplot_{}.{}'.format(target,extention))
 		else:
 			fig.write_image(output_folder+'/barplot_{}.{}'.format(target,extention))
-	stds = {'min': min(stds), 'max': max(stds), 'mean':np.mean(stds)}
+	# stds = {'min': min(stds), 'max': max(stds), 'mean':np.mean(stds)}
 	# print(stds)
 	with open(output_folder+'/stds.json','w') as file:
 		file.write(json.dumps(stds))
