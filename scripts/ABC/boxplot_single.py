@@ -14,7 +14,7 @@ import json
 ## settings
 format = '.svg'
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folder = 'outputs/Ber/ABC_B_5'
+output_folder = 'outputs/ABC'
 
 working_dir = os.getcwd()
 free_params_combined = []

@@ -11,18 +11,17 @@ import json
 import copy
 from env import ABM
 import numpy as np
-from sklearn.metrics import explained_variance_score
 current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
 # output_folder = 'outputs/Ber/ABC_B_5'
-output_folder = 'outputs/Helvia/ABC_H_4'
+# output_folder = 'outputs/Helvia/ABC_H_4'
+output_folder = 'outputs/ABC_BH_3'
+# extention = 'svg'
+extention = 'html'
 
-extention = 'svg'
-# extention = 'html'
-
-# study = 'Ber'
-study = 'Helvia'
+study = 'Ber'
+# study = 'Helvia'
 
 if extention == 'html' and study == 'Helvia':
 	bar_width= 5
