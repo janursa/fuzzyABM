@@ -281,7 +281,7 @@ class ABM(myEnv):
 			settings_copy["setup"]["agents"]["n"][key] = (int)(value*scale_factor)
 		# scale expectations
 		if "expectations" in settings_copy:
-			for timepoint in settings_copy["expectations"]["timepoints"]:
+			for timepoint in settings_copy["expectations"].keys():
 				for (key,value) in settings_copy["expectations"][timepoint].items():
 					if key == "liveCellCount" :
 						settings_copy["expectations"][timepoint][key] = (int)(value * scale_factor)
@@ -514,7 +514,7 @@ class ABM(myEnv):
 		c_tick = self.get_tick() 
 		if c_tick < (medium_change_min + self.last_refresh): # min 2 days should pass
 			return
-		timepoints = self.settings["expectations"]["timepoints"]
+		timepoints = self.settings["expectations"].keys()
 		timepoints = [int(item) for item in timepoints]
 		for t_p in timepoints:
 			if c_tick <= t_p:
