@@ -14,7 +14,7 @@ import json
 ## settings
 format = '.svg'
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folder = 'outputs/ABC'
+output_folder = 'outputs/BH/ABC_BH_10'
 
 working_dir = os.getcwd()
 free_params_combined = []
@@ -44,7 +44,8 @@ if __name__ == "__main__":
 		priors = json.load(file)
 	with open(output_folder+'/medians.json') as file:
 		medians = json.load(file)["medians"]
-	# adjusted_keys = ["MG_M_t", "CD_H_t", "a_c_Mo", "MG_H_t", "a_Pr_Mo"]
+	# adjusted_keys = ["B_Mo","B_Pr","a_BMP_nBMP","b_TGF","b_BMP"]
+	# adjusted_keys = ["B_Pr","a_BMP_nBMP","b_TGF","b_BMP","a_Diff"]
 
 	adjusted_keys = posteriors.keys()
 	p_values = {}
@@ -143,7 +144,7 @@ if __name__ == "__main__":
         verticalalignment='center')
 	for key,i in zip(adjusted_keys,range(len(xtickslocs))): # medians
 		if p_values[key] <= 0.01:
-			if (key == 'c_weight'):
+			if (key == 'c_weight' or key=='B_Mo'):
 				medians[key] = round(medians[key],4)
 			else:
 				medians[key] = round(medians[key],3)
