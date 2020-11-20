@@ -9,7 +9,7 @@ import json
 
 
 scale_factor = trainingData["scale"]
-training_item = ABM.scale(trainingData["H2017_Mg0"],scale_factor)
+training_item = ABM.scale(trainingData["X_1_C"],scale_factor)
 
 try:
     obj = ABM(free_params = {},run_mode="test")
