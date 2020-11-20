@@ -1,10 +1,10 @@
 trainingData = {
 	# "IDs": [ "H2017_Mg0"],
 	# "IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"],
-	"IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60","B2016_C","B2016_M"],
+	# "IDs": [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60","B2016_C","B2016_M"],
 	# "IDs": ["B2016_M"],
-	# "IDs": [ "B2016_C","B2016_M"],
-	#"IDs": [ "X_1_C","X_1_M3","X_1_M7","X_1_M14"],
+	"IDs": [ "B2016_C","B2016_M"],
+	# "IDs": [ "X_1_C","X_1_M3","X_1_M7","X_1_M14"],
 	"scale": 0.025,
 	"H2017_Mg0": {
 		"setup": {
@@ -349,7 +349,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.313,
-				"patch_size": 0.013
+				"patch_size": 0.0085
 			},
 			"patch": {
 				"attrs": {
@@ -374,13 +374,16 @@ trainingData = {
 		},
 		"expectations": {
 			"72": {
-				"liveCellCount":19219
+				"liveCellCount":19219,
+				'viability': '50 100'
 			},
 			"144": {
-				"liveCellCount":32401
+				"liveCellCount":32401,
+				'viability': '50 100'
 			},
 			"216": {
-				"liveCellCount":65710
+				"liveCellCount":65710,
+				'viability': '50 100'
 			}
 		}
 	},
@@ -390,7 +393,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.313,
-				"patch_size": 0.013
+				"patch_size": 0.0085
 			},
 			"patch": {
 				"attrs": {
@@ -415,13 +418,16 @@ trainingData = {
 		},
 		"expectations": {
 			"72": {
-				"liveCellCount":16602
+				"liveCellCount":16602,
+				'viability': '50 100'
 			},
 			"144": {
-				"liveCellCount":46754
+				"liveCellCount":46754,
+				'viability': '50 100'
 			},
 			"216": {
-				"liveCellCount":106053
+				"liveCellCount":80053,
+				'viability': '50 100'
 			}
 		}
 	},
@@ -431,7 +437,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.313,
-				"patch_size": 0.013
+				"patch_size": 0.0085
 			},
 			"patch": {
 				"attrs": {
@@ -456,13 +462,16 @@ trainingData = {
 		},
 		"expectations": {
 			"72": {
-				"liveCellCount":13765
+				"liveCellCount":13765,
+				'viability': '50 100'
 			},
 			"144": {
-				"liveCellCount":49915
+				"liveCellCount":49915,
+				'viability': '50 100'
 			},
 			"216": {
-				"liveCellCount":86163
+				"liveCellCount":70163,
+				'viability': '50 100'
 			}
 		}
 	},
@@ -472,7 +481,7 @@ trainingData = {
 			"grid": {
 				"area": 1,
 				"volume": 0.313,
-				"patch_size": 0.013
+				"patch_size": 0.0085
 			},
 			"patch": {
 				"attrs": {
@@ -497,19 +506,17 @@ trainingData = {
 		},
 		"expectations": {
 			"72": {
-				"liveCellCount":8277
+				"liveCellCount":8277,
+				'viability': '50 100'
 			},
 			"144": {
-				"liveCellCount":26134
+				"liveCellCount":26134,
+				'viability': '50 100'
 			},
 			"216": {
-				"liveCellCount":46675
+				"liveCellCount":46675,
+				'viability': '50 100'
 			}
 		}
 	}
-
-
-
-
-
 }

@@ -17,21 +17,23 @@ sys.path.insert(1,path_to_trainingdata)
 # output_folder = 'outputs/Ber/ABC_B_5'
 # output_folder = 'outputs/Helvia/ABC_H_4'
 # output_folder = 'outputs/ABC_BH_3'
-output_folder = 'outputs/BH/ABC_BH_5'
-extention = 'svg'
-# extention = 'html'
+output_folder = 'outputs/ABC'
+# extention = 'svg'
+extention = 'html'
 
 study = 'Ber'
 # study = 'Helvia'
-
+# study = 'Xu'
 if study == 'Ber':
 	IDs = [ "B2016_C","B2016_M"]
 elif study == 'Helvia':
 	IDs= [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"]
+elif study == 'Xu':
+	IDs= ["X_1_C","X_1_M3","X_1_M7","X_1_M14"]
 else:
 	raise ValueError()
 
-if extention == 'html' and study == 'Helvia':
+if (extention == 'html' and study == 'Helvia') or study == 'Xu':
 	bar_width= 5
 	bar_edge_width= 2
 	error_bar_width= 3
@@ -91,12 +93,12 @@ def hour_2_day(data):
 	return data_m
 if __name__ == "__main__":
 	reverse_scale = 1.0/trainingData["scale"]
-	## plotting 
+	## plotting
 	with open(os.path.join(output_folder,'top_results.json')) as file:
 		top_results = json.load(file)['top_results']
 	stds = []
 	mean_results = {}
-	
+
 	for target in targets:
 		target_mean_results = {}
 		oo = {}
@@ -125,7 +127,7 @@ if __name__ == "__main__":
 				oo.update({ID:matched})
 		except ValueError as Vl:
 			continue
-		fig = go.Figure()	
+		fig = go.Figure()
 		ID_count = 0
 		for ID in IDs:
 			time_points_adj = list(oo[ID].keys())
@@ -199,10 +201,10 @@ if __name__ == "__main__":
 			ID_count+=1
 		if target_mean_results != {}:
 			mean_results.update({target:target_mean_results})
-		
+
 		if target == 'liveCellCount':
 			yaxis_title = 'Live cell count'
-			yrange = (0,20000)
+			yrange = (0,100000)
 		elif target == 'viability':
 			yaxis_title = 'Viability (%)'
 			yrange = (0,110)
@@ -223,7 +225,7 @@ if __name__ == "__main__":
 			yrange = (-0.05,1.5)
 		else:
 			raise ValueError()
-		
+
 		time_points_adj_day = hour_2_day(time_points_adj)
 		fig.update_layout(barmode='group',
 						autosize=False,
@@ -262,7 +264,7 @@ if __name__ == "__main__":
 							),
 
 						  yaxis = dict(
-						  	title = yaxis_title, 
+						  	title = yaxis_title,
 						  	mirror=True,
 							ticks='outside',
 							showline=True,
@@ -277,7 +279,7 @@ if __name__ == "__main__":
 							range = yrange),
 						  plot_bgcolor='white'
 						  )
-		
+
 		if extention == "html":
 			fig.write_html(output_folder+'/barplot_{}.{}'.format(target,extention))
 		else:
@@ -321,6 +323,6 @@ if __name__ == "__main__":
 			sims_serial+=item
 		var_mean = fitness(exps_serial,sims_serial)
 		vars_explained.update({mean_tag:var_mean})
-		
+
 	with open(output_folder+'/vars_explained.json','w') as file:
 		file.write(json.dumps(vars_explained,indent=4))

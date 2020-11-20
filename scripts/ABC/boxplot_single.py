@@ -14,7 +14,7 @@ import json
 ## settings
 format = '.svg'
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folder = 'outputs/BH/ABC_BH_10'
+output_folder = 'outputs/ABC'
 
 working_dir = os.getcwd()
 free_params_combined = []
@@ -154,6 +154,3 @@ if __name__ == "__main__":
 	        verticalalignment='bottom')
 
 	plt.savefig(os.path.join(output_folder,"box_plot"+format),bbox_inches="tight")
-
-
-

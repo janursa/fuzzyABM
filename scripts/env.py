@@ -47,7 +47,7 @@ class ABM(myEnv):
 			os.mkdir("outputs")
 		except:
 			pass
-	def add_data(self,key,value): 
+	def add_data(self,key,value):
 		if key not in self.data:
 			self.data[key] = [value]
 		elif self.get_tick() > self.last_tick:
@@ -77,7 +77,7 @@ class ABM(myEnv):
 		else:
 			self.data["ALP"][-1] = 0
 			self.data["OC"][-1] = 0
-	
+
 	def reset(self):
 		self.initialize()
 		try:
@@ -108,7 +108,7 @@ class ABM(myEnv):
 		self.set_settings(self.settings["setup"]["grid"])
 		grid_info = self.settings["setup"]["grid"]
 		if flags["D3"]:
-			mesh =  grid3(length = sqrt(grid_info["area"]), width = sqrt(grid_info["area"]), height = 4*grid_info["patch_size"],mesh_length = grid_info["patch_size"],share = True)
+			mesh =  grid3(length = sqrt(grid_info["area"]), width = sqrt(grid_info["area"]), height = 8*grid_info["patch_size"],mesh_length = grid_info["patch_size"],share = True)
 		else:
 			mesh =  grid(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],share = True)
 
@@ -140,8 +140,8 @@ class ABM(myEnv):
 		super().update()
 		self.refresh()
 		## Either updates or appends a pair of key-value to self.data
-		
-		
+
+
 		## agent counts
 		counts = self.count_agents()
 		for key,count in counts.items():
@@ -186,7 +186,7 @@ class ABM(myEnv):
 		## HA
 		#HA = self.collect_from_patches("HA")
 		#add("HA",HA)
-		## output 
+		## output
 		self.output()
 		#sys.exit(2)
 		## calculate errors	//rewards
@@ -217,7 +217,7 @@ class ABM(myEnv):
 		if "expectations" not in self.settings: # no  calculaton is required
 			return
 		if str(self.get_tick()) not in self.settings["expectations"]: # not the right tick
-			return 
+			return
 		factors = self.settings["expectations"][str(self.get_tick())]
 		errors = {}
 		results = {}
@@ -242,7 +242,7 @@ class ABM(myEnv):
 				sim_res =self.params["a_TGF_nTGF"] * self.data["TGF"][-1] # last count
 				error_value =abs((float)(sim_res - value)/value)
 			elif key == "viability":
-				total_cell_count = self.data["MSC"][-1] + self.data["Dead"][-1] 
+				total_cell_count = self.data["MSC"][-1] + self.data["Dead"][-1]
 				sim_res = 100*(float) (self.data["MSC"][-1])/total_cell_count
 				ranges = []
 				if (isinstance(value,str)): # a range is given
@@ -253,17 +253,17 @@ class ABM(myEnv):
 						raise ValueError("Viability doesnt meet the criterion")
 					else :
 						error_value = 0
-				
+
 				else:
 					error_value =abs((float)(sim_res - value)/value)
 			else:
 				raise ValueError("Error is not defined for '{}'".format(key))
-			
+
 			# print("\n key {} sim_res {} value {} error_value {}".format(key,sim_res,value,error_value))
 			errors.update({key:error_value})
 			results.update({key:sim_res})
 		self.errors.update({str(self.get_tick()):errors})
-		self.results.update({str(self.get_tick()):results})	
+		self.results.update({str(self.get_tick()):results})
 	@staticmethod
 	def scale(settings,scale_factor):
 
@@ -310,7 +310,7 @@ class ABM(myEnv):
 		results_copy  = copy.deepcopy(results)
 
 		# scale expectations
-		
+
 		for timepoint in results_copy.keys():
 			for (key,value) in results[timepoint].items():
 				if key == "liveCellCount" :
@@ -358,7 +358,7 @@ class ABM(myEnv):
 				raise vl
 			if self.run_mode == "test":
 				update_progress(i/self.duration)
-			
+
 		# calculate mean error
 		mm = []
 		# print("\n {}".format(self.errors))
@@ -375,7 +375,7 @@ class ABM(myEnv):
 		"""
 		Runs the model for all training items
 		"""
-		#step 1: for each training item, run `episode` 
+		#step 1: for each training item, run `episode`
 		#step 2: receive the results and append it to the epoch results
 		#step 3: calculate error
 		mean_errors = []
@@ -385,12 +385,12 @@ class ABM(myEnv):
 		for ID in IDs:
 			try:
 				training_item = ABM.scale(trainingData[ID],scale_factor);
-				_,_,mean_error = self.episode(training_item) 
+				_,_,mean_error = self.episode(training_item)
 			except ValueError as vl:
 				print("\n we got None again")
 				return None
 			mean_errors.append(mean_error)
-			
+
 		epoch_error = np.mean(mean_errors)
 		return epoch_error
 
@@ -415,7 +415,7 @@ class ABM(myEnv):
 		"""
 		# agents on patches as scatter format
 		if self.run_mode != "test":
-			return 
+			return
 		def scatter_patch(patches):
 			file = open('outputs/scatter.csv','w')
 
@@ -427,14 +427,14 @@ class ABM(myEnv):
 				else:
 					size_ = 10
 					type_ = patch.agent.class_name
-					
+
 				file.write("{},{},{},{}\n".format(patch.coords[0],
 												patch.coords[1],
 												type_,
 												size_))
 			file.close()
 		# scatter_patch(self.patches)
-		
+
 		def scatter3_patch(patches):
 			file = open('outputs/scatter3.csv','w')
 
@@ -446,7 +446,7 @@ class ABM(myEnv):
 				else:
 					size_ = 10
 					type_ = patch.agent.class_name
-					
+
 				file.write("{},{},{},{},{}\n".format(patch.coords[0], patch.coords[1],patch.coords[2],
 												type_,
 												size_))
@@ -459,32 +459,32 @@ class ABM(myEnv):
 			for agent in agents:
 				x,y,z = agent.patch.coords
 				type_ = agent.class_name
-				size_ = 10	
+				size_ = 10
 				file.write("{},{},{},{}\n".format(x,
 												y,
 												type_,
 												size_))
 			file.close()
 		# scatter_agents(self.agents)
-		
+
 		def scatter3_agents(agents):
 			file = open('outputs/scatter3.csv','w')
 			file.write('x,y,z,type,size\n')
 			for agent in agents:
 				x,y,z = agent.patch.coords
 				type_ = agent.class_name
-				size_ = 10	
+				size_ = 10
 				file.write("{},{},{},{},{}\n".format(x,y,z,
 												type_,
 												size_))
 
 			file.close()
 		#scatter3_agents(self.agents)
-		## agent counts 
+		## agent counts
 		df = pd.DataFrame.from_dict(self.data)
 		df_agent_counts = df[["MSC","Dead"]]
 		df_agent_counts.to_csv('outputs/agents_traj.csv')
-		## average pH 
+		## average pH
 		df_pH = df[["pH"]]
 		df_pH.to_csv('outputs/pH.csv')
 		## TGF
@@ -511,7 +511,7 @@ class ABM(myEnv):
 	def refresh(self):
 		medium_change_min = 48
 		margin = 30 # 2margin before a measurement, medium refresh cannot happen
-		c_tick = self.get_tick() 
+		c_tick = self.get_tick()
 		if c_tick < (medium_change_min + self.last_refresh): # min 2 days should pass
 			return
 		timepoints = self.settings["expectations"].keys()
