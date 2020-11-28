@@ -30,6 +30,14 @@ fixed_parameters = {
   # "MG_L_t": 3.8618618618619998      ,
   # "MG_H_t": 29.83983983984,  "a_TGF_nTGF": 0.09682182182150001,
   #  "a_m_OC": 0.6856856856855, "a_m_ALP": 0.8566066066065
+  ## all
+  "a_P": 3.2347347347345003,"B_Pr": 0.029316316316500002,
+  "c_weight": 0.00029738738749999995,"a_Diff": 2.063063063063,
+  "b_TGF": 0.038509009009, "a_Mo": 5.2652652652650005, "b_BMP": 0.0164414414415, "B_Mo": 0.000531981,
+  "a_c_Mo": 90.790790,
+  "a_Pr_Mo": 7.702702702703, "a_m_OC": 0.6744244244245, "MG_L_t": 3.753753753754,
+   "a_TGF_nTGF": 0.0472297297295,
+    "a_BMP_nBMP": 0.045198198198
 }
 free_parameters_averaged = {}
 for key,values in free_parameters.items(): # choose a middle point in the range of the values
