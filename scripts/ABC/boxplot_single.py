@@ -14,7 +14,7 @@ import json
 ## settings
 format = '.svg'
 current_file_path = pathlib.Path(__file__).parent.absolute()
-output_folder = 'outputs/ABC'
+output_folder = 'outputs/ABC_B_8'
 
 working_dir = os.getcwd()
 free_params_combined = []
@@ -45,8 +45,7 @@ if __name__ == "__main__":
 	with open(output_folder+'/medians.json') as file:
 		medians = json.load(file)["medians"]
 	# adjusted_keys = ["B_Mo","B_Pr","a_BMP_nBMP","b_TGF","b_BMP"]
-	# adjusted_keys = ["B_Pr","a_BMP_nBMP","b_TGF","b_BMP","a_Diff"]
-
+	# adjusted_keys = ["a_m_ALP","a_BMP_nBMP","a_TGF_nTGF","b_BMP","B_Pr"]
 	adjusted_keys = posteriors.keys()
 	p_values = {}
 	for key in adjusted_keys:
