@@ -1,0 +1,3604 @@
+{
+    "top_results": [
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 69,
+                    "viability": 84.14634146341463
+                },
+                "48": {
+                    "liveCellCount": 105,
+                    "viability": 85.36585365853658
+                },
+                "72": {
+                    "liveCellCount": 196,
+                    "viability": 87.89237668161435
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 77,
+                    "viability": 84.61538461538461
+                },
+                "48": {
+                    "liveCellCount": 141,
+                    "viability": 87.5776397515528
+                },
+                "72": {
+                    "liveCellCount": 238,
+                    "viability": 88.47583643122677
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 74,
+                    "viability": 80.43478260869566
+                },
+                "48": {
+                    "liveCellCount": 126,
+                    "viability": 85.71428571428571
+                },
+                "72": {
+                    "liveCellCount": 216,
+                    "viability": 87.8048780487805
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 61,
+                    "viability": 76.25
+                },
+                "48": {
+                    "liveCellCount": 83,
+                    "viability": 76.85185185185185
+                },
+                "72": {
+                    "liveCellCount": 115,
+                    "viability": 78.76712328767124
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 29,
+                    "viability": 42.64705882352941
+                },
+                "48": {
+                    "liveCellCount": 24,
+                    "viability": 35.294117647058826
+                },
+                "72": {
+                    "liveCellCount": 23,
+                    "viability": 33.8235294117647
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 83.52941176470588
+                },
+                "48": {
+                    "liveCellCount": 114,
+                    "viability": 84.44444444444444
+                },
+                "72": {
+                    "liveCellCount": 221,
+                    "viability": 88.4
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 75,
+                    "viability": 83.33333333333333
+                },
+                "48": {
+                    "liveCellCount": 128,
+                    "viability": 85.33333333333333
+                },
+                "72": {
+                    "liveCellCount": 234,
+                    "viability": 87.31343283582089
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 77,
+                    "viability": 85.55555555555556
+                },
+                "48": {
+                    "liveCellCount": 141,
+                    "viability": 89.24050632911393
+                },
+                "72": {
+                    "liveCellCount": 254,
+                    "viability": 90.39145907473309
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 55,
+                    "viability": 70.51282051282051
+                },
+                "48": {
+                    "liveCellCount": 76,
+                    "viability": 73.7864077669903
+                },
+                "72": {
+                    "liveCellCount": 117,
+                    "viability": 79.59183673469387
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 31,
+                    "viability": 45.588235294117645
+                },
+                "48": {
+                    "liveCellCount": 27,
+                    "viability": 39.705882352941174
+                },
+                "72": {
+                    "liveCellCount": 19,
+                    "viability": 27.941176470588236
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 68,
+                    "viability": 82.92682926829268
+                },
+                "48": {
+                    "liveCellCount": 116,
+                    "viability": 84.67153284671532
+                },
+                "72": {
+                    "liveCellCount": 217,
+                    "viability": 88.21138211382114
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 84,
+                    "viability": 91.30434782608695
+                },
+                "48": {
+                    "liveCellCount": 148,
+                    "viability": 90.2439024390244
+                },
+                "72": {
+                    "liveCellCount": 267,
+                    "viability": 92.70833333333333
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 72,
+                    "viability": 81.81818181818181
+                },
+                "48": {
+                    "liveCellCount": 121,
+                    "viability": 84.02777777777777
+                },
+                "72": {
+                    "liveCellCount": 211,
+                    "viability": 86.83127572016461
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 63,
+                    "viability": 77.77777777777777
+                },
+                "48": {
+                    "liveCellCount": 97,
+                    "viability": 82.20338983050847
+                },
+                "72": {
+                    "liveCellCount": 143,
+                    "viability": 84.11764705882354
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 39,
+                    "viability": 57.35294117647059
+                },
+                "48": {
+                    "liveCellCount": 36,
+                    "viability": 52.94117647058823
+                },
+                "72": {
+                    "liveCellCount": 31,
+                    "viability": 45.588235294117645
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 65,
+                    "viability": 81.25
+                },
+                "48": {
+                    "liveCellCount": 95,
+                    "viability": 81.19658119658119
+                },
+                "72": {
+                    "liveCellCount": 165,
+                    "viability": 85.49222797927462
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 88,
+                    "viability": 90.72164948453609
+                },
+                "48": {
+                    "liveCellCount": 152,
+                    "viability": 91.56626506024097
+                },
+                "72": {
+                    "liveCellCount": 297,
+                    "viability": 91.66666666666667
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 85.1063829787234
+                },
+                "48": {
+                    "liveCellCount": 142,
+                    "viability": 87.65432098765432
+                },
+                "72": {
+                    "liveCellCount": 253,
+                    "viability": 88.7719298245614
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 64,
+                    "viability": 81.0126582278481
+                },
+                "48": {
+                    "liveCellCount": 89,
+                    "viability": 82.4074074074074
+                },
+                "72": {
+                    "liveCellCount": 116,
+                    "viability": 78.91156462585035
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 42,
+                    "viability": 61.76470588235294
+                },
+                "48": {
+                    "liveCellCount": 38,
+                    "viability": 55.88235294117647
+                },
+                "72": {
+                    "liveCellCount": 33,
+                    "viability": 48.529411764705884
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 74,
+                    "viability": 86.04651162790698
+                },
+                "48": {
+                    "liveCellCount": 127,
+                    "viability": 88.81118881118881
+                },
+                "72": {
+                    "liveCellCount": 245,
+                    "viability": 90.4059040590406
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 74,
+                    "viability": 84.0909090909091
+                },
+                "48": {
+                    "liveCellCount": 123,
+                    "viability": 86.61971830985915
+                },
+                "72": {
+                    "liveCellCount": 229,
+                    "viability": 89.80392156862744
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 64,
+                    "viability": 74.4186046511628
+                },
+                "48": {
+                    "liveCellCount": 106,
+                    "viability": 77.94117647058823
+                },
+                "72": {
+                    "liveCellCount": 184,
+                    "viability": 83.63636363636364
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 53,
+                    "viability": 67.0886075949367
+                },
+                "48": {
+                    "liveCellCount": 74,
+                    "viability": 71.15384615384616
+                },
+                "72": {
+                    "liveCellCount": 109,
+                    "viability": 74.65753424657534
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 32,
+                    "viability": 47.05882352941177
+                },
+                "48": {
+                    "liveCellCount": 24,
+                    "viability": 35.294117647058826
+                },
+                "72": {
+                    "liveCellCount": 19,
+                    "viability": 27.941176470588236
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 62,
+                    "viability": 73.80952380952381
+                },
+                "48": {
+                    "liveCellCount": 97,
+                    "viability": 80.83333333333333
+                },
+                "72": {
+                    "liveCellCount": 176,
+                    "viability": 85.85365853658537
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 68,
+                    "viability": 83.95061728395062
+                },
+                "48": {
+                    "liveCellCount": 114,
+                    "viability": 86.36363636363636
+                },
+                "72": {
+                    "liveCellCount": 187,
+                    "viability": 87.79342723004694
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 87,
+                    "viability": 92.55319148936171
+                },
+                "48": {
+                    "liveCellCount": 130,
+                    "viability": 88.43537414965986
+                },
+                "72": {
+                    "liveCellCount": 237,
+                    "viability": 90.45801526717557
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 69,
+                    "viability": 82.14285714285714
+                },
+                "48": {
+                    "liveCellCount": 117,
+                    "viability": 86.02941176470588
+                },
+                "72": {
+                    "liveCellCount": 179,
+                    "viability": 86.47342995169082
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 34,
+                    "viability": 50.0
+                },
+                "48": {
+                    "liveCellCount": 30,
+                    "viability": 44.11764705882353
+                },
+                "72": {
+                    "liveCellCount": 27,
+                    "viability": 39.705882352941174
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 85.5421686746988
+                },
+                "48": {
+                    "liveCellCount": 114,
+                    "viability": 85.71428571428571
+                },
+                "72": {
+                    "liveCellCount": 202,
+                    "viability": 87.06896551724138
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 84,
+                    "viability": 87.5
+                },
+                "48": {
+                    "liveCellCount": 148,
+                    "viability": 91.35802469135803
+                },
+                "72": {
+                    "liveCellCount": 283,
+                    "viability": 94.01993355481727
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 75,
+                    "viability": 85.22727272727273
+                },
+                "48": {
+                    "liveCellCount": 132,
+                    "viability": 86.27450980392157
+                },
+                "72": {
+                    "liveCellCount": 218,
+                    "viability": 86.5079365079365
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 75,
+                    "viability": 85.22727272727273
+                },
+                "48": {
+                    "liveCellCount": 110,
+                    "viability": 83.96946564885496
+                },
+                "72": {
+                    "liveCellCount": 169,
+                    "viability": 84.07960199004975
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 32,
+                    "viability": 47.05882352941177
+                },
+                "48": {
+                    "liveCellCount": 26,
+                    "viability": 38.23529411764706
+                },
+                "72": {
+                    "liveCellCount": 21,
+                    "viability": 30.88235294117647
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 67,
+                    "viability": 82.71604938271605
+                },
+                "48": {
+                    "liveCellCount": 108,
+                    "viability": 82.44274809160305
+                },
+                "72": {
+                    "liveCellCount": 203,
+                    "viability": 86.75213675213675
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 79,
+                    "viability": 84.04255319148936
+                },
+                "48": {
+                    "liveCellCount": 136,
+                    "viability": 86.62420382165605
+                },
+                "72": {
+                    "liveCellCount": 231,
+                    "viability": 87.83269961977186
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 68,
+                    "viability": 77.27272727272727
+                },
+                "48": {
+                    "liveCellCount": 118,
+                    "viability": 82.51748251748252
+                },
+                "72": {
+                    "liveCellCount": 201,
+                    "viability": 86.63793103448276
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 52,
+                    "viability": 71.23287671232876
+                },
+                "48": {
+                    "liveCellCount": 79,
+                    "viability": 78.21782178217822
+                },
+                "72": {
+                    "liveCellCount": 127,
+                    "viability": 83.55263157894737
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 37,
+                    "viability": 54.411764705882355
+                },
+                "48": {
+                    "liveCellCount": 35,
+                    "viability": 51.470588235294116
+                },
+                "72": {
+                    "liveCellCount": 26,
+                    "viability": 38.23529411764706
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 95.23809523809524
+                },
+                "48": {
+                    "liveCellCount": 146,
+                    "viability": 94.8051948051948
+                },
+                "72": {
+                    "liveCellCount": 278,
+                    "viability": 93.91891891891892
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 94,
+                    "viability": 94.0
+                },
+                "48": {
+                    "liveCellCount": 154,
+                    "viability": 93.90243902439025
+                },
+                "72": {
+                    "liveCellCount": 278,
+                    "viability": 91.44736842105263
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 87.91208791208791
+                },
+                "48": {
+                    "liveCellCount": 141,
+                    "viability": 90.38461538461539
+                },
+                "72": {
+                    "liveCellCount": 247,
+                    "viability": 90.47619047619048
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 64,
+                    "viability": 80.0
+                },
+                "48": {
+                    "liveCellCount": 108,
+                    "viability": 86.4
+                },
+                "72": {
+                    "liveCellCount": 160,
+                    "viability": 86.95652173913044
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 46,
+                    "viability": 67.6470588235294
+                },
+                "48": {
+                    "liveCellCount": 41,
+                    "viability": 60.294117647058826
+                },
+                "72": {
+                    "liveCellCount": 35,
+                    "viability": 51.470588235294116
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 82,
+                    "viability": 94.25287356321839
+                },
+                "48": {
+                    "liveCellCount": 137,
+                    "viability": 93.83561643835617
+                },
+                "72": {
+                    "liveCellCount": 250,
+                    "viability": 93.98496240601504
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 86,
+                    "viability": 91.48936170212765
+                },
+                "48": {
+                    "liveCellCount": 150,
+                    "viability": 92.5925925925926
+                },
+                "72": {
+                    "liveCellCount": 271,
+                    "viability": 92.8082191780822
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 92,
+                    "viability": 93.87755102040816
+                },
+                "48": {
+                    "liveCellCount": 161,
+                    "viability": 94.15204678362574
+                },
+                "72": {
+                    "liveCellCount": 280,
+                    "viability": 93.95973154362416
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 82,
+                    "viability": 92.13483146067416
+                },
+                "48": {
+                    "liveCellCount": 116,
+                    "viability": 90.625
+                },
+                "72": {
+                    "liveCellCount": 173,
+                    "viability": 90.10416666666667
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 48,
+                    "viability": 70.58823529411765
+                },
+                "48": {
+                    "liveCellCount": 39,
+                    "viability": 57.35294117647059
+                },
+                "72": {
+                    "liveCellCount": 30,
+                    "viability": 44.11764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 65,
+                    "viability": 77.38095238095238
+                },
+                "48": {
+                    "liveCellCount": 100,
+                    "viability": 80.64516129032258
+                },
+                "72": {
+                    "liveCellCount": 183,
+                    "viability": 83.94495412844037
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 79,
+                    "viability": 86.81318681318682
+                },
+                "48": {
+                    "liveCellCount": 126,
+                    "viability": 86.89655172413794
+                },
+                "72": {
+                    "liveCellCount": 234,
+                    "viability": 88.97338403041825
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 79,
+                    "viability": 84.94623655913979
+                },
+                "48": {
+                    "liveCellCount": 135,
+                    "viability": 87.09677419354838
+                },
+                "72": {
+                    "liveCellCount": 262,
+                    "viability": 90.34482758620689
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 69,
+                    "viability": 78.4090909090909
+                },
+                "48": {
+                    "liveCellCount": 93,
+                    "viability": 79.48717948717949
+                },
+                "72": {
+                    "liveCellCount": 140,
+                    "viability": 80.45977011494253
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 29,
+                    "viability": 42.64705882352941
+                },
+                "48": {
+                    "liveCellCount": 24,
+                    "viability": 35.294117647058826
+                },
+                "72": {
+                    "liveCellCount": 20,
+                    "viability": 29.41176470588235
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 74,
+                    "viability": 84.0909090909091
+                },
+                "48": {
+                    "liveCellCount": 130,
+                    "viability": 87.24832214765101
+                },
+                "72": {
+                    "liveCellCount": 224,
+                    "viability": 88.53754940711462
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 87.91208791208791
+                },
+                "48": {
+                    "liveCellCount": 141,
+                    "viability": 90.96774193548387
+                },
+                "72": {
+                    "liveCellCount": 234,
+                    "viability": 89.65517241379311
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 84,
+                    "viability": 88.42105263157895
+                },
+                "48": {
+                    "liveCellCount": 143,
+                    "viability": 88.81987577639751
+                },
+                "72": {
+                    "liveCellCount": 250,
+                    "viability": 92.25092250922509
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 73,
+                    "viability": 85.88235294117646
+                },
+                "48": {
+                    "liveCellCount": 104,
+                    "viability": 85.24590163934427
+                },
+                "72": {
+                    "liveCellCount": 137,
+                    "viability": 83.03030303030303
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 38,
+                    "viability": 55.88235294117647
+                },
+                "48": {
+                    "liveCellCount": 36,
+                    "viability": 52.94117647058823
+                },
+                "72": {
+                    "liveCellCount": 28,
+                    "viability": 41.1764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 73,
+                    "viability": 85.88235294117646
+                },
+                "48": {
+                    "liveCellCount": 113,
+                    "viability": 86.92307692307692
+                },
+                "72": {
+                    "liveCellCount": 193,
+                    "viability": 86.93693693693693
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 70,
+                    "viability": 76.92307692307692
+                },
+                "48": {
+                    "liveCellCount": 131,
+                    "viability": 84.51612903225806
+                },
+                "72": {
+                    "liveCellCount": 231,
+                    "viability": 86.19402985074628
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 79,
+                    "viability": 90.80459770114942
+                },
+                "48": {
+                    "liveCellCount": 130,
+                    "viability": 87.83783783783784
+                },
+                "72": {
+                    "liveCellCount": 222,
+                    "viability": 88.8
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 85.5421686746988
+                },
+                "48": {
+                    "liveCellCount": 92,
+                    "viability": 83.63636363636364
+                },
+                "72": {
+                    "liveCellCount": 128,
+                    "viability": 82.05128205128206
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 42,
+                    "viability": 61.76470588235294
+                },
+                "48": {
+                    "liveCellCount": 33,
+                    "viability": 48.529411764705884
+                },
+                "72": {
+                    "liveCellCount": 28,
+                    "viability": 41.1764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 64,
+                    "viability": 82.05128205128206
+                },
+                "48": {
+                    "liveCellCount": 107,
+                    "viability": 84.92063492063492
+                },
+                "72": {
+                    "liveCellCount": 203,
+                    "viability": 89.03508771929825
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 67,
+                    "viability": 77.01149425287356
+                },
+                "48": {
+                    "liveCellCount": 110,
+                    "viability": 79.71014492753623
+                },
+                "72": {
+                    "liveCellCount": 203,
+                    "viability": 84.58333333333333
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 74,
+                    "viability": 82.22222222222223
+                },
+                "48": {
+                    "liveCellCount": 131,
+                    "viability": 85.06493506493507
+                },
+                "72": {
+                    "liveCellCount": 226,
+                    "viability": 88.28125
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 67,
+                    "viability": 83.75
+                },
+                "48": {
+                    "liveCellCount": 97,
+                    "viability": 80.83333333333333
+                },
+                "72": {
+                    "liveCellCount": 135,
+                    "viability": 82.82208588957056
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 30,
+                    "viability": 44.11764705882353
+                },
+                "48": {
+                    "liveCellCount": 24,
+                    "viability": 35.294117647058826
+                },
+                "72": {
+                    "liveCellCount": 24,
+                    "viability": 35.294117647058826
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 72,
+                    "viability": 86.74698795180723
+                },
+                "48": {
+                    "liveCellCount": 109,
+                    "viability": 87.90322580645162
+                },
+                "72": {
+                    "liveCellCount": 176,
+                    "viability": 88.44221105527639
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 75,
+                    "viability": 84.26966292134831
+                },
+                "48": {
+                    "liveCellCount": 132,
+                    "viability": 87.41721854304636
+                },
+                "72": {
+                    "liveCellCount": 225,
+                    "viability": 87.20930232558139
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 72,
+                    "viability": 81.81818181818181
+                },
+                "48": {
+                    "liveCellCount": 114,
+                    "viability": 85.07462686567165
+                },
+                "72": {
+                    "liveCellCount": 186,
+                    "viability": 85.71428571428571
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 60,
+                    "viability": 76.92307692307692
+                },
+                "48": {
+                    "liveCellCount": 82,
+                    "viability": 80.3921568627451
+                },
+                "72": {
+                    "liveCellCount": 128,
+                    "viability": 82.58064516129032
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 37,
+                    "viability": 54.411764705882355
+                },
+                "48": {
+                    "liveCellCount": 37,
+                    "viability": 54.411764705882355
+                },
+                "72": {
+                    "liveCellCount": 35,
+                    "viability": 51.470588235294116
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 82,
+                    "viability": 96.47058823529412
+                },
+                "48": {
+                    "liveCellCount": 144,
+                    "viability": 95.36423841059603
+                },
+                "72": {
+                    "liveCellCount": 267,
+                    "viability": 93.6842105263158
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 76,
+                    "viability": 83.51648351648352
+                },
+                "48": {
+                    "liveCellCount": 148,
+                    "viability": 88.0952380952381
+                },
+                "72": {
+                    "liveCellCount": 247,
+                    "viability": 86.06271777003484
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 79,
+                    "viability": 85.8695652173913
+                },
+                "48": {
+                    "liveCellCount": 127,
+                    "viability": 88.19444444444444
+                },
+                "72": {
+                    "liveCellCount": 232,
+                    "viability": 90.98039215686275
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 67,
+                    "viability": 85.8974358974359
+                },
+                "48": {
+                    "liveCellCount": 94,
+                    "viability": 82.45614035087719
+                },
+                "72": {
+                    "liveCellCount": 135,
+                    "viability": 82.82208588957056
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 38,
+                    "viability": 55.88235294117647
+                },
+                "48": {
+                    "liveCellCount": 32,
+                    "viability": 47.05882352941177
+                },
+                "72": {
+                    "liveCellCount": 26,
+                    "viability": 38.23529411764706
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 75,
+                    "viability": 84.26966292134831
+                },
+                "48": {
+                    "liveCellCount": 128,
+                    "viability": 87.67123287671232
+                },
+                "72": {
+                    "liveCellCount": 240,
+                    "viability": 89.21933085501858
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 89.88764044943821
+                },
+                "48": {
+                    "liveCellCount": 133,
+                    "viability": 89.86486486486487
+                },
+                "72": {
+                    "liveCellCount": 262,
+                    "viability": 92.25352112676056
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 86.02150537634408
+                },
+                "48": {
+                    "liveCellCount": 152,
+                    "viability": 87.86127167630057
+                },
+                "72": {
+                    "liveCellCount": 260,
+                    "viability": 89.34707903780068
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 70,
+                    "viability": 85.36585365853658
+                },
+                "48": {
+                    "liveCellCount": 99,
+                    "viability": 83.19327731092437
+                },
+                "72": {
+                    "liveCellCount": 153,
+                    "viability": 84.06593406593407
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 39,
+                    "viability": 57.35294117647059
+                },
+                "48": {
+                    "liveCellCount": 38,
+                    "viability": 55.88235294117647
+                },
+                "72": {
+                    "liveCellCount": 30,
+                    "viability": 44.11764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 81,
+                    "viability": 89.01098901098901
+                },
+                "48": {
+                    "liveCellCount": 135,
+                    "viability": 89.40397350993378
+                },
+                "72": {
+                    "liveCellCount": 256,
+                    "viability": 92.4187725631769
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 78,
+                    "viability": 85.71428571428571
+                },
+                "48": {
+                    "liveCellCount": 133,
+                    "viability": 86.9281045751634
+                },
+                "72": {
+                    "liveCellCount": 232,
+                    "viability": 87.54716981132076
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 77,
+                    "viability": 82.79569892473118
+                },
+                "48": {
+                    "liveCellCount": 121,
+                    "viability": 82.87671232876713
+                },
+                "72": {
+                    "liveCellCount": 216,
+                    "viability": 87.4493927125506
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 67,
+                    "viability": 80.72289156626506
+                },
+                "48": {
+                    "liveCellCount": 93,
+                    "viability": 81.57894736842105
+                },
+                "72": {
+                    "liveCellCount": 129,
+                    "viability": 80.625
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 41,
+                    "viability": 60.294117647058826
+                },
+                "48": {
+                    "liveCellCount": 37,
+                    "viability": 54.411764705882355
+                },
+                "72": {
+                    "liveCellCount": 35,
+                    "viability": 51.470588235294116
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 68,
+                    "viability": 83.95061728395062
+                },
+                "48": {
+                    "liveCellCount": 115,
+                    "viability": 87.12121212121212
+                },
+                "72": {
+                    "liveCellCount": 198,
+                    "viability": 88.0
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 73,
+                    "viability": 80.21978021978022
+                },
+                "48": {
+                    "liveCellCount": 125,
+                    "viability": 82.78145695364239
+                },
+                "72": {
+                    "liveCellCount": 240,
+                    "viability": 85.1063829787234
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 64,
+                    "viability": 77.10843373493977
+                },
+                "48": {
+                    "liveCellCount": 131,
+                    "viability": 86.1842105263158
+                },
+                "72": {
+                    "liveCellCount": 218,
+                    "viability": 86.85258964143426
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 58,
+                    "viability": 71.60493827160494
+                },
+                "48": {
+                    "liveCellCount": 90,
+                    "viability": 76.27118644067797
+                },
+                "72": {
+                    "liveCellCount": 129,
+                    "viability": 76.33136094674556
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 45,
+                    "viability": 66.17647058823529
+                },
+                "48": {
+                    "liveCellCount": 40,
+                    "viability": 58.8235294117647
+                },
+                "72": {
+                    "liveCellCount": 35,
+                    "viability": 51.470588235294116
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 67,
+                    "viability": 84.81012658227849
+                },
+                "48": {
+                    "liveCellCount": 107,
+                    "viability": 84.92063492063492
+                },
+                "72": {
+                    "liveCellCount": 182,
+                    "viability": 87.08133971291866
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 81,
+                    "viability": 86.17021276595744
+                },
+                "48": {
+                    "liveCellCount": 144,
+                    "viability": 88.88888888888889
+                },
+                "72": {
+                    "liveCellCount": 264,
+                    "viability": 90.72164948453609
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 79,
+                    "viability": 84.04255319148936
+                },
+                "48": {
+                    "liveCellCount": 138,
+                    "viability": 87.34177215189874
+                },
+                "72": {
+                    "liveCellCount": 239,
+                    "viability": 90.18867924528301
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 67,
+                    "viability": 79.76190476190476
+                },
+                "48": {
+                    "liveCellCount": 103,
+                    "viability": 82.4
+                },
+                "72": {
+                    "liveCellCount": 152,
+                    "viability": 83.97790055248619
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 45,
+                    "viability": 66.17647058823529
+                },
+                "48": {
+                    "liveCellCount": 40,
+                    "viability": 58.8235294117647
+                },
+                "72": {
+                    "liveCellCount": 34,
+                    "viability": 50.0
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 86.58536585365853
+                },
+                "48": {
+                    "liveCellCount": 115,
+                    "viability": 89.14728682170542
+                },
+                "72": {
+                    "liveCellCount": 208,
+                    "viability": 88.13559322033899
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 86.02150537634408
+                },
+                "48": {
+                    "liveCellCount": 149,
+                    "viability": 89.22155688622755
+                },
+                "72": {
+                    "liveCellCount": 253,
+                    "viability": 88.7719298245614
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 83,
+                    "viability": 87.36842105263158
+                },
+                "48": {
+                    "liveCellCount": 156,
+                    "viability": 90.17341040462428
+                },
+                "72": {
+                    "liveCellCount": 268,
+                    "viability": 90.23569023569024
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 87.65432098765432
+                },
+                "48": {
+                    "liveCellCount": 105,
+                    "viability": 85.36585365853658
+                },
+                "72": {
+                    "liveCellCount": 149,
+                    "viability": 87.13450292397661
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 39,
+                    "viability": 57.35294117647059
+                },
+                "48": {
+                    "liveCellCount": 35,
+                    "viability": 51.470588235294116
+                },
+                "72": {
+                    "liveCellCount": 31,
+                    "viability": 45.588235294117645
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 74,
+                    "viability": 81.31868131868131
+                },
+                "48": {
+                    "liveCellCount": 119,
+                    "viability": 82.63888888888889
+                },
+                "72": {
+                    "liveCellCount": 224,
+                    "viability": 87.15953307392996
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 82.55813953488372
+                },
+                "48": {
+                    "liveCellCount": 135,
+                    "viability": 89.40397350993378
+                },
+                "72": {
+                    "liveCellCount": 231,
+                    "viability": 89.1891891891892
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 69,
+                    "viability": 79.3103448275862
+                },
+                "48": {
+                    "liveCellCount": 111,
+                    "viability": 82.83582089552239
+                },
+                "72": {
+                    "liveCellCount": 169,
+                    "viability": 81.64251207729468
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 62,
+                    "viability": 79.48717948717949
+                },
+                "48": {
+                    "liveCellCount": 87,
+                    "viability": 82.0754716981132
+                },
+                "72": {
+                    "liveCellCount": 130,
+                    "viability": 84.9673202614379
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 33,
+                    "viability": 48.529411764705884
+                },
+                "48": {
+                    "liveCellCount": 23,
+                    "viability": 33.8235294117647
+                },
+                "72": {
+                    "liveCellCount": 19,
+                    "viability": 27.941176470588236
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 66,
+                    "viability": 78.57142857142857
+                },
+                "48": {
+                    "liveCellCount": 102,
+                    "viability": 83.60655737704919
+                },
+                "72": {
+                    "liveCellCount": 180,
+                    "viability": 84.90566037735849
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 79,
+                    "viability": 84.94623655913979
+                },
+                "48": {
+                    "liveCellCount": 142,
+                    "viability": 88.19875776397515
+                },
+                "72": {
+                    "liveCellCount": 266,
+                    "viability": 90.78498293515358
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 84,
+                    "viability": 84.84848484848484
+                },
+                "48": {
+                    "liveCellCount": 139,
+                    "viability": 86.33540372670808
+                },
+                "72": {
+                    "liveCellCount": 230,
+                    "viability": 87.12121212121212
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 59,
+                    "viability": 72.8395061728395
+                },
+                "48": {
+                    "liveCellCount": 76,
+                    "viability": 71.69811320754717
+                },
+                "72": {
+                    "liveCellCount": 106,
+                    "viability": 74.12587412587412
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 36,
+                    "viability": 52.94117647058823
+                },
+                "48": {
+                    "liveCellCount": 31,
+                    "viability": 45.588235294117645
+                },
+                "72": {
+                    "liveCellCount": 30,
+                    "viability": 44.11764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 72,
+                    "viability": 83.72093023255815
+                },
+                "48": {
+                    "liveCellCount": 124,
+                    "viability": 87.32394366197182
+                },
+                "72": {
+                    "liveCellCount": 234,
+                    "viability": 91.40625
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 77,
+                    "viability": 81.91489361702128
+                },
+                "48": {
+                    "liveCellCount": 139,
+                    "viability": 85.80246913580247
+                },
+                "72": {
+                    "liveCellCount": 259,
+                    "viability": 89.00343642611683
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 86.95652173913044
+                },
+                "48": {
+                    "liveCellCount": 145,
+                    "viability": 89.50617283950618
+                },
+                "72": {
+                    "liveCellCount": 234,
+                    "viability": 89.65517241379311
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 55,
+                    "viability": 73.33333333333333
+                },
+                "48": {
+                    "liveCellCount": 78,
+                    "viability": 74.28571428571429
+                },
+                "72": {
+                    "liveCellCount": 114,
+                    "viability": 77.55102040816327
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 27,
+                    "viability": 39.705882352941174
+                },
+                "48": {
+                    "liveCellCount": 21,
+                    "viability": 30.88235294117647
+                },
+                "72": {
+                    "liveCellCount": 19,
+                    "viability": 27.941176470588236
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 74,
+                    "viability": 87.05882352941177
+                },
+                "48": {
+                    "liveCellCount": 116,
+                    "viability": 87.21804511278195
+                },
+                "72": {
+                    "liveCellCount": 172,
+                    "viability": 86.4321608040201
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 78,
+                    "viability": 81.25
+                },
+                "48": {
+                    "liveCellCount": 125,
+                    "viability": 81.69934640522875
+                },
+                "72": {
+                    "liveCellCount": 222,
+                    "viability": 85.05747126436782
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 75,
+                    "viability": 83.33333333333333
+                },
+                "48": {
+                    "liveCellCount": 125,
+                    "viability": 86.20689655172414
+                },
+                "72": {
+                    "liveCellCount": 195,
+                    "viability": 86.66666666666667
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 68,
+                    "viability": 85.0
+                },
+                "48": {
+                    "liveCellCount": 101,
+                    "viability": 87.06896551724138
+                },
+                "72": {
+                    "liveCellCount": 140,
+                    "viability": 87.5
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 33,
+                    "viability": 48.529411764705884
+                },
+                "48": {
+                    "liveCellCount": 25,
+                    "viability": 36.76470588235294
+                },
+                "72": {
+                    "liveCellCount": 24,
+                    "viability": 35.294117647058826
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 86,
+                    "viability": 91.48936170212765
+                },
+                "48": {
+                    "liveCellCount": 137,
+                    "viability": 90.72847682119205
+                },
+                "72": {
+                    "liveCellCount": 257,
+                    "viability": 92.7797833935018
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 81,
+                    "viability": 87.09677419354838
+                },
+                "48": {
+                    "liveCellCount": 152,
+                    "viability": 90.47619047619048
+                },
+                "72": {
+                    "liveCellCount": 258,
+                    "viability": 86.86868686868686
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 88,
+                    "viability": 91.66666666666667
+                },
+                "48": {
+                    "liveCellCount": 142,
+                    "viability": 88.75
+                },
+                "72": {
+                    "liveCellCount": 232,
+                    "viability": 88.212927756654
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 73,
+                    "viability": 87.95180722891567
+                },
+                "48": {
+                    "liveCellCount": 104,
+                    "viability": 87.39495798319328
+                },
+                "72": {
+                    "liveCellCount": 149,
+                    "viability": 89.75903614457832
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 50,
+                    "viability": 73.52941176470588
+                },
+                "48": {
+                    "liveCellCount": 43,
+                    "viability": 63.23529411764706
+                },
+                "72": {
+                    "liveCellCount": 39,
+                    "viability": 57.35294117647059
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 78,
+                    "viability": 90.69767441860465
+                },
+                "48": {
+                    "liveCellCount": 133,
+                    "viability": 87.5
+                },
+                "72": {
+                    "liveCellCount": 220,
+                    "viability": 90.1639344262295
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 72,
+                    "viability": 81.81818181818181
+                },
+                "48": {
+                    "liveCellCount": 122,
+                    "viability": 85.31468531468532
+                },
+                "72": {
+                    "liveCellCount": 228,
+                    "viability": 87.35632183908046
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 75,
+                    "viability": 80.64516129032258
+                },
+                "48": {
+                    "liveCellCount": 132,
+                    "viability": 83.54430379746836
+                },
+                "72": {
+                    "liveCellCount": 223,
+                    "viability": 86.43410852713178
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 67,
+                    "viability": 85.8974358974359
+                },
+                "48": {
+                    "liveCellCount": 99,
+                    "viability": 87.61061946902655
+                },
+                "72": {
+                    "liveCellCount": 152,
+                    "viability": 88.88888888888889
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 42,
+                    "viability": 61.76470588235294
+                },
+                "48": {
+                    "liveCellCount": 34,
+                    "viability": 50.0
+                },
+                "72": {
+                    "liveCellCount": 30,
+                    "viability": 44.11764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 77,
+                    "viability": 85.55555555555556
+                },
+                "48": {
+                    "liveCellCount": 125,
+                    "viability": 86.80555555555556
+                },
+                "72": {
+                    "liveCellCount": 231,
+                    "viability": 89.88326848249027
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 72,
+                    "viability": 84.70588235294117
+                },
+                "48": {
+                    "liveCellCount": 113,
+                    "viability": 85.60606060606061
+                },
+                "72": {
+                    "liveCellCount": 205,
+                    "viability": 88.74458874458874
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 84,
+                    "viability": 91.30434782608695
+                },
+                "48": {
+                    "liveCellCount": 139,
+                    "viability": 90.25974025974025
+                },
+                "72": {
+                    "liveCellCount": 238,
+                    "viability": 87.5
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 68,
+                    "viability": 81.92771084337349
+                },
+                "48": {
+                    "liveCellCount": 98,
+                    "viability": 84.48275862068965
+                },
+                "72": {
+                    "liveCellCount": 139,
+                    "viability": 83.73493975903614
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 46,
+                    "viability": 67.6470588235294
+                },
+                "48": {
+                    "liveCellCount": 38,
+                    "viability": 55.88235294117647
+                },
+                "72": {
+                    "liveCellCount": 32,
+                    "viability": 47.05882352941177
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 62,
+                    "viability": 80.51948051948052
+                },
+                "48": {
+                    "liveCellCount": 110,
+                    "viability": 85.27131782945736
+                },
+                "72": {
+                    "liveCellCount": 197,
+                    "viability": 87.94642857142857
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 83,
+                    "viability": 83.83838383838383
+                },
+                "48": {
+                    "liveCellCount": 138,
+                    "viability": 86.25
+                },
+                "72": {
+                    "liveCellCount": 249,
+                    "viability": 88.61209964412811
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 65,
+                    "viability": 76.47058823529412
+                },
+                "48": {
+                    "liveCellCount": 118,
+                    "viability": 80.82191780821918
+                },
+                "72": {
+                    "liveCellCount": 197,
+                    "viability": 84.91379310344827
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 63,
+                    "viability": 75.90361445783132
+                },
+                "48": {
+                    "liveCellCount": 94,
+                    "viability": 79.66101694915254
+                },
+                "72": {
+                    "liveCellCount": 136,
+                    "viability": 80.0
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 31,
+                    "viability": 45.588235294117645
+                },
+                "48": {
+                    "liveCellCount": 28,
+                    "viability": 41.1764705882353
+                },
+                "72": {
+                    "liveCellCount": 25,
+                    "viability": 36.76470588235294
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 73,
+                    "viability": 83.9080459770115
+                },
+                "48": {
+                    "liveCellCount": 115,
+                    "viability": 86.46616541353383
+                },
+                "72": {
+                    "liveCellCount": 213,
+                    "viability": 89.49579831932773
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 81,
+                    "viability": 85.26315789473684
+                },
+                "48": {
+                    "liveCellCount": 139,
+                    "viability": 86.33540372670808
+                },
+                "72": {
+                    "liveCellCount": 237,
+                    "viability": 84.04255319148936
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 82,
+                    "viability": 88.17204301075269
+                },
+                "48": {
+                    "liveCellCount": 130,
+                    "viability": 86.09271523178808
+                },
+                "72": {
+                    "liveCellCount": 229,
+                    "viability": 87.07224334600761
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 72,
+                    "viability": 88.88888888888889
+                },
+                "48": {
+                    "liveCellCount": 96,
+                    "viability": 82.75862068965517
+                },
+                "72": {
+                    "liveCellCount": 144,
+                    "viability": 84.21052631578948
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 34,
+                    "viability": 50.0
+                },
+                "48": {
+                    "liveCellCount": 31,
+                    "viability": 45.588235294117645
+                },
+                "72": {
+                    "liveCellCount": 26,
+                    "viability": 38.23529411764706
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 70,
+                    "viability": 85.36585365853658
+                },
+                "48": {
+                    "liveCellCount": 122,
+                    "viability": 87.76978417266187
+                },
+                "72": {
+                    "liveCellCount": 224,
+                    "viability": 89.95983935742971
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 83,
+                    "viability": 86.45833333333333
+                },
+                "48": {
+                    "liveCellCount": 154,
+                    "viability": 89.53488372093024
+                },
+                "72": {
+                    "liveCellCount": 269,
+                    "viability": 88.77887788778878
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 86.02150537634408
+                },
+                "48": {
+                    "liveCellCount": 130,
+                    "viability": 87.24832214765101
+                },
+                "72": {
+                    "liveCellCount": 223,
+                    "viability": 88.14229249011858
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 57,
+                    "viability": 75.0
+                },
+                "48": {
+                    "liveCellCount": 81,
+                    "viability": 76.41509433962264
+                },
+                "72": {
+                    "liveCellCount": 120,
+                    "viability": 80.53691275167785
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 35,
+                    "viability": 51.470588235294116
+                },
+                "48": {
+                    "liveCellCount": 30,
+                    "viability": 44.11764705882353
+                },
+                "72": {
+                    "liveCellCount": 28,
+                    "viability": 41.1764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 73,
+                    "viability": 86.9047619047619
+                },
+                "48": {
+                    "liveCellCount": 117,
+                    "viability": 88.63636363636364
+                },
+                "72": {
+                    "liveCellCount": 180,
+                    "viability": 88.66995073891626
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 86,
+                    "viability": 86.86868686868686
+                },
+                "48": {
+                    "liveCellCount": 143,
+                    "viability": 88.27160493827161
+                },
+                "72": {
+                    "liveCellCount": 232,
+                    "viability": 87.54716981132076
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 81,
+                    "viability": 87.09677419354838
+                },
+                "48": {
+                    "liveCellCount": 155,
+                    "viability": 90.11627906976744
+                },
+                "72": {
+                    "liveCellCount": 264,
+                    "viability": 91.03448275862068
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 72,
+                    "viability": 84.70588235294117
+                },
+                "48": {
+                    "liveCellCount": 99,
+                    "viability": 78.57142857142857
+                },
+                "72": {
+                    "liveCellCount": 143,
+                    "viability": 78.57142857142857
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 46,
+                    "viability": 67.6470588235294
+                },
+                "48": {
+                    "liveCellCount": 43,
+                    "viability": 63.23529411764706
+                },
+                "72": {
+                    "liveCellCount": 36,
+                    "viability": 52.94117647058823
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 66,
+                    "viability": 78.57142857142857
+                },
+                "48": {
+                    "liveCellCount": 111,
+                    "viability": 82.22222222222223
+                },
+                "72": {
+                    "liveCellCount": 205,
+                    "viability": 86.86440677966101
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 76,
+                    "viability": 86.36363636363636
+                },
+                "48": {
+                    "liveCellCount": 124,
+                    "viability": 88.57142857142857
+                },
+                "72": {
+                    "liveCellCount": 233,
+                    "viability": 89.61538461538461
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 76,
+                    "viability": 79.16666666666667
+                },
+                "48": {
+                    "liveCellCount": 131,
+                    "viability": 83.43949044585987
+                },
+                "72": {
+                    "liveCellCount": 246,
+                    "viability": 86.92579505300354
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 65,
+                    "viability": 80.24691358024691
+                },
+                "48": {
+                    "liveCellCount": 80,
+                    "viability": 76.19047619047619
+                },
+                "72": {
+                    "liveCellCount": 120,
+                    "viability": 79.47019867549669
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 41,
+                    "viability": 60.294117647058826
+                },
+                "48": {
+                    "liveCellCount": 36,
+                    "viability": 52.94117647058823
+                },
+                "72": {
+                    "liveCellCount": 35,
+                    "viability": 51.470588235294116
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 75,
+                    "viability": 87.20930232558139
+                },
+                "48": {
+                    "liveCellCount": 127,
+                    "viability": 89.43661971830986
+                },
+                "72": {
+                    "liveCellCount": 209,
+                    "viability": 89.31623931623932
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 77,
+                    "viability": 85.55555555555556
+                },
+                "48": {
+                    "liveCellCount": 131,
+                    "viability": 89.1156462585034
+                },
+                "72": {
+                    "liveCellCount": 255,
+                    "viability": 91.72661870503597
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 82,
+                    "viability": 87.23404255319149
+                },
+                "48": {
+                    "liveCellCount": 131,
+                    "viability": 87.91946308724832
+                },
+                "72": {
+                    "liveCellCount": 249,
+                    "viability": 89.56834532374101
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 66,
+                    "viability": 79.51807228915662
+                },
+                "48": {
+                    "liveCellCount": 104,
+                    "viability": 85.24590163934427
+                },
+                "72": {
+                    "liveCellCount": 176,
+                    "viability": 89.79591836734694
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 40,
+                    "viability": 58.8235294117647
+                },
+                "48": {
+                    "liveCellCount": 35,
+                    "viability": 51.470588235294116
+                },
+                "72": {
+                    "liveCellCount": 34,
+                    "viability": 50.0
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 76,
+                    "viability": 89.41176470588235
+                },
+                "48": {
+                    "liveCellCount": 118,
+                    "viability": 88.05970149253731
+                },
+                "72": {
+                    "liveCellCount": 213,
+                    "viability": 91.41630901287553
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 88,
+                    "viability": 92.63157894736842
+                },
+                "48": {
+                    "liveCellCount": 160,
+                    "viability": 93.5672514619883
+                },
+                "72": {
+                    "liveCellCount": 279,
+                    "viability": 91.47540983606558
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 73,
+                    "viability": 81.11111111111111
+                },
+                "48": {
+                    "liveCellCount": 116,
+                    "viability": 80.55555555555556
+                },
+                "72": {
+                    "liveCellCount": 193,
+                    "viability": 81.43459915611814
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 62,
+                    "viability": 79.48717948717949
+                },
+                "48": {
+                    "liveCellCount": 85,
+                    "viability": 78.70370370370371
+                },
+                "72": {
+                    "liveCellCount": 107,
+                    "viability": 76.42857142857143
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 37,
+                    "viability": 54.411764705882355
+                },
+                "48": {
+                    "liveCellCount": 32,
+                    "viability": 47.05882352941177
+                },
+                "72": {
+                    "liveCellCount": 26,
+                    "viability": 38.23529411764706
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 67,
+                    "viability": 83.75
+                },
+                "48": {
+                    "liveCellCount": 112,
+                    "viability": 85.49618320610686
+                },
+                "72": {
+                    "liveCellCount": 218,
+                    "viability": 90.45643153526972
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 82,
+                    "viability": 88.17204301075269
+                },
+                "48": {
+                    "liveCellCount": 145,
+                    "viability": 88.41463414634147
+                },
+                "72": {
+                    "liveCellCount": 260,
+                    "viability": 91.2280701754386
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 83,
+                    "viability": 94.31818181818181
+                },
+                "48": {
+                    "liveCellCount": 146,
+                    "viability": 91.82389937106919
+                },
+                "72": {
+                    "liveCellCount": 222,
+                    "viability": 87.74703557312253
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 86.58536585365853
+                },
+                "48": {
+                    "liveCellCount": 109,
+                    "viability": 86.5079365079365
+                },
+                "72": {
+                    "liveCellCount": 159,
+                    "viability": 85.48387096774194
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 41,
+                    "viability": 60.294117647058826
+                },
+                "48": {
+                    "liveCellCount": 38,
+                    "viability": 55.88235294117647
+                },
+                "72": {
+                    "liveCellCount": 31,
+                    "viability": 45.588235294117645
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 74,
+                    "viability": 88.0952380952381
+                },
+                "48": {
+                    "liveCellCount": 113,
+                    "viability": 85.60606060606061
+                },
+                "72": {
+                    "liveCellCount": 202,
+                    "viability": 87.44588744588745
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 85.1063829787234
+                },
+                "48": {
+                    "liveCellCount": 142,
+                    "viability": 84.02366863905326
+                },
+                "72": {
+                    "liveCellCount": 238,
+                    "viability": 86.54545454545455
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 66,
+                    "viability": 77.6470588235294
+                },
+                "48": {
+                    "liveCellCount": 105,
+                    "viability": 81.3953488372093
+                },
+                "72": {
+                    "liveCellCount": 172,
+                    "viability": 82.29665071770334
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 67,
+                    "viability": 82.71604938271605
+                },
+                "48": {
+                    "liveCellCount": 100,
+                    "viability": 83.33333333333333
+                },
+                "72": {
+                    "liveCellCount": 156,
+                    "viability": 87.15083798882682
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 41,
+                    "viability": 60.294117647058826
+                },
+                "48": {
+                    "liveCellCount": 33,
+                    "viability": 48.529411764705884
+                },
+                "72": {
+                    "liveCellCount": 30,
+                    "viability": 44.11764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 72,
+                    "viability": 84.70588235294117
+                },
+                "48": {
+                    "liveCellCount": 122,
+                    "viability": 88.40579710144928
+                },
+                "72": {
+                    "liveCellCount": 230,
+                    "viability": 91.26984126984127
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 82,
+                    "viability": 88.17204301075269
+                },
+                "48": {
+                    "liveCellCount": 137,
+                    "viability": 89.54248366013071
+                },
+                "72": {
+                    "liveCellCount": 244,
+                    "viability": 90.70631970260223
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 86.95652173913044
+                },
+                "48": {
+                    "liveCellCount": 141,
+                    "viability": 88.125
+                },
+                "72": {
+                    "liveCellCount": 233,
+                    "viability": 88.59315589353612
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 73,
+                    "viability": 87.95180722891567
+                },
+                "48": {
+                    "liveCellCount": 104,
+                    "viability": 87.39495798319328
+                },
+                "72": {
+                    "liveCellCount": 153,
+                    "viability": 86.93181818181819
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 36,
+                    "viability": 52.94117647058823
+                },
+                "48": {
+                    "liveCellCount": 32,
+                    "viability": 47.05882352941177
+                },
+                "72": {
+                    "liveCellCount": 28,
+                    "viability": 41.1764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 78,
+                    "viability": 89.65517241379311
+                },
+                "48": {
+                    "liveCellCount": 124,
+                    "viability": 89.85507246376811
+                },
+                "72": {
+                    "liveCellCount": 215,
+                    "viability": 91.10169491525424
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 78,
+                    "viability": 89.65517241379311
+                },
+                "48": {
+                    "liveCellCount": 131,
+                    "viability": 88.51351351351352
+                },
+                "72": {
+                    "liveCellCount": 233,
+                    "viability": 90.6614785992218
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 82.55813953488372
+                },
+                "48": {
+                    "liveCellCount": 121,
+                    "viability": 84.61538461538461
+                },
+                "72": {
+                    "liveCellCount": 218,
+                    "viability": 88.25910931174089
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 89.87341772151899
+                },
+                "48": {
+                    "liveCellCount": 91,
+                    "viability": 84.25925925925925
+                },
+                "72": {
+                    "liveCellCount": 134,
+                    "viability": 84.81012658227849
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 42,
+                    "viability": 61.76470588235294
+                },
+                "48": {
+                    "liveCellCount": 39,
+                    "viability": 57.35294117647059
+                },
+                "72": {
+                    "liveCellCount": 37,
+                    "viability": 54.411764705882355
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 73,
+                    "viability": 91.25
+                },
+                "48": {
+                    "liveCellCount": 136,
+                    "viability": 90.06622516556291
+                },
+                "72": {
+                    "liveCellCount": 246,
+                    "viability": 91.7910447761194
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 84,
+                    "viability": 87.5
+                },
+                "48": {
+                    "liveCellCount": 149,
+                    "viability": 89.22155688622755
+                },
+                "72": {
+                    "liveCellCount": 273,
+                    "viability": 90.39735099337749
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 90,
+                    "viability": 92.78350515463917
+                },
+                "48": {
+                    "liveCellCount": 152,
+                    "viability": 91.01796407185628
+                },
+                "72": {
+                    "liveCellCount": 255,
+                    "viability": 92.05776173285199
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 66,
+                    "viability": 83.54430379746836
+                },
+                "48": {
+                    "liveCellCount": 95,
+                    "viability": 81.19658119658119
+                },
+                "72": {
+                    "liveCellCount": 139,
+                    "viability": 84.24242424242425
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 49,
+                    "viability": 72.05882352941177
+                },
+                "48": {
+                    "liveCellCount": 42,
+                    "viability": 61.76470588235294
+                },
+                "72": {
+                    "liveCellCount": 38,
+                    "viability": 55.88235294117647
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 88,
+                    "viability": 94.6236559139785
+                },
+                "48": {
+                    "liveCellCount": 148,
+                    "viability": 93.67088607594937
+                },
+                "72": {
+                    "liveCellCount": 280,
+                    "viability": 92.71523178807946
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 81,
+                    "viability": 93.10344827586206
+                },
+                "48": {
+                    "liveCellCount": 145,
+                    "viability": 91.77215189873418
+                },
+                "72": {
+                    "liveCellCount": 291,
+                    "viability": 93.87096774193549
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 87,
+                    "viability": 92.55319148936171
+                },
+                "48": {
+                    "liveCellCount": 144,
+                    "viability": 88.34355828220859
+                },
+                "72": {
+                    "liveCellCount": 258,
+                    "viability": 90.20979020979021
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 73,
+                    "viability": 89.02439024390245
+                },
+                "48": {
+                    "liveCellCount": 117,
+                    "viability": 91.40625
+                },
+                "72": {
+                    "liveCellCount": 185,
+                    "viability": 92.03980099502488
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 54,
+                    "viability": 79.41176470588235
+                },
+                "48": {
+                    "liveCellCount": 44,
+                    "viability": 64.70588235294117
+                },
+                "72": {
+                    "liveCellCount": 36,
+                    "viability": 52.94117647058823
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 82.55813953488372
+                },
+                "48": {
+                    "liveCellCount": 117,
+                    "viability": 87.31343283582089
+                },
+                "72": {
+                    "liveCellCount": 217,
+                    "viability": 88.93442622950819
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 79,
+                    "viability": 82.29166666666667
+                },
+                "48": {
+                    "liveCellCount": 118,
+                    "viability": 81.94444444444444
+                },
+                "72": {
+                    "liveCellCount": 203,
+                    "viability": 86.01694915254237
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 82.55813953488372
+                },
+                "48": {
+                    "liveCellCount": 118,
+                    "viability": 86.76470588235294
+                },
+                "72": {
+                    "liveCellCount": 189,
+                    "viability": 85.52036199095022
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 63,
+                    "viability": 79.74683544303798
+                },
+                "48": {
+                    "liveCellCount": 81,
+                    "viability": 80.1980198019802
+                },
+                "72": {
+                    "liveCellCount": 118,
+                    "viability": 82.51748251748252
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 38,
+                    "viability": 55.88235294117647
+                },
+                "48": {
+                    "liveCellCount": 34,
+                    "viability": 50.0
+                },
+                "72": {
+                    "liveCellCount": 30,
+                    "viability": 44.11764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 67,
+                    "viability": 81.70731707317073
+                },
+                "48": {
+                    "liveCellCount": 107,
+                    "viability": 84.25196850393701
+                },
+                "72": {
+                    "liveCellCount": 201,
+                    "viability": 89.33333333333333
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 75,
+                    "viability": 84.26966292134831
+                },
+                "48": {
+                    "liveCellCount": 144,
+                    "viability": 87.27272727272727
+                },
+                "72": {
+                    "liveCellCount": 238,
+                    "viability": 86.86131386861314
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 69,
+                    "viability": 79.3103448275862
+                },
+                "48": {
+                    "liveCellCount": 125,
+                    "viability": 85.61643835616438
+                },
+                "72": {
+                    "liveCellCount": 202,
+                    "viability": 85.59322033898304
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 58,
+                    "viability": 74.35897435897436
+                },
+                "48": {
+                    "liveCellCount": 82,
+                    "viability": 75.92592592592592
+                },
+                "72": {
+                    "liveCellCount": 118,
+                    "viability": 78.1456953642384
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 41,
+                    "viability": 60.294117647058826
+                },
+                "48": {
+                    "liveCellCount": 36,
+                    "viability": 52.94117647058823
+                },
+                "72": {
+                    "liveCellCount": 24,
+                    "viability": 35.294117647058826
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 86.02150537634408
+                },
+                "48": {
+                    "liveCellCount": 128,
+                    "viability": 87.07482993197279
+                },
+                "72": {
+                    "liveCellCount": 245,
+                    "viability": 91.07806691449814
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 76,
+                    "viability": 83.51648351648352
+                },
+                "48": {
+                    "liveCellCount": 128,
+                    "viability": 84.21052631578948
+                },
+                "72": {
+                    "liveCellCount": 232,
+                    "viability": 87.87878787878788
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 78,
+                    "viability": 84.78260869565217
+                },
+                "48": {
+                    "liveCellCount": 138,
+                    "viability": 89.03225806451613
+                },
+                "72": {
+                    "liveCellCount": 243,
+                    "viability": 90.67164179104478
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 60,
+                    "viability": 77.92207792207792
+                },
+                "48": {
+                    "liveCellCount": 83,
+                    "viability": 80.58252427184466
+                },
+                "72": {
+                    "liveCellCount": 124,
+                    "viability": 83.22147651006712
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 37,
+                    "viability": 54.411764705882355
+                },
+                "48": {
+                    "liveCellCount": 32,
+                    "viability": 47.05882352941177
+                },
+                "72": {
+                    "liveCellCount": 27,
+                    "viability": 39.705882352941174
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 74,
+                    "viability": 87.05882352941177
+                },
+                "48": {
+                    "liveCellCount": 107,
+                    "viability": 85.6
+                },
+                "72": {
+                    "liveCellCount": 188,
+                    "viability": 89.95215311004785
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 82,
+                    "viability": 86.3157894736842
+                },
+                "48": {
+                    "liveCellCount": 141,
+                    "viability": 87.03703703703704
+                },
+                "72": {
+                    "liveCellCount": 272,
+                    "viability": 90.06622516556291
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 83.33333333333333
+                },
+                "48": {
+                    "liveCellCount": 145,
+                    "viability": 87.87878787878788
+                },
+                "72": {
+                    "liveCellCount": 236,
+                    "viability": 89.39393939393939
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 69,
+                    "viability": 83.13253012048193
+                },
+                "48": {
+                    "liveCellCount": 95,
+                    "viability": 84.070796460177
+                },
+                "72": {
+                    "liveCellCount": 141,
+                    "viability": 84.93975903614458
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 46,
+                    "viability": 67.6470588235294
+                },
+                "48": {
+                    "liveCellCount": 37,
+                    "viability": 54.411764705882355
+                },
+                "72": {
+                    "liveCellCount": 30,
+                    "viability": 44.11764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 87,
+                    "viability": 93.54838709677419
+                },
+                "48": {
+                    "liveCellCount": 133,
+                    "viability": 92.36111111111111
+                },
+                "72": {
+                    "liveCellCount": 245,
+                    "viability": 92.8030303030303
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 83,
+                    "viability": 92.22222222222223
+                },
+                "48": {
+                    "liveCellCount": 147,
+                    "viability": 92.45283018867924
+                },
+                "72": {
+                    "liveCellCount": 267,
+                    "viability": 92.38754325259515
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 70,
+                    "viability": 81.3953488372093
+                },
+                "48": {
+                    "liveCellCount": 124,
+                    "viability": 87.32394366197182
+                },
+                "72": {
+                    "liveCellCount": 233,
+                    "viability": 89.96138996138995
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 62,
+                    "viability": 78.48101265822785
+                },
+                "48": {
+                    "liveCellCount": 96,
+                    "viability": 80.0
+                },
+                "72": {
+                    "liveCellCount": 133,
+                    "viability": 80.60606060606061
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 37,
+                    "viability": 54.411764705882355
+                },
+                "48": {
+                    "liveCellCount": 33,
+                    "viability": 48.529411764705884
+                },
+                "72": {
+                    "liveCellCount": 26,
+                    "viability": 38.23529411764706
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 76,
+                    "viability": 92.6829268292683
+                },
+                "48": {
+                    "liveCellCount": 132,
+                    "viability": 93.61702127659575
+                },
+                "72": {
+                    "liveCellCount": 238,
+                    "viability": 92.24806201550388
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 94.11764705882354
+                },
+                "48": {
+                    "liveCellCount": 128,
+                    "viability": 92.7536231884058
+                },
+                "72": {
+                    "liveCellCount": 240,
+                    "viability": 92.66409266409266
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 86,
+                    "viability": 88.65979381443299
+                },
+                "48": {
+                    "liveCellCount": 136,
+                    "viability": 90.06622516556291
+                },
+                "72": {
+                    "liveCellCount": 260,
+                    "viability": 90.9090909090909
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 64,
+                    "viability": 83.11688311688312
+                },
+                "48": {
+                    "liveCellCount": 102,
+                    "viability": 84.29752066115702
+                },
+                "72": {
+                    "liveCellCount": 154,
+                    "viability": 88.0
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 45,
+                    "viability": 66.17647058823529
+                },
+                "48": {
+                    "liveCellCount": 37,
+                    "viability": 54.411764705882355
+                },
+                "72": {
+                    "liveCellCount": 30,
+                    "viability": 44.11764705882353
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 81,
+                    "viability": 92.04545454545455
+                },
+                "48": {
+                    "liveCellCount": 149,
+                    "viability": 93.71069182389937
+                },
+                "72": {
+                    "liveCellCount": 283,
+                    "viability": 94.01993355481727
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 74,
+                    "viability": 88.0952380952381
+                },
+                "48": {
+                    "liveCellCount": 137,
+                    "viability": 88.38709677419355
+                },
+                "72": {
+                    "liveCellCount": 244,
+                    "viability": 89.05109489051095
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 74,
+                    "viability": 84.0909090909091
+                },
+                "48": {
+                    "liveCellCount": 129,
+                    "viability": 85.43046357615894
+                },
+                "72": {
+                    "liveCellCount": 214,
+                    "viability": 82.94573643410853
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 80,
+                    "viability": 90.9090909090909
+                },
+                "48": {
+                    "liveCellCount": 117,
+                    "viability": 88.63636363636364
+                },
+                "72": {
+                    "liveCellCount": 171,
+                    "viability": 89.0625
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 47,
+                    "viability": 69.11764705882354
+                },
+                "48": {
+                    "liveCellCount": 37,
+                    "viability": 54.411764705882355
+                },
+                "72": {
+                    "liveCellCount": 35,
+                    "viability": 51.470588235294116
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 65,
+                    "viability": 80.24691358024691
+                },
+                "48": {
+                    "liveCellCount": 101,
+                    "viability": 82.78688524590164
+                },
+                "72": {
+                    "liveCellCount": 160,
+                    "viability": 86.02150537634408
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 70,
+                    "viability": 81.3953488372093
+                },
+                "48": {
+                    "liveCellCount": 124,
+                    "viability": 84.35374149659864
+                },
+                "72": {
+                    "liveCellCount": 219,
+                    "viability": 86.9047619047619
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 71,
+                    "viability": 83.52941176470588
+                },
+                "48": {
+                    "liveCellCount": 139,
+                    "viability": 87.9746835443038
+                },
+                "72": {
+                    "liveCellCount": 245,
+                    "viability": 90.74074074074075
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 65,
+                    "viability": 85.52631578947368
+                },
+                "48": {
+                    "liveCellCount": 95,
+                    "viability": 85.58558558558559
+                },
+                "72": {
+                    "liveCellCount": 144,
+                    "viability": 84.70588235294117
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 48,
+                    "viability": 70.58823529411765
+                },
+                "48": {
+                    "liveCellCount": 42,
+                    "viability": 61.76470588235294
+                },
+                "72": {
+                    "liveCellCount": 35,
+                    "viability": 51.470588235294116
+                }
+            }
+        },
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 86,
+                    "viability": 94.50549450549451
+                },
+                "48": {
+                    "liveCellCount": 159,
+                    "viability": 94.0828402366864
+                },
+                "72": {
+                    "liveCellCount": 275,
+                    "viability": 93.22033898305085
+                }
+            },
+            "H2017_Mg3": {
+                "24": {
+                    "liveCellCount": 85,
+                    "viability": 91.39784946236558
+                },
+                "48": {
+                    "liveCellCount": 155,
+                    "viability": 91.71597633136095
+                },
+                "72": {
+                    "liveCellCount": 245,
+                    "viability": 89.41605839416059
+                }
+            },
+            "H2017_Mg6": {
+                "24": {
+                    "liveCellCount": 83,
+                    "viability": 92.22222222222223
+                },
+                "48": {
+                    "liveCellCount": 140,
+                    "viability": 90.9090909090909
+                },
+                "72": {
+                    "liveCellCount": 250,
+                    "viability": 90.9090909090909
+                }
+            },
+            "H2017_Mg12": {
+                "24": {
+                    "liveCellCount": 68,
+                    "viability": 82.92682926829268
+                },
+                "48": {
+                    "liveCellCount": 97,
+                    "viability": 82.20338983050847
+                },
+                "72": {
+                    "liveCellCount": 147,
+                    "viability": 84.48275862068965
+                }
+            },
+            "H2017_Mg60": {
+                "24": {
+                    "liveCellCount": 40,
+                    "viability": 58.8235294117647
+                },
+                "48": {
+                    "liveCellCount": 33,
+                    "viability": 48.529411764705884
+                },
+                "72": {
+                    "liveCellCount": 31,
+                    "viability": 45.588235294117645
+                }
+            }
+        }
+    ]
+}

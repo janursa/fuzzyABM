@@ -1,0 +1,2904 @@
+{
+    "top_results": [
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 187,
+                    "viability": 92.57425742574257
+                },
+                "144": {
+                    "liveCellCount": 828,
+                    "viability": 93.24324324324324
+                },
+                "216": {
+                    "liveCellCount": 1764,
+                    "viability": 88.1559220389805
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 212,
+                    "viability": 94.22222222222223
+                },
+                "144": {
+                    "liveCellCount": 937,
+                    "viability": 94.45564516129032
+                },
+                "216": {
+                    "liveCellCount": 1764,
+                    "viability": 88.598694123556
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 149,
+                    "viability": 87.13450292397661
+                },
+                "144": {
+                    "liveCellCount": 749,
+                    "viability": 94.33249370277078
+                },
+                "216": {
+                    "liveCellCount": 1663,
+                    "viability": 90.23331524688008
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 210,
+                    "viability": 92.10526315789474
+                },
+                "144": {
+                    "liveCellCount": 933,
+                    "viability": 94.72081218274111
+                },
+                "216": {
+                    "liveCellCount": 1774,
+                    "viability": 88.3026381284221
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 182,
+                    "viability": 91.4572864321608
+                },
+                "144": {
+                    "liveCellCount": 836,
+                    "viability": 94.25028184892898
+                },
+                "216": {
+                    "liveCellCount": 1820,
+                    "viability": 91.59536990437846
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 193,
+                    "viability": 93.23671497584542
+                },
+                "144": {
+                    "liveCellCount": 982,
+                    "viability": 95.61830574488802
+                },
+                "216": {
+                    "liveCellCount": 1814,
+                    "viability": 91.10999497739829
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 159,
+                    "viability": 89.83050847457628
+                },
+                "144": {
+                    "liveCellCount": 868,
+                    "viability": 95.48954895489548
+                },
+                "216": {
+                    "liveCellCount": 1818,
+                    "viability": 92.00404858299595
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 169,
+                    "viability": 91.35135135135135
+                },
+                "144": {
+                    "liveCellCount": 860,
+                    "viability": 94.8180815876516
+                },
+                "216": {
+                    "liveCellCount": 1858,
+                    "viability": 92.16269841269842
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 194,
+                    "viability": 94.1747572815534
+                },
+                "144": {
+                    "liveCellCount": 888,
+                    "viability": 95.48387096774194
+                },
+                "216": {
+                    "liveCellCount": 1820,
+                    "viability": 92.19858156028369
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 192,
+                    "viability": 94.11764705882354
+                },
+                "144": {
+                    "liveCellCount": 870,
+                    "viability": 95.49945115257958
+                },
+                "216": {
+                    "liveCellCount": 1844,
+                    "viability": 92.47743229689067
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 240,
+                    "viability": 96.3855421686747
+                },
+                "144": {
+                    "liveCellCount": 1037,
+                    "viability": 96.64492078285181
+                },
+                "216": {
+                    "liveCellCount": 1927,
+                    "viability": 92.77804525758306
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 206,
+                    "viability": 95.37037037037037
+                },
+                "144": {
+                    "liveCellCount": 887,
+                    "viability": 95.78833693304536
+                },
+                "216": {
+                    "liveCellCount": 1803,
+                    "viability": 91.7557251908397
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 213,
+                    "viability": 95.51569506726457
+                },
+                "144": {
+                    "liveCellCount": 919,
+                    "viability": 94.93801652892562
+                },
+                "216": {
+                    "liveCellCount": 1873,
+                    "viability": 90.70217917675545
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 200,
+                    "viability": 95.23809523809524
+                },
+                "144": {
+                    "liveCellCount": 919,
+                    "viability": 95.43094496365525
+                },
+                "216": {
+                    "liveCellCount": 1803,
+                    "viability": 90.51204819277109
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 193,
+                    "viability": 93.23671497584542
+                },
+                "144": {
+                    "liveCellCount": 855,
+                    "viability": 96.61016949152543
+                },
+                "216": {
+                    "liveCellCount": 1822,
+                    "viability": 92.48730964467005
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 214,
+                    "viability": 95.53571428571429
+                },
+                "144": {
+                    "liveCellCount": 928,
+                    "viability": 95.6701030927835
+                },
+                "216": {
+                    "liveCellCount": 1844,
+                    "viability": 91.92422731804587
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 143,
+                    "viability": 89.375
+                },
+                "144": {
+                    "liveCellCount": 729,
+                    "viability": 94.30789133247089
+                },
+                "216": {
+                    "liveCellCount": 1720,
+                    "viability": 93.63091997822536
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 169,
+                    "viability": 92.34972677595628
+                },
+                "144": {
+                    "liveCellCount": 822,
+                    "viability": 95.47038327526133
+                },
+                "216": {
+                    "liveCellCount": 1736,
+                    "viability": 92.68553123331553
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 201,
+                    "viability": 90.13452914798206
+                },
+                "144": {
+                    "liveCellCount": 969,
+                    "viability": 94.72140762463343
+                },
+                "216": {
+                    "liveCellCount": 1919,
+                    "viability": 91.64278892072588
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 160,
+                    "viability": 86.48648648648648
+                },
+                "144": {
+                    "liveCellCount": 770,
+                    "viability": 93.44660194174757
+                },
+                "216": {
+                    "liveCellCount": 1643,
+                    "viability": 91.02493074792244
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 209,
+                    "viability": 89.31623931623932
+                },
+                "144": {
+                    "liveCellCount": 881,
+                    "viability": 94.52789699570816
+                },
+                "216": {
+                    "liveCellCount": 1858,
+                    "viability": 92.20843672456576
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 181,
+                    "viability": 88.72549019607843
+                },
+                "144": {
+                    "liveCellCount": 787,
+                    "viability": 94.13875598086125
+                },
+                "216": {
+                    "liveCellCount": 1724,
+                    "viability": 91.3619501854796
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 176,
+                    "viability": 89.34010152284264
+                },
+                "144": {
+                    "liveCellCount": 765,
+                    "viability": 93.17904993909866
+                },
+                "216": {
+                    "liveCellCount": 1778,
+                    "viability": 92.36363636363636
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 188,
+                    "viability": 92.15686274509804
+                },
+                "144": {
+                    "liveCellCount": 857,
+                    "viability": 95.64732142857143
+                },
+                "216": {
+                    "liveCellCount": 1795,
+                    "viability": 92.05128205128206
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 211,
+                    "viability": 93.36283185840708
+                },
+                "144": {
+                    "liveCellCount": 866,
+                    "viability": 92.91845493562232
+                },
+                "216": {
+                    "liveCellCount": 1692,
+                    "viability": 89.71367974549311
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 232,
+                    "viability": 95.47325102880659
+                },
+                "144": {
+                    "liveCellCount": 952,
+                    "viability": 94.16419386745797
+                },
+                "216": {
+                    "liveCellCount": 1727,
+                    "viability": 90.41884816753927
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 217,
+                    "viability": 94.75982532751091
+                },
+                "144": {
+                    "liveCellCount": 924,
+                    "viability": 94.96402877697842
+                },
+                "216": {
+                    "liveCellCount": 1691,
+                    "viability": 89.37632135306553
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 245,
+                    "viability": 98.39357429718875
+                },
+                "144": {
+                    "liveCellCount": 1063,
+                    "viability": 95.08050089445439
+                },
+                "216": {
+                    "liveCellCount": 1715,
+                    "viability": 89.55613577023499
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 230,
+                    "viability": 94.65020576131687
+                },
+                "144": {
+                    "liveCellCount": 935,
+                    "viability": 96.09455292908531
+                },
+                "216": {
+                    "liveCellCount": 1806,
+                    "viability": 90.70818684078353
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 235,
+                    "viability": 95.52845528455285
+                },
+                "144": {
+                    "liveCellCount": 953,
+                    "viability": 94.82587064676616
+                },
+                "216": {
+                    "liveCellCount": 1807,
+                    "viability": 91.17053481331988
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 234,
+                    "viability": 95.90163934426229
+                },
+                "144": {
+                    "liveCellCount": 971,
+                    "viability": 95.10284035259549
+                },
+                "216": {
+                    "liveCellCount": 1803,
+                    "viability": 91.43002028397567
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 173,
+                    "viability": 89.17525773195877
+                },
+                "144": {
+                    "liveCellCount": 819,
+                    "viability": 95.67757009345794
+                },
+                "216": {
+                    "liveCellCount": 1757,
+                    "viability": 92.3764458464774
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 188,
+                    "viability": 91.2621359223301
+                },
+                "144": {
+                    "liveCellCount": 901,
+                    "viability": 93.07851239669421
+                },
+                "216": {
+                    "liveCellCount": 1858,
+                    "viability": 89.84526112185686
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 159,
+                    "viability": 89.83050847457628
+                },
+                "144": {
+                    "liveCellCount": 795,
+                    "viability": 94.41805225653206
+                },
+                "216": {
+                    "liveCellCount": 1745,
+                    "viability": 90.13429752066116
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 189,
+                    "viability": 92.6470588235294
+                },
+                "144": {
+                    "liveCellCount": 920,
+                    "viability": 95.13960703205791
+                },
+                "216": {
+                    "liveCellCount": 1821,
+                    "viability": 91.00449775112443
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 200,
+                    "viability": 90.09009009009009
+                },
+                "144": {
+                    "liveCellCount": 964,
+                    "viability": 93.77431906614785
+                },
+                "216": {
+                    "liveCellCount": 1812,
+                    "viability": 90.55472263868066
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 193,
+                    "viability": 92.78846153846153
+                },
+                "144": {
+                    "liveCellCount": 847,
+                    "viability": 94.21579532814238
+                },
+                "216": {
+                    "liveCellCount": 1675,
+                    "viability": 86.83255572835667
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 189,
+                    "viability": 90.43062200956938
+                },
+                "144": {
+                    "liveCellCount": 882,
+                    "viability": 95.24838012958963
+                },
+                "216": {
+                    "liveCellCount": 1704,
+                    "viability": 88.56548856548856
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 211,
+                    "viability": 94.19642857142857
+                },
+                "144": {
+                    "liveCellCount": 882,
+                    "viability": 94.23076923076923
+                },
+                "216": {
+                    "liveCellCount": 1682,
+                    "viability": 87.55856324830818
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 202,
+                    "viability": 91.81818181818181
+                },
+                "144": {
+                    "liveCellCount": 899,
+                    "viability": 94.93136219640971
+                },
+                "216": {
+                    "liveCellCount": 1717,
+                    "viability": 88.77973112719752
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 185,
+                    "viability": 91.13300492610837
+                },
+                "144": {
+                    "liveCellCount": 817,
+                    "viability": 95.11059371362049
+                },
+                "216": {
+                    "liveCellCount": 1704,
+                    "viability": 92.15792320173067
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 180,
+                    "viability": 94.73684210526316
+                },
+                "144": {
+                    "liveCellCount": 787,
+                    "viability": 94.25149700598803
+                },
+                "216": {
+                    "liveCellCount": 1671,
+                    "viability": 92.32044198895028
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 180,
+                    "viability": 91.83673469387755
+                },
+                "144": {
+                    "liveCellCount": 805,
+                    "viability": 94.15204678362574
+                },
+                "216": {
+                    "liveCellCount": 1667,
+                    "viability": 91.69416941694169
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 172,
+                    "viability": 88.2051282051282
+                },
+                "144": {
+                    "liveCellCount": 809,
+                    "viability": 93.85150812064965
+                },
+                "216": {
+                    "liveCellCount": 1684,
+                    "viability": 92.32456140350877
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 169,
+                    "viability": 90.86021505376344
+                },
+                "144": {
+                    "liveCellCount": 756,
+                    "viability": 94.14694894146949
+                },
+                "216": {
+                    "liveCellCount": 1654,
+                    "viability": 89.45375878853434
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 187,
+                    "viability": 90.77669902912622
+                },
+                "144": {
+                    "liveCellCount": 803,
+                    "viability": 93.04750869061414
+                },
+                "216": {
+                    "liveCellCount": 1666,
+                    "viability": 89.52176249328318
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 177,
+                    "viability": 91.70984455958549
+                },
+                "144": {
+                    "liveCellCount": 813,
+                    "viability": 95.19906323185012
+                },
+                "216": {
+                    "liveCellCount": 1645,
+                    "viability": 89.2566467715681
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 166,
+                    "viability": 88.77005347593582
+                },
+                "144": {
+                    "liveCellCount": 717,
+                    "viability": 93.11688311688312
+                },
+                "216": {
+                    "liveCellCount": 1614,
+                    "viability": 89.71650917176208
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 217,
+                    "viability": 90.7949790794979
+                },
+                "144": {
+                    "liveCellCount": 916,
+                    "viability": 93.94871794871794
+                },
+                "216": {
+                    "liveCellCount": 1730,
+                    "viability": 88.94601542416453
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 195,
+                    "viability": 91.98113207547169
+                },
+                "144": {
+                    "liveCellCount": 846,
+                    "viability": 93.79157427937916
+                },
+                "216": {
+                    "liveCellCount": 1746,
+                    "viability": 90.18595041322314
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 165,
+                    "viability": 92.17877094972067
+                },
+                "144": {
+                    "liveCellCount": 750,
+                    "viability": 94.10288582183188
+                },
+                "216": {
+                    "liveCellCount": 1679,
+                    "viability": 91.59847244953627
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 189,
+                    "viability": 94.9748743718593
+                },
+                "144": {
+                    "liveCellCount": 856,
+                    "viability": 95.21690767519466
+                },
+                "216": {
+                    "liveCellCount": 1764,
+                    "viability": 92.16300940438872
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 232,
+                    "viability": 94.3089430894309
+                },
+                "144": {
+                    "liveCellCount": 1055,
+                    "viability": 95.47511312217195
+                },
+                "216": {
+                    "liveCellCount": 1882,
+                    "viability": 89.87583572110793
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 221,
+                    "viability": 95.67099567099567
+                },
+                "144": {
+                    "liveCellCount": 1023,
+                    "viability": 95.34016775396086
+                },
+                "216": {
+                    "liveCellCount": 1819,
+                    "viability": 90.36264282165922
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 200,
+                    "viability": 92.5925925925926
+                },
+                "144": {
+                    "liveCellCount": 960,
+                    "viability": 96.09609609609609
+                },
+                "216": {
+                    "liveCellCount": 1879,
+                    "viability": 91.92759295499022
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 184,
+                    "viability": 92.0
+                },
+                "144": {
+                    "liveCellCount": 899,
+                    "viability": 95.43524416135881
+                },
+                "216": {
+                    "liveCellCount": 1695,
+                    "viability": 90.44823906083245
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 181,
+                    "viability": 94.27083333333333
+                },
+                "144": {
+                    "liveCellCount": 825,
+                    "viability": 96.3785046728972
+                },
+                "216": {
+                    "liveCellCount": 1826,
+                    "viability": 92.78455284552845
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 208,
+                    "viability": 95.41284403669725
+                },
+                "144": {
+                    "liveCellCount": 924,
+                    "viability": 96.04989604989605
+                },
+                "216": {
+                    "liveCellCount": 1841,
+                    "viability": 92.23446893787575
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 231,
+                    "viability": 95.45454545454545
+                },
+                "144": {
+                    "liveCellCount": 995,
+                    "viability": 95.58117195004803
+                },
+                "216": {
+                    "liveCellCount": 1907,
+                    "viability": 91.63863527150409
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 201,
+                    "viability": 95.260663507109
+                },
+                "144": {
+                    "liveCellCount": 890,
+                    "viability": 96.42470205850488
+                },
+                "216": {
+                    "liveCellCount": 1792,
+                    "viability": 92.3235445646574
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 165,
+                    "viability": 88.23529411764706
+                },
+                "144": {
+                    "liveCellCount": 765,
+                    "viability": 93.86503067484662
+                },
+                "216": {
+                    "liveCellCount": 1679,
+                    "viability": 89.69017094017094
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 175,
+                    "viability": 92.10526315789474
+                },
+                "144": {
+                    "liveCellCount": 857,
+                    "viability": 94.27942794279429
+                },
+                "216": {
+                    "liveCellCount": 1699,
+                    "viability": 89.51527924130664
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 207,
+                    "viability": 92.0
+                },
+                "144": {
+                    "liveCellCount": 962,
+                    "viability": 94.87179487179488
+                },
+                "216": {
+                    "liveCellCount": 1727,
+                    "viability": 89.06652913873131
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 181,
+                    "viability": 90.04975124378109
+                },
+                "144": {
+                    "liveCellCount": 868,
+                    "viability": 93.93939393939394
+                },
+                "216": {
+                    "liveCellCount": 1714,
+                    "viability": 89.4572025052192
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 206,
+                    "viability": 95.81395348837209
+                },
+                "144": {
+                    "liveCellCount": 976,
+                    "viability": 96.72943508424183
+                },
+                "216": {
+                    "liveCellCount": 1850,
+                    "viability": 93.19899244332494
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 198,
+                    "viability": 92.95774647887323
+                },
+                "144": {
+                    "liveCellCount": 888,
+                    "viability": 95.07494646680942
+                },
+                "216": {
+                    "liveCellCount": 1772,
+                    "viability": 92.53263707571801
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 215,
+                    "viability": 95.55555555555556
+                },
+                "144": {
+                    "liveCellCount": 984,
+                    "viability": 95.53398058252426
+                },
+                "216": {
+                    "liveCellCount": 1793,
+                    "viability": 92.37506439979391
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 243,
+                    "viability": 96.81274900398407
+                },
+                "144": {
+                    "liveCellCount": 1021,
+                    "viability": 95.50982226379794
+                },
+                "216": {
+                    "liveCellCount": 1808,
+                    "viability": 91.869918699187
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 215,
+                    "viability": 95.13274336283186
+                },
+                "144": {
+                    "liveCellCount": 951,
+                    "viability": 94.81555333998006
+                },
+                "216": {
+                    "liveCellCount": 1751,
+                    "viability": 91.19791666666667
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 166,
+                    "viability": 93.78531073446328
+                },
+                "144": {
+                    "liveCellCount": 799,
+                    "viability": 95.57416267942584
+                },
+                "216": {
+                    "liveCellCount": 1732,
+                    "viability": 93.16837009144702
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 191,
+                    "viability": 94.55445544554455
+                },
+                "144": {
+                    "liveCellCount": 931,
+                    "viability": 95.19427402862986
+                },
+                "216": {
+                    "liveCellCount": 1710,
+                    "viability": 90.95744680851064
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 234,
+                    "viability": 97.0954356846473
+                },
+                "144": {
+                    "liveCellCount": 1101,
+                    "viability": 97.00440528634361
+                },
+                "216": {
+                    "liveCellCount": 1779,
+                    "viability": 92.65625
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 190,
+                    "viability": 95.47738693467336
+                },
+                "144": {
+                    "liveCellCount": 912,
+                    "viability": 96.5079365079365
+                },
+                "216": {
+                    "liveCellCount": 1916,
+                    "viability": 92.96458030082485
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 208,
+                    "viability": 95.85253456221199
+                },
+                "144": {
+                    "liveCellCount": 936,
+                    "viability": 96.39546858908342
+                },
+                "216": {
+                    "liveCellCount": 1918,
+                    "viability": 93.51535836177474
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 187,
+                    "viability": 96.3917525773196
+                },
+                "144": {
+                    "liveCellCount": 915,
+                    "viability": 96.82539682539682
+                },
+                "216": {
+                    "liveCellCount": 1895,
+                    "viability": 93.81188118811882
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 197,
+                    "viability": 91.20370370370371
+                },
+                "144": {
+                    "liveCellCount": 904,
+                    "viability": 95.0578338590957
+                },
+                "216": {
+                    "liveCellCount": 1850,
+                    "viability": 92.13147410358566
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 180,
+                    "viability": 91.83673469387755
+                },
+                "144": {
+                    "liveCellCount": 822,
+                    "viability": 94.70046082949308
+                },
+                "216": {
+                    "liveCellCount": 1732,
+                    "viability": 92.22577209797657
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 199,
+                    "viability": 93.86792452830188
+                },
+                "144": {
+                    "liveCellCount": 889,
+                    "viability": 95.79741379310344
+                },
+                "216": {
+                    "liveCellCount": 1764,
+                    "viability": 92.25941422594143
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 221,
+                    "viability": 95.25862068965517
+                },
+                "144": {
+                    "liveCellCount": 1008,
+                    "viability": 95.81749049429658
+                },
+                "216": {
+                    "liveCellCount": 1796,
+                    "viability": 92.38683127572017
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 217,
+                    "viability": 93.93939393939394
+                },
+                "144": {
+                    "liveCellCount": 1010,
+                    "viability": 95.28301886792453
+                },
+                "216": {
+                    "liveCellCount": 1767,
+                    "viability": 91.98334200937012
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 198,
+                    "viability": 92.09302325581395
+                },
+                "144": {
+                    "liveCellCount": 899,
+                    "viability": 95.53666312433582
+                },
+                "216": {
+                    "liveCellCount": 1777,
+                    "viability": 93.37887545980031
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 223,
+                    "viability": 95.70815450643777
+                },
+                "144": {
+                    "liveCellCount": 986,
+                    "viability": 96.10136452241716
+                },
+                "216": {
+                    "liveCellCount": 1808,
+                    "viability": 94.11764705882354
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 200,
+                    "viability": 94.7867298578199
+                },
+                "144": {
+                    "liveCellCount": 869,
+                    "viability": 95.28508771929825
+                },
+                "216": {
+                    "liveCellCount": 1732,
+                    "viability": 93.41963322545847
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 198,
+                    "viability": 95.65217391304348
+                },
+                "144": {
+                    "liveCellCount": 926,
+                    "viability": 96.76071055381401
+                },
+                "216": {
+                    "liveCellCount": 1781,
+                    "viability": 94.43266171792153
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 206,
+                    "viability": 93.21266968325791
+                },
+                "144": {
+                    "liveCellCount": 856,
+                    "viability": 94.58563535911603
+                },
+                "216": {
+                    "liveCellCount": 1678,
+                    "viability": 89.68466060929984
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 225,
+                    "viability": 94.53781512605042
+                },
+                "144": {
+                    "liveCellCount": 946,
+                    "viability": 94.78957915831663
+                },
+                "216": {
+                    "liveCellCount": 1687,
+                    "viability": 88.78947368421052
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 166,
+                    "viability": 87.36842105263158
+                },
+                "144": {
+                    "liveCellCount": 752,
+                    "viability": 93.88264669163546
+                },
+                "216": {
+                    "liveCellCount": 1647,
+                    "viability": 90.0984682713348
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 193,
+                    "viability": 94.14634146341463
+                },
+                "144": {
+                    "liveCellCount": 851,
+                    "viability": 94.76614699331849
+                },
+                "216": {
+                    "liveCellCount": 1665,
+                    "viability": 89.9513776337115
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 202,
+                    "viability": 92.66055045871559
+                },
+                "144": {
+                    "liveCellCount": 886,
+                    "viability": 94.96248660235798
+                },
+                "216": {
+                    "liveCellCount": 1751,
+                    "viability": 90.30428055698813
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 209,
+                    "viability": 92.0704845814978
+                },
+                "144": {
+                    "liveCellCount": 898,
+                    "viability": 94.52631578947368
+                },
+                "216": {
+                    "liveCellCount": 1743,
+                    "viability": 89.98451213216313
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 207,
+                    "viability": 93.24324324324324
+                },
+                "144": {
+                    "liveCellCount": 945,
+                    "viability": 94.68937875751503
+                },
+                "216": {
+                    "liveCellCount": 1761,
+                    "viability": 90.35402770651616
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 213,
+                    "viability": 94.66666666666667
+                },
+                "144": {
+                    "liveCellCount": 905,
+                    "viability": 95.5649419218585
+                },
+                "216": {
+                    "liveCellCount": 1764,
+                    "viability": 91.11570247933884
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 193,
+                    "viability": 92.78846153846153
+                },
+                "144": {
+                    "liveCellCount": 875,
+                    "viability": 95.62841530054645
+                },
+                "216": {
+                    "liveCellCount": 1766,
+                    "viability": 91.26614987080103
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 208,
+                    "viability": 93.69369369369369
+                },
+                "144": {
+                    "liveCellCount": 938,
+                    "viability": 94.6518668012109
+                },
+                "216": {
+                    "liveCellCount": 1769,
+                    "viability": 90.20907700152983
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 206,
+                    "viability": 94.4954128440367
+                },
+                "144": {
+                    "liveCellCount": 880,
+                    "viability": 94.4206008583691
+                },
+                "216": {
+                    "liveCellCount": 1843,
+                    "viability": 91.32804757185332
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 197,
+                    "viability": 95.63106796116504
+                },
+                "144": {
+                    "liveCellCount": 907,
+                    "viability": 95.17313746065058
+                },
+                "216": {
+                    "liveCellCount": 1760,
+                    "viability": 90.44193216855088
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 210,
+                    "viability": 95.45454545454545
+                },
+                "144": {
+                    "liveCellCount": 879,
+                    "viability": 94.8220064724919
+                },
+                "216": {
+                    "liveCellCount": 1869,
+                    "viability": 90.77221952404079
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 229,
+                    "viability": 95.81589958158996
+                },
+                "144": {
+                    "liveCellCount": 988,
+                    "viability": 95.55125725338492
+                },
+                "216": {
+                    "liveCellCount": 1874,
+                    "viability": 90.92673459485687
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 175,
+                    "viability": 94.08602150537635
+                },
+                "144": {
+                    "liveCellCount": 805,
+                    "viability": 95.49228944246738
+                },
+                "216": {
+                    "liveCellCount": 1776,
+                    "viability": 92.45184799583551
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 221,
+                    "viability": 94.04255319148936
+                },
+                "144": {
+                    "liveCellCount": 932,
+                    "viability": 94.90835030549898
+                },
+                "216": {
+                    "liveCellCount": 1878,
+                    "viability": 91.96865817825662
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 219,
+                    "viability": 93.58974358974359
+                },
+                "144": {
+                    "liveCellCount": 1011,
+                    "viability": 94.75164011246486
+                },
+                "216": {
+                    "liveCellCount": 1773,
+                    "viability": 89.5002523977789
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 186,
+                    "viability": 91.17647058823529
+                },
+                "144": {
+                    "liveCellCount": 899,
+                    "viability": 94.33368310598111
+                },
+                "216": {
+                    "liveCellCount": 1726,
+                    "viability": 89.94267847837415
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 223,
+                    "viability": 96.12068965517241
+                },
+                "144": {
+                    "liveCellCount": 1038,
+                    "viability": 94.967978042086
+                },
+                "216": {
+                    "liveCellCount": 1758,
+                    "viability": 88.69828456104945
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 189,
+                    "viability": 89.15094339622641
+                },
+                "144": {
+                    "liveCellCount": 895,
+                    "viability": 93.03534303534303
+                },
+                "216": {
+                    "liveCellCount": 1723,
+                    "viability": 88.95198760970572
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 211,
+                    "viability": 95.9090909090909
+                },
+                "144": {
+                    "liveCellCount": 944,
+                    "viability": 95.35353535353535
+                },
+                "216": {
+                    "liveCellCount": 1815,
+                    "viability": 91.99189052204764
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 200,
+                    "viability": 94.7867298578199
+                },
+                "144": {
+                    "liveCellCount": 923,
+                    "viability": 95.15463917525773
+                },
+                "216": {
+                    "liveCellCount": 1777,
+                    "viability": 92.40769630785232
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 193,
+                    "viability": 92.78846153846153
+                },
+                "144": {
+                    "liveCellCount": 897,
+                    "viability": 95.83333333333333
+                },
+                "216": {
+                    "liveCellCount": 1788,
+                    "viability": 92.73858921161826
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 222,
+                    "viability": 98.23008849557522
+                },
+                "144": {
+                    "liveCellCount": 983,
+                    "viability": 97.13438735177866
+                },
+                "216": {
+                    "liveCellCount": 1800,
+                    "viability": 92.54498714652956
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 206,
+                    "viability": 95.37037037037037
+                },
+                "144": {
+                    "liveCellCount": 946,
+                    "viability": 96.33401221995926
+                },
+                "216": {
+                    "liveCellCount": 1773,
+                    "viability": 93.5126582278481
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 209,
+                    "viability": 95.87155963302752
+                },
+                "144": {
+                    "liveCellCount": 986,
+                    "viability": 96.10136452241716
+                },
+                "216": {
+                    "liveCellCount": 1771,
+                    "viability": 92.72251308900523
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 190,
+                    "viability": 96.93877551020408
+                },
+                "144": {
+                    "liveCellCount": 897,
+                    "viability": 96.34801288936627
+                },
+                "216": {
+                    "liveCellCount": 1743,
+                    "viability": 92.41781548250265
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 198,
+                    "viability": 96.11650485436893
+                },
+                "144": {
+                    "liveCellCount": 959,
+                    "viability": 96.18856569709128
+                },
+                "216": {
+                    "liveCellCount": 1767,
+                    "viability": 91.93548387096774
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 196,
+                    "viability": 93.33333333333333
+                },
+                "144": {
+                    "liveCellCount": 899,
+                    "viability": 95.43524416135881
+                },
+                "216": {
+                    "liveCellCount": 1845,
+                    "viability": 92.85354806240564
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 223,
+                    "viability": 96.53679653679653
+                },
+                "144": {
+                    "liveCellCount": 1048,
+                    "viability": 95.8828911253431
+                },
+                "216": {
+                    "liveCellCount": 1929,
+                    "viability": 92.0324427480916
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 187,
+                    "viability": 95.40816326530613
+                },
+                "144": {
+                    "liveCellCount": 885,
+                    "viability": 95.46925566343042
+                },
+                "216": {
+                    "liveCellCount": 1833,
+                    "viability": 92.24962254655259
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 217,
+                    "viability": 94.75982532751091
+                },
+                "144": {
+                    "liveCellCount": 989,
+                    "viability": 96.01941747572816
+                },
+                "216": {
+                    "liveCellCount": 1933,
+                    "viability": 93.11175337186899
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 200,
+                    "viability": 93.02325581395348
+                },
+                "144": {
+                    "liveCellCount": 899,
+                    "viability": 95.84221748400853
+                },
+                "216": {
+                    "liveCellCount": 1762,
+                    "viability": 92.05851619644723
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 206,
+                    "viability": 94.93087557603687
+                },
+                "144": {
+                    "liveCellCount": 907,
+                    "viability": 95.17313746065058
+                },
+                "216": {
+                    "liveCellCount": 1751,
+                    "viability": 91.53162571876634
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 202,
+                    "viability": 93.08755760368663
+                },
+                "144": {
+                    "liveCellCount": 895,
+                    "viability": 95.41577825159915
+                },
+                "216": {
+                    "liveCellCount": 1758,
+                    "viability": 92.33193277310924
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 167,
+                    "viability": 90.76086956521739
+                },
+                "144": {
+                    "liveCellCount": 743,
+                    "viability": 94.529262086514
+                },
+                "216": {
+                    "liveCellCount": 1706,
+                    "viability": 92.8182807399347
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 189,
+                    "viability": 93.10344827586206
+                },
+                "144": {
+                    "liveCellCount": 861,
+                    "viability": 96.41657334826428
+                },
+                "216": {
+                    "liveCellCount": 1752,
+                    "viability": 92.94429708222812
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 193,
+                    "viability": 94.6078431372549
+                },
+                "144": {
+                    "liveCellCount": 880,
+                    "viability": 95.13513513513513
+                },
+                "216": {
+                    "liveCellCount": 1754,
+                    "viability": 93.34752527940394
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 185,
+                    "viability": 94.38775510204081
+                },
+                "144": {
+                    "liveCellCount": 916,
+                    "viability": 96.62447257383967
+                },
+                "216": {
+                    "liveCellCount": 1773,
+                    "viability": 93.71035940803382
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 233,
+                    "viability": 96.6804979253112
+                },
+                "144": {
+                    "liveCellCount": 1044,
+                    "viability": 96.93593314763231
+                },
+                "216": {
+                    "liveCellCount": 1817,
+                    "viability": 93.99896533885152
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 181,
+                    "viability": 93.29896907216495
+                },
+                "144": {
+                    "liveCellCount": 866,
+                    "viability": 95.26952695269527
+                },
+                "216": {
+                    "liveCellCount": 1750,
+                    "viability": 92.83819628647215
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 235,
+                    "viability": 94.75806451612904
+                },
+                "144": {
+                    "liveCellCount": 1034,
+                    "viability": 96.2756052141527
+                },
+                "216": {
+                    "liveCellCount": 1770,
+                    "viability": 92.52483010977522
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 216,
+                    "viability": 93.50649350649351
+                },
+                "144": {
+                    "liveCellCount": 995,
+                    "viability": 95.39789069990412
+                },
+                "216": {
+                    "liveCellCount": 1776,
+                    "viability": 92.59645464025026
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 214,
+                    "viability": 97.71689497716895
+                },
+                "144": {
+                    "liveCellCount": 945,
+                    "viability": 94.78435305917753
+                },
+                "216": {
+                    "liveCellCount": 1753,
+                    "viability": 91.73207744636316
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 199,
+                    "viability": 90.8675799086758
+                },
+                "144": {
+                    "liveCellCount": 895,
+                    "viability": 94.21052631578948
+                },
+                "216": {
+                    "liveCellCount": 1914,
+                    "viability": 92.19653179190752
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 157,
+                    "viability": 89.20454545454545
+                },
+                "144": {
+                    "liveCellCount": 728,
+                    "viability": 94.66840052015604
+                },
+                "216": {
+                    "liveCellCount": 1709,
+                    "viability": 92.52842447211695
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 191,
+                    "viability": 93.62745098039215
+                },
+                "144": {
+                    "liveCellCount": 851,
+                    "viability": 96.04966139954853
+                },
+                "216": {
+                    "liveCellCount": 1815,
+                    "viability": 92.41344195519348
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 172,
+                    "viability": 90.52631578947368
+                },
+                "144": {
+                    "liveCellCount": 770,
+                    "viability": 94.01709401709402
+                },
+                "216": {
+                    "liveCellCount": 1733,
+                    "viability": 91.6446324695928
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 183,
+                    "viability": 90.14778325123153
+                },
+                "144": {
+                    "liveCellCount": 785,
+                    "viability": 93.67541766109785
+                },
+                "216": {
+                    "liveCellCount": 1665,
+                    "viability": 89.18050348152116
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 213,
+                    "viability": 95.08928571428571
+                },
+                "144": {
+                    "liveCellCount": 944,
+                    "viability": 95.16129032258064
+                },
+                "216": {
+                    "liveCellCount": 1706,
+                    "viability": 88.94681960375391
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 204,
+                    "viability": 93.15068493150685
+                },
+                "144": {
+                    "liveCellCount": 852,
+                    "viability": 93.62637362637362
+                },
+                "216": {
+                    "liveCellCount": 1673,
+                    "viability": 88.61228813559322
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 182,
+                    "viability": 91.4572864321608
+                },
+                "144": {
+                    "liveCellCount": 833,
+                    "viability": 96.30057803468208
+                },
+                "216": {
+                    "liveCellCount": 1662,
+                    "viability": 90.9688013136289
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 211,
+                    "viability": 94.19642857142857
+                },
+                "144": {
+                    "liveCellCount": 981,
+                    "viability": 94.96611810261375
+                },
+                "216": {
+                    "liveCellCount": 2010,
+                    "viability": 92.88354898336414
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 204,
+                    "viability": 94.00921658986175
+                },
+                "144": {
+                    "liveCellCount": 970,
+                    "viability": 96.03960396039604
+                },
+                "216": {
+                    "liveCellCount": 1935,
+                    "viability": 94.16058394160584
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 205,
+                    "viability": 92.76018099547511
+                },
+                "144": {
+                    "liveCellCount": 983,
+                    "viability": 96.37254901960785
+                },
+                "216": {
+                    "liveCellCount": 1925,
+                    "viability": 92.86058851905452
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 189,
+                    "viability": 93.56435643564356
+                },
+                "144": {
+                    "liveCellCount": 893,
+                    "viability": 95.71275455519829
+                },
+                "216": {
+                    "liveCellCount": 1856,
+                    "viability": 93.40714645193759
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 204,
+                    "viability": 94.88372093023256
+                },
+                "144": {
+                    "liveCellCount": 897,
+                    "viability": 95.83333333333333
+                },
+                "216": {
+                    "liveCellCount": 1711,
+                    "viability": 91.2046908315565
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 227,
+                    "viability": 96.59574468085107
+                },
+                "144": {
+                    "liveCellCount": 937,
+                    "viability": 95.41751527494908
+                },
+                "216": {
+                    "liveCellCount": 1704,
+                    "viability": 91.56367544331005
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 211,
+                    "viability": 95.9090909090909
+                },
+                "144": {
+                    "liveCellCount": 944,
+                    "viability": 96.82051282051282
+                },
+                "216": {
+                    "liveCellCount": 1710,
+                    "viability": 91.78743961352657
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 225,
+                    "viability": 96.15384615384616
+                },
+                "144": {
+                    "liveCellCount": 935,
+                    "viability": 95.31090723751274
+                },
+                "216": {
+                    "liveCellCount": 1716,
+                    "viability": 91.47121535181236
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 195,
+                    "viability": 92.85714285714286
+                },
+                "144": {
+                    "liveCellCount": 914,
+                    "viability": 94.51913133402275
+                },
+                "216": {
+                    "liveCellCount": 1757,
+                    "viability": 91.60583941605839
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 206,
+                    "viability": 93.63636363636364
+                },
+                "144": {
+                    "liveCellCount": 948,
+                    "viability": 94.32835820895522
+                },
+                "216": {
+                    "liveCellCount": 1738,
+                    "viability": 90.23883696780894
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 194,
+                    "viability": 94.1747572815534
+                },
+                "144": {
+                    "liveCellCount": 896,
+                    "viability": 95.21785334750265
+                },
+                "216": {
+                    "liveCellCount": 1723,
+                    "viability": 91.40583554376659
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 210,
+                    "viability": 94.5945945945946
+                },
+                "144": {
+                    "liveCellCount": 987,
+                    "viability": 95.3623188405797
+                },
+                "216": {
+                    "liveCellCount": 1765,
+                    "viability": 91.35610766045549
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 200,
+                    "viability": 95.69377990430623
+                },
+                "144": {
+                    "liveCellCount": 869,
+                    "viability": 96.1283185840708
+                },
+                "216": {
+                    "liveCellCount": 1912,
+                    "viability": 93.72549019607843
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 218,
+                    "viability": 95.19650655021834
+                },
+                "144": {
+                    "liveCellCount": 949,
+                    "viability": 96.1499493414387
+                },
+                "216": {
+                    "liveCellCount": 1905,
+                    "viability": 93.24522760646109
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 213,
+                    "viability": 96.81818181818181
+                },
+                "144": {
+                    "liveCellCount": 976,
+                    "viability": 95.87426326129666
+                },
+                "216": {
+                    "liveCellCount": 1906,
+                    "viability": 92.97560975609755
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 210,
+                    "viability": 94.5945945945946
+                },
+                "144": {
+                    "liveCellCount": 927,
+                    "viability": 94.68845760980592
+                },
+                "216": {
+                    "liveCellCount": 1900,
+                    "viability": 93.68836291913215
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 213,
+                    "viability": 94.24778761061947
+                },
+                "144": {
+                    "liveCellCount": 1012,
+                    "viability": 96.56488549618321
+                },
+                "216": {
+                    "liveCellCount": 1951,
+                    "viability": 91.68233082706767
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 228,
+                    "viability": 93.82716049382717
+                },
+                "144": {
+                    "liveCellCount": 1026,
+                    "viability": 95.17625231910947
+                },
+                "216": {
+                    "liveCellCount": 1897,
+                    "viability": 90.5057251908397
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 229,
+                    "viability": 97.44680851063829
+                },
+                "144": {
+                    "liveCellCount": 1027,
+                    "viability": 96.25117150890347
+                },
+                "216": {
+                    "liveCellCount": 1878,
+                    "viability": 91.87866927592955
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 193,
+                    "viability": 91.9047619047619
+                },
+                "144": {
+                    "liveCellCount": 890,
+                    "viability": 95.28907922912205
+                },
+                "216": {
+                    "liveCellCount": 1837,
+                    "viability": 92.91856348002024
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 179,
+                    "viability": 91.3265306122449
+                },
+                "144": {
+                    "liveCellCount": 799,
+                    "viability": 94.22169811320755
+                },
+                "216": {
+                    "liveCellCount": 1786,
+                    "viability": 90.47619047619048
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 198,
+                    "viability": 92.95774647887323
+                },
+                "144": {
+                    "liveCellCount": 925,
+                    "viability": 94.58077709611452
+                },
+                "216": {
+                    "liveCellCount": 1773,
+                    "viability": 89.00602409638554
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 175,
+                    "viability": 88.38383838383838
+                },
+                "144": {
+                    "liveCellCount": 816,
+                    "viability": 94.77351916376307
+                },
+                "216": {
+                    "liveCellCount": 1702,
+                    "viability": 88.78455920709442
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 154,
+                    "viability": 86.51685393258427
+                },
+                "144": {
+                    "liveCellCount": 770,
+                    "viability": 93.56014580801944
+                },
+                "216": {
+                    "liveCellCount": 1722,
+                    "viability": 90.48870204939568
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 228,
+                    "viability": 96.61016949152543
+                },
+                "144": {
+                    "liveCellCount": 937,
+                    "viability": 94.93414387031409
+                },
+                "216": {
+                    "liveCellCount": 1843,
+                    "viability": 94.03061224489795
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 206,
+                    "viability": 95.81395348837209
+                },
+                "144": {
+                    "liveCellCount": 910,
+                    "viability": 95.89041095890411
+                },
+                "216": {
+                    "liveCellCount": 1812,
+                    "viability": 93.98340248962656
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 209,
+                    "viability": 94.57013574660634
+                },
+                "144": {
+                    "liveCellCount": 909,
+                    "viability": 95.6842105263158
+                },
+                "216": {
+                    "liveCellCount": 1800,
+                    "viability": 93.75
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 218,
+                    "viability": 94.37229437229438
+                },
+                "144": {
+                    "liveCellCount": 952,
+                    "viability": 95.96774193548387
+                },
+                "216": {
+                    "liveCellCount": 1810,
+                    "viability": 93.63683393688567
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 201,
+                    "viability": 93.48837209302326
+                },
+                "144": {
+                    "liveCellCount": 877,
+                    "viability": 95.01625135427952
+                },
+                "216": {
+                    "liveCellCount": 1794,
+                    "viability": 89.65517241379311
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 194,
+                    "viability": 90.65420560747664
+                },
+                "144": {
+                    "liveCellCount": 878,
+                    "viability": 94.51022604951561
+                },
+                "216": {
+                    "liveCellCount": 1725,
+                    "viability": 89.37823834196891
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 184,
+                    "viability": 88.46153846153847
+                },
+                "144": {
+                    "liveCellCount": 849,
+                    "viability": 94.01993355481727
+                },
+                "216": {
+                    "liveCellCount": 1784,
+                    "viability": 90.69649211997967
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 189,
+                    "viability": 94.9748743718593
+                },
+                "144": {
+                    "liveCellCount": 886,
+                    "viability": 95.99133261105092
+                },
+                "216": {
+                    "liveCellCount": 1791,
+                    "viability": 90.82150101419879
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 191,
+                    "viability": 91.38755980861244
+                },
+                "144": {
+                    "liveCellCount": 866,
+                    "viability": 93.11827956989248
+                },
+                "216": {
+                    "liveCellCount": 1748,
+                    "viability": 88.01611278952669
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 223,
+                    "viability": 92.14876033057851
+                },
+                "144": {
+                    "liveCellCount": 1008,
+                    "viability": 94.02985074626865
+                },
+                "216": {
+                    "liveCellCount": 1860,
+                    "viability": 87.65315739868049
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 220,
+                    "viability": 94.4206008583691
+                },
+                "144": {
+                    "liveCellCount": 1009,
+                    "viability": 94.83082706766918
+                },
+                "216": {
+                    "liveCellCount": 1859,
+                    "viability": 89.11792905081495
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 224,
+                    "viability": 92.56198347107438
+                },
+                "144": {
+                    "liveCellCount": 1026,
+                    "viability": 94.73684210526316
+                },
+                "216": {
+                    "liveCellCount": 1851,
+                    "viability": 88.69190225203641
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 208,
+                    "viability": 93.27354260089686
+                },
+                "144": {
+                    "liveCellCount": 906,
+                    "viability": 93.30587023686921
+                },
+                "216": {
+                    "liveCellCount": 1730,
+                    "viability": 88.04071246819339
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 210,
+                    "viability": 92.10526315789474
+                },
+                "144": {
+                    "liveCellCount": 1013,
+                    "viability": 94.67289719626169
+                },
+                "216": {
+                    "liveCellCount": 1820,
+                    "viability": 88.39242350655658
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 220,
+                    "viability": 95.23809523809524
+                },
+                "144": {
+                    "liveCellCount": 949,
+                    "viability": 95.18555667001003
+                },
+                "216": {
+                    "liveCellCount": 1769,
+                    "viability": 90.439672801636
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 216,
+                    "viability": 89.6265560165975
+                },
+                "144": {
+                    "liveCellCount": 1006,
+                    "viability": 93.49442379182156
+                },
+                "216": {
+                    "liveCellCount": 1778,
+                    "viability": 88.23821339950372
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 193,
+                    "viability": 91.4691943127962
+                },
+                "144": {
+                    "liveCellCount": 938,
+                    "viability": 94.6518668012109
+                },
+                "216": {
+                    "liveCellCount": 1782,
+                    "viability": 89.59276018099547
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 192,
+                    "viability": 95.04950495049505
+                },
+                "144": {
+                    "liveCellCount": 919,
+                    "viability": 95.13457556935818
+                },
+                "216": {
+                    "liveCellCount": 1750,
+                    "viability": 89.1946992864424
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 214,
+                    "viability": 91.84549356223177
+                },
+                "144": {
+                    "liveCellCount": 967,
+                    "viability": 94.06614785992218
+                },
+                "216": {
+                    "liveCellCount": 1738,
+                    "viability": 87.73346794548208
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 213,
+                    "viability": 92.6086956521739
+                },
+                "144": {
+                    "liveCellCount": 986,
+                    "viability": 94.44444444444444
+                },
+                "216": {
+                    "liveCellCount": 1765,
+                    "viability": 88.69346733668341
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 173,
+                    "viability": 89.17525773195877
+                },
+                "144": {
+                    "liveCellCount": 820,
+                    "viability": 93.5005701254276
+                },
+                "216": {
+                    "liveCellCount": 1623,
+                    "viability": 87.68233387358185
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 205,
+                    "viability": 91.51785714285714
+                },
+                "144": {
+                    "liveCellCount": 871,
+                    "viability": 94.16216216216216
+                },
+                "216": {
+                    "liveCellCount": 1619,
+                    "viability": 86.90284487385937
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 190,
+                    "viability": 90.47619047619048
+                },
+                "144": {
+                    "liveCellCount": 846,
+                    "viability": 93.37748344370861
+                },
+                "216": {
+                    "liveCellCount": 1622,
+                    "viability": 87.34518039849219
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 225,
+                    "viability": 93.75
+                },
+                "144": {
+                    "liveCellCount": 965,
+                    "viability": 93.41723136495644
+                },
+                "216": {
+                    "liveCellCount": 1627,
+                    "viability": 86.680873734683
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 203,
+                    "viability": 96.2085308056872
+                },
+                "144": {
+                    "liveCellCount": 924,
+                    "viability": 95.65217391304348
+                },
+                "216": {
+                    "liveCellCount": 1905,
+                    "viability": 94.21364985163204
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 223,
+                    "viability": 96.53679653679653
+                },
+                "144": {
+                    "liveCellCount": 1004,
+                    "viability": 96.53846153846153
+                },
+                "216": {
+                    "liveCellCount": 1918,
+                    "viability": 93.78973105134475
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 207,
+                    "viability": 95.83333333333333
+                },
+                "144": {
+                    "liveCellCount": 935,
+                    "viability": 95.8974358974359
+                },
+                "216": {
+                    "liveCellCount": 1865,
+                    "viability": 93.62449799196787
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 243,
+                    "viability": 97.2
+                },
+                "144": {
+                    "liveCellCount": 1056,
+                    "viability": 96.61482159194877
+                },
+                "216": {
+                    "liveCellCount": 1918,
+                    "viability": 93.24258629071463
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 190,
+                    "viability": 91.34615384615384
+                },
+                "144": {
+                    "liveCellCount": 860,
+                    "viability": 94.60946094609461
+                },
+                "216": {
+                    "liveCellCount": 1751,
+                    "viability": 91.62742019884877
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 184,
+                    "viability": 92.0
+                },
+                "144": {
+                    "liveCellCount": 808,
+                    "viability": 93.51851851851852
+                },
+                "216": {
+                    "liveCellCount": 1711,
+                    "viability": 90.96225412014886
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 219,
+                    "viability": 94.39655172413794
+                },
+                "144": {
+                    "liveCellCount": 974,
+                    "viability": 94.83933787731256
+                },
+                "216": {
+                    "liveCellCount": 1763,
+                    "viability": 90.0408580183861
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 207,
+                    "viability": 91.59292035398231
+                },
+                "144": {
+                    "liveCellCount": 883,
+                    "viability": 93.34038054968288
+                },
+                "216": {
+                    "liveCellCount": 1716,
+                    "viability": 89.70203868269734
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 219,
+                    "viability": 93.19148936170212
+                },
+                "144": {
+                    "liveCellCount": 936,
+                    "viability": 96.0
+                },
+                "216": {
+                    "liveCellCount": 1801,
+                    "viability": 92.97883324728963
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 217,
+                    "viability": 96.01769911504425
+                },
+                "144": {
+                    "liveCellCount": 947,
+                    "viability": 95.8502024291498
+                },
+                "216": {
+                    "liveCellCount": 1769,
+                    "viability": 93.10526315789474
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 238,
+                    "viability": 95.58232931726907
+                },
+                "144": {
+                    "liveCellCount": 1008,
+                    "viability": 95.54502369668246
+                },
+                "216": {
+                    "liveCellCount": 1796,
+                    "viability": 92.52962390520351
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 229,
+                    "viability": 97.03389830508475
+                },
+                "144": {
+                    "liveCellCount": 980,
+                    "viability": 96.45669291338582
+                },
+                "216": {
+                    "liveCellCount": 1820,
+                    "viability": 94.34940383618455
+                }
+            }
+        },
+        {
+            "X_1_C": {
+                "72": {
+                    "liveCellCount": 206,
+                    "viability": 94.4954128440367
+                },
+                "144": {
+                    "liveCellCount": 904,
+                    "viability": 96.17021276595744
+                },
+                "216": {
+                    "liveCellCount": 1893,
+                    "viability": 93.62017804154303
+                }
+            },
+            "X_1_M3": {
+                "72": {
+                    "liveCellCount": 214,
+                    "viability": 95.96412556053812
+                },
+                "144": {
+                    "liveCellCount": 992,
+                    "viability": 96.78048780487805
+                },
+                "216": {
+                    "liveCellCount": 1913,
+                    "viability": 93.408203125
+                }
+            },
+            "X_1_M7": {
+                "72": {
+                    "liveCellCount": 201,
+                    "viability": 95.71428571428571
+                },
+                "144": {
+                    "liveCellCount": 950,
+                    "viability": 95.76612903225806
+                },
+                "216": {
+                    "liveCellCount": 1897,
+                    "viability": 92.67220322423059
+                }
+            },
+            "X_1_M14": {
+                "72": {
+                    "liveCellCount": 190,
+                    "viability": 93.5960591133005
+                },
+                "144": {
+                    "liveCellCount": 840,
+                    "viability": 95.23809523809524
+                },
+                "216": {
+                    "liveCellCount": 1858,
+                    "viability": 94.17131272174353
+                }
+            }
+        }
+    ]
+}
