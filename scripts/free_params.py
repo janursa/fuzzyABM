@@ -20,6 +20,4 @@ free_parameters = {
 "a_BMP_nBMP":[0.001,0.1],
 "a_TGF_nTGF":[0.001,0.1],
 "B_Pr": [0.021,0.083]
-
-
 }

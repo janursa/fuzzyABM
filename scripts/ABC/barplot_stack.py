@@ -17,15 +17,15 @@ sys.path.insert(1,path_to_trainingdata)
 # output_folder = 'outputs/Ber/ABC_B_5'
 # output_folder = 'outputs/Helvia/ABC_H_4'
 # output_folder = 'outputs/ABC_BH_3'
-prefixes = [1,2,3,4,5,6,7,8]
-output_ = 'outputs/all/ABC_all_'
+prefixes = [1,2,3,4,5]
+output_ = 'outputs/X/ABC_X_'
 
 extention = 'svg'
 # extention = 'html'
 
-study = 'Ber'
+# study = 'Ber'
 # study = 'Helvia'
-# study = 'Xu'
+study = 'Xu'
 if study == 'Ber':
 	IDs = [ "B2016_C","B2016_M"]
 elif study == 'Helvia':
@@ -35,7 +35,7 @@ elif study == 'Xu':
 else:
 	raise ValueError()
 
-if (extention == 'html' and study == 'Helvia') or study == 'Xu':
+if (extention == 'html' and study == 'Helvia') :
 	bar_width= 5
 	bar_edge_width= 2
 	error_bar_width= 3
@@ -65,6 +65,16 @@ elif study == 'Ber':
 	title_font_size = 40
 	gridwidth = 50
 	fig_size = [700,700]
+elif study == 'Xu':
+	bar_width= 12
+	bar_edge_width= 3
+	error_bar_width= 6
+	error_bar_thickness= 4
+	tick_font_size = 35
+	text_font_size = 35
+	title_font_size = 35
+	gridwidth = 50
+	fig_size = [800,700]
 
 from trainingdata import trainingData
 
@@ -200,7 +210,10 @@ if __name__ == "__main__":
 
 			if target == 'liveCellCount':
 				yaxis_title = 'Live cell count'
-				yrange = (0,100000)
+				if study == 'Helvia':
+					yrange = (0,17000)
+				elif study == 'Xu':
+					yrange = (0,100000)
 			elif target == 'viability':
 				yaxis_title = 'Viability (%)'
 				yrange = (0,110)

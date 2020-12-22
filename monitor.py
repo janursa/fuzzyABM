@@ -1,5 +1,4 @@
 import sys
-sys.path.insert(1,'../realtime_visualization/')
 from realtime import monitor
 settings = {
     "Medium": {

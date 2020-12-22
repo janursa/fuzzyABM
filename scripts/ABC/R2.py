@@ -4,9 +4,17 @@ import os
 
 # collect the data 
 studies = {
+	'Study 1':dict(
+		prefixes = [1,2,3,4,5],
+		output_folder = 'outputs/H/ABC_H_'
+	),
 	'Study 2':dict(
 		prefixes = [1,2,3,4,5,6,7,8],
-		output_folder = 'outputs/ABC_B_'
+		output_folder = 'outputs/B/ABC_B_'
+	),
+	'Study 3':dict(
+		prefixes = [1,2,3,4,5],
+		output_folder = 'outputs/X/ABC_X_'
 	),
 	'All': dict(
 		prefixes = [1,2,3,4,5,6,7,8],
@@ -79,7 +87,11 @@ for study_tag,data in fitness_std.items():
 	if study_tag == 'Study 2':
 		yranges = [0.6,1.1]
 	elif study_tag == 'All':
-		yranges = [0.4,1]
+		yranges = [0.6,0.9]
+	elif study_tag == 'Study 1':
+		yranges = [0.8,1.1]
+	elif study_tag == 'Study 3':
+		yranges = [0.6,1]
 	else:
 		raise ValueError()
 	fig.update_layout(

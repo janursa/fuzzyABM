@@ -4,7 +4,7 @@ import sys
 import os,sys
 import pathlib
 current_file = pathlib.Path(__file__).parent.absolute()
-medians_path = os.path.join(current_file,'..','outputs_ber','medians.json')
+# medians_path = os.path.join(current_file,'..','outputs_ber','medians.json')
 import json
 
 
