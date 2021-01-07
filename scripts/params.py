@@ -1,3 +1,10 @@
+import pathlib
+import sys
+import os
+# current_file = pathlib.Path(__file__).parent.absolute()
+# print(current_file)
+# print(current_file)
+# sys.path.insert(1,current_file)
 from free_params import free_parameters
 import numpy as np
 fixed_parameters = {

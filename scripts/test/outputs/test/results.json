@@ -1,0 +1,20 @@
+{
+    "results": [
+        {
+            "H2017_Mg0": {
+                "24": {
+                    "liveCellCount": 214,
+                    "viability": 97.27272727272727
+                },
+                "48": {
+                    "liveCellCount": 605,
+                    "viability": 97.1107544141252
+                },
+                "72": {
+                    "liveCellCount": 748,
+                    "viability": 95.65217391304348
+                }
+            }
+        }
+    ]
+}

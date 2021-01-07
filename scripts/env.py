@@ -11,9 +11,8 @@ import copy
 current_file_path = pathlib.Path(__file__).parent.absolute()
 
 
-from imports import myEnv,grid, grid3, update_progress
+from imports import *
 from agents import MSC_,Dead_
-from patch import myPatch_
 from trainingdata import trainingData
 from params import parameters
 SETTINGS_PATH = os.path.join(current_file_path,'settings.json')
@@ -57,7 +56,8 @@ class ABM(myEnv):
 
 	def initialize(self):
 		## default fields
-		self._repo = []
+		self.agents_repo = []
+		self.patch_repo = []
 		self.patches.clear()
 		self.agents.clear()
 		## to update
@@ -85,7 +85,7 @@ class ABM(myEnv):
 		except Exception as e:
 			raise e
 	def update_repo(self):
-		self._repo[:]= [agent for agent in self._repo if not agent.disappear]
+		self.agents_repo[:]= [agent for agent in self.agents_repo if not agent.disappear]
 	def generate_agent(self,agent_name):
 		if agent_name == 'MSC':
 			agent_obj = MSC_(self, params = self.params.copy(),
@@ -96,13 +96,12 @@ class ABM(myEnv):
 		else:
 			print("Generate agent is not defined for '{}'".format(agent_name))
 			sys.exit(0)
-		self._repo.append(agent_obj)
 		self.agents.append(agent_obj)
 		return agent_obj
 	def generate_patch(self):
-		patch_obj = myPatch_(self, initial_conditions = self.settings["setup"]["patch"]["attrs"].copy(),
+		patch_obj = myPatch(self, initial_conditions = self.settings["setup"]["patch"]["attrs"].copy(),
 								  params = self.params.copy(),flags = flags.copy())
-		self._repo.append(patch_obj)
+		self.patch_repo.append(patch_obj)
 		return patch_obj
 	def setup(self):
 		self.set_settings(self.settings["setup"]["grid"])
@@ -140,8 +139,6 @@ class ABM(myEnv):
 		super().update()
 		self.refresh()
 		## Either updates or appends a pair of key-value to self.data
-
-
 		## agent counts
 		counts = self.count_agents()
 		for key,count in counts.items():
@@ -349,7 +346,6 @@ class ABM(myEnv):
 			self.reset()
 		except ValueError as vl:
 			raise vl
-
 		self.duration = self.settings["setup"]["exp_duration"]
 		for i in range(self.duration):
 			try:

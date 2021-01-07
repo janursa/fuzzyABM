@@ -1,11 +1,12 @@
 #pragma once
-#include "CPPYABM/include/ABM/bases.h"
+#include "CppyABM/include/ABM/bases.h"
 #include "tools.h"
 #include "fuzzy/fuzzy.h"
 
 using namespace std;
-struct Patch;
-struct myEnv : public Env {
+struct myPatch;
+struct Cell;
+struct myEnv : public  Env<myEnv,Cell,myPatch> {
 	/** Env data **/
 	
 	void construct_policy() {
@@ -54,28 +55,27 @@ struct myEnv : public Env {
 		tick = value;
 	}
 };
-struct Dead: public Agent{
-	Dead(shared_ptr<Env> env , string class_name)
-	try: Agent(env,class_name){
+// struct Dead: public Agent{
+// 	Dead(shared_ptr< Env> env , string class_name)
+// 	try: Agent(env,class_name){
 		
-	}catch(...){
-		cerr<<"Error in the construction of my agent";
-		exit(2);
-	}
+// 	}catch(...){
+// 		cerr<<"Error in the construction of my agent";
+// 		exit(2);
+// 	}
 
-};
-struct MSC : public Agent{
-	MSC(shared_ptr<myEnv> env , string class_name, 
+// };
+struct Cell : public  Agent<myEnv,Cell,myPatch> {
+	using  Agent<myEnv,Cell,myPatch>:: Agent;
+	Cell(shared_ptr<myEnv> env , string class_name, 
 		std::map<string,double> params_,std::map<string,double> initial_conditions)
-	try: Agent(env,class_name){
+	try:  Agent(env,class_name){
 		myenv = env;
 		this->params = params_;
 		this->initial_conditions = initial_conditions;
 		this->initialize(initial_conditions);
-		
-		
 	}catch(...){
-		cerr<<"Error in the construction of MSC";
+		cerr<<"Error in the construction of Cell";
 		exit(2);
 	}
 	void initialize(map<string,double> initial_conditions);
@@ -99,7 +99,7 @@ struct MSC : public Agent{
 	}
 
 	map<string,double> collect_policy_inputs();
-	virtual void inherit(shared_ptr<Agent> father);
+	virtual void inherit(shared_ptr<Cell> father);
 	map<string,double> data;
 	virtual void reward() {};
 	virtual void update();
@@ -117,9 +117,10 @@ struct MSC : public Agent{
 	//double v_p_v; //v_patch/v_domain
 };
 
-struct myPatch : public Patch{
-	myPatch(shared_ptr<Env> env,std::map<string,double> params_,std::map<string,double> initial_conditions, std::map<string, bool> flags)
-	try: Patch(env){
+struct myPatch : public  Patch<myEnv,Cell,myPatch> {
+	using  Patch<myEnv,Cell,myPatch>:: Patch;
+	myPatch(shared_ptr<myEnv> env,std::map<string,double> params_,std::map<string,double> initial_conditions, std::map<string, bool> flags)
+	try:  Patch(env){
 		this->params = params_;
 		this->initial_conditions = initial_conditions;
 		this->flags = flags;

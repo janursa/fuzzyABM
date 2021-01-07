@@ -20,108 +20,110 @@ sys.path.insert(1,path_to_trainingdata)
 prefixes = [1,2,3,4,5]
 output_ = 'outputs/X/ABC_X_'
 
-extention = 'svg'
-# extention = 'html'
+class Settings :
+	extention = 'svg'
+	# extention = 'html'
+	study = 'Xu'
+	# study = 'Ber'
+	# study = 'Helvia'
+	targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
+	time_points = ["24","48","72","144","168", "216", "336","504"]
 
-# study = 'Ber'
-# study = 'Helvia'
-study = 'Xu'
-if study == 'Ber':
-	IDs = [ "B2016_C","B2016_M"]
-elif study == 'Helvia':
-	IDs= [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"]
-elif study == 'Xu':
-	IDs= ["X_1_C","X_1_M3","X_1_M7","X_1_M14"]
-else:
-	raise ValueError()
 
-if (extention == 'html' and study == 'Helvia') :
-	bar_width= 5
-	bar_edge_width= 2
-	error_bar_width= 3
-	error_bar_thickness= 2
-	tick_font_size = 40
-	text_font_size = 40
-	title_font_size = 30
-	gridwidth = 50
-	fig_size = [700,700]
-elif study == 'Helvia':
-	bar_width= 3
-	bar_edge_width= 3
-	error_bar_width= 5
-	error_bar_thickness= 3
-	tick_font_size = 35
-	text_font_size = 35
-	title_font_size = 35
-	gridwidth = 50
-	fig_size = [800,700]
-elif study == 'Ber':
-	bar_width= 50
-	bar_edge_width= 3
-	error_bar_width= 8
-	error_bar_thickness= 5
-	tick_font_size = 50
-	text_font_size = 50
-	title_font_size = 40
-	gridwidth = 50
-	fig_size = [700,700]
-elif study == 'Xu':
-	bar_width= 12
-	bar_edge_width= 3
-	error_bar_width= 6
-	error_bar_thickness= 4
-	tick_font_size = 35
-	text_font_size = 35
-	title_font_size = 35
-	gridwidth = 50
-	fig_size = [800,700]
 
 from trainingdata import trainingData
 
-targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
-#targets = ["viability","liveCellCount"]
-#time_points = ["24","48","72"]
-time_points = ["24","48","72","144","168", "216", "336","504"]
 
-def fitness(exp,sim):
-	diff_squares = []
-	for i in range(len(exp)):
-		diff = sim[i] - exp[i]
-		diff_squares.append((diff)**2/(np.mean([exp[i],sim[i]])**2))
-	fit = 1-np.mean(diff_squares)
-	# print('sim {} \n exp {} \n diff {} \n fit {}'.format(sim,exp,diff_squares,fit))
-	return fit
-def hour_2_day(data):
-	data_m = []
-	for item in data:
-		data_m.append(str(int(int(item)/24)))
-	return data_m
-if __name__ == "__main__":
-	reverse_scale = 1.0/trainingData["scale"]
-	## plotting
-	for prefix in prefixes:
-		with open(os.path.join(output_+str(prefix),'top_results.json')) as file:
-			top_results = json.load(file)['top_results']
+class Plot:
+	def __init__(self,settings,output_dir):
+		self.settings = settings
+		self.output_dir = output_dir
+
+
+	def fitness(self,exp,sim):
+		diff_squares = []
+		for i in range(len(exp)):
+			diff = sim[i] - exp[i]
+			diff_squares.append((diff)**2/(np.mean([exp[i],sim[i]])**2))
+		fit = 1-np.mean(diff_squares)
+		return fit
+	def hour_2_day(self,data):
+		data_m = []
+		for item in data:
+			data_m.append(str(int(int(item)/24)))
+		return data_m
+
+	def plot(self,results,trainingData):
+		# if self.settings.study == 'Ber':
+		# 	IDs = [ "B2016_C","B2016_M"]
+		# elif self.settings.study == 'Helvia':
+		# 	IDs= [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"]
+		# elif self.settings.study == 'Xu':
+		# 	IDs= ["X_1_C","X_1_M3","X_1_M7","X_1_M14"]
+		# else:
+		# 	raise ValueError()
+
+		if (self.settings.extention == 'html' and self.settings.study == 'Helvia') :
+			bar_width= 5
+			bar_edge_width= 2
+			error_bar_width= 3
+			error_bar_thickness= 2
+			tick_font_size = 40
+			text_font_size = 40
+			title_font_size = 30
+			gridwidth = 50
+			fig_size = [700,700]
+		elif self.settings.study == 'Helvia':
+			bar_width= 3
+			bar_edge_width= 3
+			error_bar_width= 5
+			error_bar_thickness= 3
+			tick_font_size = 35
+			text_font_size = 35
+			title_font_size = 35
+			gridwidth = 50
+			fig_size = [800,700]
+		elif self.settings.study == 'Ber':
+			bar_width= 50
+			bar_edge_width= 3
+			error_bar_width= 8
+			error_bar_thickness= 5
+			tick_font_size = 50
+			text_font_size = 50
+			title_font_size = 40
+			gridwidth = 50
+			fig_size = [700,700]
+		elif self.settings.study == 'Xu':
+			bar_width= 12
+			bar_edge_width= 3
+			error_bar_width= 6
+			error_bar_thickness= 4
+			tick_font_size = 35
+			text_font_size = 35
+			title_font_size = 35
+			gridwidth = 50
+			fig_size = [800,700]
+		reverse_scale = 1.0/trainingData["scale"]
 		stds = []
 		mean_results = {}
 
-		for target in targets:
+		for target in self.settings.targets:
 			target_mean_results = {}
 			oo = {}
 			try:
-				for ID in IDs:
+				for ID in trainingData['IDs']:
 					trainingitem =trainingData[ID]
 					matched = {}
-					for time_point in time_points:
+					for time_point in self.settings.time_points:
 						if time_point  not in trainingitem["expectations"]:
 							continue
 						if target not in trainingitem["expectations"][time_point].keys():
 							raise ValueError()
 						exp = trainingitem["expectations"][time_point][target]
 						sims = []
-						top_results_copy = copy.deepcopy(top_results)
+						results_copy = copy.deepcopy(results)
 
-						for top_result, in zip(top_results_copy):
+						for top_result, in zip(results_copy):
 							if top_result == None:
 								print("top result is none")
 								continue
@@ -135,7 +137,7 @@ if __name__ == "__main__":
 				continue
 			fig = go.Figure()
 			ID_count = 0
-			for ID in IDs:
+			for ID in trainingData['IDs']:
 				time_points_adj = list(oo[ID].keys())
 				exp_y_mean = [oo[ID][i]["exp"] for i in time_points_adj] # error bar is excluded for exp
 				sim_y1 = [oo[ID][i]["sim"] for i in time_points_adj]
@@ -210,9 +212,9 @@ if __name__ == "__main__":
 
 			if target == 'liveCellCount':
 				yaxis_title = 'Live cell count'
-				if study == 'Helvia':
+				if self.settings.study == 'Helvia':
 					yrange = (0,17000)
-				elif study == 'Xu':
+				elif self.settings.study == 'Xu':
 					yrange = (0,100000)
 			elif target == 'viability':
 				yaxis_title = 'Viability (%)'
@@ -235,7 +237,7 @@ if __name__ == "__main__":
 			else:
 				raise ValueError()
 
-			time_points_adj_day = hour_2_day(time_points_adj)
+			time_points_adj_day = self.hour_2_day(time_points_adj)
 			fig.update_layout(barmode='group',
 							autosize=False,
 					   		width=fig_size[0],
@@ -289,13 +291,13 @@ if __name__ == "__main__":
 							  plot_bgcolor='white'
 							  )
 
-			if extention == "html":
-				fig.write_html(output_+str(prefix)+'/barplot_{}.{}'.format(target,extention))
+			if self.settings.extention == "html":
+				fig.write_html(self.output_dir+'/barplot_{}.{}'.format(target,self.settings.extention))
 			else:
-				fig.write_image(output_+str(prefix)+'/barplot_{}.{}'.format(target,extention))
-		# stds = {'min': min(stds), 'max': max(stds), 'mean':np.mean(stds)}
-		# print(stds)
-		with open(output_+str(prefix)+'/stds.json','w') as file:
+				fig.write_image(self.output_dir+'/barplot_{}.{}'.format(target,self.settings.extention))
+		self.postprocessing(stds,mean_results)
+	def postprocessing(self,stds,mean_results):
+		with open(self.output_dir+'/stds.json','w') as file:
 			file.write(json.dumps(stds))
 		fitness_R2 = {}
 		fitness_R2_means = []
@@ -312,7 +314,7 @@ if __name__ == "__main__":
 						raise ValueError()
 					exp = values['exp']
 					sim = values['sim']
-					var = fitness(exp,sim)
+					var = self.fitness(exp,sim)
 					fitness_R2_IDs.update({ID:var})
 					exps.append(exp)
 					sims.append(sim)
@@ -331,11 +333,20 @@ if __name__ == "__main__":
 				exps_serial+= item
 			for item in sims:
 				sims_serial+=item
-			var_mean = fitness(exps_serial,sims_serial)
+			var_mean = self.fitness(exps_serial,sims_serial)
 			fitness_R2.update({mean_tag:var_mean})
 			fitness_R2_means.append(var_mean)
 		fitness_R2.update({'overall_mean':np.mean(fitness_R2_means)})
 		fitness_R2.update({'std_mean':np.mean(stds)})
 		
-		with open(output_+str(prefix)+'/fitness_R2.json','w') as file:
+		with open(self.output_dir+'/fitness_R2.json','w') as file:
 			file.write(json.dumps(fitness_R2,indent=4))
+if __name__ == "__main__":
+	settings = Settings()
+	for prefix in prefixes:
+		with open(os.path.join(output_+str(prefix),'top_results.json')) as file:
+			top_results = json.load(file)['top_results']
+		output_dir = output_+str(prefix)
+		pltObj = Plot(settings,output_dir)
+		pltObj.plot(top_results,trainingData)
+

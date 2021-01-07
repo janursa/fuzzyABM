@@ -4,16 +4,16 @@ import pathlib
 import os
 import time
 import platform
-from imports import MSC,Dead
+from imports import Cell
 
 import numpy as np
 
-class Dead_(Dead):
+class Dead_(Cell):
 	"""
 	This class describes a Dead cell.
 	"""
 	def __init__(self,env,configs = None, params = None):
-		Dead.__init__(self,env = env, class_name = 'Dead')
+		Cell.__init__(self,env = env, class_name = 'Dead')
 		self.configs = configs or {}
 		self.params = params or {}
 		
@@ -22,12 +22,12 @@ class Dead_(Dead):
 		pass
 
 
-class MSC_(MSC):
+class MSC_(Cell):
 	"""
 	This class describes a MSC cell.
 	"""
 	def __init__(self,env, params = None,initial_conditions = None, id = 0):
-		MSC.__init__(self,env = env, class_name = 'MSC',  
+		Cell.__init__(self,env = env, class_name = 'MSC',  
 					params = params, initial_conditions = initial_conditions)
 		#try:
 			#self.policy = fuzzy("MSC",params)

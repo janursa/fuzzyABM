@@ -31,35 +31,33 @@ void myPatch::step(){
 	this->data["agent_density"] = this->find_neighbor_agents(true).size()/ max_cell_count;
 }
 
-bool MSC::mortality(double Mo){
+bool Cell::mortality(double Mo){
+	auto a_Mo = this->params.at("a_Mo");
+	auto baseChance = this->params.at("B_Mo");
+	auto a_Pr = this->params.at("a_Pr_Mo");
+	auto a_pass = this->params.at("a_c_Mo"); // passaging effect
+	int pass_flag = 0;
+	if (this->myenv->get_tick() <= 1) {
+		pass_flag = 1;
+	}
+	auto change =(1+ a_Pr*this->cycled)*(1+Mo* a_Mo) * (1 + pass_flag* a_pass)* baseChance;
 
-		auto a_Mo = this->params.at("a_Mo");
-		auto baseChance = this->params.at("B_Mo");
-		auto a_Pr = this->params.at("a_Pr_Mo");
-		auto a_pass = this->params.at("a_c_Mo"); // passaging effect
-		int pass_flag = 0;
-		if (this->myenv->get_tick() <= 1) {
-			pass_flag = 1;
-		}
-		auto change =(1+ a_Pr*this->cycled)*(1+Mo* a_Mo) * (1 + pass_flag* a_pass)* baseChance;
-
-        this->cycled = false;
-		auto pick = tools::random(0,1);
-		if (pick < change)
-			return true;
-		else
-			return false;
+    this->cycled = false;
+	auto pick = tools::random(0,1);
+	if (pick < change)
+		return true;
+	else
+		return false;
 	}
 
-bool MSC::proliferation(double Pr){
-	
+bool Cell::proliferation(double Pr){
 	auto baseChance = this->params.at("B_Pr");
 	auto internal_clock = this->data["Pr_clock"] * baseChance;
 	if (internal_clock > 1) internal_clock = 1;
 	auto adj_coeff = logic_function(internal_clock);
 	auto modified_baseChance = baseChance * adj_coeff;
 	
-	auto chance =Pr * this->params["a_P"]* modified_baseChance;
+	auto chance = Pr * this->params["a_P"]* modified_baseChance;
 	auto pick = tools::random(0,1);
 	//cout << "internal_clock:"<< internal_clock <<" adj_coeff: "<< adj_coeff<<" modified:"<< modified_baseChance <<" pr: "<<Pr<<" chance: "<< chance << endl;
 	if (pick < chance)
@@ -67,36 +65,36 @@ bool MSC::proliferation(double Pr){
 	else
 		return false;
 }
-double MSC::alkalinity(){
-		auto adapted_pH = this->data.at("pH");
-		auto env_pH = this->patch->get_data("pH");
-		double AE;
-		if (adapted_pH == 0)
-			AE = 1;
-		else
-			AE = this->params.at("AE_a_coeff") * abs(env_pH - adapted_pH) / adapted_pH;
-		if (AE > 1)
-			AE = 1;
-		// damage
-		if (this->patch->get_data("pH") >= this->params.at("pH_t")) {
-			this->damage = true;
-		}
-		return AE;
+double Cell::alkalinity(){
+	auto adapted_pH = this->data.at("pH");
+	auto env_pH = this->patch->get_data("pH");
+	double AE;
+	if (adapted_pH == 0)
+		AE = 1;
+	else
+		AE = this->params.at("AE_a_coeff") * abs(env_pH - adapted_pH) / adapted_pH;
+	if (AE > 1)
+		AE = 1;
+	// damage
+	if (this->patch->get_data("pH") >= this->params.at("pH_t")) {
+		this->damage = true;
 	}
-double MSC::adaptation(){
-		auto adapted_pH = this->data.at("pH");
-		if (this->damage) return adapted_pH; // not recovery for permanent damage
+	return AE;
+	}
+double Cell::adaptation(){
+	auto adapted_pH = this->data.at("pH");
+	if (this->damage) return adapted_pH; // not recovery for permanent damage
 
-		auto env_pH = this->patch->get_data("pH");
-		double new_adapted_pH = 0;
-		auto adaptation_rate = this->params.at("B_rec");
-		if (env_pH > adapted_pH)
-			new_adapted_pH = adapted_pH + adaptation_rate;
-		else
-			new_adapted_pH = adapted_pH - adaptation_rate;
-		return new_adapted_pH;
+	auto env_pH = this->patch->get_data("pH");
+	double new_adapted_pH = 0;
+	auto adaptation_rate = this->params.at("B_rec");
+	if (env_pH > adapted_pH)
+		new_adapted_pH = adapted_pH + adaptation_rate;
+	else
+		new_adapted_pH = adapted_pH - adaptation_rate;
+	return new_adapted_pH;
 	}
-bool MSC::migration(double Mi){
+bool Cell::migration(double Mi){
 		auto chance = Mi;
 		auto pick = tools::random(0,1);
 		if (pick < chance)
@@ -108,7 +106,7 @@ void myEnv::setup_agents(map<string, unsigned> config) {
 	auto FIND_PATCH = [&]() {
 		auto patches_indices_copy = this->patches_indices;
 		auto patch_count = this->patches_indices.size();
-		auto g = random_::randomly_seeded_MT();
+		auto g = tools::randomly_seeded_MT();
 
 		std::shuffle(patches_indices_copy.begin(), patches_indices_copy.end(), g);
 
@@ -124,14 +122,17 @@ void myEnv::setup_agents(map<string, unsigned> config) {
 
 	for (auto const [agent_type, count] : config) {
 		for (unsigned i = 0; i < count; i++) {
-			auto agent = this->generate_agent(agent_type);
 			auto patch = FIND_PATCH();
+			auto agent = this->generate_agent(agent_type);
 			this->place_agent(patch, agent);
 		}
 		this->agent_classes.insert(agent_type);
 	}
 }
-void MSC::step(){
+void Cell::step(){
+	if (class_name == "Dead"){
+		return;
+	}
 	// policy's inputs
 	auto policy_inputs = this->collect_policy_inputs();
 	/*json jj(policy_inputs);
@@ -158,7 +159,10 @@ void MSC::step(){
 	this->data["MI"] = MI;
 	this->data["pH"] = adapted_ph;
 };
-void MSC::differentiation(double earlyDiff, double lateDiff) {
+void Cell::differentiation(double earlyDiff, double lateDiff) {
+	if (class_name == "Dead"){
+		return;
+	}
 	// TODO: update maturity
 	if (this->data["maturity"] >= 1) return;
 	auto base_rate = this->params["B_Diff"];
@@ -174,11 +178,11 @@ void MSC::differentiation(double earlyDiff, double lateDiff) {
 //	cout  <<"\n base_rate: " << base_rate  << " f_diff: " << f_diff << " adj_rate: " << adj_rate << " maturity: " << this->data["maturity"] << endl;
 	this->data["maturity"] += adj_rate;
 }
-void MSC::bone_production(double f_ECM, double f_HA) {
+void Cell::bone_production(double f_ECM, double f_HA) {
 
 
 }
-//void MSC::GF() {
+//void Cell::GF() {
 	/* BMP */
 	//auto BMP_cont = this->env->patches[0]->get_data("BMP");
 	//auto BMP_PROD = [&]() -> double {
@@ -227,8 +231,8 @@ double myEnv::collect_from_agents(string tag) {
 	}
 	return result;
 }
-map<string,double> MSC::collect_policy_inputs(){
-	
+map<string,double> Cell::collect_policy_inputs(){
+
 		auto AE = this->alkalinity();
 		auto CD = this->patch->get_data("agent_density");
 		auto Mg = this->patch->get_data("Mg")/this->params.at("Mg_max");
@@ -240,11 +244,26 @@ map<string,double> MSC::collect_policy_inputs(){
 			{"maturity", maturity} , {"BMP",BMP},{"damage",damage} };
 		return policy_inputs;
 	}
-void MSC::update(){
+void Cell::update(){
+	if (class_name == "Dead"){
+			return;
+		}
 	this->data["Pr_clock"] += 1;
 }
 void myEnv::update(){
-	Env::update();
+	Env<myEnv,Cell,myPatch>::update();
+	// unsigned nonEmptyPatches = 0;
+	// unsigned agentsInPatchesCount = 0;
+	for (auto &[index,patch]:this->patches){
+		if (patch->agent_count>1){
+			throw patch_availibility("Patch holds more than one agent");
+		}
+		// if (patch->empty == false){
+		// 	nonEmptyPatches++;
+		// }
+		// agentsInPatchesCount+=patch->agent_count;
+	}
+	// cout<<"Patches: "<<this->patches.size()<<" Agents: "<<this->agents.size()<<" Taken patches: "<<nonEmptyPatches<<" Accom agents: "<<agentsInPatchesCount<<endl;
 	for (auto &agent:this->agents){
 		agent->update();
 	}
@@ -344,7 +363,7 @@ double myPatch::pH(){
 		auto pH_new = this->params["w_mg_ph"]*mg + 7.83;
 		return pH_new;
 	}
-void MSC::inherit(shared_ptr<Agent> father){
+void Cell::inherit(shared_ptr<Cell> father){
 	this->cycled = true;
 		for (auto const&[key,value]:this->data){
 			this->data[key] = father->get_data(key);
@@ -360,7 +379,10 @@ void MSC::inherit(shared_ptr<Agent> father){
 		}
 		
 	}
-void MSC::initialize(map<string,double> initial_conditions){
+void Cell::initialize(map<string,double> initial_conditions){
+	if (class_name == "Dead"){
+		return;
+	}
 	initial_conditions["pH"] = 7.8;
 	initial_conditions["Pr_clock"] = 0;
 	initial_conditions["maturity"] = 0;
