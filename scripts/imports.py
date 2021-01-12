@@ -11,7 +11,7 @@ if platform.system() == 'Windows':
 	sys.path.insert(1,os.path.join(current_file_path,'..','build','x64-Release','binds'))
 else:
 	sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
-from myBinds import Cell, myEnv,grid2,grid3,myPatch
+from myBinds import Cell, myEnv,space,myPatch
 
 def update_progress(progress):
     barLength = 50 # Modify this to change the length of the progress bar

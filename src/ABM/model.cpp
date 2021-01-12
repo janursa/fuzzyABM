@@ -4,14 +4,14 @@
 using json = nlohmann::json;
 double myPatch::lactate(){
 		double MI = 0;
-		if (this->empty) {
+		if (this->empty()) {
 			MI = 0;
 		}
-		else if (this->agent->class_name == "Dead"){
+		else if (this->get_agent()->class_name == "Dead"){
 			MI = 0;
 		}
 		else {
-			MI = this->agent->get_data("MI");
+			MI = this->get_agent()->get_data("MI");
 		}
 		// auto w = this->params["w_MI_lactate"];
 		// auto lactate = this->data["lactate"] + w * MI;
@@ -113,7 +113,7 @@ void myEnv::setup_agents(map<string, unsigned> config) {
 		for (auto const& i : patches_indices_copy) {
 			auto potential_patch = this->patches.at(i);
 			if (potential_patch->layer_index != 0) continue;
-			if (potential_patch->empty) {
+			if (potential_patch->empty()) {
 				return potential_patch;
 			}
 		}

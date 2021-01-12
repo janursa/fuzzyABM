@@ -107,9 +107,9 @@ class ABM(myEnv):
 		self.set_settings(self.settings["setup"]["grid"])
 		grid_info = self.settings["setup"]["grid"]
 		if flags["D3"]:
-			mesh =  grid3(length = sqrt(grid_info["area"]), width = sqrt(grid_info["area"]), height = 8*grid_info["patch_size"],mesh_length = grid_info["patch_size"],share = True)
+			mesh =  space.grid3(length = sqrt(grid_info["area"]), width = sqrt(grid_info["area"]), height = 8*grid_info["patch_size"],mesh_length = grid_info["patch_size"],share = True)
 		else:
-			mesh =  grid(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],share = True)
+			mesh =  space.grid(sqrt(grid_info["area"]),sqrt(grid_info["area"]),grid_info["patch_size"],share = True)
 
 		self.setup_domain(mesh)
 		## construct policy
