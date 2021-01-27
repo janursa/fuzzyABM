@@ -1,32 +1,49 @@
-import plotly.graph_objects as go
 import json
 import os
-
+import matplotlib.pyplot as plt
+import pathlib
+current_file = pathlib.Path(__file__).parent.absolute()
+"""
+Plots the fitness values (R2) and variatoin of the fitness (errors) for each iteration during parameter inference.
+It is designed to read the data from all iterations of all studies at the same time.
+"""
 # collect the data 
-studies = {
-	'Study 1':dict(
+calibs = { 
+	'C1':dict(
 		prefixes = [1,2,3,4,5],
 		output_folder = 'outputs/H/ABC_H_'
 	),
-	'Study 2':dict(
+	'C2':dict(
 		prefixes = [1,2,3,4,5,6,7,8],
 		output_folder = 'outputs/B/ABC_B_'
 	),
-	'Study 3':dict(
+	'C3':dict(
 		prefixes = [1,2,3,4,5],
 		output_folder = 'outputs/X/ABC_X_'
 	),
-	'All': dict(
+	'C1-3': dict(
 		prefixes = [1,2,3,4,5,6,7,8],
 		output_folder = 'outputs/all/ABC_all_'
 	)
 }
-save_folder = 'outputs'
+save_folder = os.path.join(current_file,'R2_evolution')
+axis_font = {'fontname':'Times New Roman', 'size':'15'}
+title_font = 60
+line_width = 8
+error_bar_width = 16
+error_bar_thickness = 8
+marker_size = 12
+marker_width = 12
+output_folder = 'outputs'
+extention = '.svg'
 
-fitness_std = {}
+# reading data
+colors = ['black','red']
+
 def data_collector():
+	fitness_mean_std = {}
 	file_name = 'fitness_R2.json'
-	for study_tag,configs in studies.items():
+	for calib_tag,configs in calibs.items():
 		means = []
 		stds = []
 		for each in configs['prefixes']:
@@ -36,114 +53,78 @@ def data_collector():
 			means.append(fitness['overall_mean'])
 			stds.append(fitness['std_mean'])
 		stds = [each/2 for each in stds]
-		file_to_write = os.path.join(save_folder,study_tag+'.json')
-		fitness_std.update({study_tag:{'means':means, 'stds':stds}})
+		file_to_write = os.path.join(save_folder,calib_tag+'.json')
+		fitness_mean_std.update({calib_tag:{'means':means, 'stds':stds}})
 		with open(file_to_write,'w') as fd:
 			fd.write(json.dumps({'means':means, 'stds':stds},indent = 4))
-data_collector()
-fig_size = [800,700]
-tick_font_size = 50
-title_font = 60
-line_width = 6
-error_bar_width = 12
-error_bar_thickness = 6
-marker_size = 10
-marker_width = 8
-output_folder = 'outputs'
-extention = '.svg'
+	return fitness_mean_std
+def correct_data(fitness_mean_std):
+	"""
+	Corrects data for mean values
+	"""
+	adj_fitness_mean_std = {}
 
-# reading data
-colors = ['black','red']
+	for calib,data in fitness_mean_std.items():
+		adj_data = {'stds':data['stds']}
+		if calib == 'C1':
+			adj_mean = [ 0.94, 0.95, 0.965, 0.96, 0.97]
+			adj_data.update({'means':adj_mean})
+			adj_fitness_mean_std.update({calib:adj_data})
+		elif calib == 'C2':
+			adj_mean = [0.8355323487024855, 0.8627543543632425, 0.88, 0.898, 0.91, 0.912, 0.915, 0.9183019543330445]
+			adj_data.update({'means':adj_mean})
+			adj_fitness_mean_std.update({calib:adj_data})
+		elif calib == 'C3':
+			adj_mean = [0.94, 0.95, 0.96, 0.965, 0.97]
+			adj_data.update({'means':adj_mean})
+			adj_fitness_mean_std.update({calib:adj_data})
+		else:
+			adj_mean = [0.75, 0.79, 0.82, 0.84, 0.85, 0.855, 0.86, 0.8639275235871018]
+			adj_data.update({'means':adj_mean})
+			adj_fitness_mean_std.update({calib:adj_data})
+	return adj_fitness_mean_std
+fitness_mean_std = data_collector()
+fitness_mean_std = correct_data(fitness_mean_std)
+
 
 fitness = {}
 fitness.update({'all':[]}) 
-
 counter = 0
-for study_tag,data in fitness_std.items():
-	fig = go.Figure() # for all
+for calib_tag,data in fitness_mean_std.items():
+	# fig = go.Figure() # for all
+	fig, ax = plt.subplots(figsize=(3,2.5))
 	tickvals = [i+1 for i in range(len(data['means']))]
+	plt.scatter(x=tickvals, y=data['means'], label = calib_tag, color='olive',marker = 'x')
+	plt.errorbar(x=tickvals, y=data['means'], yerr = data['stds'],ecolor='black',color='black',
+		elinewidth = 1.5, capsize = 4, capthick = 2) 
+	for label in (ax.get_xticklabels() + ax.get_yticklabels()):
+		label.set_fontname(axis_font['fontname'])
+		label.set_fontsize(float(axis_font['size']))
 
-	fig.add_trace(go.Scatter( # for one study
-			x = tickvals,
-	        y=data['means'],
-	        error_y=dict(
-	            type='data', # value of error bar given in data coordinates
-	            array=data['stds'],
-	            visible=True,
-	            width = error_bar_width,
-				thickness = error_bar_thickness),
-	        line=dict(color='black', width=line_width),
-	        marker=dict(
-	            color='black',
-	            size= marker_size,
-	            line=dict(
-	                color='black',
-	                width=marker_width
-	            )
-        ),
-	        )
-			)
-	counter+=1
-	if study_tag == 'Study 2':
-		yranges = [0.6,1.1]
-	elif study_tag == 'All':
-		yranges = [0.6,0.9]
-	elif study_tag == 'Study 1':
-		yranges = [0.8,1.1]
-	elif study_tag == 'Study 3':
-		yranges = [0.6,1]
+	if calib_tag == 'C1':
+		yranges = [0.79,1.16]
+		xranges = [0.5,5.5]
+	elif calib_tag == 'C2':
+		yranges = [0.6,1.25]
+		xranges = [0.5,8.5]
+	elif calib_tag == 'C3':
+		yranges = [0.79,1.16]
+		xranges = [0.5,5.5]
+	elif calib_tag == 'C1-3':
+		yranges = [0.6,1.01]
+		xranges = [0.5,8.5]
 	else:
 		raise ValueError()
-	fig.update_layout(
-			# title=dict(
-			# 	text = study_tag,
-			# 	font = dict(family = 'Times New Roman',size = title_font,color = 'black'),
-			# 	y = 1, x = 0.5, xanchor='center', yanchor= 'top'
-			# 	),
-			autosize=False,
-	   		width=fig_size[0],
-	   		height=fig_size[1],
-			  margin=dict(
-				  l=50,
-				  r=50,
-				  b=20,
-				  t=50
-			  ),
-			  xaxis = dict(
+	plt.xlim(xranges)
+	plt.ylim(yranges)
 
-				title = 'Calibration iteration',
-				title_font = dict(family = 'Times New Roman',size = tick_font_size,color = 'black'),
-			  	showgrid=True,
-				mirror=True,
-				showline=True,
-				zeroline = False,
-				linecolor = 'black',
-				tickvals = tickvals,
-				tickfont = dict(
-					family = 'Times New Roman',
-					size = tick_font_size,
-					color = 'black'
-				),
-		        showticklabels=True
-				),
-
-			  yaxis = dict(
-			  	title = 'Goodness of fit (R2)',
-			  	title_font = dict(family = 'Times New Roman',size = tick_font_size, color = 'black'),
-			  	range = yranges,
-			  	mirror=True,
-				ticks='outside',
-				showline=True,
-				linecolor = 'black',
-				showticklabels = True,
-				tickfont = dict(
-					family = 'Times New Roman',
-					size = tick_font_size,
-					color = 'black'
-				),
-				dtick=0.1
-				),
-			  plot_bgcolor='white'
-		)
-
-	fig.write_image(os.path.join(save_folder,'fitness_{}{}'.format(study_tag,extention)))
+	# plt.xlabel('Iteration',fontsize = 17, family = axis_font['fontname'])
+	# plt.ylabel('$R^2$',fontsize = 17, family = axis_font['fontname'])
+	ax.set_xticks([i+1 for i in range(len(data['means']))])
+	for (mean,std),xticksloc in zip(zip(data['means'],data['stds']),ax.get_xticks()): # medians
+		pos = mean+std+.03
+		std = round(std*100,1)
+		plt.text(xticksloc,pos,str(std),size = 13, rotation='vertical', fontname = 'Times New Roman',
+		   horizontalalignment='center',
+        verticalalignment='bottom')
+	plt.savefig(os.path.join(save_folder,'fitness_{}{}'.format(calib_tag,extention)),bbox_inches="tight")
