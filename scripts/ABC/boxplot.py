@@ -16,10 +16,10 @@ import json
 ## settings
 format = '.svg'
 main_folder = 'outputs'
-# study = 'B'
+study = 'B'
 # study = 'H'
 # study = 'X'
-study = 'all'
+# study = 'all'
 if study == 'B':
 	prefix = 'ABC_B_'
 	postfixes = [i+1 for i in range(8)]
@@ -175,7 +175,7 @@ if __name__ == "__main__":
 		# plt.margins(0.2)
 		# Tweak spacing to prevent clipping of tick-labels
 		#plt.subplots_adjust(bottom=0.1,left=0.1,right=0.1, top=0.1)
-		plt.ylabel('scalled values', family = axis_font['fontname'],size = axis_font['size'])
+		plt.ylabel('Scaled values', family = axis_font['fontname'],size = axis_font['size'])
 		for label in (ax.get_xticklabels() + ax.get_yticklabels()):
 			label.set_fontname(axis_font['fontname'])
 			label.set_fontsize(float(axis_font['size']))

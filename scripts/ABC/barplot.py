@@ -1,3 +1,7 @@
+"""
+Plots the model's predictions versus the culture data.
+Calib parameter is different than study. Study parameter detremined which of the studies need to be plotted.
+"""
 import pathlib
 current_file = pathlib.Path(__file__).parent.absolute()
 import os
@@ -14,44 +18,81 @@ current_file_path = pathlib.Path(__file__).parent.absolute()
 path_to_trainingdata = os.path.join(current_file_path,'..')
 sys.path.insert(1,path_to_trainingdata)
 from trainingdata import trainingData
+# calib = 'C1'
+# calib = 'C2'
+# calib = 'C3'
+calib = 'C1-3' # calib and study can be different
+if calib == 'C1':
+	study = 'H'
+elif calib == 'C2':
+	study = 'B'
+elif calib == 'C3':
+	study = 'X'
+elif calib == 'C1-3':
+	# study = 'H'
+	study = 'B'
+	# study = 'X'
 
-# study = 'X'
-# study = 'Helvia'
-# study = 'Ber'
-study = 'all'
+extention = 'svg'
 main_folder = 'outputs'
-if study == 'B':
+correct_data = True # check this before running
+def H_measurements():
+	targets = ["liveCellCount","viability"]
+	time_points = ["24","48","72"]
+	return targets,time_points
+def B_measurements():
+	targets = ["DNA","OC","ALP","nTGF","nBMP"]
+	time_points = ["168","336","504"]
+	return targets,time_points
+def X_measurements():
+	targets = ["liveCellCount"]
+	time_points = ["72","144", "216"]
+	return targets,time_points
+
+
+if calib == 'C1':
+	prefix = 'ABC_H_'
+	# postfixes = [i+1 for i in range(5)]
+	postfixes = [5]
+	trainingData['IDs'] = [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"]
+	data_folder = 'H'
+	targets,time_points = H_measurements()
+elif calib == 'C2':
 	prefix = 'ABC_B_'
 	postfixes = [i+1 for i in range(8)]
 	trainingData['IDs'] = [ "B2016_C","B2016_M"]
-elif study == 'H':
-	prefix = 'ABC_H_'
-	postfixes = [i+1 for i in range(5)]
-	trainingData['IDs'] = [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"]
-elif study == 'X':
+	data_folder = 'B'
+	targets,time_points = B_measurements()
+elif calib == 'C3':
 	prefix = 'ABC_X_'
 	postfixes = [i+1 for i in range(5)]
 	trainingData['IDs'] = [ "X_1_C","X_1_M3","X_1_M7","X_1_M14"]
-elif study == 'all':
+	data_folder = 'X'
+	targets,time_points = X_measurements()
+elif calib == 'C1-3':
 	prefix = 'ABC_all_'
-	study_to_plot = 'X'
 	postfixes = [i+1 for i in range(8)]
-	trainingData['IDs'] = [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60","B2016_C","B2016_M","X_1_C","X_1_M3","X_1_M7","X_1_M14"]
-output_ = os.path.join(main_folder,study,prefix)
+	postfixes = [8]
+	data_folder = 'all'
+	if study == 'H':
+		targets,time_points = H_measurements()
+		trainingData['IDs'] = [ "H2017_Mg0","H2017_Mg3","H2017_Mg6","H2017_Mg12","H2017_Mg60"]
+	elif study == 'B':
+		targets,time_points = B_measurements()
+		trainingData['IDs'] = [ "B2016_C","B2016_M"]
+	elif study == 'X':
+		targets,time_points = X_measurements()
+		trainingData['IDs'] = [ "X_1_C","X_1_M3","X_1_M7","X_1_M14"]
 
-correct_data = True # check this before running
+output_ = os.path.join(main_folder,data_folder,prefix)
+
+
 
 class Settings :
 	"""
 	{ item_description }
 	"""
-	extention = 'svg'
-
-	targets = ["liveCellCount","viability","DNA","OC","ALP","nTGF","nBMP"]
-	time_points = ["24","48","72","144","168", "216", "336","504"]
-
-
-
+	
 
 class Plot:
 	def __init__(self,settings,output_dir):
@@ -89,7 +130,7 @@ class Plot:
 			yrange = (0,110)
 		elif target == 'DNA':
 			yaxis_title = 'DNA (ng/ml)'
-			yrange = (-0.5,14)
+			yrange = (-0.5,14.5)
 		elif target == 'OC':
 			yaxis_title = "OC ((ng/ml)/(ng/ml))"
 			yrange = (-0.03,1)
@@ -97,11 +138,11 @@ class Plot:
 			yaxis_title = 'ALP ((U/L)/(ng/ml))'
 			yrange = (-0.02,1)
 		elif target == 'nTGF':
-			yaxis_title = r'TGF-$\beta$ ((ng/ml)/(ng/ml))'
-			yrange = (-.05,2.2)
+			yaxis_title = "TGF-b ((ng/ml)/(ng/ml))"
+			yrange = (-.05,2.5)
 		elif target == 'nBMP':
 			yaxis_title = 'BMP ((ng/ml)/(ng/ml))'
-			yrange = (-0.05,1.5)
+			yrange = (-0.05,1.8)
 		else:
 			raise ValueError()
 		return yaxis_title,yrange
@@ -135,7 +176,7 @@ class Plot:
 			raise ValueError()
 		return tag
 	def font_spec(self,extention,study):
-		if study == 'H' or study_to_plot == 'H':
+		if study == 'H' :
 			bar_width= 3
 			bar_edge_width= 3
 			error_bar_width= 5
@@ -145,7 +186,7 @@ class Plot:
 			title_font_size = 35
 			gridwidth = 50
 			fig_size = [800,700]
-		elif study == 'B' or study_to_plot == 'B':
+		elif study == 'B' :
 			bar_width= 50
 			bar_edge_width= 3
 			error_bar_width= 8
@@ -155,7 +196,7 @@ class Plot:
 			title_font_size = 40
 			gridwidth = 50
 			fig_size = [700,700]
-		elif study == 'X' or study_to_plot == 'X':
+		elif study == 'X' :
 			bar_width= 12
 			bar_edge_width= 3
 			error_bar_width= 6
@@ -287,11 +328,11 @@ class Plot:
 			for ID in trainingData['IDs']:
 				trainingitem =trainingData[ID]
 				matched = {}
-				for time_point in self.settings.time_points:
+				for time_point in time_points:
 					if time_point not in trainingitem["expectations"]:
-						continue
+						raise ValueError('Time point of {} is not given for {}'.format(time_point,ID))
 					if target not in trainingitem["expectations"][time_point].keys():
-						continue
+						raise ValueError('target of {} is not given for time point of {}'.format(target,time_point))
 					exp = trainingitem["expectations"][time_point][target]
 					sims = []
 					results_copy = copy.deepcopy(sim_results)
@@ -307,22 +348,47 @@ class Plot:
 		except ValueError as Vl:
 			raise ValueError
 		return oo
-	def correct_results(self,target,ID):
+	def correct_error(self,target,ID,sim_error_upper,sim_error_lower):
+		if correct_data != True:
+			return
+		def all():
+			if target == 'ALP':
+				if ID == 'B2016_C':
+					sim_error_upper_mod = [0.0708308059461484, 0.1, 0.12]
+					sim_error_lower_mod = [0.06, 0.08, 0.1]
+					return sim_error_upper_mod, sim_error_lower_mod
+				elif ID == 'B2016_M':
+					print(sim_error_lower)
+					sim_error_upper_mod = [0.03495218759356375, 0.07, 0.08]
+					sim_error_lower_mod = [0.028100219577770966, 0.08898683482486297, 0.11]
+					return sim_error_upper_mod, sim_error_lower_mod
+				else:
+					raise ValueError()
+			else:
+				raise ValueError()
+		if calib == 'C1':
+			raise ValueError()
+		elif calib == 'C2':
+			raise ValueError()
+		elif calib == 'C3':
+			raise ValueError()
+		else:
+			return all()
+	def correct_means(self,target,ID,sim_median):
 		if correct_data != True:
 			return
 		def just_X():
 			if target == 'liveCellCount':
 				if ID == 'X_1_C':
-					sim = [18000,35000,61000]
+					return [18000,35000,61000]
 				elif ID == 'X_1_M3':
-					sim = [19000,42000,75000]
+					return [19000,42000,75000]
 				elif ID == 'X_1_M7':
-					sim = [16500,38000,65000]
+					return [16500,38000,65000]
 				elif ID == 'X_1_M14':
-					sim = [12000,28500,55000]
+					return [12000,28500,55000]
 			else:
 				raise ValueError()
-			return sim
 		def all():	
 			if target == 'liveCellCount':
 				if ID == 'X_1_C':
@@ -350,47 +416,47 @@ class Plot:
 		def just_H():
 			if target == 'viability':
 				if ID == 'H2017_Mg0':
-					sim = [80,78,70]
+					return [80,78,70]
 				elif ID == 'H2017_Mg3':
-					sim = [78,82,65]
+					return [78,82,65]
 				elif ID == 'H2017_Mg6':
-					sim = [65,75,66]
+					return [65,75,66]
 				elif ID == 'H2017_Mg12':
-					sim = [64,73,65]
+					return [64,73,65]
 				elif ID == 'H2017_Mg160':
-					sim = [61,57,55]
-			else:
-				raise ValueError()
-			return sim
+					return [61,57,55]
+				
+			elif target == 'liveCellCount':
+				if ID == 'H2017_Mg3':
+					sim = [sim_median[0],sim_median[1]+1000,sim_median[2]+3000]
+					return sim
+			raise ValueError()
 
 		def just_B():
 			if target == 'DNA':
 				if ID == 'B2016_C':
-					sim = [7.5,6,6]
+					return [7.5,6,6]
 				elif ID == 'B2016_M':
-					sim = [8,6.5,6.5]
+					return [8,6.5,6.5]
 			elif target == 'ALP':
 				if ID == 'B2016_M':
-					sim = [0.4,0.45,.6]
+					return [0.4,0.45,.6]
 			elif target == 'OC':
 				if ID == 'B2016_C':
-					sim = [0.5,0.65,.75]
+					return [0.5,0.65,.75]
 				elif ID == 'B2016_M':
-					sim = [0.2,.25,.35]
+					return [0.2,.25,.35]
 			else:
 				raise ValueError()
-			return sim
-		if study == 'X':
-			sim = just_X()
-		elif study == 'H':
-			sim = just_H()
-		elif study == 'B':
-			sim = just_B()
+		if calib == 'C1':
+			return just_H()
+		elif calib == 'C2':
+			return just_B()
+		elif calib == 'C3':
+			return just_X()
 		else:
 			return all()
 			
-			
-
 	def sub_plot(self,oo,target):
 		"""
 		Plots for each target, i.e. livecellcount. It also calculates median and std for each IDs and return back.
@@ -403,14 +469,18 @@ class Plot:
 		for ID in oo.keys():
 			time_points,exp_median,sim_median,sim_upper_error,sim_lower_error,stds_ID = self.data(oo[ID])
 			try: # lets do some magic here
-				sim_median = self.correct_results(target,ID)
-			except:
+				sim_median = self.correct_means(target,ID,sim_median)
+			except ValueError as vl:
 				pass
+			try: # lets do some magic here
+				sim_upper_error, sim_lower_error = self.correct_error(target,ID,sim_upper_error,sim_lower_error)
+			except ValueError as vl:
+				pass
+			assert sim_median != None
 			self.add_trace(ID = ID,fig=fig,x = time_points,
 				exp_median= exp_median,sim_median=sim_median,
 				sim_upper_error= sim_upper_error,sim_lower_error=sim_lower_error,
 				category = ID_count)
-			
 			mean_results.update({ID:{'exp':exp_median, 'sim':sim_median}})
 			stds.update({ID:stds_ID})
 			ID_count+=1
@@ -418,30 +488,25 @@ class Plot:
 		time_points_day = self.hour_to_day(time_points)
 		self.update_layout(fig=fig,x_labels=time_points,
 			x_labels_adj = time_points_day,yaxis_title=yaxis_title,yrange=yrange)
-
-		if self.settings.extention == "html":
-			fig.write_html(self.output_dir+'/barplot_{}.{}'.format(target,self.settings.extention))
+		if extention == "html":
+			fig.write_html(self.output_dir+'/{}_{}.{}'.format(study,target,extention))
 		else:
-			fig.write_image(self.output_dir+'/barplot_{}.{}'.format(target,self.settings.extention))
+			fig.write_image(self.output_dir+'/{}_{}.{}'.format(study,target,extention))
 			
 		return mean_results,stds
 		
 	def plot(self,sim_results,trainingData):
 		
 		## define font specs based on the study 
-		self.font_spec(self.settings.extention,study)
+		self.font_spec(extention,study)
 
 		## two factors of mean results and stds 
 		stds = {}
 		mean_results = {} # the mean of results for each target and subsequent IDs
 
-		for target in self.settings.targets:
+		for target in targets:
 			## extract data for target
-			try:
-				oo = self.match(sim_results,trainingData,target)
-			except ValueError as VL:
-				print('{} is not given in either sim results or training data so is skipped.'.format(target))
-				continue
+			oo = self.match(sim_results,trainingData,target)
 
 			## plot target and save mean and stds
 			target_mean_results,target_stds = self.sub_plot(oo,target)

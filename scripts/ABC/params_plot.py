@@ -22,7 +22,7 @@ calib_params = {
 	"a_Mo": [5.68,4.24,None,5.26],
 	"a_Pr_Mo": [None,None,None,7.7],
 	"a_c_Mo": [54.65,None,19.26,90.79],
-	"a_Diff": [7.35,2.34,3.2,4],
+	"a_Diff": [3.6,3.2,7.35,4],
 	"B_Pr": [0.074,0.03,0.028,0.065],
 	"a_P": [1.98,8.42,16.4,2.23],
 	"pH_t": [9.21,None,None,None],
@@ -128,5 +128,5 @@ if __name__ == "__main__":
 		label.set_fontname(axis_font['fontname'])
 		label.set_fontsize(float(axis_font['size']))
 	plt.legend(bbox_to_anchor=(0.25, 1.15), loc='upper left', borderaxespad=0.,prop=legend_font,ncol=4)
-	plt.ylabel('Scalled values',fontsize = 17, family = axis_font['fontname'])
+	plt.ylabel('Scaled values',fontsize = 17, family = axis_font['fontname'])
 	plt.savefig(os.path.join(output_dir,"calib_params"+format),bbox_inches="tight")
