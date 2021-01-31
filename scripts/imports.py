@@ -12,7 +12,6 @@ if platform.system() == 'Windows':
 else:
 	sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
 from myBinds import Cell, myEnv,space,myPatch
-
 def update_progress(progress):
     barLength = 50 # Modify this to change the length of the progress bar
     status = ""

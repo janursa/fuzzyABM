@@ -7,7 +7,7 @@ import numpy as np
 doPlot = True
 doWait = True
 doRescale = True
-class Diff:
+class Diffusion:
 	def __init__(self,x,y,z,patch_l,D,timeStepDuration,steps):
 		# Domain
 		self.nx = int(x/patch_l)

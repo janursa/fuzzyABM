@@ -1,9 +1,9 @@
 #define CATCH_CONFIG_MAIN
 #include <fstream>
 #include <catch2/catch.hpp>
-#include <nlohmann/json.hpp>
+// #include <nlohmann/json.hpp>
 #include "fuzzy/fuzzy.h"
-using json = nlohmann::json;
+// using json = nlohmann::json;
 
 
 shared_ptr<fuzzy> initialize() {

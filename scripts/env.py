@@ -10,18 +10,11 @@ from math import sqrt
 import copy
 current_file_path = pathlib.Path(__file__).parent.absolute()
 
-
 from imports import *
 from agents import MSC_,Dead_
 from trainingdata import trainingData
 from params import parameters
 SETTINGS_PATH = os.path.join(current_file_path,'settings.json')
-
-#TRAININGDATA_PATH = os.path.join(current_file_path,'trainingdata.json')
-
-# with open(TRAININGDATA_PATH) as file:
-# 	trainingData = json.load(file)
-
 
 ###### settings
 flags = {
@@ -29,6 +22,7 @@ flags = {
 	}
 
 class ABM(myEnv):
+	output_dir = 'outputs/single'
 	def __init__(self,free_params = {},run_mode = "ABC"):
 		myEnv.__init__(self)
 		## simulation specific
@@ -57,7 +51,7 @@ class ABM(myEnv):
 	def initialize(self):
 		## default fields
 		self.agents_repo = []
-		self.patch_repo = []
+		self.patches_repo = []
 		self.patches.clear()
 		self.agents.clear()
 		## to update
@@ -85,7 +79,12 @@ class ABM(myEnv):
 		except Exception as e:
 			raise e
 	def update_repo(self):
-		self.agents_repo[:]= [agent for agent in self.agents_repo if not agent.disappear]
+		indices = []
+		for i in range(len(self.agents_repo)):
+			if self.agents_repo[i].disappear==True:
+				indices.append(i)
+		for ele in sorted(indices, reverse = True):  
+			del self.agents_repo[ele]
 	def generate_agent(self,agent_name):
 		if agent_name == 'MSC':
 			agent_obj = MSC_(self, params = self.params.copy(),
@@ -96,12 +95,14 @@ class ABM(myEnv):
 		else:
 			print("Generate agent is not defined for '{}'".format(agent_name))
 			sys.exit(0)
+		self.agents_repo.append(agent_obj)
 		self.agents.append(agent_obj)
 		return agent_obj
-	def generate_patch(self):
-		patch_obj = myPatch(self, initial_conditions = self.settings["setup"]["patch"]["attrs"].copy(),
+	def generate_patch(self,mesh):
+		patch_obj = myPatch(self, mesh, initial_conditions = self.settings["setup"]["patch"]["attrs"].copy(),
 								  params = self.params.copy(),flags = flags.copy())
-		self.patch_repo.append(patch_obj)
+		self.patches.append(patch_obj);
+		self.patches_repo.append(patch_obj)
 		return patch_obj
 	def setup(self):
 		self.set_settings(self.settings["setup"]["grid"])
@@ -413,7 +414,8 @@ class ABM(myEnv):
 		if self.run_mode != "test":
 			return
 		def scatter_patch(patches):
-			file = open('outputs/scatter.csv','w')
+			file_name = os.path.join(self.output_dir,'scatter.csv')
+			file = open(file_name,'w')
 
 			file.write('x,y,z,type,size\n')
 			for index,patch in patches.items():
@@ -432,7 +434,8 @@ class ABM(myEnv):
 		# scatter_patch(self.patches)
 
 		def scatter3_patch(patches):
-			file = open('outputs/scatter3.csv','w')
+			file_name = os.path.join(self.output_dir,'scatter3.csv')
+			file = open(file_name,'w')
 
 			file.write('x,y,z,type,size\n')
 			for index,patch in patches.items():
@@ -450,7 +453,8 @@ class ABM(myEnv):
 		scatter3_patch(self.patches)
 
 		def scatter_agents(agents):
-			file = open('outputs/scatter.csv','w')
+			file_name = os.path.join(self.output_dir,'scatter.csv')
+			file = open(file_name,'w')
 			file.write('x,y,type,size\n')
 			for agent in agents:
 				x,y,z = agent.patch.coords
@@ -464,7 +468,8 @@ class ABM(myEnv):
 		# scatter_agents(self.agents)
 
 		def scatter3_agents(agents):
-			file = open('outputs/scatter3.csv','w')
+			file_name = os.path.join(self.output_dir,'scatter3.csv')
+			file = open(file_name,'w')
 			file.write('x,y,z,type,size\n')
 			for agent in agents:
 				x,y,z = agent.patch.coords
@@ -479,25 +484,32 @@ class ABM(myEnv):
 		## agent counts
 		df = pd.DataFrame.from_dict(self.data)
 		df_agent_counts = df[["MSC","Dead"]]
-		df_agent_counts.to_csv('outputs/agents_traj.csv')
+		file_name = os.path.join(self.output_dir,'agents_traj.csv')
+		df_agent_counts.to_csv(file_name)
 		## average pH
 		df_pH = df[["pH"]]
-		df_pH.to_csv('outputs/pH.csv')
+		file_name = os.path.join(self.output_dir,'pH.csv')
+		df_pH.to_csv(file_name)
 		## TGF
 		lactate = df[["TGF"]]
-		lactate.to_csv('outputs/TGF.csv')
+		file_name = os.path.join(self.output_dir,'TGF.csv')
+		lactate.to_csv(file_name)
 		## BMP
 		BMP = df[["BMP"]]
-		BMP.to_csv('outputs/BMP.csv')
+		file_name = os.path.join(self.output_dir,'BMP.csv')
+		BMP.to_csv(file_name)
 		## maturity
 		maturity = df[["maturity"]]
-		maturity.to_csv('outputs/maturity.csv')
+		file_name = os.path.join(self.output_dir,'maturity.csv')
+		maturity.to_csv(file_name)
 		## ALP
 		ALP = df[["ALP"]]
-		ALP.to_csv('outputs/ALP.csv')
+		file_name = os.path.join(self.output_dir,'ALP.csv')
+		ALP.to_csv(file_name)
 		## OC
 		OC = df[["OC"]]
-		OC.to_csv('outputs/OC.csv')
+		file_name = os.path.join(self.output_dir,'OC.csv')
+		OC.to_csv(file_name)
 		## ECM
 		#ECM = df[["ECM"]]
 		#ECM.to_csv('outputs/ECM.csv')

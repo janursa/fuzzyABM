@@ -4,6 +4,7 @@ xcode/*
 cmake-build-debug/*
 CMakeFiles/*
 outputs/*
+results/*
 
 
 # Byte-compiled / optimized / DLL files

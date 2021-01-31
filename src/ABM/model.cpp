@@ -1,7 +1,8 @@
 #include "ABM/model.h"
 #include <math.h>  
-#include <nlohmann/json.hpp>
-using json = nlohmann::json;
+// #include <nlohmann/json.hpp>
+// using json = nlohmann::json;
+// #define DIFFUSION 
 double myPatch::lactate(){
 		double MI = 0;
 		if (this->empty()) {
@@ -27,7 +28,6 @@ void myPatch::step(){
 	if (this->flags.at("D3")) {
 		max_cell_count = 27.0;
 	}
-
 	this->data["agent_density"] = this->find_neighbor_agents(true).size()/ max_cell_count;
 }
 
@@ -104,8 +104,11 @@ bool Cell::migration(double Mi){
 	}
 void myEnv::setup_agents(map<string, unsigned> config) {
 	auto FIND_PATCH = [&]() {
-		auto patches_indices_copy = this->patches_indices;
-		auto patch_count = this->patches_indices.size();
+		vector<unsigned> patches_indices;
+		for(auto const& patch: this->patches)
+    		patches_indices.push_back(patch.first);
+		auto patches_indices_copy = patches_indices;
+		auto patch_count = patches_indices.size();
 		auto g = tools::randomly_seeded_MT();
 
 		std::shuffle(patches_indices_copy.begin(), patches_indices_copy.end(), g);
@@ -182,38 +185,7 @@ void Cell::bone_production(double f_ECM, double f_HA) {
 
 
 }
-//void Cell::GF() {
-	/* BMP */
-	//auto BMP_cont = this->env->patches[0]->get_data("BMP");
-	//auto BMP_PROD = [&]() -> double {
 
-	//	double r_prod = params.at("B_BMP");
-	//	auto r_prod_adj = r_prod * this->v_p_v;
-	//	return r_prod_adj;
-	//};
-	//
-	//auto BMP_r_prod = BMP_PROD();
-	//auto BMP_cont_new = BMP_cont + BMP_r_prod ;
-	//if (BMP_cont_new < 0) BMP_cont_new = 0;
-	//this->env->patches[0]->set_data("BMP", BMP_cont_new); //only add to the patch 0 as the representative of the domain
-	///*cout << "BMP_cont: " << BMP_cont << " BMP_r_prod " << BMP_r_prod  << " BMP_cont_new " << BMP_cont_new << endl;
-	//cout << " updated " << this->env->patches[0]->get_data("BMP") << endl;
-	//exit(2);*/
-	///* TGF */
-	//auto TGF_cont = this->env->patches[0]->get_data("TGF");
-	//auto TGF_PROD = [&]() -> double {
-
-	//	double r_prod = params.at("B_TGF");
-	//	auto r_prod_adj = r_prod * this->v_p_v;
-	//	return r_prod_adj;
-	//};
-	//
-	//auto TGF_r_prod = TGF_PROD();
-	//auto TGF_cont_new = TGF_cont + TGF_r_prod ;
-	//if (TGF_cont_new < 0) TGF_cont_new = 0;
-	//this->env->patches[0]->set_data("TGF", TGF_cont_new); //only add to the patch 0 as the representative of the domain
-
-//}
 double myEnv::collect_from_patches(string tag){
 
     double result = 0;
@@ -250,24 +222,10 @@ void Cell::update(){
 		}
 	this->data["Pr_clock"] += 1;
 }
-void myEnv::update(){
-	Env<myEnv,Cell,myPatch>::update();
-	// unsigned nonEmptyPatches = 0;
-	// unsigned agentsInPatchesCount = 0;
-	for (auto &[index,patch]:this->patches){
-		if (patch->agent_count>1){
-			throw patch_availibility("Patch holds more than one agent");
-		}
-		// if (patch->empty == false){
-		// 	nonEmptyPatches++;
-		// }
-		// agentsInPatchesCount+=patch->agent_count;
-	}
-	// cout<<"Patches: "<<this->patches.size()<<" Agents: "<<this->agents.size()<<" Taken patches: "<<nonEmptyPatches<<" Accom agents: "<<agentsInPatchesCount<<endl;
-	for (auto &agent:this->agents){
-		agent->update();
-	}
-	// productions
+void myEnv::GFs_diffusion_model(){
+
+}
+void myEnv::GFs_static_model(){
 	unsigned live_cell_count = 0;
 	for (auto& agent : this->agents) {
 		if (agent->class_name != "Dead") live_cell_count++;
@@ -292,15 +250,12 @@ void myEnv::update(){
 			auto TGF_max = this->params["TGF_max"];
 			auto coeff = (b) / (TGF_max + c_TGF);
 			auto rate_prod = coeff * maturity_n * c_cell ;
-			//cout << "\n c_TGF "<< c_TGF<<" b " << b << " TGF_max :" << TGF_max << " c_cell:" << c_cell << " coeff " << coeff <<" rate_prod "<< rate_prod<< endl;
 			return rate_prod;
 		};
 		auto prod = PROD();
 		auto deg = DEG();
 		auto c_TGF_updated = c_TGF + prod - deg;
 		this->set_GFs("TGF", c_TGF_updated);
-		//cout << "\n agents_c " << this->agents.size() << " volume " << this->grid_settings["volume"] << " c_cell " << c_cell << " rate " << rate << " c "<<c_TGF<< endl;
-		//cout << " c0 " << c_TGF << " prod " << prod << " deg " << deg << " c " << c_TGF_updated << endl;
 	};
 	TGF();
 	
@@ -319,21 +274,35 @@ void myEnv::update(){
 			auto b = this->params["b_BMP"];
 			auto BMP_max = this->params["BMP_max"];
 			auto coeff = (b) / (BMP_max + c_BMP);
-//			auto maturity_a = this->get_data("maturity");
-//			cout<<maturity_n<<endl;
 			auto rate_prod = coeff * maturity_n * c_cell ;
-//			cout << "b " << b << " BMP_max :" << BMP_max << " c_cell:" << c_cell <<" coeff "<< coeff<< " maturity " << maturity_n<< " rate: "<< rate_prod<< endl;
 			return rate_prod;
-
 		};
 		auto prod = PROD();
 		auto deg = DEG();
 		auto c_updated = c_BMP + prod - deg;
 		this->set_GFs("BMP", c_updated);
-		//cout << " c0 " << c_BMP << " prod " << prod << " deg " << deg << " c " << c_updated << endl;
-		//exit(2);
 	};
 	BMP();
+}
+void myEnv::execute_GFs(){
+#ifdef DIFFUSION
+	this->GFs_diffusion_model();
+#else 
+	this->GFs_static_model();
+#endif // DIFFUSION
+	// productions
+}
+void myEnv::update(){
+	Env<myEnv,Cell,myPatch>::update();
+	for (auto &[index,patch]:this->patches){
+		if (patch->agent_count>1){
+			throw patch_availibility("Patch holds more than one agent");
+		}
+	}
+	for (auto &agent:this->agents){
+		agent->update();
+	}
+	this->execute_GFs();
 	
 }
 void myPatch::initialize(){
@@ -341,15 +310,6 @@ void myPatch::initialize(){
 	initial_conditions["lactate"] = 0;
 	initial_conditions["ECM"] = 0;
 	initial_conditions["HA"] = 0;
-	/*if (index == 0) {
-		initial_conditions["TGF"] = params.at("TGF_0");
-		initial_conditions["BMP"] = params.at("BMP_0");
-	}
-	else {
-		initial_conditions["TGF"] = 0;
-		initial_conditions["BMP"] = 0;
-	}*/
-	
 	for (auto const &[key,value]:this->initial_conditions){
 		this->data[key] = value;
 	}
@@ -393,9 +353,3 @@ void Cell::initialize(map<string,double> initial_conditions){
 	double v_patch = patch_size * patch_size;
 	
 }
-//shared_ptr<Patch> myEnv::generate_patch(){
-//	map<string,double> initial_conditions = py::cast<map<string,double>>(this->settings["setup"]["patch"]["attrs"]);
-//	auto patch_obj = make_shared<myPatch>(this->get_ptr(), this->params,
-//		initial_conditions);
-//	return patch_obj;
-//}

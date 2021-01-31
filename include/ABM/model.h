@@ -34,6 +34,9 @@ struct myEnv : public  Env<myEnv,Cell,myPatch> {
 	
 	//virtual shared_ptr<Patch> generate_patch();
 	virtual void update();
+	void execute_GFs(); //!< exectutes growth factor model
+	void GFs_static_model(); //!< executes the growth factor model without diffusion
+	void GFs_diffusion_model(); //!< executes the growth factor model with diffusion
 	param_type params;
 	shared_ptr<fuzzy> policy;
 	map<string,double> grid_settings;
@@ -117,10 +120,12 @@ struct Cell : public  Agent<myEnv,Cell,myPatch> {
 	//double v_p_v; //v_patch/v_domain
 };
 
-struct myPatch : public  Patch<myEnv,Cell,myPatch> {
-	using  Patch<myEnv,Cell,myPatch>:: Patch;
-	myPatch(shared_ptr<myEnv> env,std::map<string,double> params_,std::map<string,double> initial_conditions, std::map<string, bool> flags)
-	try:  Patch(env){
+struct myPatch : public  Patch<myEnv,Cell,myPatch> {	
+	using basePatch = Patch<myEnv,Cell,myPatch> ;
+	using basePatch::basePatch;
+	myPatch(shared_ptr<myEnv> env,MESH_ITEM mesh,std::map<string,double> params_,std::map<string,double> initial_conditions, std::map<string, bool> flags)
+
+	try:  basePatch(env,mesh){
 		this->params = params_;
 		this->initial_conditions = initial_conditions;
 		this->flags = flags;

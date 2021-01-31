@@ -69,16 +69,14 @@ PYBIND11_MODULE(myBinds, m) {
     /** Patch **/
     auto myPatch_binds = bind_tools::expose_patch<myEnv,Cell,myPatch>(m,"myPatch");
     myPatch_binds.def(py::init<shared_ptr<myEnv>,
+                    MESH_ITEM,
                     std::map<string,double>,
                     std::map<string,double>,
                     std::map<string, bool>>(),
-                    "Initialize",py::arg("env"),
+                    "Initialize",py::arg("env"),py::arg("mesh"),
                     py::arg("params"),py::arg("initial_conditions"), py::arg("flags"));
     myPatch_binds.def("initialize",&myPatch::initialize);
-    // /** Exceptions **/
-    // expose_exceptions(m);
-    /** mesh **/
-    // expose_mesh(m);
+
 }
 
 

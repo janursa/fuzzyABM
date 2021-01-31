@@ -7,7 +7,7 @@ add_executable(${FUZZYTESTS} testfuzzy.cpp)
 target_compile_features(${FUZZYTESTS} PRIVATE cxx_std_17)
 
 # Should be linked to the main library, as well as the Catch2 testing library
-target_link_libraries(${FUZZYTESTS} PRIVATE ${FUZZYLIB} Catch2::Catch2 nlohmann_json::nlohmann_json)
+target_link_libraries(${FUZZYTESTS} PRIVATE ${FUZZYLIB} Catch2::Catch2 )
 target_include_directories(${FUZZYTESTS} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 # If you register a test, then ctest and make test will run it.
