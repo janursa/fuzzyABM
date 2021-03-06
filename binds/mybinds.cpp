@@ -1,5 +1,5 @@
 #include <iostream>
-#include "CppyABM/include/ABM/bind_tools.h"
+#include "cppyabm/bind_tools.h"
 #include "model.h"
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>

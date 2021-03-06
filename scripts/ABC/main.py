@@ -5,9 +5,9 @@ path_to_env = os.path.join(current_file,'..')
 import sys
 sys.path.insert(1,path_to_env)
 from env import ABM
-ABC_path = os.path.join(current_file,'..','..','..','ABC/ABC')
+ABC_path = os.path.join(current_file,'..','..','..','ABayesianC')
 sys.path.insert(1,ABC_path)
-import tools
+from ABayesianC import tools
 
 
 settings = {

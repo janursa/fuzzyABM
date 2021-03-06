@@ -1,5 +1,5 @@
 #pragma once
-#include "CppyABM/include/ABM/bases.h"
+#include "cppyabm/bases.h"
 #include "tools.h"
 #include "fuzzy/fuzzy.h"
 

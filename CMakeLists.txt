@@ -40,27 +40,7 @@ set (PYTHON_EXECUTABLE $"/Users/matin/miniconda3/envs/v37_conda/bin/python")
 
 include(FetchContent)
 
-# FetchContent_Declare(json
-#   GIT_REPOSITORY https://github.com/nlohmann/json.git
-#   GIT_TAG v3.7.3)
-
-# FetchContent_GetProperties(json)
-# if(NOT json_POPULATED)
-#   FetchContent_Populate(json)
-#   add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)
-# endif()
-
-if (DEALII)
-	FIND_PACKAGE(deal.II 9.1.0 REQUIRED
-	HINTS ${DEALII_DIR}/build ../ ../../ $ENV{DEALII_DIR}/build
-	)
-	DEAL_II_INITIALIZE_CACHED_VARIABLES()
-	include_directories(${DEALII_DIR}/include)
-	add_definitions(-DDEALII)
-endif(DEALII)
-
-
-add_subdirectory(../CPPYABM CPPYABM)
+add_subdirectory(../CppyABM cppyabm)
 add_subdirectory(src)
 #add_subdirectory(app)
 add_subdirectory(binds)
