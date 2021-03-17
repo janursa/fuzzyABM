@@ -6,14 +6,24 @@ from free_params import free_parameters
 import numpy as np
 fixed_parameters = {
   "BMP_max": 2000,
-  "TGF_max": 60,
+  "TGF_max":60,
+  "K_p_g2": 25, # average of the physiological range
+  "K_p_g1": 0.0008, # average of the physiological range
   "Mg_max": 60.0,
-  "BMP_0": 0,
-  "TGF_0": 0,
+  "BMP_0": 0.008,
+  "TGF_0": 14,
+  "V_max_base":(1.43*10**-7)/24, # obtained from Ribeiro
+  "K_b": 11.01, # obtained from Ribeiro
+  "deg_rate_BMP": np.exp(-np.log(2)/10),
+  "deg_rate_TGF": np.exp(-np.log(2)/0.17),
+  "b_TGF": 1000,
+  "b_BMP": .5,
+
   "B_rec": 0.003,
   "w_mg_ph": 0.021,
-  "AE_a_coeff": 6.19,
+  "AE_a_coeff": 4.42,
   "B_Diff": 0.0014,
+
   
 
   ## helvia

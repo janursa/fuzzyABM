@@ -12,9 +12,8 @@ current_file_path = pathlib.Path(__file__).parent.absolute()
 
 from imports import *
 from agents import MSC_,Dead_
-from trainingdata import trainingData
-from params import parameters
-SETTINGS_PATH = os.path.join(current_file_path,'settings.json')
+
+
 
 ###### settings
 flags = {
@@ -25,10 +24,6 @@ class ABM(myEnv):
 	output_dir = 'outputs/single'
 	def __init__(self,free_params = {},run_mode = "ABC"):
 		myEnv.__init__(self)
-		## simulation specific
-		#with open(SETTINGS_PATH) as file:
-			#self.settings = json.load(file)
-		#self.settings = ABM.scale(self.settings,self.settings["scale"]);
 		self.params = parameters
 		for key,value in free_params.items():
 			self.params[key] = value
@@ -376,12 +371,12 @@ class ABM(myEnv):
 		#step 2: receive the results and append it to the epoch results
 		#step 3: calculate error
 		mean_errors = []
-		IDs = trainingData["IDs"]
+		IDs = observations["IDs"]
 		print(IDs)
-		scale_factor = trainingData["scale"]
+		scale_factor = observations["scale"]
 		for ID in IDs:
 			try:
-				training_item = ABM.scale(trainingData[ID],scale_factor);
+				training_item = ABM.scale(observations[ID],scale_factor);
 				_,_,mean_error = self.episode(training_item)
 			except ValueError as vl:
 				print("\n we got None again")
@@ -393,11 +388,11 @@ class ABM(myEnv):
 
 	def test(self):
 		results = {}
-		IDs = trainingData["IDs"]
-		scale_factor = trainingData["scale"]
+		IDs = observations["IDs"]
+		scale_factor = observations["scale"]
 		for ID in IDs:
 			try:
-				training_item = ABM.scale(trainingData[ID],scale_factor);
+				training_item = ABM.scale(observations[ID],scale_factor);
 				results_episode,_,_ = self.episode(training_item)
 			except ValueError as vl:
 				print("\nValueError inside env::test as ",vl)

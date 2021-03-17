@@ -1,15 +1,18 @@
-from env import ABM, trainingData
 import time
 import sys
 import os,sys
 import pathlib
 current_file = pathlib.Path(__file__).parent.absolute()
-# medians_path = os.path.join(current_file,'..','outputs_ber','medians.json')
-import json
+ABM_path = os.path.join(current_file,'ABM')
+sys.path.insert(0,ABM_path)
+from env import ABM
+data_path = os.path.join(current_file,'..','bio_data')
+sys.path.insert(0,data_path)
+from observations import observations
 
 
-scale_factor = trainingData["scale"]
-training_item = ABM.scale(trainingData["B2016_M"],scale_factor)
+scale_factor = observations["scale"]
+training_item = ABM.scale(observations["H2017_Mg0"],scale_factor)
 
 try:
     obj = ABM(free_params = {},run_mode="test")

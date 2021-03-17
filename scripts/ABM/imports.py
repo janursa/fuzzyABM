@@ -5,12 +5,21 @@ import os
 import time
 import platform
 current_file_path = pathlib.Path(__file__).parent.absolute()
+# import empirical data
+data_path = os.path.join(current_file_path,'..','..','bio_data')
+sys.path.insert(0,data_path)
+from observations import observations
+# import parameters
+params_path = os.path.join(current_file_path,'..','..','parameters')
+sys.path.insert(0,params_path)
+from parameters import parameters
+# import binds
 sys.path.insert(1,current_file_path)
 # sys.path.insert(1,os.path.join(current_file_path,'..','..','ABM_base','build','binds'))
 if platform.system() == 'Windows':
-	sys.path.insert(1,os.path.join(current_file_path,'..','build','x64-Release','binds'))
+	sys.path.insert(1,os.path.join(current_file_path,'..','..','build','x64-Release','binds'))
 else:
-	sys.path.insert(1,os.path.join(current_file_path,'..','build','binds'))
+	sys.path.insert(1,os.path.join(current_file_path,'..','..','build','binds'))
 from myBinds import Cell, myEnv,space,myPatch
 def update_progress(progress):
     barLength = 50 # Modify this to change the length of the progress bar

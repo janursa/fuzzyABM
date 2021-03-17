@@ -513,7 +513,7 @@ observations = {
 			}
 		}
 	},
-	"scale": 1,
+	"scale": 0.1,
 }
 import json
 with open('observations.json','w') as file:

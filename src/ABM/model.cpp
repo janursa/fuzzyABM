@@ -145,13 +145,13 @@ void Cell::step(){
 	// functions
 	auto die = this->mortality(predictions["Mo"]);
 	auto hatch = this->proliferation(predictions["Pr"]);
-	auto walk = this->migration(predictions["Mi"]);
+	// auto walk = this->migration(predictions["Mi"]);
 	this->differentiation(predictions["earlyDiff"], predictions["lateDiff"]);
 	
 	//bone_production(predictions["ECMprod"], predictions[ "HAprod"]);
 	
-	if (walk)
-		this->order_move(/**patch**/nullptr, /* quiet */ true,/** reset**/ true);
+	// if (walk)
+	// 	this->order_move(/**patch**/nullptr, /* quiet */ true,/** reset**/ true);
 	if (hatch)
 		this->order_hatch(/**patch**/nullptr, /**inherit**/true,/** quiet **/ true);
 	if (die)
@@ -180,6 +180,7 @@ void Cell::differentiation(double earlyDiff, double lateDiff) {
 	//if (tools::random(0,1) < 0.001)
 //	cout  <<"\n base_rate: " << base_rate  << " f_diff: " << f_diff << " adj_rate: " << adj_rate << " maturity: " << this->data["maturity"] << endl;
 	this->data["maturity"] += adj_rate;
+	this->data["diff_rate"] = adj_rate;
 }
 void Cell::bone_production(double f_ECM, double f_HA) {
 
@@ -230,55 +231,91 @@ void myEnv::GFs_static_model(){
 	for (auto& agent : this->agents) {
 		if (agent->class_name != "Dead") live_cell_count++;
 	}
-	auto c_cell = live_cell_count / this->grid_settings["volume"];
+	auto c_cell = live_cell_count / this->grid_settings["volume"]/pow(10,6);
+	// normalized maturity
 	auto maturity_t = this->collect_from_agents("maturity");
 	double maturity_n = 0;
-	if (live_cell_count == 0)maturity_n = 0;
+	if (live_cell_count == 0) maturity_n = 0;
     else   maturity_n = maturity_t/live_cell_count;
+    // normalized differentiation rate
+    auto diff_rate = this->collect_from_agents("diff_rate");
+	double diff_rate_n = 0;
+	if (live_cell_count == 0) diff_rate_n = 0;
+    else   diff_rate_n = diff_rate/live_cell_count;
+    // normalized proliferation indicator function
+    int p_count = 0;
+    for (auto & cell:this->agents){
+    	if (cell->_hatch._flag){
+    		p_count++;
+    	};
+    }
+    // auto p_rate = this->collect_from_agents("diff_rate");
+	double p_rate = 0;
+	if (live_cell_count == 0) p_rate = 0;
+    else   p_rate = p_rate/live_cell_count;
+
 	auto TGF = [&]() {
 		auto c_TGF = this->get_GFs("TGF");
-
 		auto DEG = [&]() ->double {
-			double half_life = 1.0 / 6;
-			auto half_life_rate = log(2) / half_life;
-			auto coeff = exp(-half_life_rate);
-			auto deg_rate = c_TGF * (1 - coeff);
-			return deg_rate;
+			auto deg =  c_TGF* (1 - this->params["deg_rate_TGF"]);
+			return deg;
 		};
 		auto PROD = [&]()->double {
 			auto b = this->params["b_TGF"];
-			auto TGF_max = this->params["TGF_max"];
-			auto coeff = (b) / (TGF_max + c_TGF);
-			auto rate_prod = coeff * maturity_n * c_cell ;
+			auto coeff = (b)*c_TGF/ (this->params["K_p_g2"] + c_TGF);
+			auto rate_prod = coeff * c_cell ;
 			return rate_prod;
+		};
+		auto CONSUMED = [&]()->double {
+			auto c_min = 14;
+			auto consumed = p_rate *(c_TGF - c_min);
+			return consumed;
+		};
+		auto BACKGROUND = [&]()->double {
+			auto V_max = c_cell*this->params["V_max_base"];
+			auto K = this->params["K_b"]; 
+			auto background = (V_max*c_TGF)/(K*c_TGF);
+			return background;
+
 		};
 		auto prod = PROD();
 		auto deg = DEG();
-		auto c_TGF_updated = c_TGF + prod - deg;
+		auto consumed = CONSUMED();
+		auto background = BACKGROUND();
+		auto c_TGF_updated = c_TGF + prod - deg-consumed-background;
 		this->set_GFs("TGF", c_TGF_updated);
 	};
 	TGF();
 	
-	// BMP degrades
-	
 	auto BMP = [&]() {
 		auto c_BMP = this->get_GFs("BMP");
 		auto DEG = [&]() ->double {
-			auto half_life = 10.08;
-			auto half_life_rate = log(2) / half_life;
-			auto coeff = exp(-half_life_rate);
-			auto deg_rate = c_BMP * (1 - coeff);
+			auto deg_rate = (1-this->params["deg_rate_BMP"])*c_BMP ;
 			return deg_rate;
 		};
 		auto PROD = [&]()->double {
 			auto b = this->params["b_BMP"];
-			auto BMP_max = this->params["BMP_max"];
-			auto coeff = (b) / (BMP_max + c_BMP);
-			auto rate_prod = coeff * maturity_n * c_cell ;
+			auto coeff = (b*c_BMP) / (this->params["K_p_g1"] + c_BMP);
+			auto rate_prod = coeff * c_cell ;
 			return rate_prod;
+		};
+		auto CONSUMED = [&]()->double {
+			auto c_min = 0.008;
+			auto consumed = diff_rate_n *(c_BMP - c_min);
+			return consumed;
+		};
+		auto BACKGROUND = [&]()->double {
+			auto V_max = c_cell*this->params["V_max_base"];
+			auto K = this->params["K_b"]; 
+			auto background = (V_max*c_BMP)/(K*c_BMP);
+			// cout<<" c_c "<<c_cell<<" c_BMP "<<c_BMP<<" background "<<background<<endl;
+			return background;
+
 		};
 		auto prod = PROD();
 		auto deg = DEG();
+		auto consumed = CONSUMED();
+		auto background = BACKGROUND();
 		auto c_updated = c_BMP + prod - deg;
 		this->set_GFs("BMP", c_updated);
 	};
@@ -346,6 +383,7 @@ void Cell::initialize(map<string,double> initial_conditions){
 	initial_conditions["pH"] = 7.8;
 	initial_conditions["Pr_clock"] = 0;
 	initial_conditions["maturity"] = 0;
+	initial_conditions["diff_rate"] = 0;
 	for (auto const &[key,value]:initial_conditions){
 		this->data[key] = value;
 	}
