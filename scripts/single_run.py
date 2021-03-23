@@ -12,7 +12,9 @@ from observations import observations
 
 
 scale_factor = observations["scale"]
-training_item = ABM.scale(observations["H2017_Mg0"],scale_factor)
+# training_item = ABM.scale(observations["H2017_Mg0"],scale_factor)
+training_item = ABM.scale(observations["B2016_C"],scale_factor)
+# training_item = ABM.scale(observations["X_1_C"],scale_factor)
 
 try:
     obj = ABM(free_params = {},run_mode="test")

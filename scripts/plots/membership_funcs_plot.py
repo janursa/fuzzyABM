@@ -13,7 +13,12 @@ import copy
 import pylab
 import pylab
 import matplotlib.font_manager
+import matplotlib
+import matplotlib.ticker as ticker
+from matplotlib import rcParams
 rcParams["mathtext.default"]='rm'
+rcParams['mathtext.fontset'] = 'stixsans'
+del matplotlib.font_manager.weight_dict['roman']
 file_dir = pl.Path(__file__).parent.absolute()
 output_dir = os.path.join(file_dir,"graphs")
 line_width  = 2
@@ -122,7 +127,7 @@ def plot_MG():
     ax.set_xlabel('Concentration (mM)',**axis_font)
     tags_x_locs = [(0+fakes[0.8])/2,fakes[1.8],fakes[5],fakes[15],(fakes[40]+fakes[60])/2]
     tags = ['Negligible','Inhibitory','Stimulatory','High','Destructive']
-    return fig,ax,r'Mg$^{2+}$ ions',tags_x_locs,tags
+    return fig,ax,'Mg$^{2+}$ ions',tags_x_locs,tags
 def plot_CD():
     fig,ax = plt.subplots(figsize=(4.5, 3))
     range = np.arange(0, 1, 0.01)
