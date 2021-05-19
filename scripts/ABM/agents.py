@@ -38,6 +38,9 @@ class MSC_(Cell):
 		self.saved_actions = []
 		self.saved_rewards = []
 		self.previous_checkpoint = 0
+	def run_policy(self,policy_inputs):
+		print(policy_inputs)
+		return {}
 	# def step(self):
 	# 	policy_inputs = self.collect_policy_inputs()
 	# 	probs,state_value = self.run_policy(policy_inputs)
