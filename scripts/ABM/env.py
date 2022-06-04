@@ -344,6 +344,7 @@ class ABM(myEnv):
 			raise vl
 		self.duration = self.settings["setup"]["exp_duration"]
 		for i in range(self.duration):
+		# for i in range(140):
 			try:
 				self.step()
 			except ValueError as vl:
@@ -439,7 +440,7 @@ class ABM(myEnv):
 					color_ = 'black'
 				else:
 					size_ = 10
-					type_ = patch.get_agent().class_name
+					type_ = patch.get_agents()[0].class_name
 					color_ = 'blue'
 
 				file.write("{},{},{},{},{},{}\n".format(patch.coords[0], patch.coords[1],patch.coords[2],

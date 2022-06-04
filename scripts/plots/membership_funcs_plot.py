@@ -30,36 +30,32 @@ colors = {'neg':'indigo' , 'low':'darkred', 'medium':'royalblue', 'high':'olive'
 linestyles = {'neg':'solid' , 'low':'dashed', 'medium':'dashed', 'high':'dashed','veryhigh':'dashed'}
 format = ".svg"
 
-def plot_BMP():
+def plot_IL8():
     fig,ax = plt.subplots(figsize=(5.5, 3))
-    range = np.arange(0, 70, .5)
+    range = np.arange(0, 100, .1)
     # Generate fuzzy membership functions
-    neg = fuzz.trapmf(range, [0,0,0.008,10])
-    low = fuzz.trapmf(range, [0.008,10,20,50])
-    medium = fuzz.trapmf(range, [20,50,200,500])
-    high = fuzz.trapmf(range, [200,500,2000,2000])
-    fakes = {"0.008":10,"10":20,"20":30,"50":40,"200":50,"500":60,"2000":70}
-    fake_neg = fuzz.trapmf(range, [0,0,fakes["0.008"],fakes["10"]])
-    fake_low = fuzz.trapmf(range, [fakes["0.008"],fakes["10"],fakes["20"],fakes["50"]])
-    fake_medium = fuzz.trapmf(range, [fakes["20"],fakes["50"],fakes["200"],fakes["500"]])
-    fake_high = fuzz.trapmf(range, [fakes["200"],fakes["500"],fakes["2000"],fakes["2000"]])
+    neg = fuzz.trimf(range, [0,0,25])
+    medium = fuzz.trimf(range, [0,25,100])
+    high = fuzz.trimf(range, [25,100,100])
+    fakes = {"25":25,"100":100}
+    fake_neg = fuzz.trimf(range, [0,0,fakes["25"]])
+    fake_medium = fuzz.trimf(range, [fakes["0"],fakes["25"],fakes["100"]])
+    fake_high = fuzz.trapmf(range, [fakes["25"],fakes["100"],fakes["100"]])
     # Visualize these universes and membership functions
     line1, = ax.plot(range, fake_neg, colors['neg'], linewidth=line_width, label='N',linestyle=linestyles['neg'])
-    line2, = ax.plot(range, fake_low,colors['low'] , linewidth=line_width, label='L',linestyle=linestyles['low'])
-    line2.set_dashes([1, 1, 1, 1])
     line3, = ax.plot(range, fake_medium, colors['medium'], linewidth=line_width, label='M',linestyle=linestyles['medium'])
     line3.set_dashes([2, 1, 2, 1])
     line4, = ax.plot(range, fake_high, colors['high'], linewidth=line_width, label='H',linestyle = linestyles['high'])
     line4.set_dashes([4, 2, 4, 2])
-    # ax.set_title('BMP2',fontname = 'Times New Roman Bold',size = 17)
-    ax.set_xticks([0,fakes["0.008"],fakes["10"],fakes["20"],fakes["50"], fakes["200"],fakes["500"],fakes["2000"]]) 
-    ax.set_xticklabels([0,0.008,10,20,50, 200,500,2000])
+
+    ax.set_xticks([0,fakes["25"],fakes["100"]]) 
+    ax.set_xticklabels([0,r'$c_{1}$',100])
     ax.set_yticks([0,0.5,1])
     ax.set_yticklabels([0,0.5,1])
     # ax.set_ylabel('Membership',**axis_font)
     ax.set_xlabel('Concentration (ng/ml)',**axis_font)
-    tags_x_locs = [(0+fakes["0.008"])/2,(fakes["10"]+fakes["20"])/2,(fakes["50"]+fakes["200"])/2,(fakes["500"]+fakes["2000"])/2]
-    tags = ['Negligible','Stimulatory','High','Destructive']
+    tags_x_locs = [(0+fakes["25"])/2,(fakes["25"]+fakes["100"])/2]
+    tags = ['Negligible','Low Stimulatory','High Stimulatory']
     # ax.legend(loc=2, fontsize=16)
     return fig,ax,'BMP2',tags_x_locs,tags
 def plot_TGF():
@@ -256,24 +252,24 @@ def plot_legends():
     ax.set_xlabel('Concentration (mM)',**axis_font)
     return fig,ax,'legends'
 ## plot BMP
-fig,ax,name,tags_x_locs,tags = plot_BMP()
+fig,ax,name,tags_x_locs,tags = plot_IL8()
 post( ax,name,tags_x_locs,tags)
-## plot TGF
-fig,ax,name,tags_x_locs,tags = plot_TGF()
-post( ax,name,tags_x_locs,tags )
-## plot CD
-fig,ax,name,tags_x_locs,tags = plot_CD()
-post( ax,name,tags_x_locs,tags )
-# plot AE
-fig,ax,name,tags_x_locs,tags = plot_AE()
-post( ax,name,tags_x_locs,tags)
-# plot maturity
-fig,ax,name,tags_x_locs,tags = plot_maturity()
-post( ax,name,tags_x_locs,tags)
-## plot MG
-fig,ax,name,tags_x_locs,tags= plot_MG()
-post( ax,name,tags_x_locs,tags)
-fig,ax,name = plot_legends()
+# ## plot TGF
+# fig,ax,name,tags_x_locs,tags = plot_TGF()
+# post( ax,name,tags_x_locs,tags )
+# ## plot CD
+# fig,ax,name,tags_x_locs,tags = plot_CD()
+# post( ax,name,tags_x_locs,tags )
+# # plot AE
+# fig,ax,name,tags_x_locs,tags = plot_AE()
+# post( ax,name,tags_x_locs,tags)
+# # plot maturity
+# fig,ax,name,tags_x_locs,tags = plot_maturity()
+# post( ax,name,tags_x_locs,tags)
+# ## plot MG
+# fig,ax,name,tags_x_locs,tags= plot_MG()
+# post( ax,name,tags_x_locs,tags)
+# fig,ax,name = plot_legends()
 # post( ax,name)
 
 def export_legend(axes):

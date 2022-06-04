@@ -8,11 +8,11 @@ double myPatch::lactate(){
 		if (this->empty()) {
 			MI = 0;
 		}
-		else if (this->get_agent()->class_name == "Dead"){
+		else if (this->get_agents()[0]->class_name == "Dead"){
 			MI = 0;
 		}
 		else {
-			MI = this->get_agent()->get_data("MI");
+			MI = this->get_agents()[0]->get_data("MI");
 		}
 		// auto w = this->params["w_MI_lactate"];
 		// auto lactate = this->data["lactate"] + w * MI;
@@ -67,7 +67,7 @@ bool Cell::proliferation(double Pr){
 }
 double Cell::alkalinity(){
 	auto adapted_pH = this->data.at("pH");
-	auto env_pH = this->patch->get_data("pH");
+	auto env_pH = this->get_patch()->get_data("pH");
 	double AE;
 	if (adapted_pH == 0)
 		AE = 1;
@@ -76,7 +76,7 @@ double Cell::alkalinity(){
 	if (AE > 1)
 		AE = 1;
 	// damage
-	if (this->patch->get_data("pH") >= this->params.at("pH_t")) {
+	if (this->get_patch()->get_data("pH") >= this->params.at("pH_t")) {
 		this->damage = true;
 	}
 	return AE;
@@ -85,7 +85,7 @@ double Cell::adaptation(){
 	auto adapted_pH = this->data.at("pH");
 	if (this->damage) return adapted_pH; // not recovery for permanent damage
 
-	auto env_pH = this->patch->get_data("pH");
+	auto env_pH = this->get_patch()->get_data("pH");
 	double new_adapted_pH = 0;
 	auto adaptation_rate = this->params.at("B_rec");
 	if (env_pH > adapted_pH)
@@ -207,8 +207,8 @@ double myEnv::collect_from_agents(string tag) {
 map<string,double> Cell::collect_policy_inputs(){
 
 		auto AE = this->alkalinity();
-		auto CD = this->patch->get_data("agent_density");
-		auto Mg = this->patch->get_data("Mg")/this->params.at("Mg_max");
+		auto CD = this->get_patch()->get_data("agent_density");
+		auto Mg = this->get_patch()->get_data("Mg")/this->params.at("Mg_max");
 		auto maturity = this->data["maturity"] ; // maturity indeex
 		auto TGF = this->myenv->get_GFs("TGF")/ this->params.at("TGF_max");
 		double BMP = this->myenv->get_GFs("BMP")/ this->params.at("BMP_max");
